@@ -34,13 +34,35 @@
           </div>
         </nav>
 
-        <section class="subpage-hero-copy" id="shopping-planner">
-          <p class="eyebrow">Kitchen Notes / Shopping Planner</p>
-          <h1>Weekly shopping planner translated into English.</h1>
-          <p class="hero-text">
-            This page is based on the approved 30-day menu PDF. Repeated ingredients have been
-            grouped week by week so shopping one or two times per week is enough for the home.
-          </p>
+        <section class="planner-hero-grid" id="shopping-planner">
+          <div class="subpage-hero-copy">
+            <p class="eyebrow">Kitchen Notes / Shopping Planner</p>
+            <h1>Weekly shopping planner translated into English.</h1>
+            <p class="hero-text">
+              This page is based on the approved 30-day menu PDF. Repeated ingredients have been
+              grouped week by week so shopping one or two times per week is enough for the home.
+            </p>
+          </div>
+
+          <aside class="month-calendar-card" aria-label="Monthly calendar view">
+            <div class="month-calendar-header">
+              <div>
+                <p class="card-label">Monthly view</p>
+                <h2 class="month-calendar-title" id="month-calendar-title">Month</h2>
+              </div>
+              <p class="month-calendar-caption">Highlights your selected market day.</p>
+            </div>
+            <div class="month-weekdays" aria-hidden="true">
+              <span>Sun</span>
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+            </div>
+            <div class="month-grid" id="month-grid"></div>
+          </aside>
         </section>
       </header>
 
@@ -62,6 +84,7 @@
               <p class="sidebar-title">Planner Tree</p>
               <nav class="tree-menu">
                 <a href="#planner-overview">Overview</a>
+                <a href="#market-scheduler">Binh Dien market time</a>
                 <a href="#weekly-formula">Average weekly formula</a>
                 <div class="tree-group">
                   <button class="tree-toggle" type="button" aria-expanded="true">
@@ -88,6 +111,68 @@
                   only once or twice weekly. Quantities are intended for 3 people over 7 days,
                   at approximately 150k per day, not including rice and seasonings.
                 </p>
+              </article>
+
+              <article class="planner-card market-card" id="market-scheduler">
+                <p class="card-label">Market trip scheduler</p>
+                <h3>Bookmark a time to go to Binh Dien market.</h3>
+                <p>
+                  Pick a date and time, save it as your market reminder on this device, or open
+                  it directly in Google Calendar while signed into your own Google account.
+                </p>
+
+                <div class="market-grid">
+                  <div class="market-calendar">
+                    <label class="form-label" for="market-date">Date</label>
+                    <input class="planner-input" id="market-date" type="date" />
+
+                    <label class="form-label" for="market-time">Time</label>
+                    <input
+                      class="planner-input"
+                      id="market-time"
+                      type="time"
+                      value="05:00"
+                      min="04:00"
+                      max="08:00"
+                      step="1800"
+                    />
+
+                    <label class="form-label" for="market-duration">Duration</label>
+                    <div class="duration-input-wrap">
+                      <input
+                        class="planner-input"
+                        id="market-duration"
+                        type="number"
+                        value="1.5"
+                        min="0.5"
+                        max="8"
+                        step="0.5"
+                        inputmode="decimal"
+                      />
+                      <span class="duration-suffix">hours</span>
+                    </div>
+                  </div>
+
+                  <div class="market-summary">
+                    <p class="summary-chip">Personal bookmark</p>
+                    <h4>Saved market plan</h4>
+                    <p class="saved-market-booking" id="saved-market-booking">
+                      No saved Binh Dien market visit yet.
+                    </p>
+                    <div class="market-actions">
+                      <button class="button button-primary" id="bookmark-market-time" type="button">
+                        Save bookmark
+                      </button>
+                      <button class="button button-secondary" id="add-google-calendar" type="button">
+                        Add to Google Calendar
+                      </button>
+                    </div>
+                    <p class="market-help">
+                      Google Calendar opens in the browser and uses whichever Google account you
+                      are signed into there, so you can review and save the event yourself.
+                    </p>
+                  </div>
+                </div>
               </article>
 
               <article class="planner-card" id="weekly-formula">

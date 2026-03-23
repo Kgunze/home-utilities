@@ -151,6 +151,13 @@ body::before {
   margin-bottom: 1.5rem;
 }
 
+.planner-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 430px);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
 .hero-content {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.9fr);
@@ -160,6 +167,87 @@ body::before {
 
 .subpage-hero-copy {
   padding: 2.25rem 0 0.5rem;
+}
+
+.month-calendar-card {
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(180deg, rgba(255, 251, 245, 0.92), rgba(245, 240, 229, 0.9));
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+}
+
+.month-calendar-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+}
+
+.month-calendar-title {
+  font-size: 1.8rem;
+  margin-top: 0.2rem;
+}
+
+.month-calendar-caption {
+  max-width: 14ch;
+  margin: 0;
+  color: var(--muted);
+  text-align: right;
+}
+
+.month-weekdays,
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.month-weekdays {
+  margin-top: 1.5rem;
+}
+
+.month-weekdays span {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  text-align: center;
+}
+
+.month-grid {
+  margin-top: 0.7rem;
+  flex: 1;
+}
+
+.month-day {
+  min-height: 68px;
+  border: 1px solid rgba(85, 56, 39, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 252, 247, 0.88);
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  padding: 0.7rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.month-day.is-muted {
+  opacity: 0.36;
+}
+
+.month-day.is-selected {
+  background: rgba(53, 92, 74, 0.14);
+  border-color: rgba(53, 92, 74, 0.28);
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px rgba(53, 92, 74, 0.18);
 }
 
 .hero-copy,
@@ -355,6 +443,12 @@ p {
   margin-top: 0;
 }
 
+.market-card {
+  background:
+    radial-gradient(circle at top right, rgba(53, 92, 74, 0.1), transparent 30%),
+    rgba(255, 251, 245, 0.82);
+}
+
 .planner-sidebar {
   padding: 1.25rem;
   position: sticky;
@@ -417,6 +511,91 @@ p {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.market-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.market-calendar,
+.market-summary {
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: rgba(255, 248, 240, 0.72);
+}
+
+.form-label {
+  display: block;
+  margin: 0.2rem 0 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.planner-input {
+  width: 100%;
+  margin-bottom: 0.9rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fffdf8;
+  color: var(--text);
+  font: inherit;
+}
+
+.duration-input-wrap {
+  position: relative;
+}
+
+.duration-input-wrap .planner-input {
+  padding-right: 5.5rem;
+}
+
+.duration-suffix {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(calc(-50% - 0.45rem));
+  color: var(--muted);
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.summary-chip {
+  display: inline-flex;
+  margin: 0;
+  padding: 0.4rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(53, 92, 74, 0.12);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.saved-market-booking {
+  min-height: 3.5rem;
+  color: var(--muted);
+}
+
+.market-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.market-help {
+  margin-bottom: 0;
+  font-size: 0.94rem;
+  color: var(--muted);
 }
 
 .planner-list {
@@ -626,6 +805,8 @@ h4 {
 @media (max-width: 900px) {
   .planner-layout,
   .planner-columns,
+  .market-grid,
+  .planner-hero-grid,
   .hero-content,
   .ptsd-grid,
   .recipe-grid,
