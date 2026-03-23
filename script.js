@@ -10,6 +10,7 @@ const addGoogleCalendarButton = document.querySelector("#add-google-calendar");
 const savedMarketBooking = document.querySelector("#saved-market-booking");
 const monthCalendarTitle = document.querySelector("#month-calendar-title");
 const monthGrid = document.querySelector("#month-grid");
+const ptsdParallaxLayers = document.querySelectorAll(".ptsd-parallax-layer");
 
 const MARKET_BOOKING_KEY = "home-utilities-market-booking";
 
@@ -219,3 +220,19 @@ if (addGoogleCalendarButton) {
 
 renderSavedMarketBooking();
 renderMonthCalendar(marketDateInput ? marketDateInput.value : "");
+
+if (ptsdParallaxLayers.length > 0) {
+  const syncPtsdParallax = () => {
+    const offset = window.scrollY;
+    const multipliers = [0.08, 0.16, 0.24, 0.34];
+
+    ptsdParallaxLayers.forEach((layer, index) => {
+      const moveY = offset * multipliers[index];
+      const moveX = offset * multipliers[index] * 0.08;
+      layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+    });
+  };
+
+  window.addEventListener("scroll", syncPtsdParallax, { passive: true });
+  syncPtsdParallax();
+}

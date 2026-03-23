@@ -32,6 +32,67 @@ body {
     linear-gradient(180deg, #f5ebde 0%, #f9f4ec 52%, #f4ead9 100%);
 }
 
+.ptsd-page-body {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(249, 196, 118, 0.3), transparent 24%),
+    radial-gradient(circle at 78% 22%, rgba(61, 102, 130, 0.2), transparent 28%),
+    linear-gradient(180deg, #efe2bf 0%, #e9dcc3 26%, #c9d5cb 100%);
+}
+
+.ptsd-parallax-scene {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ptsd-parallax-layer {
+  position: absolute;
+  inset: -6%;
+  will-change: transform;
+}
+
+.ptsd-page-body .page-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.layer-sky {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(242, 177, 76, 0.38), transparent 20%),
+    radial-gradient(circle at 70% 18%, rgba(82, 115, 144, 0.28), transparent 24%),
+    radial-gradient(circle at 82% 75%, rgba(91, 140, 117, 0.2), transparent 18%);
+}
+
+.layer-swirls {
+  background:
+    radial-gradient(circle at 22% 14%, transparent 0 42px, rgba(198, 126, 49, 0.24) 43px 51px, transparent 52px),
+    radial-gradient(circle at 68% 24%, transparent 0 58px, rgba(61, 98, 149, 0.22) 59px 70px, transparent 71px),
+    radial-gradient(circle at 78% 62%, transparent 0 34px, rgba(228, 185, 96, 0.18) 35px 42px, transparent 43px),
+    radial-gradient(circle at 28% 72%, transparent 0 62px, rgba(70, 114, 139, 0.16) 63px 72px, transparent 73px);
+  filter: blur(1px);
+  opacity: 0.95;
+}
+
+.layer-stars {
+  background-image:
+    radial-gradient(circle, rgba(254, 239, 182, 0.9) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(255, 224, 132, 0.75) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle, rgba(248, 211, 111, 0.68) 0 1.5px, transparent 2.5px);
+  background-size: 180px 180px, 240px 240px, 320px 320px;
+  background-position: 12% 18%, 68% 22%, 76% 74%;
+  opacity: 0.55;
+}
+
+.layer-doodles {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='1200' viewBox='0 0 1200 1200'%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M94 212c46-34 104-38 147 0 36 32 39 85 9 124-35 44-102 63-158 33' stroke='%23bc6a37' stroke-width='10' opacity='.23'/%3E%3Cpath d='M766 145c58-26 124-18 165 25 39 41 42 98 7 142-36 45-102 57-157 36' stroke='%23395f8d' stroke-width='11' opacity='.24'/%3E%3Cpath d='M904 762c-44-44-53-108-13-161 36-47 98-64 153-42' stroke='%23d8a04a' stroke-width='9' opacity='.24'/%3E%3Cpath d='M265 904c52-24 112-17 151 21 42 40 48 101 14 146' stroke='%2348708a' stroke-width='10' opacity='.18'/%3E%3Cpath d='M505 348c34-11 74-2 97 28 20 26 23 61 7 91-16 30-49 51-86 51' stroke='%23f3ce78' stroke-width='8' opacity='.2'/%3E%3C/g%3E%3C/svg%3E")
+      center / cover no-repeat;
+  opacity: 0.68;
+  mix-blend-mode: multiply;
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -677,6 +738,44 @@ h4 {
   box-shadow: var(--shadow);
 }
 
+.ptsd-page-section {
+  margin-top: 1.5rem;
+  padding: 2rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--line);
+  background: rgba(255, 248, 240, 0.82);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+}
+
+.ptsd-hero-card {
+  min-height: 360px;
+  background:
+    linear-gradient(180deg, rgba(255, 247, 231, 0.94), rgba(223, 235, 228, 0.82));
+}
+
+.ptsd-note {
+  margin-top: auto;
+  color: var(--muted);
+}
+
+.ptsd-terms-grid,
+.record-timeline {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.record-warning-card {
+  margin-top: 1.25rem;
+  background: rgba(255, 244, 232, 0.95);
+}
+
+.timeline-card {
+  min-height: 100%;
+}
+
 .text-link {
   display: inline-flex;
   margin-top: 1rem;
@@ -807,6 +906,8 @@ h4 {
   .planner-columns,
   .market-grid,
   .planner-hero-grid,
+  .ptsd-terms-grid,
+  .record-timeline,
   .hero-content,
   .ptsd-grid,
   .recipe-grid,
@@ -853,6 +954,7 @@ h4 {
   .hero-card,
   .story-panel,
   .planner-section,
+  .ptsd-page-section,
   .ptsd-section,
   .ptsd-card,
   .planner-card,
