@@ -11,6 +11,14 @@ const savedMarketBooking = document.querySelector("#saved-market-booking");
 const monthCalendarTitle = document.querySelector("#month-calendar-title");
 const monthGrid = document.querySelector("#month-grid");
 const ptsdParallaxLayers = document.querySelectorAll(".ptsd-parallax-layer");
+const chapterSpreads = document.querySelectorAll(".chapter-spread");
+const storyModal = document.querySelector("#story-modal");
+const storyModalTitle = document.querySelector("#story-modal-title");
+const storyModalKicker = document.querySelector("#story-modal-kicker");
+const storyModalYears = document.querySelector("#story-modal-years");
+const storyModalIntro = document.querySelector("#story-modal-intro");
+const storyModalBody = document.querySelector("#story-modal-body");
+const storyModalCloseButtons = document.querySelectorAll("[data-story-close]");
 
 const MARKET_BOOKING_KEY = "home-utilities-market-booking";
 
@@ -235,4 +243,73 @@ if (ptsdParallaxLayers.length > 0) {
 
   window.addEventListener("scroll", syncPtsdParallax, { passive: true });
   syncPtsdParallax();
+}
+
+if (
+  storyModal &&
+  storyModalTitle &&
+  storyModalKicker &&
+  storyModalYears &&
+  storyModalIntro &&
+  storyModalBody
+) {
+  const closeStoryModal = () => {
+    storyModal.classList.remove("is-open");
+    storyModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  const openStoryModal = (chapter) => {
+    const {
+      storyTitle,
+      storyYears,
+      storyKicker,
+      storyIntro,
+      storyBody,
+    } = chapter.dataset;
+
+    storyModalTitle.textContent = storyTitle || "Story";
+    storyModalKicker.textContent = storyKicker || "Chapter";
+    storyModalYears.textContent = storyYears || "";
+    storyModalIntro.textContent = storyIntro || "";
+    storyModalBody.innerHTML = "";
+
+    const paragraphs = (storyBody || "")
+      .split("\n\n")
+      .map((paragraph) => paragraph.trim())
+      .filter(Boolean);
+
+    for (const paragraph of paragraphs) {
+      const node = document.createElement("p");
+      node.textContent = paragraph;
+      storyModalBody.appendChild(node);
+    }
+
+    storyModal.classList.add("is-open");
+    storyModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+
+  for (const chapter of chapterSpreads) {
+    chapter.addEventListener("click", () => {
+      openStoryModal(chapter);
+    });
+
+    chapter.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openStoryModal(chapter);
+      }
+    });
+  }
+
+  for (const button of storyModalCloseButtons) {
+    button.addEventListener("click", closeStoryModal);
+  }
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && storyModal.classList.contains("is-open")) {
+      closeStoryModal();
+    }
+  });
 }
