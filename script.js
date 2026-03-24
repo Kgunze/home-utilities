@@ -19,8 +19,219 @@ const storyModalYears = document.querySelector("#story-modal-years");
 const storyModalIntro = document.querySelector("#story-modal-intro");
 const storyModalBody = document.querySelector("#story-modal-body");
 const storyModalCloseButtons = document.querySelectorAll("[data-story-close]");
+const mealDateInput = document.querySelector("#meal-date");
+const mealPeopleInput = document.querySelector("#meal-people");
+const mealRecipeTypeSelect = document.querySelector("#meal-recipe-type");
+const recipePickerCards = document.querySelectorAll(".recipe-picker-card");
+const recipePickerInputs = document.querySelectorAll(".recipe-picker-input");
+const mealSummaryBody = document.querySelector("#meal-summary-body");
+const ingredientSummaryBody = document.querySelector("#ingredient-summary-body");
+const printMealPlanButton = document.querySelector("#print-meal-plan");
+const ingredientChipInputs = document.querySelectorAll(".ingredient-chip-input");
+const ingredientMatchBody = document.querySelector("#ingredient-match-body");
+const ingredientSelectionList = document.querySelector("#ingredient-selection-list");
+const stepperItems = document.querySelectorAll(".stepper-item");
+const stepToCalculatorButton = document.querySelector("#step-to-calculator");
+const stepToRecipesButton = document.querySelector("#step-to-recipes");
+const mealCalculatorSection = document.querySelector("#meal-calculator");
+const ingredientPlannerSection = document.querySelector("#ingredient-planner");
+const brothRecipesSection = document.querySelector("#broth-recipes");
+const catalogueCards = document.querySelectorAll(".catalogue-card[data-recipe-id]");
+const livePlannerText = document.querySelector("#live-planner-text");
 
 const MARKET_BOOKING_KEY = "home-utilities-market-booking";
+const RECIPE_PLANNER_STATE_KEY = "home-utilities-recipe-planner-state";
+const RECIPE_PLANNER_COOKIE_DAYS = 14;
+const RECIPE_CALCULATOR_DATA = {
+  "pho-ga": {
+    name: "Pho Ga",
+    type: "broth",
+    baseServings: 4,
+    matchIngredients: ["chicken", "rice noodles", "ginger", "herbs", "fish sauce"],
+    ingredients: [
+      ["Chicken", 1, "bird"],
+      ["Rice noodles", 400, "g"],
+      ["Onion", 1, "piece"],
+      ["Ginger", 60, "g"],
+      ["Scallions and herbs", 120, "g"],
+    ],
+  },
+  "basa-tomato-soup": {
+    name: "Basa Tomato Soup",
+    type: "broth",
+    baseServings: 4,
+    matchIngredients: ["basa fillet", "tomatoes", "herbs", "fish sauce"],
+    ingredients: [
+      ["Basa fillet", 400, "g"],
+      ["Tomatoes", 300, "g"],
+      ["Herbs", 40, "g"],
+      ["Shallot", 30, "g"],
+    ],
+  },
+  "seaweed-tofu-soup": {
+    name: "Seaweed Tofu Soup",
+    type: "broth",
+    baseServings: 4,
+    matchIngredients: ["tofu", "seaweed", "fish sauce"],
+    ingredients: [
+      ["Tofu", 2, "blocks"],
+      ["Seaweed", 0.5, "pack"],
+      ["Scallion", 20, "g"],
+    ],
+  },
+  "pork-rib-pumpkin-soup": {
+    name: "Pork Rib Pumpkin Soup",
+    type: "broth",
+    baseServings: 4,
+    matchIngredients: ["spare ribs", "pumpkin"],
+    ingredients: [
+      ["Spare ribs", 500, "g"],
+      ["Pumpkin", 500, "g"],
+      ["Scallion", 20, "g"],
+    ],
+  },
+  "thit-kho": {
+    name: "Thit Kho",
+    type: "non-broth",
+    baseServings: 4,
+    matchIngredients: ["pork", "eggs", "fish sauce"],
+    ingredients: [
+      ["Pork", 600, "g"],
+      ["Eggs", 4, "pieces"],
+      ["Coconut water", 500, "ml"],
+      ["Shallot", 30, "g"],
+    ],
+  },
+  "beef-pumpkin-stir-fry": {
+    name: "Beef and Pumpkin Stir-Fry",
+    type: "non-broth",
+    baseServings: 4,
+    matchIngredients: ["beef", "pumpkin", "fish sauce"],
+    ingredients: [
+      ["Beef", 350, "g"],
+      ["Pumpkin", 400, "g"],
+      ["Garlic", 20, "g"],
+    ],
+  },
+  "banh-mi-plate": {
+    name: "Banh Mi Plate",
+    type: "non-broth",
+    baseServings: 4,
+    matchIngredients: ["eggs", "banh mi", "cucumber", "herbs"],
+    ingredients: [
+      ["Eggs", 4, "pieces"],
+      ["Banh mi", 4, "pieces"],
+      ["Cucumber", 300, "g"],
+      ["Herbs", 40, "g"],
+    ],
+  },
+  "ginger-fish-sauce": {
+    name: "Ginger Fish Sauce",
+    type: "non-broth",
+    baseServings: 4,
+    matchIngredients: ["ginger", "fish sauce"],
+    ingredients: [
+      ["Fish sauce", 80, "ml"],
+      ["Ginger", 40, "g"],
+      ["Lime", 2, "pieces"],
+      ["Chili", 10, "g"],
+    ],
+  },
+};
+let isSyncingRecipePlanner = false;
+let rerenderIngredientPlanner = null;
+let recipePlannerState = {
+  ingredients: [],
+  matchedRecipes: [],
+  selectedRecipes: [],
+  mealDate: "",
+  peopleCount: 3,
+};
+
+const setStepperState = (currentStep, completedSteps = []) => {
+  for (const item of stepperItems) {
+    const step = Number(item.dataset.step);
+    item.classList.toggle("is-active", step === currentStep);
+    item.classList.toggle("is-complete", completedSteps.includes(step));
+  }
+};
+
+const setCookie = (name, value, days) => {
+  const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+};
+
+const getCookie = (name) => {
+  const prefix = `${name}=`;
+  const parts = document.cookie.split(";").map((part) => part.trim());
+
+  for (const part of parts) {
+    if (part.startsWith(prefix)) {
+      return decodeURIComponent(part.slice(prefix.length));
+    }
+  }
+
+  return "";
+};
+
+const saveRecipePlannerState = () => {
+  try {
+    setCookie(
+      RECIPE_PLANNER_STATE_KEY,
+      JSON.stringify(recipePlannerState),
+      RECIPE_PLANNER_COOKIE_DAYS,
+    );
+  } catch {
+    // Ignore storage errors and continue with in-memory state.
+  }
+};
+
+const loadRecipePlannerState = () => {
+  try {
+    const raw = getCookie(RECIPE_PLANNER_STATE_KEY);
+
+    if (!raw) {
+      return;
+    }
+
+    const parsed = JSON.parse(raw);
+    recipePlannerState = {
+      ...recipePlannerState,
+      ...parsed,
+    };
+  } catch {
+    // Ignore invalid state and keep defaults.
+  }
+};
+
+const renderLivePlannerState = () => {
+  if (!livePlannerText) {
+    return;
+  }
+
+  const ingredientText =
+    recipePlannerState.ingredients.length > 0
+      ? `${recipePlannerState.ingredients.length} ingredients`
+      : "no ingredients";
+  const recipeText =
+    recipePlannerState.selectedRecipes.length > 0
+      ? `${recipePlannerState.selectedRecipes.length} selected recipes`
+      : "no selected recipes";
+  const peopleText = `${recipePlannerState.peopleCount || 1} people`;
+  const dateText = recipePlannerState.mealDate || "no date yet";
+
+  livePlannerText.textContent = `${ingredientText}, ${recipeText}, ${peopleText}, ${dateText}.`;
+};
+
+const setStepButtonState = (button, enabled) => {
+  if (!button) {
+    return;
+  }
+
+  button.setAttribute("aria-disabled", String(!enabled));
+  button.classList.toggle("is-disabled", !enabled);
+  button.classList.toggle("is-ready", enabled);
+};
 
 for (const button of filterButtons) {
   button.addEventListener("click", () => {
@@ -312,4 +523,360 @@ if (
       closeStoryModal();
     }
   });
+}
+
+if (
+  mealDateInput &&
+  mealPeopleInput &&
+  mealRecipeTypeSelect &&
+  mealSummaryBody &&
+  ingredientSummaryBody
+) {
+  const getCheckedRecipeIds = () =>
+    Array.from(recipePickerInputs)
+      .filter((input) => input.checked)
+      .map((input) => input.value);
+
+  const getSelectedIngredientValues = () =>
+    Array.from(ingredientChipInputs)
+      .filter((input) => input.checked)
+      .map((input) => input.value);
+
+  const getMatchedRecipeIdsFromIngredients = (selectedIngredients) =>
+    selectedIngredients.length === 0
+      ? []
+      : Object.entries(RECIPE_CALCULATOR_DATA)
+          .filter(([, recipe]) =>
+            recipe.matchIngredients.some((ingredient) => selectedIngredients.includes(ingredient)),
+          )
+          .map(([id]) => id);
+
+  const syncCatalogueCards = (selectedRecipeIds) => {
+    const selectedSet = new Set(selectedRecipeIds);
+    recipePlannerState.selectedRecipes = [...selectedSet];
+    saveRecipePlannerState();
+    renderLivePlannerState();
+
+    for (const card of catalogueCards) {
+      const shouldShow = selectedSet.size === 0 || selectedSet.has(card.dataset.recipeId);
+      card.classList.toggle("is-hidden", !shouldShow);
+    }
+  };
+
+  const applyIngredientMatchesToCalculator = (matchedRecipeIds) => {
+    const matchedSet = new Set(matchedRecipeIds);
+    const activeType = mealRecipeTypeSelect.value;
+    recipePlannerState.matchedRecipes = [...matchedSet];
+    saveRecipePlannerState();
+    renderLivePlannerState();
+
+    for (const input of recipePickerInputs) {
+      const card = input.closest(".recipe-picker-card");
+      const recipe = RECIPE_CALCULATOR_DATA[input.value];
+      const typeAllowed = activeType === "all" || recipe.type === activeType;
+      const matchAllowed = matchedSet.size === 0 || matchedSet.has(input.value);
+      const shouldShow = typeAllowed && matchAllowed;
+
+      if (card) {
+        card.classList.toggle("is-hidden", !shouldShow);
+      }
+
+      input.checked = shouldShow && matchedSet.size > 0;
+    }
+  };
+
+  const syncIngredientsFromRecipes = (selectedRecipeIds) => {
+    const selectedIngredients = new Set();
+
+    for (const id of selectedRecipeIds) {
+      const recipe = RECIPE_CALCULATOR_DATA[id];
+
+      if (!recipe) {
+        continue;
+      }
+
+      for (const ingredient of recipe.matchIngredients) {
+        selectedIngredients.add(ingredient);
+      }
+    }
+
+    for (const input of ingredientChipInputs) {
+      input.checked = selectedIngredients.has(input.value);
+    }
+
+    recipePlannerState.ingredients = [...selectedIngredients];
+    saveRecipePlannerState();
+    renderLivePlannerState();
+  };
+
+  const formatCalculatorAmount = (amount) => {
+    if (Number.isInteger(amount)) {
+      return String(amount);
+    }
+
+    return amount.toFixed(1).replace(".0", "");
+  };
+
+  const syncRecipeTypeFilter = () => {
+    const activeType = mealRecipeTypeSelect.value;
+    const matchedIngredients = getSelectedIngredientValues();
+    const matchedRecipeIds = getMatchedRecipeIdsFromIngredients(matchedIngredients);
+    const matchedSet = new Set(matchedRecipeIds);
+
+    for (const card of recipePickerCards) {
+      const input = card.querySelector(".recipe-picker-input");
+      const recipeId = input ? input.value : "";
+      const typeAllowed = activeType === "all" || card.dataset.type === activeType;
+      const ingredientAllowed = matchedSet.size === 0 || matchedSet.has(recipeId);
+      const shouldShow = typeAllowed && ingredientAllowed;
+      card.classList.toggle("is-hidden", !shouldShow);
+    }
+  };
+
+  const renderMealCalculator = () => {
+    const peopleCount = Math.max(1, Number(mealPeopleInput.value) || 1);
+    const mealDate = mealDateInput.value || new Date().toISOString().slice(0, 10);
+    const selectedIds = Array.from(recipePickerInputs)
+      .filter((input) => input.checked)
+      .map((input) => input.value);
+
+    recipePlannerState.peopleCount = peopleCount;
+    recipePlannerState.mealDate = mealDate;
+    recipePlannerState.selectedRecipes = [...selectedIds];
+    saveRecipePlannerState();
+    renderLivePlannerState();
+
+    mealSummaryBody.innerHTML = "";
+    ingredientSummaryBody.innerHTML = "";
+
+    if (selectedIds.length === 0) {
+      mealSummaryBody.innerHTML =
+        '<tr><td colspan="4">Select at least one recipe to build a meal plan.</td></tr>';
+      ingredientSummaryBody.innerHTML =
+        '<tr><td colspan="2">Ingredient totals will appear once recipes are selected.</td></tr>';
+      setStepButtonState(stepToRecipesButton, false);
+      syncCatalogueCards([]);
+      return;
+    }
+
+    setStepButtonState(stepToRecipesButton, true);
+
+    syncCatalogueCards(selectedIds);
+
+    const ingredientTotals = new Map();
+
+    for (const id of selectedIds) {
+      const recipe = RECIPE_CALCULATOR_DATA[id];
+
+      if (!recipe) {
+        continue;
+      }
+
+      const mealRow = document.createElement("tr");
+      mealRow.innerHTML = `
+        <td>${mealDate}</td>
+        <td>${recipe.name}</td>
+        <td>${recipe.type}</td>
+        <td>${peopleCount}</td>
+      `;
+      mealSummaryBody.appendChild(mealRow);
+
+      const scale = peopleCount / recipe.baseServings;
+
+      for (const [ingredient, amount, unit] of recipe.ingredients) {
+        const key = `${ingredient}__${unit}`;
+        const nextTotal = (ingredientTotals.get(key)?.amount || 0) + amount * scale;
+        ingredientTotals.set(key, { ingredient, unit, amount: nextTotal });
+      }
+    }
+
+    for (const { ingredient, unit, amount } of ingredientTotals.values()) {
+      const ingredientRow = document.createElement("tr");
+      ingredientRow.innerHTML = `
+        <td>${ingredient}</td>
+        <td>${formatCalculatorAmount(amount)} ${unit}</td>
+      `;
+      ingredientSummaryBody.appendChild(ingredientRow);
+    }
+  };
+
+  mealDateInput.value = new Date().toISOString().slice(0, 10);
+
+  if (recipePlannerState.mealDate) {
+    mealDateInput.value = recipePlannerState.mealDate;
+  }
+
+  if (recipePlannerState.peopleCount) {
+    mealPeopleInput.value = String(recipePlannerState.peopleCount);
+  }
+
+  mealDateInput.addEventListener("input", renderMealCalculator);
+  mealPeopleInput.addEventListener("input", renderMealCalculator);
+  mealRecipeTypeSelect.addEventListener("change", () => {
+    syncRecipeTypeFilter();
+    renderMealCalculator();
+  });
+
+  for (const input of recipePickerInputs) {
+    input.addEventListener("change", () => {
+      if (!isSyncingRecipePlanner) {
+        isSyncingRecipePlanner = true;
+        syncIngredientsFromRecipes(getCheckedRecipeIds());
+        if (typeof rerenderIngredientPlanner === "function") {
+          rerenderIngredientPlanner();
+        }
+        isSyncingRecipePlanner = false;
+      }
+
+      syncRecipeTypeFilter();
+      renderMealCalculator();
+    });
+  }
+
+  if (printMealPlanButton) {
+    printMealPlanButton.addEventListener("click", () => {
+      window.print();
+    });
+  }
+
+  syncRecipeTypeFilter();
+  renderMealCalculator();
+}
+
+if (ingredientMatchBody && ingredientSelectionList) {
+  const renderIngredientPlanner = () => {
+    const selectedIngredients = Array.from(ingredientChipInputs)
+      .filter((input) => input.checked)
+      .map((input) => input.value);
+
+    ingredientSelectionList.textContent =
+      selectedIngredients.length > 0
+        ? selectedIngredients.join(", ")
+        : "Pick ingredients to see recipe matches.";
+
+    recipePlannerState.ingredients = [...selectedIngredients];
+    saveRecipePlannerState();
+    renderLivePlannerState();
+
+    ingredientMatchBody.innerHTML = "";
+
+    if (selectedIngredients.length === 0) {
+      ingredientMatchBody.innerHTML =
+        '<tr><td colspan="3">Select ingredients to see matching recipes.</td></tr>';
+      setStepButtonState(stepToCalculatorButton, false);
+      if (!isSyncingRecipePlanner) {
+        isSyncingRecipePlanner = true;
+        syncRecipeTypeFilter();
+        renderMealCalculator();
+        isSyncingRecipePlanner = false;
+      }
+      return;
+    }
+
+    const rankedRecipes = Object.values(RECIPE_CALCULATOR_DATA)
+      .map((recipe) => {
+        const matched = recipe.matchIngredients.filter((ingredient) =>
+          selectedIngredients.includes(ingredient),
+        );
+
+        return {
+          recipe,
+          matched,
+        };
+      })
+      .filter(({ matched }) => matched.length > 0)
+      .sort((left, right) => right.matched.length - left.matched.length);
+
+    if (rankedRecipes.length === 0) {
+      ingredientMatchBody.innerHTML =
+        '<tr><td colspan="3">No recipe matches yet. Try adding one more ingredient.</td></tr>';
+      setStepButtonState(stepToCalculatorButton, false);
+      return;
+    }
+
+    setStepButtonState(stepToCalculatorButton, true);
+
+    for (const { recipe, matched } of rankedRecipes) {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${recipe.name}</td>
+        <td>${recipe.type}</td>
+        <td>${matched.join(", ")}</td>
+      `;
+      ingredientMatchBody.appendChild(row);
+    }
+
+    if (!isSyncingRecipePlanner) {
+      isSyncingRecipePlanner = true;
+      applyIngredientMatchesToCalculator(rankedRecipes.map(({ recipe }) =>
+        Object.entries(RECIPE_CALCULATOR_DATA).find(([, value]) => value.name === recipe.name)?.[0],
+      ).filter(Boolean));
+      renderMealCalculator();
+      isSyncingRecipePlanner = false;
+    }
+  };
+
+  rerenderIngredientPlanner = renderIngredientPlanner;
+
+  if (recipePlannerState.ingredients.length > 0) {
+    for (const input of ingredientChipInputs) {
+      input.checked = recipePlannerState.ingredients.includes(input.value);
+    }
+  }
+
+  for (const input of ingredientChipInputs) {
+    input.addEventListener("change", renderIngredientPlanner);
+  }
+
+  renderIngredientPlanner();
+}
+
+if (stepToCalculatorButton && mealCalculatorSection) {
+  stepToCalculatorButton.addEventListener("click", () => {
+    if (stepToCalculatorButton.getAttribute("aria-disabled") === "true") {
+      return;
+    }
+
+    const selectedIngredients = getSelectedIngredientValues();
+    const matchedRecipeIds = getMatchedRecipeIdsFromIngredients(selectedIngredients);
+
+    isSyncingRecipePlanner = true;
+    applyIngredientMatchesToCalculator(matchedRecipeIds);
+    syncRecipeTypeFilter();
+    renderMealCalculator();
+    isSyncingRecipePlanner = false;
+
+    setStepperState(2, [1]);
+    mealCalculatorSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+if (stepToRecipesButton && brothRecipesSection) {
+  stepToRecipesButton.addEventListener("click", () => {
+    if (stepToRecipesButton.getAttribute("aria-disabled") === "true") {
+      return;
+    }
+
+    const selectedRecipeIds = getCheckedRecipeIds();
+    const selectedTypes = new Set(
+      selectedRecipeIds.map((id) => RECIPE_CALCULATOR_DATA[id]?.type).filter(Boolean),
+    );
+    const recipeTarget =
+      selectedTypes.size === 1 && selectedTypes.has("non-broth")
+        ? document.querySelector("#non-broth-recipes")
+        : brothRecipesSection;
+
+    syncCatalogueCards(selectedRecipeIds);
+
+    setStepperState(3, [1, 2]);
+    recipeTarget.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+if (ingredientPlannerSection) {
+  loadRecipePlannerState();
+  renderLivePlannerState();
+  setStepButtonState(stepToCalculatorButton, false);
+  setStepButtonState(stepToRecipesButton, false);
+  setStepperState(1, []);
 }

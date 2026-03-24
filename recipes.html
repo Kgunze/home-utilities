@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipes Catalogue | Home Utilities</title>
+    <meta
+      name="description"
+      content="A recipe catalogue for Home Utilities with broth and non-broth navigation, tied to ingredients from the Shopping Planner."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="recipe-page-body">
+    <div class="page-shell">
+      <header class="hero hero-subpage">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="index.html#home">Home Utilities</a>
+          <div class="nav-links">
+            <a href="stories.html">Stories</a>
+            <div class="nav-parent">
+              <a href="index.html#kitchen-notes">Kitchen Notes</a>
+              <div class="nav-submenu" aria-label="Kitchen Notes submenu">
+                <a href="#recipe-catalogue">Recipes</a>
+                <a href="shopping-planner.html">Shopping Planner</a>
+              </div>
+            </div>
+            <a href="ptsd.html">PTSD</a>
+          </div>
+        </nav>
+
+        <section class="recipe-hero-grid" id="recipe-catalogue">
+          <div class="subpage-hero-copy">
+            <p class="eyebrow">Kitchen Notes / Recipes</p>
+            <h1>A recipe catalogue organized by broth and non-broth cooking.</h1>
+            <p class="hero-text">
+              This page turns the Shopping Planner into a usable cooking shelf. Recipes are grouped
+              by style, connected to the ingredient flow of the weekly planner, and linked into
+              blog-style reading pages.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#broth-recipes">Browse broth recipes</a>
+              <a class="button button-secondary" href="#non-broth-recipes">Browse non-broth recipes</a>
+            </div>
+          </div>
+
+          <aside class="recipe-side-card">
+            <p class="card-label">Planner connection</p>
+            <h2>Built from weekly shopping ingredients</h2>
+            <ul class="feature-list">
+              <li>Chicken, pork, ribs, beef, shrimp, squid, and basa</li>
+              <li>Pumpkin, tomato, cucumber, mushrooms, greens, and cabbage</li>
+              <li>Eggs, tofu, seaweed, herbs, and pantry basics</li>
+            </ul>
+            <p class="story-ledger-note">
+              Think of this as the cooking half of the planner: one page to decide what to cook
+              with what is already on hand.
+            </p>
+          </aside>
+        </section>
+      </header>
+
+      <main class="catalogue-layout">
+        <aside class="planner-sidebar catalogue-sidebar" aria-label="Recipe navigator">
+          <p class="sidebar-title">Recipe Navigator</p>
+          <nav class="tree-menu">
+            <a href="#catalogue-overview">Catalogue overview</a>
+            <a href="#meal-calculator">Meal calculator</a>
+            <a href="#ingredient-planner">Ingredient planner</a>
+            <a href="#broth-recipes">Broth recipes</a>
+            <div class="tree-links">
+              <a href="#pho-ga-card">Pho ga</a>
+              <a href="#basa-soup-card">Basa tomato soup</a>
+              <a href="#seaweed-soup-card">Seaweed tofu soup</a>
+              <a href="#rib-soup-card">Pork rib pumpkin soup</a>
+            </div>
+            <a href="#non-broth-recipes">Non-broth recipes</a>
+            <div class="tree-links">
+              <a href="#thit-kho-card">Thit kho</a>
+              <a href="#beef-pumpkin-card">Beef and pumpkin stir-fry</a>
+              <a href="#banh-mi-card">Banh mi plate</a>
+              <a href="#ginger-sauce-card">Ginger fish sauce</a>
+            </div>
+          </nav>
+        </aside>
+
+        <div class="catalogue-content">
+          <section class="recipe-blog-section stepper-shell" id="planning-stepper">
+            <p class="section-tag">Guided flow</p>
+            <h2>Move from ingredients to meal planning to recipe reading.</h2>
+            <div class="live-planner-bar" id="live-planner-bar" aria-live="polite">
+              <strong>Live planner state</strong>
+              <span id="live-planner-text">Waiting for selections.</span>
+            </div>
+            <div class="stepper-track" aria-label="Recipe planning steps">
+              <div class="stepper-item is-active" data-step="1">
+                <span class="stepper-number">1</span>
+                <div>
+                  <strong>Ingredients</strong>
+                  <span>Start from what you have or can buy</span>
+                </div>
+              </div>
+              <div class="stepper-item" data-step="2">
+                <span class="stepper-number">2</span>
+                <div>
+                  <strong>Meal plan</strong>
+                  <span>Set date, people, and recipe type</span>
+                </div>
+              </div>
+              <div class="stepper-item" data-step="3">
+                <span class="stepper-number">3</span>
+                <div>
+                  <strong>Recipes</strong>
+                  <span>Read and prepare the chosen dishes</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="recipe-blog-section" id="catalogue-overview">
+            <p class="section-tag">Catalogue</p>
+            <h2>From shopping list to actual meals.</h2>
+            <p class="recipe-story-lead">
+              The Shopping Planner already defines the ingredients. This catalogue turns those same
+              ingredients into a cooking map you can actually navigate.
+            </p>
+            <div class="recipe-story-body">
+              <p>
+                Broth recipes are the bowls, soups, and lighter comfort meals that depend on stock,
+                simmering, or a more fluid base. Non-broth recipes hold the braises, stir-fries,
+                breakfast plates, and condiments that give structure to the rest of the week.
+              </p>
+              <p>
+                Each recipe below is tied to ingredients already appearing in the planner, so the
+                catalogue feels practical rather than aspirational.
+              </p>
+            </div>
+          </section>
+
+          <section class="recipe-blog-section" id="ingredient-planner">
+            <div class="section-heading">
+              <div>
+                <p class="section-tag">Ingredient planner</p>
+                <h2>Start from ingredients you have or can buy.</h2>
+              </div>
+              <p class="planner-caption">
+                A flexible planning view for days when ingredients come first and recipes come second.
+              </p>
+            </div>
+
+            <div class="recipe-story-body">
+              <p>
+                Use this mode when the planner is less about a fixed menu and more about what is
+                already in the kitchen or easiest to pick up. Choose the ingredients you have, and
+                the page will suggest matching recipes from the catalogue.
+              </p>
+            </div>
+
+            <div class="ingredient-chip-grid" id="ingredient-chip-grid">
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="chicken" />Chicken</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="pork" />Pork</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="spare ribs" />Spare ribs</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="beef" />Beef</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="basa fillet" />Basa fillet</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="tofu" />Tofu</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="seaweed" />Seaweed</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="eggs" />Eggs</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="pumpkin" />Pumpkin</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="tomatoes" />Tomatoes</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="cucumber" />Cucumber</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="herbs" />Herbs</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="ginger" />Ginger</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="fish sauce" />Fish sauce</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="banh mi" />Banh mi</label>
+              <label class="ingredient-chip"><input class="ingredient-chip-input" type="checkbox" value="rice noodles" />Rice noodles</label>
+            </div>
+
+            <div class="calculator-summary ingredient-summary-layout">
+              <article class="recipe-side-card">
+                <p class="card-label">Matches</p>
+                <h3>Recipes that fit the chosen ingredients</h3>
+                <div class="table-wrap">
+                  <table class="summary-table">
+                    <thead>
+                      <tr>
+                        <th>Recipe</th>
+                        <th>Type</th>
+                        <th>Ingredient match</th>
+                      </tr>
+                    </thead>
+                    <tbody id="ingredient-match-body"></tbody>
+                  </table>
+                </div>
+              </article>
+
+              <article class="recipe-side-card">
+                <p class="card-label">Available ingredients</p>
+                <h3>Current ingredient selection</h3>
+                <div class="ingredient-selection-list" id="ingredient-selection-list">
+                  Pick ingredients to see recipe matches.
+                </div>
+              </article>
+            </div>
+
+            <div class="stepper-action">
+              <button
+                class="button button-primary is-disabled"
+                id="step-to-calculator"
+                type="button"
+                aria-disabled="true"
+              >
+                Continue to meal planning
+              </button>
+            </div>
+          </section>
+
+          <section class="recipe-blog-section" id="meal-calculator">
+            <div class="section-heading">
+              <div>
+                <p class="section-tag">Calculator</p>
+                <h2>Plan a meal by date, people count, and recipe type.</h2>
+              </div>
+              <button class="button button-secondary" id="print-meal-plan" type="button">
+                Print meal plan
+              </button>
+            </div>
+
+            <div class="calculator-controls">
+              <div>
+                <label class="form-label" for="meal-date">Meal date</label>
+                <input class="planner-input" id="meal-date" type="date" />
+              </div>
+              <div>
+                <label class="form-label" for="meal-people">Number of people</label>
+                <input
+                  class="planner-input"
+                  id="meal-people"
+                  type="number"
+                  min="1"
+                  max="20"
+                  step="1"
+                  value="3"
+                />
+              </div>
+              <div>
+                <label class="form-label" for="meal-recipe-type">Recipe type</label>
+                <select class="planner-input" id="meal-recipe-type">
+                  <option value="all">All recipes</option>
+                  <option value="broth">Broth recipes</option>
+                  <option value="non-broth">Non-broth recipes</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="recipe-picker-grid" id="recipe-picker-grid">
+              <label class="recipe-picker-card" data-type="broth">
+                <input class="recipe-picker-input" type="checkbox" value="pho-ga" checked />
+                <strong>Pho Ga</strong>
+                <span>Broth</span>
+              </label>
+              <label class="recipe-picker-card" data-type="broth">
+                <input class="recipe-picker-input" type="checkbox" value="basa-tomato-soup" />
+                <strong>Basa Tomato Soup</strong>
+                <span>Broth</span>
+              </label>
+              <label class="recipe-picker-card" data-type="broth">
+                <input class="recipe-picker-input" type="checkbox" value="seaweed-tofu-soup" />
+                <strong>Seaweed Tofu Soup</strong>
+                <span>Broth</span>
+              </label>
+              <label class="recipe-picker-card" data-type="broth">
+                <input class="recipe-picker-input" type="checkbox" value="pork-rib-pumpkin-soup" />
+                <strong>Pork Rib Pumpkin Soup</strong>
+                <span>Broth</span>
+              </label>
+              <label class="recipe-picker-card" data-type="non-broth">
+                <input class="recipe-picker-input" type="checkbox" value="thit-kho" checked />
+                <strong>Thit Kho</strong>
+                <span>Non-broth</span>
+              </label>
+              <label class="recipe-picker-card" data-type="non-broth">
+                <input class="recipe-picker-input" type="checkbox" value="beef-pumpkin-stir-fry" />
+                <strong>Beef and Pumpkin Stir-Fry</strong>
+                <span>Non-broth</span>
+              </label>
+              <label class="recipe-picker-card" data-type="non-broth">
+                <input class="recipe-picker-input" type="checkbox" value="banh-mi-plate" />
+                <strong>Banh Mi Plate</strong>
+                <span>Non-broth</span>
+              </label>
+              <label class="recipe-picker-card" data-type="non-broth">
+                <input class="recipe-picker-input" type="checkbox" value="ginger-fish-sauce" />
+                <strong>Ginger Fish Sauce</strong>
+                <span>Non-broth</span>
+              </label>
+            </div>
+
+            <div class="calculator-summary">
+              <article class="recipe-side-card">
+                <p class="card-label">Meal summary</p>
+                <h3>Selected plates for the day</h3>
+                <div class="table-wrap">
+                  <table class="summary-table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Recipe</th>
+                        <th>Type</th>
+                        <th>Plates</th>
+                      </tr>
+                    </thead>
+                    <tbody id="meal-summary-body"></tbody>
+                  </table>
+                </div>
+              </article>
+
+              <article class="recipe-side-card">
+                <p class="card-label">Ingredients</p>
+                <h3>Combined ingredient totals</h3>
+                <div class="table-wrap">
+                  <table class="summary-table">
+                    <thead>
+                      <tr>
+                        <th>Ingredient</th>
+                        <th>Total needed</th>
+                      </tr>
+                    </thead>
+                    <tbody id="ingredient-summary-body"></tbody>
+                  </table>
+                </div>
+              </article>
+            </div>
+
+            <div class="stepper-action">
+              <button
+                class="button button-primary is-disabled"
+                id="step-to-recipes"
+                type="button"
+                aria-disabled="true"
+              >
+                Continue to recipe reading
+              </button>
+            </div>
+          </section>
+
+          <section class="recipe-blog-section" id="broth-recipes">
+            <p class="section-tag">Broth recipes</p>
+            <h2>Use these when the week needs warmth and softness.</h2>
+            <div class="catalogue-grid">
+              <article class="recipe-card catalogue-card" id="pho-ga-card" data-recipe-id="pho-ga">
+                <a class="recipe-card-link" href="recipe-pho-ga.html">
+                  <img class="recipe-image" src="assets/recipes/pho-ga.svg" alt="Illustrated bowl of pho ga" />
+                  <div class="recipe-card-copy">
+                    <p class="recipe-type">Broth</p>
+                    <h3>Pho Ga for Slow Weekends</h3>
+                    <p>Built from planner chicken, herbs, onion, ginger, and noodles.</p>
+                    <span class="recipe-meta">Chicken | Herbs | Noodles</span>
+                  </div>
+                </a>
+              </article>
+
+              <article class="recipe-card catalogue-card" id="basa-soup-card" data-recipe-id="basa-tomato-soup">
+                <a class="recipe-card-link" href="recipe-basa-tomato-soup.html">
+                  <img class="recipe-image" src="assets/recipes/basa-tomato-soup.svg" alt="Illustrated bowl of basa tomato soup" />
+                  <div class="recipe-card-copy">
+                    <p class="recipe-type">Broth</p>
+                    <h3>Basa Tomato Soup</h3>
+                    <p>A clean planner-friendly soup using basa fillet, tomato, herbs, and light broth.</p>
+                    <span class="recipe-meta">Basa | Tomato | Light soup</span>
+                  </div>
+                </a>
+              </article>
+
+              <article class="recipe-card catalogue-card" id="seaweed-soup-card" data-recipe-id="seaweed-tofu-soup">
+                <a class="recipe-card-link" href="recipe-seaweed-tofu-soup.html">
+                  <img class="recipe-image" src="assets/recipes/seaweed-tofu-soup.svg" alt="Illustrated bowl of seaweed tofu soup" />
+                  <div class="recipe-card-copy">
+                    <p class="recipe-type">Broth</p>
+                    <h3>Seaweed Tofu Soup</h3>
+                    <p>Designed directly from the planner's tofu and seaweed staples.</p>
+                    <span class="recipe-meta">Tofu | Seaweed | Fast broth</span>
+                  </div>
+                </a>
+              </article>
+
+              <article class="recipe-card catalogue-card" id="rib-soup-card" data-recipe-id="pork-rib-pumpkin-soup">
+                <a class="recipe-card-link" href="recipe-pork-rib-pumpkin-soup.html">
+                  <img class="recipe-image" src="assets/recipes/pork-rib-pumpkin-soup.svg" alt="Illustrated bowl of pork rib pumpkin soup" />
+                  <div class="recipe-card-copy">
+                    <p class="recipe-type">Broth</p>
+                    <h3>Pork Rib Pumpkin Soup</h3>
+                    <p>Uses ribs and pumpkin from the planner to make a mellow, home-style soup.</p>
+                    <span class="recipe-meta">Ribs | Pumpkin | Family soup</span>
+                  </div>
+                </a>
+              </article>
+            </div>
+          </section>
+
+          <section class="recipe-blog-section" id="non-broth-recipes">
+            <p class="section-tag">Non-broth recipes</p>
+            <h2>Use these when the week needs body, texture, and structure.</h2>
+            <div class="catalogue-grid">
+              <article class="recipe-card catalogue-card" id="thit-kho-card" data-recipe-id="thit-kho">
+                <a class="recipe-card-link" href="recipe-thit-kho.html">
+                  <img class="recipe-image" src="assets/recipes/thit-kho.svg" alt="Illustrated bowl of thit kho" />
+                  <div class="recipe-card-copy">
+                    <p class="recipe-type">Non-broth</p>
+                    <h3>Caramelized Thit Kho</h3>
+                    <p>Pork and eggs from the planner turned into a rice-first braise.</p>
+                    <span class="recipe-meta">Pork | Eggs | Braise</span>
+                  </div>
+                </a>
+              </article>
+
+              <article class="recipe-card catalogue-card" id="beef-pumpkin-card" data-recipe-id="beef-pumpkin-stir-fry">
+                <a class="recipe-card-link" href="recipe-beef-pumpkin-stir-fry.html">
+                  <img class="recipe-image" src="assets/recipes/beef-pumpkin-stir-fry.svg" alt="Illustrated beef and pumpkin stir-fry" />
+                  <div class="recipe-card-copy">
+                    <p class="recipe-type">Non-broth</p>
+                    <h3>Beef and Pumpkin Stir-Fry</h3>
+                    <p>A quick skillet built from planner beef, pumpkin, garlic, and black pepper.</p>
+                    <span class="recipe-meta">Beef | Pumpkin | Fast skillet</span>
+                  </div>
+                </a>
+              </article>
+
+              <article class="recipe-card catalogue-card" id="banh-mi-card" data-recipe-id="banh-mi-plate">
+                <a class="recipe-card-link" href="recipe-banh-mi-plate.html">
+                  <img class="recipe-image" src="assets/recipes/banh-mi-plate.svg" alt="Illustrated banh mi breakfast plate" />
+                  <div class="recipe-card-copy">
+                    <p class="recipe-type">Non-broth</p>
+                    <h3>Crisp Morning Banh Mi Plate</h3>
+                    <p>Built from eggs, cucumber, herbs, and simple breakfast structure.</p>
+                    <span class="recipe-meta">Eggs | Herbs | Breakfast</span>
+                  </div>
+                </a>
+              </article>
+
+              <article class="recipe-card catalogue-card" id="ginger-sauce-card" data-recipe-id="ginger-fish-sauce">
+                <a class="recipe-card-link" href="recipe-ginger-fish-sauce.html">
+                  <img class="recipe-image" src="assets/recipes/ginger-fish-sauce.svg" alt="Illustrated ginger fish sauce dipping bowl" />
+                  <div class="recipe-card-copy">
+                    <p class="recipe-type">Non-broth</p>
+                    <h3>Ginger Fish Sauce Dipping Bowl</h3>
+                    <p>The small supporting sauce that wakes up grilled, boiled, or fried dishes.</p>
+                    <span class="recipe-meta">Ginger | Fish sauce | Condiment</span>
+                  </div>
+                </a>
+              </article>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="script.js"></script>
+  </body>
+</html>
