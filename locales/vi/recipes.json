@@ -1,0 +1,11 @@
+{
+  "title": "Danh mục công thức | Home Utilities",
+  "description": "Danh mục công thức của Home Utilities với điều hướng món nước và món khô, liên kết với nguyên liệu từ trang Kế hoạch đi chợ.",
+  "translations": [
+    { "selector": ".subpage-hero-copy .eyebrow", "text": "Ghi chú bếp / Công thức" },
+    { "selector": ".subpage-hero-copy h1", "text": "Danh mục công thức đan dệt xưa nay giữa món nước và món khô." },
+    { "selector": ".subpage-hero-copy .hero-text", "text": "Trang này chuyển những gói nguyên liệu trong Kế hoạch đi chợ thành một tủ nấu ăn đầy trí nhớ, nơi mỗi công thức là một lời mời vào bàn cơm gia đình." },
+    { "selector": ".hero-actions a[href=\"#broth-recipes\"]", "text": "Xem món nước" },
+    { "selector": ".hero-actions a[href=\"#non-broth-recipes\"]", "text": "Xem món khô" }
+  ]
+}

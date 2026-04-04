@@ -1,0 +1,16 @@
+{
+  "title": "Fertilization Guide | Home Utilities",
+  "description": "Simple explanations for plant fertilization basics, common mistakes, and starter tips.",
+  "recommendationPlaceholder": "Please select a plant type to see your tip.",
+  "quickButtons": {
+    "tomato": "Tomato",
+    "leafy": "Leafy greens",
+    "other": "Other"
+  },
+  "recommendations": {
+    "tomato": "Use more potassium once the fruit sets and add calcium if blossom-end rot appears.",
+    "leafy": "Lean on nitrogen early, then switch to a gentle balanced feed as the greens thicken.",
+    "other": "Choose a balanced 10-10-10, apply lightly every two weeks, and observe how the plant responds."
+  },
+  "translations": []
+}

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planting Diary | Home Utilities</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero hero-subpage">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="index.html#home">Home Utilities</a>
+          <div class="nav-links">
+            <a href="stories.html">Stories</a>
+            <div class="nav-parent">
+              <a href="index.html#kitchen-notes">Kitchen Notes</a>
+              <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                <a href="recipes.html">Recipes</a>
+                <a href="shopping-planner.html">Shopping Planner</a>
+              </div>
+            </div>
+            <div class="nav-parent nav-parent-greenies">
+              <a class="nav-link-greenies" href="#">Greenies</a>
+              <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                <a class="nav-greenies-planting" href="planting-diary.html">Planting diary</a>
+                <a class="nav-greenies-fertilization" href="fertilization-wikipedia.html">Fertilization wikipedia</a>
+              </div>
+            </div>
+            <a href="ptsd.html">PTSD</a>
+          </div>
+          <label class="locale-switcher">
+            <span class="locale-switcher-label">Language</span>
+            <select class="locale-select" id="locale-select" aria-label="Language selector">
+              <option value="en">English</option>
+              <option value="vi">Tiếng Việt</option>
+            </select>
+          </label>
+        </nav>
+
+        <section class="hero-content hero-planting">
+          <div class="hero-copy">
+            <p class="eyebrow" id="planting-eyebrow">Greenies / Planting Diary</p>
+            <h1 id="planting-title">Planting Diary</h1>
+            <p class="hero-text" id="planting-subhead">
+              Track your plants, learn from nature, and grow with confidence.
+            </p>
+            <p class="hero-text" id="planting-subtext">
+              This calm log helps you remember what you planted, when, and how it responded so every season feels lighter.
+            </p>
+          </div>
+        </section>
+      </header>
+
+      <main class="planner-section planner-page">
+        <section class="planner-card">
+          <h2 class="section-heading" id="diary-what-title">What is a Planting Diary?</h2>
+          <p id="diary-what-description">
+            A planting diary is your personal record of everything you grow. It helps you remember what you planted, when you planted it, and how it performed over time.
+          </p>
+          <div class="planner-columns">
+            <article class="planner-card planner-note">
+              <p class="card-label" id="diary-why-label">Why it matters</p>
+              <ul class="planner-list">
+                <li id="diary-why-1">Avoid repeating mistakes (wrong season, overwatering, etc.)</li>
+                <li id="diary-why-2">Understand plant behavior in your local environment</li>
+                <li id="diary-why-3">Improve results season by season</li>
+              </ul>
+            </article>
+            <article class="planner-card planner-note">
+              <p class="card-label" id="diary-record-label">What to record</p>
+              <ul class="planner-list">
+                <li id="diary-record-1">Plant name</li>
+                <li id="diary-record-2">Date planted</li>
+                <li id="diary-record-3">Location (balcony, garden, indoor)</li>
+                <li id="diary-record-4">Sunlight exposure</li>
+                <li id="diary-record-5">Watering frequency</li>
+                <li id="diary-record-6">Notes (growth, issues, observations)</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="planner-card" id="diary-form">
+          <h2 id="diary-entry-title">Diary Entry (prefilled)</h2>
+          <form class="planner-columns">
+            <label>
+              Plant Name
+              <input class="planner-input" type="text" value="Cherry Tomato" />
+            </label>
+            <label>
+              Date Planted
+              <input class="planner-input" type="date" value="2026-03-01" />
+            </label>
+            <label>
+              Location
+              <select class="planner-input">
+                <option>Indoor</option>
+                <option selected>Balcony</option>
+                <option>Garden</option>
+              </select>
+            </label>
+            <label>
+              Sunlight
+              <select class="planner-input">
+                <option>Full Sun</option>
+                <option selected>Partial</option>
+                <option>Shade</option>
+              </select>
+            </label>
+            <label>
+              Watering
+              <input class="planner-input" type="text" value="Every 2 days" />
+            </label>
+            <label>
+              Notes
+              <textarea class="planner-input" rows="3">Leaves look healthy. Slight yellowing after heavy rain.</textarea>
+            </label>
+          </form>
+        </section>
+
+        <section class="planner-card">
+          <h2 id="diary-timeline-title">Diary Timeline</h2>
+          <div class="planner-columns">
+            <article class="planner-card planner-note">
+              <p class="card-label">Entry 1</p>
+              <p>Tomato planted on March 1</p>
+              <p>Note: "Germinated after 5 days"</p>
+            </article>
+            <article class="planner-card planner-note">
+              <p class="card-label">Entry 2</p>
+              <p>Basil planted on March 3</p>
+              <p>Note: "Growing slowly, moved to sunnier spot"</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="planner-card">
+          <h2 id="diary-security-title">Security & Data</h2>
+          <ul class="planner-list">
+            <li id="security-1">Sanitize all user inputs to keep notes script-free.</li>
+            <li id="security-2">Store timestamps in UTC so you can review entries from anywhere.</li>
+            <li id="security-3">Keep diary entries scoped per user to avoid cross-account leakage.</li>
+            <li id="security-4">Avoid exposing internal IDs in the UI; keep the focus on each plant story.</li>
+          </ul>
+        </section>
+
+        <section class="planner-card" id="battle-plan">
+          <h2 id="battle-plan-title">Battle Plan for Mini Growers</h2>
+          <p id="battle-plan-intro">
+            Hello friend, this is the full "Battle Plan" for busy beginners who use the Minisize Aussie trio (100ml bottles) and the supporting supplements to conquer balcony gourds: melon, bottle gourd, pumpkin, and papaya.
+          </p>
+          <div class="lang-toggle" data-target="battle-plan-content" aria-label="Battle plan language switch">
+            <button data-lang="en" class="toggle-btn active" type="button">EN</button>
+            <button data-lang="vi" class="toggle-btn" type="button">VI</button>
+          </div>
+          <div id="battle-plan-content" class="lang-content">
+            <article data-lang-content="en">
+              <p class="card-label">1. Shopping list (6 essentials)</p>
+              <ul class="planner-list">
+                <li>Combo Aussie trio (Minisize 100ml): Seasol for roots, Powerfeed for stem/leaf, Org-Hum for soil.</li>
+                <li>AminoQuelant-K (100ml) keeps fruits big and sweet (think of it as a banana-tea substitute).</li>
+                <li>Super Lan 10-60-10 (50g sachet) forces the vine to bloom.</li>
+                <li>Physan 20SL (100ml) sanitizes the soil fast and handles rot.</li>
+                <li>Daconil (100ml) battles powdery mildew and dew diseases common on melon.</li>
+                <li>Neem oil (100ml) chases thrips and spider mites, making new leaves behave.</li>
+              </ul>
+              <p>
+                Tools: Keep a 5ml syringe handy to measure every drop precisely.
+              </p>
+              <p class="card-label">2. "Do-it-when-you-have-time" schedule (4 steps)</p>
+              <ul class="planner-list">
+                <li><strong>Step 1: Dump soil & plant right away (Day 1)</strong> – Fill the pot with clean soil, spray 1ml Physan per liter of water to sterilize, wait two hours for the mist to settle, then sow seeds or transplant seedlings without needing to pre-moisten.</li>
+                <li><strong>Step 2: Grow a lush green vine</strong> – When the plant has two true leaves and begins to climb, mix 1ml each of Seasol, Powerfeed, and Org-Hum per liter, drench the base every seven days, and spray Neem oil every ten days to keep thrips from curling the tips.</li>
+                <li><strong>Step 3: Push flowers</strong> – Once the vine is halfway up the trellis and no female buds appear yet, dissolve 2g Super Lan in a liter and mist the leaves twice, seven days apart. If a flower opens between 7–9 a.m., gently top it with a male bloom to pollinate.</li>
+                <li><strong>Step 4: Grow & sweeten fruit (Day 5+)</strong> – As soon as fruits are thumb-sized, feed 1ml Powerfeed + 2ml Amino K per liter, water at the base every 5–7 days, and keep Daconil (1.5ml/1L) at hand to spray the underside when powdery mildew flares.</li>
+              </ul>
+              <p class="card-label">3. Golden rules</p>
+              <ul class="planner-list">
+                <li>Measure every 1ml, 2ml with the syringe. Better to underdose than sun-burn the leaves.</li>
+                <li>Feed and spray in the cool of the evening (after 5 p.m.) and rinse the foliage with plain water the next morning.</li>
+                <li>Never mix disease spray with fertilizer. If you need both, spray disease first and wait three days before feeding.</li>
+                <li>You can mix Seasol, Powerfeed, and Org-Hum in the same bucket for one lazy pour.</li>
+              </ul>
+              <p>
+                Check your Shopee cart: do you have all six items? If so, go ahead and press "Buy"—then start your rooftop farming adventure.
+              </p>
+            </article>
+            <article data-lang-content="vi" class="hidden">
+              <p>
+                Chào bạn, đây là bản "Kế hoạch tác chiến" đầy đủ, gọn nhẹ nhất dành cho người mới, bận rộn, sử dụng Bộ 3 Minisize (100ml) và các món bổ trợ để chinh phục vườn sân thượng (Dưa, Bầu, Bí, Đu đủ).
+              </p>
+              <p class="card-label">1. Danh sách mua sắm chốt hạ (6 món)</p>
+              <ul class="planner-list">
+                <li>Combo Bộ 3 Úc (Minisize 100ml): Seasol (Rễ), Powerfeed (Thân/Lá), Org-Hum (Đất).</li>
+                <li>AminoQuelant-K (100ml): Để trái to, ngọt (Thay thế dịch chuối).</li>
+                <li>Siêu Lân 10-60-10 (Gói 50g): Để ép cây ra hoa.</li>
+                <li>Physan 20SL (100ml): Sát khuẩn đất nhanh và trị thối thân/rễ.</li>
+                <li>Daconil (100ml): Trị phấn trắng, sương mai (Bệnh vàng/đốm lá hay gặp ở dưa).</li>
+                <li>Dầu Neem (100ml): Trị bọ trĩ, nhện đỏ (Làm xoăn lá non).</li>
+              </ul>
+              <p>
+                Dụng cụ cần có: 1 ống tiêm (xilanh) 5ml để đong dung dịch cho chuẩn.
+              </p>
+              <p class="card-label">2. Lịch trình "Rảnh đâu làm đó" (4 bước)</p>
+              <ul class="planner-list">
+                <li><strong>Bước 1: Đổ đất & Trồng ngay (Ngày đầu tiên)</strong> – Đất sạch mới đổ, pha 1ml Physan + 1 lít nước tưới đẫm đất để diệt khuẩn, đợi 2 tiếng cho thuốc bay hơi, rồi gieo/ trồng luôn.</li>
+                <li><strong>Bước 2: Nuôi cây bốc xanh (2 lá thật đến khi leo 1/2 giàn)</strong> – Cây đã bám rễ, pha 1ml Seasol + 1ml Powerfeed + 1ml Org-Hum vào 1 lít, tưới đẫm gốc chiều mát, phun Dầu Neem mỗi 10 ngày.</li>
+                <li><strong>Bước 3: Ép ra hoa (Khi cây đủ cao)</strong> – Cây xanh tốt nhưng chưa thấy nụ cái, pha 2g Siêu Lân + 1 lít nước phun lá, làm 2 lần cách 7 ngày, sáng thấy hoa nở thì thụ phấn bằng hoa đực.</li>
+                <li><strong>Bước 4: Nuôi trái & tạo ngọt (Từ lúc đậu quả)</strong> – Trái nhỏ bằng ngón tay, pha 1ml Powerfeed + 2ml Amino K/1L, tưới gốc 5-7 ngày/lần, pha 1.5ml Daconil/1L phun khi thấy đốm trắng.</li>
+              </ul>
+              <p class="card-label">3. Nguyên tắc vàng</p>
+              <ul class="planner-list">
+                <li>Đúng liều lượng: dùng xilanh đo đúng 1ml, 2ml. Thà thiếu còn hơn thừa.</li>
+                <li>Thời điểm: Bón phân/phun thuốc vào chiều mát (sau 5h), sáng hôm sau tưới nước xả lại lá.</li>
+                <li>Tách biệt: Không pha chung thuốc bệnh với phân. Nếu cần dùng cả hai, phun thuốc bệnh trước, 3 ngày sau mới tưới phân.</li>
+                <li>Hỗn hợp phân: Pha chung Seasol, Powerfeed, Org-Hum trong cùng một xô để tưới.</li>
+              </ul>
+              <p>
+                Bước tiếp theo: Kiểm tra lại giỏ hàng Shopee xem đã đủ 6 món trên chưa? Nếu đủ rồi thì cứ tự tin "Chốt đơn" và bắt đầu hành trình làm nông dân sân thượng thôi!
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="planner-card" id="pinching">
+          <h2 id="pinching-title">Pinching Rescue</h2>
+          <div class="lang-toggle" data-target="pinch-content" aria-label="Pinching language switch">
+            <button data-lang="en" class="toggle-btn active" type="button">EN</button>
+            <button data-lang="vi" class="toggle-btn" type="button">VI</button>
+          </div>
+          <div id="pinch-content" class="lang-content">
+            <article data-lang-content="en">
+              <p>
+                Pinching a luffa at seven real leaves is a lucky mistake if you know how to recover. If the vine climbs unchecked, the main stem stretches long but produces few fruits. A pinch drives energy into the runner shoots, the ones that carry the most female flowers.
+              </p>
+              <p class="card-label">1. Immediate actions</p>
+              <ul class="planner-list">
+                <li>Check the leaf axils: after pinching, the plant pours energy into the buds between leaf 1 and leaf 7.</li>
+                <li>Select 2-3 strong runner shoots near the base or mid-stem to become the new main vines.</li>
+                <li>Remove the small, weak shoots in the other axils so the plant focuses on the strong runners.</li>
+              </ul>
+              <p class="card-label">2. Emergency nutrition</p>
+              <ul class="planner-list">
+                <li>Monday (today or when you have time) – Mix the Aussie trio again, 1ml of Seasol + Powerfeed + Org-Hum per liter.</li>
+                <li>Powerfeed (fish nitrogen) pulls the runners out, Seasol seals the pinch, and Org-Hum feeds the soil.</li>
+                <li>If the wound is open, spray Physan 1ml/1L lightly or dab the tip to block pathogens.</li>
+              </ul>
+              <p class="card-label">3. Follow-up rhythm</p>
+              <ul class="planner-list">
+                <li>When the runners reach 20-30cm, keep the Monday Aussie trio so they climb quickly.</li>
+                <li>Once the runners cover the trellis, bring out Super Lan 10-60-10 to force these shoots to bloom.</li>
+              </ul>
+              <p class="card-label">Notes for newcomers</p>
+              <ul class="planner-list">
+                <li>Don’t fret; experienced growers sometimes pinch early to keep vines short but productive for easy harvest.</li>
+                <li>Make sure chicken manure chunks are around the base so the plant has dry rations for the new shoots.</li>
+              </ul>
+              <p>
+                Have you seen the little green buds popping from the axils yet? If so, feed them Powerfeed and they will sprint away.
+              </p>
+            </article>
+            <article data-lang-content="vi" class="hidden">
+              <p>
+                Bấm ngọn mướp hương khi có 7 lá thực ra lại là một "sai lầm có lợi" nếu bạn biết cách xử lý. Thông thường, dây mẹ kéo dài nhưng trái ít; bấm ngọn kích thích cây ra nhánh chèo – đây mới là dây đậu trái nhiều nhất.
+              </p>
+              <p class="card-label">1. Việc cần làm ngay</p>
+              <ul class="planner-list">
+                <li>Quan sát nách lá: sau khi bấm ngọn, cây dồn sức nuôi mầm ở nách lá từ lá thứ 1 đến thứ 7.</li>
+                <li>Chọn 2-3 nhánh chèo khỏe ở gần gốc hoặc giữa thân; những nhánh này là “thân chính mới.”</li>
+                <li>Vặt bỏ những mầm phụ yếu ớt để tập trung dinh dưỡng vào hai ba nhánh chủ lực.</li>
+              </ul>
+              <p class="card-label">2. Chế độ dinh dưỡng "hồi sức cấp cứu"</p>
+              <ul class="planner-list">
+                <li>Thứ 2 (hôm nay hoặc lúc rảnh) – Pha Combo Bộ 3 Úc (Seasol + Powerfeed + Org-Hum).</li>
+                <li>Tỉ lệ 1ml mỗi loại/1 lít nước, Powerfeed giúp kéo đọt chèo, Seasol làm lành vết bấm.</li>
+                <li>Do ngọn chưa lành, nếu rảnh bạn pha Physan (1ml/1L) phun nhẹ hoặc chấm lát ngọn để tránh nấm khuẩn.</li>
+              </ul>
+              <p class="card-label">3. Lịch trình tiếp theo</p>
+              <ul class="planner-list">
+                <li>Khi nhánh chèo dài 20-30cm: tiếp tục lịch Thứ 2 tưới Bộ 3 Úc để dây leo lên giàn.</li>
+                <li>Khi nhánh chèo phủ kín giàn: lúc này mới dùng Siêu Lân 10-60-10 để ép nhánh chèo ra hoa.</li>
+              </ul>
+              <p class="card-label">Lưu ý cho người mới</p>
+              <ul class="planner-list">
+                <li>Đừng quá lo lắng, đôi khi người trồng mướp chuyên nghiệp còn bấm ngọn sớm để giàn thấp, nhiều nhánh dễ thu hoạch.</li>
+                <li>Hãy rải Phân gà cục quanh gốc để cây có “lương khô” nuôi các nhánh mới bung ra.</li>
+              </ul>
+              <p>
+                Bạn đã thấy các mầm xanh nhỏ nhú ra ở nách lá chưa? Nếu có, cứ yên tâm bón Powerfeed vào, nó sẽ vọt đi rất nhanh!
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="script.js"></script>
+  </body>
+</html>

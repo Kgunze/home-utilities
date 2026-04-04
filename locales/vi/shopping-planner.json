@@ -1,0 +1,10 @@
+{
+  "title": "Kế hoạch đi chợ | Home Utilities",
+  "description": "Trang kế hoạch đi chợ hằng tuần của Home Utilities, dựa trên tài liệu thực đơn 30 ngày đã được duyệt.",
+  "translations": [
+    { "selector": ".subpage-hero-copy .eyebrow", "text": "Ghi chú bếp / Kế hoạch đi chợ" },
+    { "selector": ".subpage-hero-copy h1", "text": "Kế hoạch đi chợ hằng tuần được dịch lại để cả nhà cùng hiểu." },
+    { "selector": ".subpage-hero-copy .hero-text", "text": "Trang này dựa trên thực đơn 30 ngày đã được duyệt, gom nguyên liệu theo mỗi tuần để cha mẹ chỉ cần đi chợ vài lần vẫn giữ được nhịp sống nhẹ nhõm." },
+    { "selector": ".duration-suffix", "text": "giờ" }
+  ]
+}

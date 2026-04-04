@@ -1,0 +1,11 @@
+{
+  "title": "Câu chuyện | Home Utilities",
+  "description": "Trang câu chuyện dạng chương của Home Utilities, thiết kế như một cuốn sách mở với dòng thời gian cá nhân từ 1992 đến 2026.",
+  "translations": [
+    { "selector": ".subpage-hero-copy .eyebrow", "text": "Câu chuyện / Sách theo chương" },
+    { "selector": ".subpage-hero-copy h1", "text": "Một cuốn sách mở, bắc nối ký ức từ 1992 đến 2026." },
+    { "selector": ".subpage-hero-copy .hero-text", "text": "Trang này gom mọi thời đoạn như những chương sách, cho phép ký ức thở nhẹ và được viết lại bằng ngôn ngữ ấm áp của Nguyễn Ngọc Ánh." },
+    { "selector": ".hero-actions a[href=\"#chapter-index\"]", "text": "Mở mục lục chương" },
+    { "selector": ".hero-actions a[href=\"#timeline-rail\"]", "text": "Xem toàn bộ dòng thời gian" }
+  ]
+}

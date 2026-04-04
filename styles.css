@@ -164,6 +164,30 @@ body::before {
   align-items: center;
 }
 
+.locale-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.locale-switcher-label {
+  white-space: nowrap;
+}
+
+.locale-select {
+  min-height: 2.5rem;
+  padding: 0.55rem 2.2rem 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 252, 247, 0.92);
+  color: var(--text);
+  font: inherit;
+}
+
 .nav-links a {
   color: var(--muted);
   font-weight: 600;
@@ -1657,6 +1681,15 @@ h4 {
 
   .nav-links {
     flex-wrap: wrap;
+  }
+
+  .locale-switcher {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .locale-select {
+    width: 100%;
   }
 
   .nav-submenu {

@@ -1,0 +1,9 @@
+{
+  "title": "PTSD | Home Utilities",
+  "description": "Trang PTSD với bối cảnh bị đổ lỗi trong gia đình, thuật ngữ dựa trên bằng chứng, tham chiếu triệu chứng và mẫu theo dõi điều trị.",
+  "translations": [
+    { "selector": ".subpage-hero-copy .eyebrow", "text": "Hỗ trợ / PTSD" },
+    { "selector": ".subpage-hero-copy h1", "text": "PTSD và những câu chuyện được hiểu lại trong ánh mắt gia đình." },
+    { "selector": ".subpage-hero-copy .hero-text", "text": "Trang này viết lại chứng lý về PTSD bằng lời dịu dàng, phân biệt giữa tiếng khóc không phải là tội lỗi và những chứng cứ cần bảo lưu." }
+  ]
+}
