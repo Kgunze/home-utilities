@@ -1,0 +1,26 @@
+{
+  "title": "Ngày 2 — Từ tuyến đường đến hệ thống (Tư duy NestJS) | Cat Can Code",
+  "description": "Nhật ký ngày thứ hai kể lại cách NestJS gom các lớp trách nhiệm thành một hệ thống thứ tự và duyên dáng.",
+  "translations": [
+    {
+      "selector": "#day-two-title",
+      "text": "Ngày 2 — Từ tuyến đường đến hệ thống (Tư duy NestJS)"
+    },
+    {
+      "selector": "#day-two-subtitle",
+      "text": "Hôm nay mình không còn thấy backend là từng API riêng lẻ, mà là chuỗi vai trò giữ nhịp cho hệ thống cân bằng."
+    },
+    {
+      "selector": "#day-two-author",
+      "text": "Cat Can Code"
+    },
+    {
+      "selector": "#day-two-date",
+      "text": "Ngày 05 tháng 4 năm 2026"
+    },
+    {
+      "selector": "#day-two-reading",
+      "text": "Đọc trong 5 phút"
+    }
+  ]
+}

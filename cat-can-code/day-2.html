@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 2 — From Routes to Systems (Thinking in NestJS) | Cat Can Code</title>
+    <meta
+      name="description"
+      content="A Day 2 entry that turns NestJS routing into layered responsibility models and a new way to think about backend flow."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .cat-page-shell {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f9f3eb 0%, #f4e6d8 100%);
+      }
+
+      .sketch-parallax {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .sketch-svg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        filter: blur(0.3px);
+      }
+
+      .sketch-layer {
+        mix-blend-mode: multiply;
+        will-change: transform;
+      }
+
+      .sketch-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(244, 233, 214, 0.4));
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cat-page-shell .page-shell {
+        position: relative;
+        z-index: 2;
+      }
+
+      .article-wrapper {
+        max-width: 720px;
+        margin: 0 auto;
+        padding-top: 1rem;
+      }
+
+      .article-meta {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .article-body {
+        color: var(--text);
+        line-height: 1.7;
+        font-size: 1.1rem;
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      .article-body h2 {
+        font-family: "Fraunces", serif;
+        font-size: 1.8rem;
+        margin: 0;
+      }
+
+      .article-body h3 {
+        font-family: "Fraunces", serif;
+        font-size: 1.45rem;
+        margin-bottom: 0.35rem;
+      }
+
+      .article-body h4 {
+        font-family: "Fraunces", serif;
+        font-size: 1.2rem;
+        margin-bottom: 0.15rem;
+      }
+
+      .article-body ul {
+        padding-left: 1.2rem;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .article-body blockquote {
+        margin: 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .hero-capsule {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .hero-capsule h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 4.4rem);
+      }
+
+      .hero-capsule p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .day-navigation {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .day-navigation a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .day-navigation span {
+        flex: 1;
+        display: inline-flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cat-page-shell">
+      <div class="sketch-parallax" aria-hidden="true">
+        <svg class="sketch-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+          <g class="sketch-layer" data-speed="0.04">
+            <path d="M60 260 L180 240 L320 260" stroke="#5c5145" stroke-width="1.4" fill="none" stroke-dasharray="6 4"/>
+            <text x="190" y="252" font-size="10" fill="#5c5145">flow → deploy</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.03">
+            <rect x="220" y="340" width="120" height="70" rx="8" stroke="#5c5145" stroke-width="1.6" fill="none"/>
+            <text x="240" y="375" font-size="16" fill="#5c5145">&gt;_</text>
+            <path d="M220 420 L340 420" stroke="#5c5145" stroke-width="1.1" stroke-dasharray="5 5" />
+            <text x="222" y="435" font-size="10" fill="#5c5145">state?</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.06">
+            <circle cx="840" cy="210" r="40" stroke="#5c5145" stroke-width="1.4" fill="none"/>
+            <rect x="840" y="250" width="80" height="40" rx="10" fill="none" stroke="#5c5145" stroke-width="1.3"/>
+            <text x="860" y="270" font-size="8" fill="#5c5145">DB</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="520" y="90" font-size="12" fill="#5c5145" opacity="0.7">notes: why this works?</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sketch-overlay"></div>
+      <div class="page-shell">
+      <header class="hero hero-subpage">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="../index.html#home">Home Utilities</a>
+          <div class="nav-links">
+            <a href="../stories.html">Stories</a>
+            <div class="nav-parent">
+              <a href="../index.html#kitchen-notes">Kitchen Notes</a>
+              <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                <a href="../recipes.html">Recipes</a>
+                <a href="../shopping-planner.html">Shopping Planner</a>
+              </div>
+            </div>
+            <div class="nav-parent nav-parent-greenies">
+              <a class="nav-link-greenies" href="#">Greenies</a>
+              <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                <a class="nav-greenies-planting" href="../planting-diary.html">Planting diary</a>
+                <a class="nav-greenies-fertilization" href="../fertilization-wikipedia.html">Fertilization wikipedia</a>
+              </div>
+            </div>
+            <a href="../ptsd.html">PTSD</a>
+          </div>
+          <label class="locale-switcher">
+            <span class="locale-switcher-label">Language</span>
+            <select class="locale-select" id="locale-select" aria-label="Language selector">
+              <option value="en">English</option>
+              <option value="vi">Tiếng Việt</option>
+            </select>
+          </label>
+        </nav>
+
+        <section class="hero-content hero-subpage">
+          <div class="hero-copy article-wrapper hero-capsule">
+            <h1 id="day-two-title">Day 2 — From Routes to Systems (Thinking in NestJS)</h1>
+            <p id="day-two-subtitle">Starting to understand backend… properly. Not as “API endpoints”. But as a system of responsibility layers.</p>
+            <div class="article-meta">
+              <span id="day-two-author">Cat Can Code</span>
+              <span id="day-two-date">April 5, 2026</span>
+              <span id="day-two-reading">5 min read</span>
+            </div>
+          </div>
+        </section>
+      </header>
+
+      <main class="planner-section planner-page">
+        <article class="planner-card article-wrapper">
+          <div class="article-body">
+            <section>
+              <p>Starting to understand backend… properly.</p>
+              <p>Not as “API endpoints”.</p>
+              <p>But as a <strong>system of responsibility layers</strong>.</p>
+            </section>
+
+            <section>
+              <h2>Recap from Learning</h2>
+              <p>Today’s focus was NestJS — a backend framework that forces structure.</p>
+              <p>At first, it feels heavier than Express.</p>
+              <p>But then I realized:</p>
+              <blockquote>It’s not heavier. It’s clearer.</blockquote>
+              <div class="my-10">
+                <iframe
+                  class="w-full aspect-video rounded-xl"
+                  src="https://www.youtube.com/embed/21_I-12f5JE"
+                  title="Day 2 NestJS Recap"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <h3>What NestJS Really Is</h3>
+              <ul>
+                <li>Controller → handles incoming requests</li>
+                <li>Service → contains business logic</li>
+                <li>Module → organizes everything</li>
+              </ul>
+              <p>This creates a system where:</p>
+              <blockquote>Each part has a job. Nothing overlaps.</blockquote>
+
+              <h3>The Flow (Now Much Clearer)</h3>
+              <p>Request → Controller → Service → Database → Response</p>
+              <p>Compared to yesterday:</p>
+              <p>User → UI → API → Backend → DB → AI</p>
+              <p>Now I can zoom into the backend part.</p>
+            </section>
+
+            <section>
+              <hr />
+              <h2>Prerequisites (Reality Check)</h2>
+              <p>Before jumping into NestJS, I see why these matter:</p>
+              <ul>
+                <li>JavaScript → core language understanding</li>
+                <li>TypeScript → structure and type safety</li>
+                <li>Node.js → runtime environment</li>
+                <li>Express → baseline backend thinking</li>
+              </ul>
+              <p>NestJS is not replacing these.</p>
+              <p>It’s organizing them.</p>
+
+              <h3>Insight</h3>
+              <p>If Express is:</p>
+              <blockquote>“Freedom to build anything”</blockquote>
+              <p>NestJS is:</p>
+              <blockquote>“Structure to scale safely”</blockquote>
+            </section>
+
+            <section>
+              <h3>🧩 Key Concepts (Translated Simply)</h3>
+              <h4>Controller = Door</h4>
+              <ul>
+                <li>Receives requests</li>
+                <li>Decides where to send them</li>
+              </ul>
+              <p>Example thinking:</p>
+              <blockquote>“User wants workout plan → send to service”</blockquote>
+
+              <h4>Service = Brain</h4>
+              <ul>
+                <li>Handles logic</li>
+                <li>Processes data</li>
+                <li>Talks to database</li>
+              </ul>
+              <p>Example:</p>
+              <blockquote>“Given user data → generate structured plan input”</blockquote>
+
+              <h4>Module = Organizer</h4>
+              <ul>
+                <li>Groups related logic together</li>
+                <li>Keeps system scalable</li>
+              </ul>
+              <p>Example:</p>
+              <blockquote>“AuthModule, UserModule, WorkoutModule”</blockquote>
+            </section>
+
+            <section>
+              <h3>⚙️ Dependency Injection (Important Shift)</h3>
+              <p>Instead of manually connecting things, NestJS injects dependencies automatically.</p>
+              <p>Meaning:</p>
+              <blockquote>“You don’t build connections every time — the system wires it for you.”</blockquote>
+              <p>Why this matters:</p>
+              <ul>
+                <li>Less coupling</li>
+                <li>Easier testing</li>
+                <li>Cleaner scaling</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>🧠 Mental Upgrade</h3>
+              <p>Before:</p>
+              <blockquote>“Call API → get data”</blockquote>
+              <p>Now:</p>
+              <blockquote>“Route request through controlled layers”</blockquote>
+            </section>
+
+            <section>
+              <h3>🔍 Backend Is Not Just Data</h3>
+              <p>I used to think backend = database operations. But actually it is:</p>
+              <ul>
+                <li>Validation layer</li>
+                <li>Logic layer</li>
+                <li>Security layer</li>
+                <li>Structure layer</li>
+              </ul>
+              <p>Database is just one part.</p>
+            </section>
+
+            <section>
+              <h3>⚠️ Hidden Complexity (Again)</h3>
+              <p>Things that look simple:</p>
+              <ul>
+                <li>Routing → actually access control problem</li>
+                <li>Services → can become messy without boundaries</li>
+                <li>Modules → require good domain thinking</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>🛡️ Security Awareness (Day 2 Note)</h3>
+              <ul>
+                <li>Never trust incoming data</li>
+                <li>Always validate DTOs</li>
+                <li>Separate public vs protected endpoints</li>
+                <li>Avoid leaking internal errors to client</li>
+                <li>Keep environment variables strictly server-side</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>🔗 Connecting Day 1 → Day 2</h3>
+              <p>Day 1:</p>
+              <blockquote>“Saw the full system”</blockquote>
+              <p>Day 2:</p>
+              <blockquote>“Understood how backend is structured inside that system”</blockquote>
+            </section>
+
+            <section>
+              <h3>Small Reflection</h3>
+              <p>Today I learned:</p>
+              <blockquote>Good backend is not about writing logic.</blockquote>
+              <p>It’s about:</p>
+              <ul>
+                <li>Designing responsibility</li>
+                <li>Enforcing boundaries</li>
+                <li>Making systems predictable</li>
+              </ul>
+              <p>Tomorrow:</p>
+              <p>I want to understand how <strong>data flows into AI properly</strong>. Because that’s where everything connects.</p>
+            </section>
+          </div>
+        </article>
+
+        <nav class="day-navigation" aria-label="Diary navigation">
+          <a href="day-1.html">← Day 1</a>
+          <span></span>
+          <a href="day-3.html">Day 3 →</a>
+        </nav>
+      </main>
+      </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="../script.js"></script>
+  </body>
+</html>

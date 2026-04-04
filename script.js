@@ -478,9 +478,10 @@ let localeData = {
 
 const getCurrentPage = () => {
   const path = window.location.pathname;
+  const dayMatch = path.match(/\/cat-can-code\/day-(\d+)/);
 
-  if (path.includes("/cat-can-code/day-1")) {
-    return "cat-can-code-day-1.html";
+  if (dayMatch) {
+    return `cat-can-code-day-${dayMatch[1]}.html`;
   }
 
   if (path.includes("/cat-can-code")) {

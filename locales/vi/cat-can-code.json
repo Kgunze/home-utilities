@@ -33,6 +33,26 @@
     {
       "selector": "#diary-card-reading",
       "text": "Đọc trong 4 phút"
+    },
+    {
+      "selector": "#day-two-card-title",
+      "text": "Ngày 2 — Từ tuyến đường đến hệ thống (Tư duy theo NestJS)"
+    },
+    {
+      "selector": "#day-two-card-excerpt",
+      "text": "Hôm nay mình không còn thấy backend như các endpoint đơn lẻ nữa, mà là một chiếc máy nhiệm vụ rõ ràng và tròn trịa."
+    },
+    {
+      "selector": "#day-two-card-day",
+      "text": "Ngày 2"
+    },
+    {
+      "selector": "#day-two-card-date",
+      "text": "Ngày 05 tháng 4 năm 2026"
+    },
+    {
+      "selector": "#day-two-card-reading",
+      "text": "Đọc trong 5 phút"
     }
   ]
 }
