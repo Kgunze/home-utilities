@@ -127,6 +127,124 @@
         color: var(--muted);
       }
 
+      .flow-helper {
+        margin: 0;
+        max-width: 60ch;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .flow-visualizer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0;
+      }
+
+      .flow-node {
+        flex: 1;
+        min-width: 140px;
+        background: #fff;
+        border: 1px solid rgba(92, 81, 69, 0.25);
+        border-radius: 1rem;
+        padding: 0.85rem 1rem;
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+        box-shadow: 0 4px 12px rgba(92, 81, 69, 0.08);
+      }
+
+      .flow-node:hover,
+      .flow-node:focus-visible {
+        transform: translateY(-2px);
+        border-color: rgba(92, 81, 69, 0.45);
+        box-shadow: 0 8px 20px rgba(92, 81, 69, 0.18);
+      }
+
+      .flow-node-label {
+        display: block;
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+        color: var(--text);
+      }
+
+      .flow-node-reference {
+        display: block;
+        font-size: 0.88rem;
+        color: var(--muted);
+        margin-top: 0.35rem;
+      }
+
+      .flow-node-arrow {
+        position: absolute;
+        top: 50%;
+        right: -1rem;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        opacity: 0.4;
+      }
+
+      .flow-node-last .flow-node-arrow {
+        display: none;
+      }
+
+      .flow-tooltip {
+        position: fixed;
+        z-index: 20;
+        background: #1a1a1a;
+        color: #fff;
+        padding: 0.85rem;
+        border-radius: 0.85rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        width: 240px;
+        left: 50%;
+        transform: translate(-50%, -5%);
+      }
+
+      .flow-tooltip::before {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: #1a1a1a;
+      }
+
+      .flow-tooltip-title {
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .flow-tooltip-description,
+      .flow-tooltip-example,
+      .flow-tooltip-note {
+        margin: 0.25rem 0 0;
+        font-size: 0.75rem;
+        opacity: 0.88;
+      }
+
+      .flow-note-panel {
+        min-height: 2.25rem;
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
+        border-radius: 0.85rem;
+        border: 1px dashed rgba(92, 81, 69, 0.4);
+        background: rgba(255, 255, 255, 0.75);
+        color: var(--muted);
+        margin-top: 0.5rem;
+        line-height: 1.5;
+      }
+
+      .flow-note-panel.is-visible {
+        border-style: solid;
+        color: var(--text);
+        background: #fff;
+      }
+
       .day-navigation {
         margin-top: 2rem;
         display: flex;
@@ -250,11 +368,45 @@
               <p>This creates a system where:</p>
               <blockquote>Each part has a job. Nothing overlaps.</blockquote>
 
-              <h3>The Flow (Now Much Clearer)</h3>
-              <p>Request → Controller → Service → Database → Response</p>
-              <p>Compared to yesterday:</p>
-              <p>User → UI → API → Backend → DB → AI</p>
-              <p>Now I can zoom into the backend part.</p>
+              <h3>The Flow (Interactive)</h3>
+              <p class="flow-helper">
+                Hover each block to understand what it does. Think of it as how a request travels inside the system.
+              </p>
+              <div class="flow-visualizer" id="backend-flow-visualizer">
+                <div class="flow-node" data-step="request" tabindex="0">
+                  <span class="flow-node-label">Request</span>
+                  <span class="flow-node-reference">User sends a request from UI</span>
+                  <span class="flow-node-arrow" aria-hidden="true">→</span>
+                </div>
+                <div class="flow-node" data-step="controller" tabindex="0">
+                  <span class="flow-node-label">Controller</span>
+                  <span class="flow-node-reference">Receives request and routes it</span>
+                  <span class="flow-node-arrow" aria-hidden="true">→</span>
+                </div>
+                <div class="flow-node" data-step="service" tabindex="0">
+                  <span class="flow-node-label">Service</span>
+                  <span class="flow-node-reference">Handles business logic</span>
+                  <span class="flow-node-arrow" aria-hidden="true">→</span>
+                </div>
+                <div class="flow-node" data-step="database" tabindex="0">
+                  <span class="flow-node-label">Database</span>
+                  <span class="flow-node-reference">Stores and retrieves data</span>
+                  <span class="flow-node-arrow" aria-hidden="true">→</span>
+                </div>
+                <div class="flow-node flow-node-last" data-step="response" tabindex="0">
+                  <span class="flow-node-label">Response</span>
+                  <span class="flow-node-reference">Returns result to user</span>
+                </div>
+              </div>
+              <div id="flow-tooltip" class="flow-tooltip" role="status" aria-live="polite" hidden>
+                <p class="flow-tooltip-title"></p>
+                <p class="flow-tooltip-description"></p>
+                <p class="flow-tooltip-example"></p>
+                <p class="flow-tooltip-note"></p>
+              </div>
+              <div id="flow-note-panel" class="flow-note-panel" aria-live="polite">
+                Click a block to expand the note.
+              </div>
             </section>
 
             <section>
@@ -393,5 +545,138 @@
     </div>
     <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
     <script src="../script.js"></script>
+    <script>
+      (function () {
+        const flowData = {
+          request: {
+            label: "Request",
+            description: "User sends a request from UI",
+            example: "Click 'Generate Workout Plan'",
+            note: "This starts everything",
+          },
+          controller: {
+            label: "Controller",
+            description: "Receives request and routes it",
+            example: "POST /workout",
+            note: "Like a receptionist directing traffic",
+          },
+          service: {
+            label: "Service",
+            description: "Handles business logic",
+            example: "Process user fitness data",
+            note: "This is where thinking happens",
+          },
+          database: {
+            label: "Database",
+            description: "Stores and retrieves data",
+            example: "User profile + goals",
+            note: "Memory of the system",
+          },
+          response: {
+            label: "Response",
+            description: "Returns result to user",
+            example: "Workout plan displayed",
+            note: "Final output visible to user",
+          },
+        };
+
+        const visualizer = document.getElementById("backend-flow-visualizer");
+        const tooltip = document.getElementById("flow-tooltip");
+        const notePanel = document.getElementById("flow-note-panel");
+
+        if (!visualizer || !tooltip || !notePanel) {
+          return;
+        }
+
+        const defaultNoteText = "Click a block to expand the note.";
+        let activeNoteId = null;
+
+        const updateTooltipPosition = (node) => {
+          const nodeRect = node.getBoundingClientRect();
+          const tooltipRect = tooltip.getBoundingClientRect();
+          const viewportWidth = window.innerWidth;
+          let top = nodeRect.top + window.scrollY - tooltipRect.height - 8;
+          if (top < window.scrollY + 10) {
+            top = nodeRect.bottom + window.scrollY + 10;
+          }
+          let left = nodeRect.left + window.scrollX + nodeRect.width / 2;
+          left = Math.min(
+            viewportWidth - tooltipRect.width - 12,
+            Math.max(12, left - tooltipRect.width / 2),
+          );
+          tooltip.style.top = `${top}px`;
+          tooltip.style.left = `${left}px`;
+        };
+
+        const showTooltip = (stepId, node) => {
+          const info = flowData[stepId];
+          if (!info) {
+            return;
+          }
+          tooltip.querySelector(".flow-tooltip-title").textContent = info.label;
+          tooltip.querySelector(".flow-tooltip-description").textContent = info.description;
+          tooltip.querySelector(".flow-tooltip-example").textContent = `Example: ${info.example}`;
+          tooltip.querySelector(".flow-tooltip-note").textContent = info.note;
+          tooltip.hidden = false;
+          updateTooltipPosition(node);
+        };
+
+        const hideTooltip = () => {
+          tooltip.hidden = true;
+        };
+
+        const resetNotePanel = () => {
+          notePanel.textContent = defaultNoteText;
+          notePanel.classList.remove("is-visible");
+          activeNoteId = null;
+        };
+
+        const handleNoteToggle = (stepId) => {
+          if (!stepId) {
+            return;
+          }
+          if (activeNoteId === stepId) {
+            resetNotePanel();
+            return;
+          }
+          const info = flowData[stepId];
+          if (!info) {
+            resetNotePanel();
+            return;
+          }
+          notePanel.textContent = `Note: ${info.note}`;
+          notePanel.classList.add("is-visible");
+          activeNoteId = stepId;
+        };
+
+        const nodes = visualizer.querySelectorAll(".flow-node");
+        nodes.forEach((node) => {
+          const stepId = node.dataset.step;
+          if (!stepId) {
+            return;
+          }
+          node.addEventListener("pointerenter", () => showTooltip(stepId, node));
+          node.addEventListener("pointerleave", hideTooltip);
+          node.addEventListener("focus", () => showTooltip(stepId, node));
+          node.addEventListener("blur", hideTooltip);
+          node.addEventListener("pointerdown", (event) => {
+            event.preventDefault();
+            handleNoteToggle(stepId);
+            showTooltip(stepId, node);
+          });
+        });
+
+        window.addEventListener("scroll", () => {
+          if (!tooltip.hidden && activeNoteId) {
+            const focusedNode = visualizer.querySelector(`[data-step="${activeNoteId}"]`);
+            if (focusedNode) {
+              updateTooltipPosition(focusedNode);
+            }
+          }
+        }, { passive: true });
+
+        resetNotePanel();
+      })();
+    </script>
   </body>
 </html>
