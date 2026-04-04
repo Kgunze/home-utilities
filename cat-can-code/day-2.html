@@ -420,6 +420,30 @@
         overflow-x: auto;
         margin: 0.5rem 0;
       }
+      .smart-prompting {
+        margin-top: 1.5rem;
+      }
+      .smart-prompting h2 {
+        font-size: 1.6rem;
+        margin-bottom: 0.4rem;
+        font-family: "Fraunces", serif;
+      }
+      .smart-prompting h3 {
+        margin-top: 1.25rem;
+        font-size: 1.2rem;
+      }
+      .smart-prompting hr {
+        border: none;
+        border-top: 1px solid rgba(92, 81, 69, 0.25);
+        margin-bottom: 1.25rem;
+      }
+      .smart-prompting ul {
+        padding-left: 1.2rem;
+        color: var(--muted);
+      }
+      .smart-prompting p {
+        color: var(--muted);
+      }
 
       .day-navigation {
         margin-top: 2rem;
@@ -819,6 +843,137 @@ generate(profile: CreatePlanDto) {
                 <li>Making complexity manageable</li>
               </ul>
               <p>Tomorrow:<br />I want to explore how this structure connects to:<br />“AI input → prompt → output quality”.</p>
+            </section>
+            <section id="smart-prompting-day2" class="smart-prompting">
+              <hr />
+              <h2>Smart Prompting &amp; Boundaries (FE ↔ BE)</h2>
+              <p>I’m mostly working on the frontend.</p>
+              <p>But every time backend changes (new API, new fields, new flow),<br />I’m not just updating UI — I’m touching <strong>system boundaries</strong>.</p>
+              <p>If I prompt Cursor carelessly, it will:</p>
+              <ul>
+                <li>Leak backend logic into frontend</li>
+                <li>Break data contracts</li>
+                <li>Create hidden bugs</li>
+              </ul>
+              <p>So I need a <strong>clear prompting discipline</strong>.</p>
+
+              <h3>🔗 Connecting Day 1 → Day 2 → Now</h3>
+              <p>Day 1:<br />“System flow (UI → API → Backend → DB → AI)</p>
+              <p>Day 2:<br />“Backend structure (Controller → Service → Module)”</p>
+              <p>Now:<br />“Frontend must respect those boundaries — not cross them”</p>
+
+              <h3>🧩 Core Rule</h3>
+              <p><strong>Frontend = Consumer of API</strong><br /> <strong>Backend = Owner of logic</strong></p>
+              <p>Frontend should:</p>
+              <ul>
+                <li>Display</li>
+                <li>Trigger actions</li>
+                <li>Handle state</li>
+              </ul>
+              <p>Frontend should NOT:</p>
+              <ul>
+                <li>Recreate business logic</li>
+                <li>Infer hidden rules</li>
+                <li>Mutate backend data structure</li>
+              </ul>
+
+              <h3>⚠️ Common FE Mistake (Cursor often does this)</h3>
+              <pre class="code-sample">// ❌ FE trying to "fix" backend logic
+if (user.goal === "lose_weight") {
+  plan.type = "fat_loss"
+}</pre>
+              <p>This belongs to backend.</p>
+
+              <h3>✅ Correct Thinking</h3>
+              <pre class="code-sample">// ✅ FE trusts backend contract
+const plan = await api.getWorkoutPlan()
+render(plan)</pre>
+
+              <h3>🧠 Smart Prompt Structure (Use This With Cursor)</h3>
+              <p>When asking Cursor to update FE based on API:</p>
+
+              <h4>1. Define Boundary Clearly</h4>
+              <pre class="code-sample">Frontend only. Do NOT modify backend logic.
+Assume API is source of truth.</pre>
+
+              <h4>2. Define Contract (VERY IMPORTANT)</h4>
+              <pre class="code-sample">API response structure:
+{
+  goal: string
+  experience: string
+  plan: WorkoutPlan[]
+}</pre>
+
+              <h4>3. Define Responsibility</h4>
+              <pre class="code-sample">Your task:
+- Update UI rendering
+- Map API response to components
+- Do NOT transform business logic</pre>
+
+              <h4>4. Define Constraints</h4>
+              <pre class="code-sample">Constraints:
+- Do not hardcode values
+- Do not duplicate backend logic
+- Keep types aligned with API
+- Use TypeScript interfaces</pre>
+
+              <h4>5. Define Edge Handling</h4>
+              <pre class="code-sample">Handle:
+- loading state
+- empty state
+- error state</pre>
+
+              <h3>🧩 Keywords That Matter (Use in Prompt)</h3>
+              <p>These reduce ambiguity significantly:</p>
+              <h4>Boundary Keywords</h4>
+              <p>“frontend only”, “do not modify backend”, “respect API contract”, “no business logic duplication”</p>
+              <h4>Data Integrity Keywords</h4>
+              <p>“strict typing”, “DTO alignment”, “no transformation of meaning”, “pass-through data”</p>
+              <h4>System Thinking Keywords</h4>
+              <p>“single responsibility”, “separation of concerns”, “stateless UI”, “source of truth = backend”</p>
+              <h4>Safety Keywords</h4>
+              <p>“no hardcoded values”, “validate optional fields”, “handle undefined safely”</p>
+
+              <h3>🛡️ Security Awareness (FE Side)</h3>
+              <ul>
+                <li>Never expose API keys</li>
+                <li>Do not trust API blindly → handle null/invalid</li>
+                <li>Avoid logging sensitive data</li>
+                <li>Sanitize anything rendered dynamically</li>
+              </ul>
+
+              <h3>🧠 Mental Model (Important Shift)</h3>
+              <p>Before:<br />“Update UI to match API”</p>
+              <p>Now:<br />“Adapt UI to a contract without breaking system boundaries”</p>
+
+              <h3>🔍 Hidden Insight</h3>
+              <p>Bad prompts cause:</p>
+              <ul>
+                <li>Logic duplication</li>
+                <li>Inconsistent behavior</li>
+                <li>Security gaps</li>
+                <li>Tech debt</li>
+              </ul>
+              <p>Good prompts enforce:<br /><strong>Clean architecture — even when using AI</strong></p>
+
+              <h3>🧩 Simple Checklist Before Prompting Cursor</h3>
+              <ul>
+                <li>What layer am I in? (FE / BE)</li>
+                <li>What is my responsibility?</li>
+                <li>What is the API contract?</li>
+                <li>Am I duplicating logic?</li>
+                <li>Am I introducing assumptions?</li>
+              </ul>
+
+              <h3>Small Reflection</h3>
+              <p>Today I realized:<br />“Prompting is not just asking AI to code.”</p>
+              <p>It’s:</p>
+              <ul>
+                <li>Defining boundaries</li>
+                <li>Protecting system design</li>
+                <li>Preventing future bugs</li>
+              </ul>
+              <p>Tomorrow:<br />I want to connect this with:<br />“AI prompts — where bad structure becomes bad intelligence”.</p>
             </section>
 
             <section>
