@@ -245,6 +245,138 @@
         background: #fff;
       }
 
+      .concept-timeline-section {
+        padding: 1rem 0 0;
+      }
+
+      .concept-timeline-intro {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+
+      .concept-timeline {
+        position: relative;
+        margin-top: 1rem;
+      }
+
+      .timeline-line {
+        position: absolute;
+        left: 16px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #e0d5c6;
+        border-radius: 1rem;
+      }
+
+      .concept-block {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        border: 1px solid rgba(92, 81, 69, 0.2);
+        border-radius: 1.5rem;
+        padding: 1rem;
+        margin-top: 1.5rem;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 15px 25px rgba(92, 81, 69, 0.1);
+        position: relative;
+        transition: transform 200ms ease, border-color 200ms ease;
+        cursor: pointer;
+      }
+
+      .concept-block::before {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        background: #f5b76a;
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 4px #fff;
+      }
+
+      .concept-block.is-active {
+        border-color: rgba(53, 92, 74, 0.5);
+        transform: translateY(-4px);
+      }
+
+      .concept-visual {
+        padding: 1rem;
+        border-radius: 1.25rem;
+        border: 1px dashed rgba(92, 81, 69, 0.4);
+        background: #f4e6d8;
+      }
+
+      .concept-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .concept-sketch {
+        font-size: 0.85rem;
+        font-style: italic;
+        color: rgba(33, 33, 33, 0.7);
+      }
+
+      .concept-copy h3 {
+        margin: 0 0 0.6rem;
+        font-size: 1.4rem;
+      }
+
+      .concept-layer {
+        margin-bottom: 0.9rem;
+      }
+
+      .layer-label {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(33, 33, 33, 0.55);
+      }
+
+      .layer-example {
+        margin: 0.35rem 0 0;
+        font-size: 0.85rem;
+        color: rgba(33, 33, 33, 0.7);
+      }
+
+      .concept-layer pre {
+        background: #1a1a1a;
+        color: #9ef29e;
+        padding: 0.75rem;
+        border-radius: 0.85rem;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        overflow-x: auto;
+        margin: 0.35rem 0 0;
+      }
+
+      .concept-insight {
+        font-size: 0.9rem;
+        color: #6b5e52;
+        border-left: 3px solid rgba(33, 33, 33, 0.2);
+        padding-left: 0.8rem;
+      }
+
+      .timeline-detail {
+        margin-top: 1rem;
+        padding: 0.85rem 1rem;
+        border-radius: 1rem;
+        border: 1px dashed rgba(92, 81, 69, 0.45);
+        background: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .timeline-detail.is-active {
+        border-style: solid;
+        color: var(--text);
+      }
+
       .day-navigation {
         margin-top: 2rem;
         display: flex;
@@ -429,32 +561,92 @@
               <blockquote>“Structure to scale safely”</blockquote>
             </section>
 
-            <section>
-              <h3>🧩 Key Concepts (Translated Simply)</h3>
-              <h4>Controller = Door</h4>
-              <ul>
-                <li>Receives requests</li>
-                <li>Decides where to send them</li>
-              </ul>
-              <p>Example thinking:</p>
-              <blockquote>“User wants workout plan → send to service”</blockquote>
-
-              <h4>Service = Brain</h4>
-              <ul>
-                <li>Handles logic</li>
-                <li>Processes data</li>
-                <li>Talks to database</li>
-              </ul>
-              <p>Example:</p>
-              <blockquote>“Given user data → generate structured plan input”</blockquote>
-
-              <h4>Module = Organizer</h4>
-              <ul>
-                <li>Groups related logic together</li>
-                <li>Keeps system scalable</li>
-              </ul>
-              <p>Example:</p>
-              <blockquote>“AuthModule, UserModule, WorkoutModule”</blockquote>
+            <section class="concept-timeline-section">
+              <p class="concept-timeline-intro">
+                All three pieces work together at the same time when a request flows through the system.
+              </p>
+              <div class="concept-timeline">
+                <div class="timeline-line" aria-hidden="true"></div>
+                <article class="concept-block" data-note="Controller should stay thin — no heavy logic here">
+                  <div class="concept-visual">
+                    <div class="concept-icon">🚪</div>
+                    <div class="concept-sketch">✏️ arrow entering a box labeled controller</div>
+                  </div>
+                  <div class="concept-copy">
+                    <h3>Controller = Door</h3>
+                    <div class="concept-layer">
+                      <div class="layer-label">Business Thinking</div>
+                      <p>Receives user intent and routes it correctly.</p>
+                      <p class="layer-example">Example: User clicks “Generate Workout Plan”.</p>
+                    </div>
+                    <div class="concept-layer">
+                      <div class="layer-label">Code Logic</div>
+                      <pre>@Post('/workout')
+createWorkout(@Body() data) {
+  return this.workoutService.generate(data);
+}</pre>
+                    </div>
+                    <div class="concept-insight">
+                      Controller should stay thin — no heavy logic here.
+                    </div>
+                  </div>
+                </article>
+                <article class="concept-block" data-note="This is where your real system intelligence lives">
+                  <div class="concept-visual">
+                    <div class="concept-icon">🧠</div>
+                    <div class="concept-sketch">✏️ brain with arrows branching out</div>
+                  </div>
+                  <div class="concept-copy">
+                    <h3>Service = Brain</h3>
+                    <div class="concept-layer">
+                      <div class="layer-label">Business Thinking</div>
+                      <p>Processes logic and makes decisions.</p>
+                      <p class="layer-example">
+                        Example: Interpret user fitness data and create plan input.
+                      </p>
+                    </div>
+                    <div class="concept-layer">
+                      <div class="layer-label">Code Logic</div>
+                      <pre>generate(data) {
+  const structured = this.transform(data);
+  return structured;
+}</pre>
+                    </div>
+                    <div class="concept-insight">
+                      This is where your real system intelligence lives.
+                    </div>
+                  </div>
+                </article>
+                <article class="concept-block" data-note="Prevents chaos as system grows">
+                  <div class="concept-visual">
+                    <div class="concept-icon">📦</div>
+                    <div class="concept-sketch">✏️ boxes grouped together</div>
+                  </div>
+                  <div class="concept-copy">
+                    <h3>Module = Organizer</h3>
+                    <div class="concept-layer">
+                      <div class="layer-label">Business Thinking</div>
+                      <p>Groups related logic into domains.</p>
+                      <p class="layer-example">
+                        Example: WorkoutModule handles everything about workouts.
+                      </p>
+                    </div>
+                    <div class="concept-layer">
+                      <div class="layer-label">Code Logic</div>
+                      <pre>@Module({
+  controllers: [WorkoutController],
+  providers: [WorkoutService],
+})</pre>
+                    </div>
+                    <div class="concept-insight">
+                      Prevents chaos as system grows.
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="timeline-detail" id="timeline-detail">
+                Click or hover a concept to read the sketch note.
+              </div>
             </section>
 
             <section>
@@ -544,6 +736,7 @@
       </div>
     </div>
     <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+
     <script src="../script.js"></script>
     <script>
       (function () {
@@ -676,6 +869,58 @@
         }, { passive: true });
 
         resetNotePanel();
+      })();
+    </script>
+    <script>
+      (function () {
+        const timelineDetail = document.getElementById("timeline-detail");
+        const conceptBlocks = document.querySelectorAll(".concept-block");
+
+        if (!timelineDetail || conceptBlocks.length === 0) {
+          return;
+        }
+
+        const defaultDetail = timelineDetail.textContent;
+
+        const updateDetail = (note, active) => {
+          timelineDetail.textContent = note || defaultDetail;
+          timelineDetail.classList.toggle("is-active", Boolean(active));
+        };
+
+        const clearActive = () => {
+          conceptBlocks.forEach((block) => block.classList.remove("is-active"));
+          updateDetail("", false);
+        };
+
+        conceptBlocks.forEach((block) => {
+          const note = block.dataset.note;
+
+          const activate = () => {
+            clearActive();
+            block.classList.add("is-active");
+            updateDetail(note, true);
+          };
+
+          const deactivate = () => {
+            block.classList.remove("is-active");
+            updateDetail("", false);
+          };
+
+          block.addEventListener("pointerenter", activate);
+          block.addEventListener("focus", activate);
+          block.addEventListener("pointerleave", () => {
+            deactivate();
+            updateDetail(defaultDetail, false);
+          });
+          block.addEventListener("blur", () => {
+            deactivate();
+            updateDetail(defaultDetail, false);
+          });
+          block.addEventListener("pointerdown", (event) => {
+            event.preventDefault();
+            activate();
+          });
+        });
       })();
     </script>
   </body>
