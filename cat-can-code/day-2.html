@@ -377,6 +377,50 @@
         color: var(--text);
       }
 
+      .arguments-section {
+        margin-top: 1.5rem;
+      }
+
+      .arguments-section h2 {
+        font-size: 1.6rem;
+        margin-bottom: 0.25rem;
+        font-family: "Fraunces", serif;
+      }
+
+      .arguments-section hr {
+        border: none;
+        border-top: 1px solid rgba(92, 81, 69, 0.2);
+        margin: 2rem 0 1rem;
+      }
+
+      .arguments-section blockquote {
+        margin: 0 0 1rem;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .arguments-section ul {
+        padding-left: 1.2rem;
+        color: var(--muted);
+      }
+
+      .arguments-section a {
+        color: var(--primary);
+      }
+
+      .code-sample {
+        background: #1a1a1a;
+        color: #93fca8;
+        padding: 0.75rem;
+        border-radius: 0.85rem;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        overflow-x: auto;
+        margin: 0.5rem 0;
+      }
+
       .day-navigation {
         margin-top: 2rem;
         display: flex;
@@ -668,6 +712,113 @@ createWorkout(@Body() data) {
               <blockquote>“Call API → get data”</blockquote>
               <p>Now:</p>
               <blockquote>“Route request through controlled layers”</blockquote>
+            </section>
+
+            <section class="arguments-section">
+              <hr />
+              <h2>Function Arguments = System Clarity</h2>
+              <p>Today I hit a line from <em>Clean Code</em> that looks simple, but changes how I see everything:</p>
+              <blockquote>
+                The ideal number of arguments for a function is zero → one → two. Avoid more than that.
+              </blockquote>
+              <p>At first, it feels like a coding style rule.<br />But it’s not.<br />It’s a <strong>system design rule</strong>.</p>
+
+              <h3>🔗 Connecting the Dots (Day 1 → Day 2 → Now)</h3>
+              <p>Day 1:<br />“I saw the full system flow”</p>
+              <p>Day 2:<br />“I understood backend structure (Controller → Service → Module)”</p>
+              <p>Now:<br />“I understand how <strong>data moves safely inside that structure</strong>”</p>
+
+              <h3>🧩 Where This Appears in My System</h3>
+              <p>From yesterday’s flow:</p>
+              <p><strong>Request → Controller → Service → Database → Response</strong></p>
+              <p>Now zoom into this part:</p>
+              <p><strong>Controller → Service</strong></p>
+              <p>This is where function arguments live.</p>
+
+              <h3>❌ The Wrong Way (Feels normal, but dangerous)</h3>
+              <pre class="code-sample">generateWorkoutPlan(goal, experience, daysPerWeek, equipment, injuries)</pre>
+              <p>Looks fine. But actually:</p>
+              <ul>
+                <li>Hard to read</li>
+                <li>Easy to mix up order</li>
+                <li>Hard to scale</li>
+                <li>Hard to validate</li>
+                <li>Hard to secure</li>
+              </ul>
+              <p>This is called a <strong>code smell</strong> — too many parameters usually means poor structure (<a href="https://en.wikipedia.org/wiki/Code_smell" target="_blank" rel="noreferrer">Wikipedia</a>)</p>
+
+              <h3>✅ The Better Way (System Thinking)</h3>
+              <pre class="code-sample">
+generateWorkoutPlan(userProfile)
+</pre>
+              <p>Where:</p>
+              <pre class="code-sample">
+const userProfile = {
+  goal: "lose weight",
+  experience: "beginner",
+  daysPerWeek: 3,
+  equipment: ["dumbbells"],
+  injuries: []
+}
+</pre>
+              <p>Now:<br />One argument = one meaning.</p>
+
+              <h3>🧠 What Changed (Important Insight)</h3>
+              <p>Before:<br />“Function receives values”</p>
+              <p>Now:<br />“Function receives <strong>a structured concept</strong>”</p>
+
+              <h3>🏗️ Mapping to NestJS (This clicked for me)</h3>
+              <p>Controller</p>
+              <pre class="code-sample">
+@Post('/plan')
+generate(@Body() dto: CreatePlanDto) {
+  return this.service.generate(dto)
+}
+</pre>
+              <p>Service</p>
+              <pre class="code-sample">
+generate(profile: CreatePlanDto) {
+  return this.buildPlan(profile)
+}
+</pre>
+
+              <h3>🔍 Why This Rule Exists (Deeper Truth)</h3>
+              <p>Functions with many arguments:</p>
+              <ul>
+                <li>Break readability</li>
+                <li>Increase testing complexity (<a href="https://medium.com/" target="_blank" rel="noreferrer">Medium</a>)</li>
+                <li>Hide real responsibility</li>
+              </ul>
+              <p>Which usually means:<br />“The function is doing too many things”.</p>
+
+              <h3>⚠️ Hidden Risk (System + Security)</h3>
+              <ul>
+                <li>Wrong data mapping (silent bugs)</li>
+                <li>Missing validation points</li>
+                <li>Injection risks if fields are loosely handled</li>
+                <li>Tight coupling between layers</li>
+              </ul>
+
+              <h3>🧠 Mental Model Upgrade</h3>
+              <p>Function is not just:<br />“something that runs logic”</p>
+              <p>Function is:<br />“A <strong>boundary of responsibility</strong>”</p>
+              <p>And arguments define:<br />“What is allowed to cross that boundary”</p>
+
+              <h3>🔗 Final Connection</h3>
+              <p>Controller:<br />Accept structured input (DTO)</p>
+              <p>Service:<br />Process structured logic</p>
+              <p>Database:<br />Store structured data</p>
+              <p>AI:<br />Requires structured context</p>
+
+              <h3>Small Reflection</h3>
+              <p>Today I realized:<br />“Clean code is not about writing prettier functions.”</p>
+              <p>It’s about:</p>
+              <ul>
+                <li>Designing safer systems</li>
+                <li>Reducing ambiguity</li>
+                <li>Making complexity manageable</li>
+              </ul>
+              <p>Tomorrow:<br />I want to explore how this structure connects to:<br />“AI input → prompt → output quality”.</p>
             </section>
 
             <section>
