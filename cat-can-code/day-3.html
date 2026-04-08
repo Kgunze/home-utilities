@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 3 - Rebase, Conflict Thinking &amp; Production Safety | Cat Can Code</title>
+    <meta
+      name="description"
+      content="A Day 3 diary entry about rebasing, resolving conflicts with judgment, and treating Git workflow as production risk control."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .cat-page-shell {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f9f3eb 0%, #f4e6d8 100%);
+      }
+
+      .sketch-parallax {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .sketch-svg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        filter: blur(0.3px);
+      }
+
+      .sketch-layer {
+        mix-blend-mode: multiply;
+        will-change: transform;
+      }
+
+      .sketch-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(244, 233, 214, 0.4));
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cat-page-shell .page-shell {
+        position: relative;
+        z-index: 2;
+      }
+
+      .article-wrapper {
+        max-width: 760px;
+        margin: 0 auto;
+        padding-top: 1rem;
+      }
+
+      .article-meta {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .article-body {
+        color: var(--text);
+        line-height: 1.7;
+        font-size: 1.1rem;
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .article-body h2 {
+        font-family: "Fraunces", serif;
+        font-size: 1.8rem;
+        margin: 0 0 0.4rem;
+      }
+
+      .article-body p {
+        margin: 0 0 0.9rem;
+      }
+
+      .article-body ul {
+        padding-left: 1.2rem;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .article-body blockquote {
+        margin: 0.75rem 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .hero-capsule {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .hero-capsule h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 4.4rem);
+      }
+
+      .hero-capsule p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .callout-card {
+        border: 1px solid rgba(92, 81, 69, 0.22);
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.84);
+        padding: 1.1rem 1.2rem;
+        box-shadow: 0 12px 24px rgba(92, 81, 69, 0.08);
+      }
+
+      .code-sample {
+        background: #1a1a1a;
+        color: #93fca8;
+        padding: 0.85rem 1rem;
+        border-radius: 0.85rem;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        overflow-x: auto;
+        margin: 0.85rem 0;
+      }
+
+      .insight-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.6rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(92, 81, 69, 0.07);
+      }
+
+      .insight-table th,
+      .insight-table td {
+        padding: 0.9rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(92, 81, 69, 0.12);
+      }
+
+      .insight-table th {
+        font-family: "Fraunces", serif;
+        font-size: 1rem;
+        background: rgba(244, 230, 216, 0.8);
+      }
+
+      .insight-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .term-grid {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .term-card {
+        border: 1px solid rgba(92, 81, 69, 0.18);
+        border-radius: 1.1rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .term-card strong {
+        display: block;
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+        margin-bottom: 0.35rem;
+      }
+
+      .day-navigation {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .day-navigation a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .day-navigation span {
+        flex: 1;
+        display: inline-flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cat-page-shell">
+      <div class="sketch-parallax" aria-hidden="true">
+        <svg class="sketch-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+          <g class="sketch-layer" data-speed="0.04">
+            <path d="M70 230 C210 190 360 250 500 210" stroke="#5c5145" stroke-width="1.4" fill="none" stroke-dasharray="6 4" />
+            <text x="510" y="220" font-size="11" fill="#5c5145">rebase -&gt; validate -&gt; release</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.03">
+            <rect x="220" y="330" width="135" height="76" rx="10" stroke="#5c5145" stroke-width="1.6" fill="none" />
+            <text x="247" y="376" font-size="16" fill="#5c5145">git status</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.07">
+            <path d="M830 160 C875 118 955 122 996 165" stroke="#5c5145" stroke-width="1.2" fill="none" />
+            <circle cx="958" cy="215" r="28" stroke="#5c5145" stroke-width="1.3" fill="none" />
+            <text x="938" y="220" font-size="10" fill="#5c5145">prod</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="610" y="88" font-size="12" fill="#5c5145" opacity="0.7">which truth wins?</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sketch-overlay"></div>
+      <div class="page-shell">
+        <header class="hero hero-subpage">
+          <nav class="topbar" aria-label="Primary">
+            <a class="brand" href="../index.html#home">Home Utilities</a>
+            <div class="nav-links">
+              <a href="../stories.html">Stories</a>
+              <div class="nav-parent">
+                <a href="../index.html#kitchen-notes">Kitchen Notes</a>
+                <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                  <a href="../recipes.html">Recipes</a>
+                  <a href="../shopping-planner.html">Shopping Planner</a>
+                </div>
+              </div>
+              <div class="nav-parent nav-parent-greenies">
+                <a class="nav-link-greenies" href="#">Greenies</a>
+                <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                  <a class="nav-greenies-planting" href="../planting-diary.html">Planting diary</a>
+                  <a class="nav-greenies-fertilization" href="../fertilization-wikipedia.html">Fertilization wikipedia</a>
+                </div>
+              </div>
+              <a href="../ptsd.html">PTSD</a>
+            </div>
+            <label class="locale-switcher">
+              <span class="locale-switcher-label">Language</span>
+              <select class="locale-select" id="locale-select" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="vi">Tiếng Việt</option>
+              </select>
+            </label>
+          </nav>
+
+          <section class="hero-content hero-subpage">
+            <div class="hero-copy article-wrapper hero-capsule">
+              <h1 id="day-three-title">Day 3 - Rebase, Conflict Thinking &amp; Production Safety</h1>
+              <p id="day-three-subtitle">
+                Today I stopped thinking of Git as commands and started seeing it as production risk control.
+              </p>
+              <div class="article-meta">
+                <span id="day-three-author">Cat Can Code</span>
+                <span id="day-three-date">April 6, 2026</span>
+                <span id="day-three-reading">7 min read</span>
+              </div>
+            </div>
+          </section>
+        </header>
+
+        <main class="planner-section planner-page">
+          <article class="planner-card article-wrapper">
+            <div class="article-body">
+              <section>
+                <p>Today was the first time I stopped thinking of Git as commands and started seeing it as a simulation engine for production risk.</p>
+                <p>The Cursor prompt is not just automation. It is enforcing a discipline:</p>
+                <blockquote>Solve problems before they reach staging or production.</blockquote>
+              </section>
+
+              <section class="callout-card">
+                <h2>The Mental Shift</h2>
+                <p>Before today, <code>git rebase</code> felt like just another Git operation.</p>
+                <p>Now it feels like a replay system for reality.</p>
+                <blockquote>Rebase asks: if production already changed, would my feature still work?</blockquote>
+                <p>That changes the whole mindset. I am no longer building on assumptions. I am rebuilding on current truth.</p>
+              </section>
+
+              <section>
+                <h2>Rebase as Local Simulation</h2>
+                <p>This flow looks simple:</p>
+                <pre class="code-sample">feature branch
+  -&gt; rebase onto staging
+  -&gt; resolve conflicts
+  -&gt; validate build
+  -&gt; open PR</pre>
+                <p>But it is not just a workflow. It is a safety pipeline.</p>
+                <blockquote>Rebase = rebuild changes as if the base branch was always correct.</blockquote>
+              </section>
+
+              <section>
+                <h2>Conflict Resolution = Engineering Judgment</h2>
+                <p>A conflict is not really asking, &quot;Which code do I pick?&quot;</p>
+                <p>It is asking, &quot;Two versions of reality exist. How do I reconcile them without breaking the system?&quot;</p>
+                <pre class="code-sample">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD (staging)
+new API schema
+=======
+my feature logic
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature</pre>
+                <p>The important questions are:</p>
+                <table class="insight-table">
+                  <thead>
+                    <tr>
+                      <th>Question</th>
+                      <th>Why it matters</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Did the API change?</td>
+                      <td>Prevents breaking frontend and backend coordination.</td>
+                    </tr>
+                    <tr>
+                      <td>Is my feature outdated?</td>
+                      <td>Stops silent bugs from shipping.</td>
+                    </tr>
+                    <tr>
+                      <td>What depends on this?</td>
+                      <td>Avoids cascading failures across layers.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+
+              <section class="callout-card">
+                <h2>Correct Strategy</h2>
+                <ul>
+                  <li>Keep the latest contract from staging.</li>
+                  <li>Adapt feature logic to that contract.</li>
+                  <li>Never blindly overwrite one side with the other.</li>
+                </ul>
+                <p>This is what backward compatibility and system integrity look like in real work.</p>
+              </section>
+
+              <section>
+                <h2>Validation Is the Truth Check</h2>
+                <p>These commands used to feel like routine steps:</p>
+                <pre class="code-sample">pnpm install
+pnpm build
+pnpm test</pre>
+                <p>Now they feel like system verification after surgery.</p>
+                <p>Rebase can create hidden type mismatches, broken imports, or invalid API contracts. Build and test are where the system tells the truth.</p>
+                <blockquote>After conflict resolution, validation is the first line of defense.</blockquote>
+              </section>
+
+              <section>
+                <h2>Commit Hygiene Is Also Security</h2>
+                <p>Small cleanup steps are not cosmetic.</p>
+                <ul>
+                  <li>Remove <code>console.log</code> debugging.</li>
+                  <li>Remove temporary testing logic.</li>
+                  <li>Check how environment variables are being used.</li>
+                </ul>
+                <p>If I skip this, debug behavior or sensitive information can reach production by accident.</p>
+              </section>
+
+              <section>
+                <h2>Why Force Push Is Allowed and Dangerous</h2>
+                <pre class="code-sample">git push --force-with-lease</pre>
+                <p>Today I learned why this can be acceptable after a rebase and why it still demands caution.</p>
+                <ul>
+                  <li>It is safer when I rebased locally and validated the result.</li>
+                  <li>It is dangerous because it rewrites history.</li>
+                  <li>It becomes reckless if I do not control the branch lifecycle.</li>
+                </ul>
+                <blockquote>Force push is safe only when you understand exactly whose history you are rewriting.</blockquote>
+              </section>
+
+              <section>
+                <h2>The Architecture Connection</h2>
+                <p>This clicked when I mapped it back to the real stack:</p>
+                <ul>
+                  <li>Frontend depends on the BFF.</li>
+                  <li>BFF enforces schema through validation.</li>
+                  <li>Backend defines the contract.</li>
+                </ul>
+                <p>Without this workflow:</p>
+                <table class="insight-table">
+                  <thead>
+                    <tr>
+                      <th>Layer</th>
+                      <th>Risk</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Frontend</td>
+                      <td>Calls an outdated API.</td>
+                    </tr>
+                    <tr>
+                      <td>BFF</td>
+                      <td>Schema no longer matches.</td>
+                    </tr>
+                    <tr>
+                      <td>Backend</td>
+                      <td>Rejects the request or behaves unexpectedly.</td>
+                    </tr>
+                    <tr>
+                      <td>User</td>
+                      <td>Sees the failure even though the branch looked fine locally.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>This is what the workflow is protecting: contract consistency, type safety, and stable release flow.</p>
+              </section>
+
+              <section>
+                <h2>Security Thinking That Quietly Emerged</h2>
+                <ul>
+                  <li>Silent contract drift is dangerous because old frontend assumptions can survive longer than expected.</li>
+                  <li>Hidden breaking changes often pass local intuition but fail in staging or production.</li>
+                  <li>Unsafe merge behavior delays conflict discovery until the most expensive moment.</li>
+                </ul>
+                <p>This makes the workflow feel much closer to DevSecOps than simple Git hygiene.</p>
+              </section>
+
+              <section class="callout-card">
+                <h2>New Knowledge: BFF (Backend for Frontend)</h2>
+                <p>BFF means a backend layer designed specifically for a frontend.</p>
+                <pre class="code-sample">Frontend (NextJS)
+  -&gt; BFF Layer
+  -&gt; Backend (NestJS / Services)</pre>
+                <p>Instead of the frontend calling backend services directly, the frontend talks to a BFF that adapts, filters, and stabilizes the interaction.</p>
+                <blockquote>BFF is a controlled translation layer that protects, adapts, and stabilizes communication between frontend and backend.</blockquote>
+              </section>
+
+              <section>
+                <h2>Where BFF Came From</h2>
+                <p>The BFF pattern emerged in the early 2010s during the rise of microservices, especially when teams had to support web, mobile, and tablet clients from the same backend ecosystem.</p>
+                <p>The problem was simple: every client needed different data shapes and different performance tradeoffs, but one shared backend kept becoming bloated and difficult to maintain.</p>
+                <pre class="code-sample">Without BFF
+Mobile -&gt; Backend (too heavy)
+Web -&gt; Backend (missing fields)
+
+With BFF
+Web -&gt; Web-BFF -&gt; Backend
+Mobile -&gt; Mobile-BFF -&gt; Backend</pre>
+                <p>That is why the pattern matters. Each frontend gets exactly what it needs without forcing the core backend to become a dumping ground for presentation concerns.</p>
+              </section>
+
+              <section>
+                <h2>How BFF Works in This Architecture</h2>
+                <pre class="code-sample">NextJS (FE)
+  -&gt; packages/bff
+  -&gt; NestJS Backend</pre>
+                <p>This layer is powerful because it creates a stable contract for the frontend, even when backend services evolve underneath it.</p>
+                <p>The BFF responsibilities are practical:</p>
+                <ul>
+                  <li>Aggregate multiple backend calls into one frontend-friendly response.</li>
+                  <li>Transform backend field names and shapes into cleaner UI contracts.</li>
+                  <li>Validate responses with Zod before invalid data reaches the frontend.</li>
+                  <li>Normalize errors and hide internal backend details.</li>
+                  <li>Act as a security boundary for tokens, endpoints, and sensitive data.</li>
+                </ul>
+                <pre class="code-sample">const user = await getUser()
+const bookings = await getBookings()
+
+return { user, bookings }</pre>
+                <pre class="code-sample">schema.safeParse(response)</pre>
+              </section>
+
+              <section>
+                <h2>Why BFF Matters So Much</h2>
+                <p>Without a BFF, the frontend is tightly coupled to backend contracts.</p>
+                <p>With a BFF, the frontend depends on a stable BFF contract while the BFF absorbs backend changes and translations.</p>
+                <blockquote>This directly reduces the frontend-backend conflict surface that shows up during rebase and integration.</blockquote>
+                <p>That is why this connects so strongly to today&apos;s rebase lesson. A good BFF does not remove all risk, but it moves risk into a controlled layer.</p>
+              </section>
+
+              <section>
+                <h2>How BFF Can Be Misused</h2>
+                <p>BFF becomes dangerous when it stops acting like an adapter and starts pretending to own business truth.</p>
+                <ul>
+                  <li>Putting discount rules, balance logic, or domain decisions into the BFF is the wrong boundary.</li>
+                  <li>Duplicating backend rules in the BFF creates inconsistency.</li>
+                  <li>Skipping validation means trusting backend responses blindly and inviting runtime failures.</li>
+                </ul>
+                <pre class="code-sample">if (user.balance &gt; 1000) {
+  applyDiscount()
+}</pre>
+                <p>Logic like that belongs in the real backend domain layer, not in the frontend adapter layer.</p>
+              </section>
+
+              <section>
+                <h2>Security Perspective</h2>
+                <p>The BFF is also a security boundary, not just a convenience layer.</p>
+                <ul>
+                  <li>It reduces direct backend exposure to the public client.</li>
+                  <li>It can prevent over-fetching of sensitive fields.</li>
+                  <li>It can keep token handling on the server side instead of leaking responsibility to the client.</li>
+                </ul>
+                <pre class="code-sample">Backend returns
+{
+  "user": "...",
+  "passwordHash": "...",
+  "internalRole": "admin"
+}
+
+BFF returns
+{
+  "user": "..."
+}</pre>
+              </section>
+
+              <section class="callout-card">
+                <h2>My New Mental Model for BFF</h2>
+                <p>Before, I thought API mostly meant backend responsibility.</p>
+                <p>Now I see API as an experience layer tailored for the frontend.</p>
+                <p>The rules are becoming clear:</p>
+                <ul>
+                  <li>BFF is an adapter, not the owner of business truth.</li>
+                  <li>Always validate.</li>
+                  <li>Keep frontend dependent on stable BFF contracts, not volatile backend responses.</li>
+                  <li>Optimize the contract for the client that actually consumes it.</li>
+                </ul>
+                <table class="insight-table">
+                  <thead>
+                    <tr>
+                      <th>Concept</th>
+                      <th>Connection</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Rebase</td>
+                      <td>Resolves frontend to BFF integration drift earlier.</td>
+                    </tr>
+                    <tr>
+                      <td>NextJS API</td>
+                      <td>Can act as a BFF layer.</td>
+                    </tr>
+                    <tr>
+                      <td>Zod validation</td>
+                      <td>Enforces the BFF contract before data reaches UI.</td>
+                    </tr>
+                    <tr>
+                      <td>DevSecOps</td>
+                      <td>Makes BFF a practical security boundary, not just a coding pattern.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>This feels like architecture-level thinking, not just coding syntax.</p>
+              </section>
+
+              <section class="callout-card">
+                <h2>New Knowledge: Zod Explained Like I&apos;m 5</h2>
+                <p>I imagine a cookie shop.</p>
+                <p>Kids come in and try to order cookies.</p>
+                <p>The rule is simple: every order must say the flavor and the quantity.</p>
+                <pre class="code-sample">Order must have
+- flavor (chocolate or vanilla)
+- quantity (a number)</pre>
+                <p>In this story, Zod is the friendly guard at the door checking every order before it goes inside.</p>
+              </section>
+
+              <section>
+                <h2>How the Guard Works</h2>
+                <p>A good order sounds like this:</p>
+                <pre class="code-sample">I want 2 chocolate cookies</pre>
+                <p>A bad order sounds like this:</p>
+                <pre class="code-sample">I want blue cookies
+I want many cookies</pre>
+                <p>Zod listens and decides:</p>
+                <ul>
+                  <li>If the order is real, it says, &quot;Okay, come in.&quot;</li>
+                  <li>If the order is wrong, it says, &quot;Nope, that is not a real order.&quot;</li>
+                </ul>
+                <blockquote>Zod checks whether the shape of the data matches the rules we promised to accept.</blockquote>
+              </section>
+
+              <section>
+                <h2>The Kitchen Problem</h2>
+                <p>Then the kitchen, which is like the backend, makes the cookies and sends something back.</p>
+                <p>Usually it should send cookies.</p>
+                <pre class="code-sample">Here are your cookies 🍪🍪</pre>
+                <p>But if the kitchen makes a mistake, it might send something unexpected.</p>
+                <pre class="code-sample">Here are your... broccoli</pre>
+                <p>Without validation, the kid just receives nonsense and cries.</p>
+                <p>With Zod checking the response too, the guard stops it and says, &quot;Wait, this is not cookies.&quot;</p>
+              </section>
+
+              <section>
+                <h2>The Full Zod Story</h2>
+                <pre class="code-sample">Kid -&gt; Zod checks -&gt; Kitchen -&gt; Zod checks -&gt; Kid gets cookies</pre>
+                <p>That means Zod is useful in two directions:</p>
+                <ul>
+                  <li>It checks requests before bad input enters the system.</li>
+                  <li>It checks responses before bad output reaches the frontend.</li>
+                </ul>
+                <table class="insight-table">
+                  <thead>
+                    <tr>
+                      <th>Real system</th>
+                      <th>Kid story</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>API request</td>
+                      <td>Kid order</td>
+                    </tr>
+                    <tr>
+                      <td>Backend</td>
+                      <td>Kitchen</td>
+                    </tr>
+                    <tr>
+                      <td>Zod</td>
+                      <td>Guard</td>
+                    </tr>
+                    <tr>
+                      <td>Data validation</td>
+                      <td>Checking the order</td>
+                    </tr>
+                    <tr>
+                      <td>Error handling</td>
+                      <td>Saying &quot;Nope&quot;</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+
+              <section>
+                <h2>Why This Matters in Real Apps</h2>
+                <p>Without Zod, wrong data can travel through the app and break things later.</p>
+                <p>With Zod, bad data is rejected early while the problem is still small and understandable.</p>
+                <ul>
+                  <li>Wrong request data gets blocked before it reaches business logic.</li>
+                  <li>Wrong response data gets blocked before it breaks the UI.</li>
+                  <li>Users get safer behavior and clearer failures instead of confusing crashes.</li>
+                </ul>
+                <pre class="code-sample">schema.safeParse(response)</pre>
+                <blockquote>Zod makes sure what goes in and what comes out is exactly what we expect.</blockquote>
+              </section>
+
+              <section class="callout-card">
+                <h2>My Zod Mental Model</h2>
+                <p>Zod is a guard that makes sure kids only ask for real cookies and the kitchen only gives back real cookies.</p>
+                <p>Translated back into software, that means data going in and out of the system is checked before trust is given.</p>
+                <p>That is why Zod fits perfectly with the BFF layer and today&apos;s rebase lesson: it helps catch contract drift before the frontend quietly breaks.</p>
+              </section>
+
+              <section class="callout-card">
+                <h2>New Insight: Axios and How Data Travels</h2>
+                <p>Axios is the messenger that sends data between my app and the server.</p>
+                <p>It does not validate data. That is Zod&apos;s job.</p>
+                <p>It does not decide business logic. That belongs to the backend.</p>
+                <blockquote>Axios moves data. Zod decides whether that data is safe to trust.</blockquote>
+                <pre class="code-sample">Frontend (NextJS UI)
+  -&gt; Zod checks input
+  -&gt; Axios sends request
+  -&gt; BFF / API
+  -&gt; Backend (NestJS)
+  -&gt; Axios receives response
+  -&gt; Zod checks response</pre>
+              </section>
+
+              <section>
+                <h2>Where Axios Fits in a Real Flow</h2>
+                <p>In the Google Login example, the user clicks &quot;Continue with Google.&quot;</p>
+                <p>Then Axios sends the request:</p>
+                <pre class="code-sample">await axios.post('/api/auth/google', {
+  token: googleToken
+})</pre>
+                <p>The backend responds with something like this:</p>
+                <pre class="code-sample">{
+  "accessToken": "abc123",
+  "user": { "name": "Kyle" }
+}</pre>
+                <p>Axios brings that response back through <code>res.data</code>. It delivers the package, but it does not inspect whether the package is correct.</p>
+                <pre class="code-sample">const res = await axios.post(...)
+const data = res.data</pre>
+                <p>That is the critical insight: Axios is transport, not trust.</p>
+              </section>
+
+              <section>
+                <h2>Kid Version: Delivery Person and Cookies</h2>
+                <p>If the cookie story continues, Axios is the delivery person.</p>
+                <p>You say, &quot;I want chocolate cookies,&quot; and Axios carries the order to the kitchen and brings something back.</p>
+                <p>Sometimes the kitchen gives cookies. Sometimes it accidentally sends broccoli.</p>
+                <pre class="code-sample">You -&gt; Axios -&gt; Kitchen -&gt; Axios -&gt; Zod -&gt; You</pre>
+                <p>Without Zod, Axios can still deliver broccoli because delivery is not the same as validation.</p>
+              </section>
+
+              <section>
+                <h2>The Missing Piece I Noticed</h2>
+                <p>The better system has Zod in two places, not one.</p>
+                <blockquote>Zod protects both directions: input before the request is sent and output after the response comes back.</blockquote>
+                <pre class="code-sample">You
+  -&gt; Zod checks input
+  -&gt; Axios sends request
+  -&gt; Backend
+  -&gt; Axios receives response
+  -&gt; Zod checks response
+  -&gt; You</pre>
+                <p>That means bad user input can be stopped before Axios sends it, and bad backend data can be stopped before the UI uses it.</p>
+              </section>
+
+              <section>
+                <h2>Real Code Mapping</h2>
+                <p>Input validation comes first:</p>
+                <pre class="code-sample">const inputSchema = z.object({
+  token: z.string()
+})
+
+const validInput = inputSchema.safeParse(body)
+
+if (!validInput.success) {
+  throw new Error("Invalid input")
+}</pre>
+                <p>Then Axios sends validated data:</p>
+                <pre class="code-sample">await axios.post('/api/auth/google', validInput.data)</pre>
+                <p>Then response validation happens after Axios returns:</p>
+                <pre class="code-sample">const responseSchema = z.object({
+  accessToken: z.string(),
+  user: z.object({
+    name: z.string()
+  })
+})
+
+const validResponse = responseSchema.safeParse(res.data)
+
+if (!validResponse.success) {
+  throw new Error("Invalid response")
+}</pre>
+              </section>
+
+              <section>
+                <h2>Security and Stability Insight</h2>
+                <p>Axios also matters because it centralizes how requests are made.</p>
+                <ul>
+                  <li>It can attach authorization headers and tokens consistently.</li>
+                  <li>It can control timeouts, headers, and base URLs.</li>
+                  <li>It can keep API calls organized instead of scattering fetch logic everywhere.</li>
+                </ul>
+                <pre class="code-sample">Authorization: Bearer token</pre>
+                <p>But if Axios is misused, the risks show up quickly: wrong endpoints, missing headers, weak error handling, and bad data moving into the UI unchecked.</p>
+              </section>
+
+              <section class="callout-card">
+                <h2>My Axios Mental Model</h2>
+                <pre class="code-sample">Axios = delivery
+Zod = security guard
+Backend = kitchen
+Frontend = user</pre>
+                <p>Axios is reliable transport. Zod is what makes the transport safe to use.</p>
+                <p>My rule now is simple:</p>
+                <blockquote>Never trust data just because Axios delivered it. Always validate before using it.</blockquote>
+              </section>
+
+              <section>
+                <h2>Example: Google Login vs Staging and Production</h2>
+                <p>This is the kind of example that makes the lesson real.</p>
+                <p>Imagine I am working on <code>feature/google-auth</code> and my goal is to add Google Login and Signup.</p>
+                <p>My target branch is <code>staging</code>, but staging and production still only support email and password authentication.</p>
+                <pre class="code-sample">git fetch origin
+git rebase origin/staging</pre>
+                <p>Now my feature is being replayed on top of current staging reality.</p>
+              </section>
+
+              <section class="callout-card">
+                <h2>Where the Problem Appears</h2>
+                <p>My feature expects this:</p>
+                <pre class="code-sample">POST /auth/login/google
+{
+  token: string
+}</pre>
+                <p>But staging only supports this:</p>
+                <pre class="code-sample">POST /auth/login
+{
+  email: string
+  password: string
+}</pre>
+                <p>This is the dangerous part: Git might not show any file conflict at all.</p>
+                <blockquote>My frontend can call <code>/auth/login/google</code> successfully in my head while the backend in staging does not support it in reality.</blockquote>
+                <p>That means the break is logical, not textual. Git cannot always see it.</p>
+              </section>
+
+              <section>
+                <h2>Conflict Resolution Thinking</h2>
+                <p>The first real engineering question is not &quot;How do I keep my code?&quot;</p>
+                <p>It is this:</p>
+                <blockquote>Is the backend already deployed for this feature?</blockquote>
+                <p>If the backend already exists, the task is to keep the feature and make sure the request shape still matches the schema.</p>
+                <p>If the backend is not ready yet, I must not blindly keep the integration just because rebase succeeded.</p>
+              </section>
+
+              <section>
+                <h2>Proper Resolution Options</h2>
+                <p>When backend is not ready, the safe choices are structural.</p>
+                <ul>
+                  <li>Feature flag the Google login UI until backend support is live.</li>
+                  <li>Add fallback behavior that returns users to email login safely.</li>
+                  <li>Hide the integration temporarily while keeping the code isolated.</li>
+                </ul>
+                <pre class="code-sample">if (featureFlags.googleAuthEnabled) {
+  showGoogleLogin()
+}</pre>
+                <pre class="code-sample">if (!googleAuthAvailable) {
+  // fallback to email login
+}</pre>
+                <p>The goal is not to preserve every line I wrote. The goal is to preserve system stability.</p>
+              </section>
+
+              <section>
+                <h2>Validation Is Where Truth Hits</h2>
+                <pre class="code-sample">pnpm build
+pnpm test</pre>
+                <p>This is where the hidden mismatch becomes visible.</p>
+                <p>Maybe my schema expects <code>googleToken</code>, but staging still returns <code>accessToken</code>.</p>
+                <pre class="code-sample">// My feature expects
+googleToken: string
+
+// Staging response still returns
+{
+  accessToken: string
+}</pre>
+                <p>That build failure is good news. It means the system caught the drift before users did.</p>
+                <p>Other failures can be runtime crashes, missing Google auth dependencies, or incorrect environment configuration.</p>
+              </section>
+
+              <section>
+                <h2>Hidden Security and Stability Risks</h2>
+                <ul>
+                  <li>An exposed auth route can invite probing against an endpoint that is not actually ready.</li>
+                  <li>Weak Google token validation can create authentication bypass risk.</li>
+                  <li>Bad debugging habits can leak secrets, especially around auth environment variables.</li>
+                </ul>
+                <pre class="code-sample">console.log(process.env.GOOGLE_CLIENT_SECRET)</pre>
+                <p>If something like that survives cleanup, the issue is no longer just buggy. It becomes critical.</p>
+              </section>
+
+              <section class="callout-card">
+                <h2>Commit Hygiene for This Feature</h2>
+                <ul>
+                  <li>Remove debug logs.</li>
+                  <li>Remove mock tokens and hardcoded credentials.</li>
+                  <li>Validate environment variable usage carefully.</li>
+                  <li>Make sure the existing email login flow still works.</li>
+                </ul>
+                <p>If I open the PR, the feature should be presented honestly as gated work with backend dependency risk.</p>
+                <pre class="code-sample">[FE] Add Google Login (feature-gated)</pre>
+              </section>
+
+              <section>
+                <h2>The Real Insight</h2>
+                <blockquote>The most dangerous bugs are not merge conflicts. They are contract mismatches that Git cannot see.</blockquote>
+                <p>That gives me a much better checklist when rebasing a feature like Google Login:</p>
+                <ul>
+                  <li>Does backend support it yet?</li>
+                  <li>Does the schema still match?</li>
+                  <li>Can it break the existing login flow?</li>
+                  <li>Should it be behind a feature flag?</li>
+                </ul>
+              </section>
+
+              <section>
+                <h2>Key Terms I Understand Differently Now</h2>
+                <div class="term-grid">
+                  <div class="term-card">
+                    <strong>Rebase</strong>
+                    <span>Replay history on top of new truth.</span>
+                  </div>
+                  <div class="term-card">
+                    <strong>Conflict</strong>
+                    <span>Competing system realities that need reconciliation.</span>
+                  </div>
+                  <div class="term-card">
+                    <strong>Validation</strong>
+                    <span>Integrity check after structural change.</span>
+                  </div>
+                  <div class="term-card">
+                    <strong>PR</strong>
+                    <span>Review space, not the place where debugging should begin.</span>
+                  </div>
+                  <div class="term-card">
+                    <strong>Staging</strong>
+                    <span>The integration battlefield where assumptions meet reality.</span>
+                  </div>
+                  <div class="term-card">
+                    <strong>Production</strong>
+                    <span>The truth users actually experience.</span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="callout-card">
+                <h2>My Rule After Today</h2>
+                <blockquote>If conflict surprises me in PR, I failed earlier.</blockquote>
+                <p>That single sentence changes how I use Cursor too.</p>
+                <p>My prompts should always reinforce rebase, conflict explanation, validation, API contract awareness, type safety, backward compatibility, and no blind overwrite behavior.</p>
+              </section>
+
+              <section>
+                <h2>Final Reflection</h2>
+                <p>Today was the first time I understood that Git is not just version control.</p>
+                <p>Git is risk control.</p>
+                <p>And Cursor is not just helping me code. It is helping enforce engineering discipline that I do not naturally have yet.</p>
+                <p>The next step is obvious now: move into real failure simulation, where schema drift breaks the frontend and safety checks catch it before release.</p>
+              </section>
+            </div>
+          </article>
+
+          <nav class="day-navigation" aria-label="Diary navigation">
+            <a href="day-2.html">&larr; Day 2</a>
+            <span></span>
+            <a href="day-4.html">Day 4 &rarr;</a>
+          </nav>
+        </main>
+      </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="../script.js"></script>
+  </body>
+</html>

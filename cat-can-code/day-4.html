@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 4 - Standard Next.js Project with Zod and Axios | Cat Can Code</title>
+    <meta
+      name="description"
+      content="A Day 4 diary entry about how a production-grade Next.js project is structured with a BFF layer, Zod validation, and Axios hidden inside the HTTP service."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .cat-page-shell {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f9f3eb 0%, #f4e6d8 100%);
+      }
+
+      .sketch-parallax {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .sketch-svg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        filter: blur(0.3px);
+      }
+
+      .sketch-layer {
+        mix-blend-mode: multiply;
+        will-change: transform;
+      }
+
+      .sketch-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(244, 233, 214, 0.4));
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cat-page-shell .page-shell {
+        position: relative;
+        z-index: 2;
+      }
+
+      .article-wrapper {
+        max-width: 760px;
+        margin: 0 auto;
+        padding-top: 1rem;
+      }
+
+      .article-meta {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .article-body {
+        color: var(--text);
+        line-height: 1.7;
+        font-size: 1.1rem;
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .article-body h2 {
+        font-family: "Fraunces", serif;
+        font-size: 1.8rem;
+        margin: 0 0 0.4rem;
+      }
+
+      .article-body p {
+        margin: 0 0 0.9rem;
+      }
+
+      .article-body ul {
+        padding-left: 1.2rem;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .article-body blockquote {
+        margin: 0.75rem 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .hero-capsule {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .hero-capsule h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 4.4rem);
+      }
+
+      .hero-capsule p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .callout-card {
+        border: 1px solid rgba(92, 81, 69, 0.22);
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.84);
+        padding: 1.1rem 1.2rem;
+        box-shadow: 0 12px 24px rgba(92, 81, 69, 0.08);
+      }
+
+      .code-sample {
+        background: #1a1a1a;
+        color: #93fca8;
+        padding: 0.85rem 1rem;
+        border-radius: 0.85rem;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        overflow-x: auto;
+        margin: 0.85rem 0;
+      }
+
+      .insight-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.6rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(92, 81, 69, 0.07);
+      }
+
+      .insight-table th,
+      .insight-table td {
+        padding: 0.9rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(92, 81, 69, 0.12);
+      }
+
+      .insight-table th {
+        font-family: "Fraunces", serif;
+        font-size: 1rem;
+        background: rgba(244, 230, 216, 0.8);
+      }
+
+      .insight-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .day-navigation {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .day-navigation a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .day-navigation span {
+        flex: 1;
+        display: inline-flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cat-page-shell">
+      <div class="sketch-parallax" aria-hidden="true">
+        <svg class="sketch-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+          <g class="sketch-layer" data-speed="0.04">
+            <path d="M80 240 C210 200 350 250 500 220" stroke="#5c5145" stroke-width="1.4" fill="none" stroke-dasharray="6 4" />
+            <text x="510" y="225" font-size="11" fill="#5c5145">UI -&gt; BFF -&gt; HTTP -&gt; API</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.03">
+            <rect x="240" y="335" width="148" height="76" rx="10" stroke="#5c5145" stroke-width="1.6" fill="none" />
+            <text x="270" y="378" font-size="14" fill="#5c5145">schema.parse()</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.07">
+            <circle cx="945" cy="210" r="34" stroke="#5c5145" stroke-width="1.3" fill="none" />
+            <text x="925" y="215" font-size="10" fill="#5c5145">BFF</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="610" y="88" font-size="12" fill="#5c5145" opacity="0.7">where should this logic live?</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sketch-overlay"></div>
+      <div class="page-shell">
+        <header class="hero hero-subpage">
+          <nav class="topbar" aria-label="Primary">
+            <a class="brand" href="../index.html#home">Home Utilities</a>
+            <div class="nav-links">
+              <a href="../stories.html">Stories</a>
+              <div class="nav-parent">
+                <a href="../index.html#kitchen-notes">Kitchen Notes</a>
+                <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                  <a href="../recipes.html">Recipes</a>
+                  <a href="../shopping-planner.html">Shopping Planner</a>
+                </div>
+              </div>
+              <div class="nav-parent nav-parent-greenies">
+                <a class="nav-link-greenies" href="#">Greenies</a>
+                <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                  <a class="nav-greenies-planting" href="../planting-diary.html">Planting diary</a>
+                  <a class="nav-greenies-fertilization" href="../fertilization-wikipedia.html">Fertilization wikipedia</a>
+                </div>
+              </div>
+              <a href="../ptsd.html">PTSD</a>
+            </div>
+            <label class="locale-switcher">
+              <span class="locale-switcher-label">Language</span>
+              <select class="locale-select" id="locale-select" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="vi">Tiếng Việt</option>
+              </select>
+            </label>
+          </nav>
+
+          <section class="hero-content hero-subpage">
+            <div class="hero-copy article-wrapper hero-capsule">
+              <h1 id="day-four-title">Day 4 - Standard Next.js Project with Zod and Axios</h1>
+              <p id="day-four-subtitle">
+                Today I stopped seeing Next.js as just pages and started seeing a production flow: UI to BFF to validation to backend and back again.
+              </p>
+              <div class="article-meta">
+                <span id="day-four-author">Cat Can Code</span>
+                <span id="day-four-date">April 7, 2026</span>
+                <span id="day-four-reading">7 min read</span>
+              </div>
+            </div>
+          </section>
+        </header>
+
+        <main class="planner-section planner-page">
+          <article class="planner-card article-wrapper">
+            <div class="article-body">
+              <section class="callout-card">
+                <h2>Big Idea</h2>
+                <p>I can explain today&apos;s lesson with a very simple game rule.</p>
+                <p>You choose a building.</p>
+                <p>If the building is a hotel, then it must have stars.</p>
+                <p>The stars must be between 0 and 5. Other building types can treat stars as optional.</p>
+                <blockquote>What code is really doing here is turning game rules into data rules.</blockquote>
+              </section>
+
+              <section>
+                <h2>The Rule Book</h2>
+                <p>Zod feels like a rule-checker robot that reads the rule book before data is allowed through.</p>
+                <pre class="code-sample">import { z } from "zod";
+
+export const PropertySchema = z.discriminatedUnion("propertyType", [
+  z.object({
+    propertyType: z.literal("HOTEL"),
+    ratingStar: z.number().min(0).max(5),
+  }),
+  z.object({
+    propertyType: z.literal("VILLA"),
+    ratingStar: z.number().min(0).max(5).optional(),
+  }),
+]);</pre>
+                <p>If I say hotel without stars, the robot blocks me. If I give 10 stars, it blocks me again. If I give a valid value like 3, it lets the data pass.</p>
+              </section>
+
+              <section class="callout-card">
+                <h2>How the Whole System Works</h2>
+                <pre class="code-sample">User -&gt; UI -&gt; Zod (rules) -&gt; BFF -&gt; Backend</pre>
+                <p>This still matches the bigger architecture I&apos;ve been learning.</p>
+                <p>The user interacts with the UI, Zod checks the rules, the BFF acts like the gatekeeper, and the backend does the real work.</p>
+                <p>If the order is wrong, the system should stop early instead of letting bad data travel deeper.</p>
+              </section>
+
+              <section class="callout-card">
+                <h2>New Insight: Zod Error Codes to UI State to i18n</h2>
+                <p>I can now see another important layer in the system.</p>
+                <blockquote>Zod does not talk to users. It talks to the system using codes. The UI translates those codes into human language and visible states.</blockquote>
+                <pre class="code-sample">User input
+  -&gt; Zod validation (returns code)
+  -&gt; UI state management
+  -&gt; i18n mapping
+  -&gt; User sees message</pre>
+              </section>
+
+              <section>
+                <h2>Zod as a Code Generator</h2>
+                <p>Old thinking is to hardcode human text directly inside validation.</p>
+                <pre class="code-sample">z.string().email({ message: "Invalid email address" })</pre>
+                <p>That works at first, but it does not scale well.</p>
+                <p>New thinking is to let Zod return a stable system code instead.</p>
+                <pre class="code-sample">z.string().email({ message: "INVALID_EMAIL" })</pre>
+                <pre class="code-sample">{
+  path: ["email"],
+  message: "INVALID_EMAIL"
+}</pre>
+                <p>That means Zod is defining what is wrong, not trying to act like the final copywriter for the product.</p>
+              </section>
+
+              <section>
+                <h2>The Missing Bridge: UI State</h2>
+                <p>Zod tells me what failed, but the UI still decides where the error appears, when it appears, and how the screen should react.</p>
+                <pre class="code-sample">type FormState = {
+  errors: Record&lt;string, string&gt;;
+  status: "idle" | "error" | "success" | "loading";
+};</pre>
+                <pre class="code-sample">if (!result.success) {
+  setState({
+    status: "error",
+    errors: result.error.flatten().fieldErrors,
+  });
+  return;
+}
+
+setState({ status: "success" });</pre>
+                <p>This is the bridge between machine validation and product behavior.</p>
+              </section>
+
+              <section>
+                <h2>i18n Mapping Layer</h2>
+                <p>Once the UI has the code, the app can translate that code into whatever language the user needs.</p>
+                <pre class="code-sample">const errorMap = {
+  "en-US": {
+    INVALID_EMAIL: "Please enter a valid email address",
+    REQUIRED: "This field is required",
+  },
+  "vi-VN": {
+    INVALID_EMAIL: "Vui lòng nhập email hợp lệ",
+    REQUIRED: "Trường này là bắt buộc",
+  },
+};</pre>
+                <pre class="code-sample">&lt;p&gt;{errorMap[locale][errorCode]}&lt;/p&gt;</pre>
+                <p>This makes the system much more scalable than scattering random strings across components.</p>
+              </section>
+
+              <section>
+                <h2>Success Codes Matter Too</h2>
+                <p>I should not think only about errors. Success is also a system state that benefits from standard codes.</p>
+                <pre class="code-sample">const successMap = {
+  "en-US": {
+    REGISTRATION_SUCCESS: "Registration submitted successfully",
+  },
+  "vi-VN": {
+    REGISTRATION_SUCCESS: "Đăng ký thành công",
+  },
+};</pre>
+                <pre class="code-sample">setState({
+  status: "success",
+  message: "REGISTRATION_SUCCESS",
+});</pre>
+                <p>That keeps success handling as consistent and localizable as error handling.</p>
+              </section>
+
+              <section>
+                <h2>Separation of Responsibility</h2>
+                <table class="insight-table">
+                  <thead>
+                    <tr>
+                      <th>Layer</th>
+                      <th>Responsibility</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Zod</td>
+                      <td>Define rules and return machine-friendly codes.</td>
+                    </tr>
+                    <tr>
+                      <td>UI state</td>
+                      <td>Control behavior such as error, loading, and success.</td>
+                    </tr>
+                    <tr>
+                      <td>i18n</td>
+                      <td>Translate codes into human language.</td>
+                    </tr>
+                    <tr>
+                      <td>Backend</td>
+                      <td>Process valid data after it passes the boundary.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+
+              <section class="callout-card">
+                <h2>Security and Consistency Insight</h2>
+                <p>This architecture improves consistency because the same code can map to the same message everywhere.</p>
+                <p>It improves localization because new languages can be added without changing validation logic.</p>
+                <p>It improves safety because random hardcoded strings are not scattered through the codebase.</p>
+                <pre class="code-sample">z.string().email({
+  message: "Email không hợp lệ",
+});</pre>
+                <p>That kind of hardcoded mixed-language validation is the anti-pattern I want to avoid.</p>
+              </section>
+
+              <section>
+                <h2>Product-Level Upgrade</h2>
+                <p>This makes me realize I am not just building validation anymore.</p>
+                <p>I am defining a language system between machine and human.</p>
+                <pre class="code-sample">Machine language
+INVALID_EMAIL
+REQUIRED
+OUT_OF_RANGE</pre>
+                <pre class="code-sample">Human language
+Please enter a valid email
+Vui lòng nhập email hợp lệ</pre>
+              </section>
+
+              <section class="callout-card">
+                <h2>Insight to Keep</h2>
+                <blockquote>Zod defines what is wrong, UI defines how to communicate it, and i18n makes sure everyone understands it.</blockquote>
+                <p>The shortest version is even simpler:</p>
+                <blockquote>Zod speaks in codes, UI translates, users understand.</blockquote>
+              </section>
+
+              <section class="callout-card">
+                <h2>Example: Burger with Beef or Pork</h2>
+                <p>This burger story makes the whole idea much easier to hold in my head.</p>
+                <p>In the restaurant, I can order a burger, but I must choose beef or pork.</p>
+                <p>I cannot choose both, and I cannot choose nothing.</p>
+                <blockquote>These are the rules, and Zod is the system that enforces them before the kitchen ever starts cooking.</blockquote>
+              </section>
+
+              <section>
+                <h2>Wrong Order: Both Meats</h2>
+                <p>If I say, &quot;I want a burger with beef and pork,&quot; the rule checker stops me.</p>
+                <p>But it does not speak to me in a polished product sentence. It returns a code.</p>
+                <pre class="code-sample">INVALID_MEAT_SELECTION</pre>
+                <p>Then the UI acts like the waiter and translates that code for the person using the app.</p>
+                <pre class="code-sample">English
+Please choose either Beef or Pork, not both.
+
+Korean
+소고기 또는 돼지고기 중 하나만 선택해주세요.</pre>
+              </section>
+
+              <section>
+                <h2>Wrong Order: No Meat</h2>
+                <p>If I ask for a burger with nothing selected, that is a different rule failure.</p>
+                <pre class="code-sample">MEAT_REQUIRED</pre>
+                <p>The UI can render different language versions of the same machine code.</p>
+                <pre class="code-sample">English
+Please choose at least one meat.
+
+Korean
+고기를 하나 이상 선택해주세요.</pre>
+                <p>Same system code, different human message.</p>
+              </section>
+
+              <section>
+                <h2>Correct Order</h2>
+                <p>If I choose beef only, the order is valid.</p>
+                <p>Zod says the data is okay, the kitchen can cook, and the UI can show a success state.</p>
+                <pre class="code-sample">OK</pre>
+                <pre class="code-sample">English
+Your burger is ready!
+
+Korean
+버거가 준비되었습니다!</pre>
+                <p>This is a nice reminder that success is also part of the communication system, not just error handling.</p>
+              </section>
+
+              <section>
+                <h2>What the Code Looks Like</h2>
+                <p>The rules can be expressed directly in the schema.</p>
+                <pre class="code-sample">const BurgerSchema = z
+  .object({
+    meat: z.array(z.enum(["BEEF", "PORK"])),
+  })
+  .refine((data) =&gt; data.meat.length &gt; 0, {
+    message: "MEAT_REQUIRED",
+  })
+  .refine((data) =&gt; data.meat.length === 1, {
+    message: "INVALID_MEAT_SELECTION",
+  });</pre>
+                <p>And the translation dictionary can stay separate from validation.</p>
+                <pre class="code-sample">const messages = {
+  "en-US": {
+    MEAT_REQUIRED: "Please choose at least one meat.",
+    INVALID_MEAT_SELECTION: "Please choose either Beef or Pork, not both.",
+  },
+  "ko-KR": {
+    MEAT_REQUIRED: "고기를 하나 이상 선택해주세요.",
+    INVALID_MEAT_SELECTION: "소고기 또는 돼지고기 중 하나만 선택해주세요.",
+  },
+};</pre>
+              </section>
+
+              <section class="callout-card">
+                <h2>What This Example Teaches</h2>
+                <pre class="code-sample">You order burger
+  -&gt; Zod checks rules and returns code
+  -&gt; UI translates the code
+  -&gt; Kitchen only receives valid orders</pre>
+                <p>Without this system, the kitchen gets confusing orders and the user gets confusing behavior.</p>
+                <p>With this system, the rules are clear, the communication is understandable, and the whole flow works in any language.</p>
+                <blockquote>You can pick beef or pork, but not both, and the waiter explains it in your language.</blockquote>
+              </section>
+
+              <section>
+                <h2>Why Not Use if and else Everywhere</h2>
+                <p>At first it feels like I could just write conditional checks by hand.</p>
+                <pre class="code-sample">if (propertyType === "HOTEL") {
+  if (!ratingStar) throw Error("Required");
+}</pre>
+                <p>But that creates several problems.</p>
+                <ul>
+                  <li>The same logic gets scattered across UI code, API code, and validation code.</li>
+                  <li>TypeScript still does not fully trust the data shape after a casual check.</li>
+                  <li>Small changes like <code>"hotel"</code> instead of <code>"HOTEL"</code> can break the logic silently.</li>
+                  <li>Bad backend data can still sneak through and break the UI later.</li>
+                </ul>
+                <pre class="code-sample">if (propertyType === "HOTEL") {
+  ratingStar // still maybe undefined
+}</pre>
+              </section>
+
+              <section>
+                <h2>Why Zod Discriminated Union Is Better</h2>
+                <p>The important shift is that the rule lives in one place instead of being repeated everywhere.</p>
+                <pre class="code-sample">z.discriminatedUnion(...)</pre>
+                <table class="insight-table">
+                  <thead>
+                    <tr>
+                      <th>What it gives me</th>
+                      <th>Why it matters</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Single source of truth</td>
+                      <td>The rule only needs to exist once.</td>
+                    </tr>
+                    <tr>
+                      <td>Auto type safety</td>
+                      <td>When the type is HOTEL, <code>ratingStar</code> is guaranteed.</td>
+                    </tr>
+                    <tr>
+                      <td>Impossible states blocked</td>
+                      <td>HOTEL without rating and rating above 5 are rejected early.</td>
+                    </tr>
+                    <tr>
+                      <td>Cleaner thinking</td>
+                      <td>I stop thinking in scattered conditionals and start thinking in valid structures.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <pre class="code-sample">if (data.propertyType === "HOTEL") {
+  data.ratingStar // guaranteed exists
+}</pre>
+              </section>
+
+              <section class="callout-card">
+                <h2>The Upgrade in My Brain</h2>
+                <p>Before, I thought the job was to check things with if and else after the fact.</p>
+                <p>Now I see the better approach:</p>
+                <blockquote>Design the rules so invalid data cannot exist in the first place.</blockquote>
+                <p>That is a much deeper mindset shift than just learning a new library.</p>
+              </section>
+
+              <section>
+                <h2>Day 4 Final Insight</h2>
+                <blockquote>Don&apos;t check data after it breaks. Design it so it can&apos;t break.</blockquote>
+                <p>This feels like the real lesson behind Zod, BFF, and strong project structure.</p>
+              </section>
+
+              <section>
+                <h2>What I Learned Today</h2>
+                <table class="insight-table">
+                  <thead>
+                    <tr>
+                      <th>Concept</th>
+                      <th>Meaning</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Zod</td>
+                      <td>Rule checker.</td>
+                    </tr>
+                    <tr>
+                      <td>Schema</td>
+                      <td>Rule book.</td>
+                    </tr>
+                    <tr>
+                      <td>Discriminated union</td>
+                      <td>Smart rule system based on type.</td>
+                    </tr>
+                    <tr>
+                      <td>BFF</td>
+                      <td>Gatekeeper.</td>
+                    </tr>
+                    <tr>
+                      <td>Axios</td>
+                      <td>Hidden delivery system.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+
+              <section class="callout-card">
+                <h2>One-Line Summary</h2>
+                <blockquote>If it&apos;s a hotel, you must give stars, and the robot will not let you cheat.</blockquote>
+              </section>
+            </div>
+          </article>
+
+          <nav class="day-navigation" aria-label="Diary navigation">
+            <a href="day-3.html">&larr; Day 3</a>
+            <span></span>
+            <a href="index.html">Back to diary</a>
+          </nav>
+        </main>
+      </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="../script.js"></script>
+  </body>
+</html>
