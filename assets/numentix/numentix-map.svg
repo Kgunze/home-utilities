@@ -1,0 +1,25 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" rx="36" fill="#E9D6AF"/>
+  <rect x="24" y="24" width="1552" height="952" rx="26" stroke="#75543C" stroke-width="4" stroke-dasharray="8 16"/>
+  <path d="M163 191C268 135 431 126 530 177C626 226 691 226 770 183C915 104 1095 103 1240 182C1331 232 1419 238 1502 201V769C1402 825 1282 835 1170 800C1035 758 926 754 818 803C684 864 512 872 375 813C273 769 196 759 98 784L163 191Z" fill="#DAB98A"/>
+  <path d="M434 603C383 556 382 473 432 423C486 369 579 369 633 423C689 479 687 571 637 620C584 673 486 673 434 603Z" fill="#80A9BF" stroke="#355C6C" stroke-width="8"/>
+  <path d="M382 564C408 520 458 487 526 479C576 473 628 484 671 509" stroke="#DFF1F8" stroke-width="10" stroke-linecap="round"/>
+  <path d="M908 207L1034 133L1156 176L1233 294L1159 371L1041 337L947 291L908 207Z" fill="#9D8B75" stroke="#66533E" stroke-width="8"/>
+  <path d="M1039 137L1094 243L1178 176" stroke="#F5E2C3" stroke-width="8" stroke-linecap="round"/>
+  <path d="M299 179L382 121L464 162L486 247L428 311L330 302L271 240L299 179Z" fill="#BDA68C" stroke="#6A5544" stroke-width="8"/>
+  <path d="M274 718C335 659 430 638 512 666C584 689 643 745 674 822C553 869 434 891 318 878C260 815 241 751 274 718Z" fill="#7D9F75" stroke="#486448" stroke-width="8"/>
+  <path d="M1184 601C1261 555 1362 547 1445 584C1490 644 1494 716 1457 785C1379 815 1298 812 1214 781C1166 729 1154 647 1184 601Z" fill="#738B5A" stroke="#4A5C3D" stroke-width="8"/>
+  <path d="M746 462C818 392 945 391 1018 463" stroke="#8B6A48" stroke-width="12" stroke-linecap="round" stroke-dasharray="10 18"/>
+  <path d="M776 413L1049 709" stroke="#8B6A48" stroke-width="8" stroke-linecap="round" stroke-dasharray="10 18"/>
+  <circle cx="442" cy="578" r="14" fill="#A3472F"/>
+  <circle cx="1008" cy="283" r="14" fill="#A3472F"/>
+  <circle cx="456" cy="228" r="14" fill="#A3472F"/>
+  <path d="M450 228L430 290" stroke="#A3472F" stroke-width="5" stroke-linecap="round"/>
+  <path d="M1008 283L1060 348" stroke="#A3472F" stroke-width="5" stroke-linecap="round"/>
+  <path d="M442 578L530 636" stroke="#A3472F" stroke-width="5" stroke-linecap="round"/>
+  <text x="111" y="111" fill="#4C3728" font-family="Georgia, serif" font-size="44" font-weight="700">Numentix</text>
+  <text x="118" y="152" fill="#6D5644" font-family="Georgia, serif" font-size="20">Draft world map for chapters and zones</text>
+  <text x="506" y="663" fill="#2F4A57" font-family="Georgia, serif" font-size="28" font-weight="700">Mirror Lake</text>
+  <text x="1074" y="372" fill="#5A4A3E" font-family="Georgia, serif" font-size="28" font-weight="700">First Gate Pass</text>
+  <text x="345" y="343" fill="#5A4A3E" font-family="Georgia, serif" font-size="28" font-weight="700">Signal Tower</text>
+</svg>
