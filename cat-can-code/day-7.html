@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 7 - Onion Layers | Cat Can Code</title>
+    <meta
+      name="description"
+      content="A Day 7 diary entry that explains browser, Next.js, BFF, and backend as onion layers that must be peeled one by one."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .cat-page-shell {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f9f3eb 0%, #f4e6d8 100%);
+      }
+
+      .sketch-parallax {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .sketch-svg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        filter: blur(0.3px);
+      }
+
+      .sketch-layer {
+        mix-blend-mode: multiply;
+        will-change: transform;
+      }
+
+      .sketch-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(244, 233, 214, 0.4));
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cat-page-shell .page-shell {
+        position: relative;
+        z-index: 2;
+      }
+
+      .article-wrapper {
+        max-width: 820px;
+        margin: 0 auto;
+        padding-top: 1rem;
+      }
+
+      .article-shell {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-inline: clamp(1.25rem, 3vw, 2.75rem);
+      }
+
+      .article-layout {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        gap: clamp(2.5rem, 4vw, 4.5rem);
+      }
+
+      .article-meta {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .article-body {
+        color: var(--text);
+        line-height: 1.7;
+        font-size: 1.08rem;
+        display: grid;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 820px;
+        min-width: 0;
+        order: 1;
+      }
+
+      .article-body section[id] {
+        scroll-margin-top: 7.5rem;
+      }
+
+      .article-body h2,
+      .article-body h3,
+      .article-body h4 {
+        font-family: "Fraunces", serif;
+        margin: 0 0 0.45rem;
+      }
+
+      .article-body h2 {
+        font-size: 1.9rem;
+      }
+
+      .article-body h3 {
+        font-size: 1.4rem;
+      }
+
+      .article-body h4 {
+        font-size: 1.1rem;
+      }
+
+      .article-body p {
+        margin: 0 0 0.9rem;
+      }
+
+      .article-body ul,
+      .article-body ol {
+        padding-left: 1.25rem;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .article-body blockquote {
+        margin: 0.75rem 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .hero-capsule {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .hero-capsule h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 4.4rem);
+      }
+
+      .hero-capsule p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .callout-card {
+        border: 1px solid rgba(92, 81, 69, 0.22);
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.84);
+        padding: 1.15rem 1.25rem;
+        box-shadow: 0 12px 24px rgba(92, 81, 69, 0.08);
+      }
+
+      .code-sample {
+        background: #1d1a17;
+        color: #f8ebd8;
+        padding: 0.95rem 1rem;
+        border-radius: 0.85rem;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        overflow-x: auto;
+        margin: 0.85rem 0;
+        white-space: pre-wrap;
+      }
+
+      .insight-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.6rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(92, 81, 69, 0.07);
+      }
+
+      .insight-table th,
+      .insight-table td {
+        padding: 0.9rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(92, 81, 69, 0.12);
+        vertical-align: top;
+      }
+
+      .insight-table th {
+        font-family: "Fraunces", serif;
+        font-size: 1rem;
+        background: rgba(244, 230, 216, 0.8);
+      }
+
+      .insight-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .day-navigation {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .day-navigation a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .day-navigation span {
+        flex: 1;
+        display: inline-flex;
+        justify-content: center;
+      }
+
+      .toc-nav {
+        position: sticky;
+        top: 6rem;
+        align-self: start;
+        width: 250px;
+        flex: 0 0 250px;
+        order: 2;
+      }
+
+      .toc-card {
+        background: rgba(255, 250, 245, 0.82);
+        border-left: 1px solid rgba(92, 81, 69, 0.18);
+        border-radius: 1rem;
+        padding: 1rem 0 1rem 1rem;
+        box-shadow: 0 10px 24px rgba(92, 81, 69, 0.06);
+        backdrop-filter: blur(6px);
+      }
+
+      .toc-title {
+        margin: 0 0 0.8rem;
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+      }
+
+      .toc-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .toc-link {
+        display: block;
+        padding: 0.35rem 0.55rem;
+        border-radius: 0.7rem;
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.92rem;
+        line-height: 1.35;
+        transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+      }
+
+      .toc-link:hover,
+      .toc-link:focus-visible {
+        color: var(--primary);
+        background: rgba(53, 92, 74, 0.08);
+        transform: translateX(2px);
+      }
+
+      .toc-link.is-active {
+        color: var(--primary);
+        background: rgba(53, 92, 74, 0.12);
+        font-weight: 700;
+      }
+
+      @media (min-width: 1280px) {
+        .article-shell {
+          padding-inline: clamp(1.75rem, 3vw, 3.5rem);
+        }
+      }
+
+      @media (min-width: 1536px) {
+        .article-layout {
+          gap: clamp(4.5rem, 6vw, 6.5rem);
+        }
+
+        .toc-nav {
+          width: 260px;
+          flex-basis: 260px;
+        }
+      }
+
+      @media (max-width: 1279px) {
+        .article-layout {
+          display: block;
+        }
+
+        .toc-nav {
+          position: static;
+          top: auto;
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cat-page-shell">
+      <div class="sketch-parallax" aria-hidden="true">
+        <svg class="sketch-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+          <g class="sketch-layer" data-speed="0.04">
+            <path d="M94 230 C214 194 356 248 516 220" stroke="#5c5145" stroke-width="1.4" fill="none" stroke-dasharray="7 5" />
+            <text x="528" y="224" font-size="11" fill="#5c5145">browser -&gt; next -&gt; bff -&gt; backend</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.03">
+            <ellipse cx="292" cy="388" rx="96" ry="62" stroke="#5c5145" stroke-width="1.5" fill="none" />
+            <ellipse cx="292" cy="388" rx="66" ry="42" stroke="#5c5145" stroke-width="1.2" fill="none" />
+            <ellipse cx="292" cy="388" rx="36" ry="22" stroke="#5c5145" stroke-width="1.1" fill="none" />
+            <text x="252" y="394" font-size="12" fill="#5c5145">layers</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.06">
+            <rect x="888" y="160" width="112" height="68" rx="12" stroke="#5c5145" stroke-width="1.3" fill="none" />
+            <text x="916" y="200" font-size="11" fill="#5c5145">backend</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="620" y="92" font-size="12" fill="#5c5145" opacity="0.7">do not skip the parent</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="662" y="118" font-size="12" fill="#5c5145" opacity="0.7">peel one layer at a time</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sketch-overlay"></div>
+      <div class="page-shell">
+        <header class="hero hero-subpage">
+          <nav class="topbar" aria-label="Primary">
+            <a class="brand" href="../index.html#home">Home Utilities</a>
+            <div class="nav-links">
+              <a href="../stories.html">Stories</a>
+              <div class="nav-parent">
+                <a href="../index.html#kitchen-notes">Kitchen Notes</a>
+                <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                  <a href="../recipes.html">Recipes</a>
+                  <a href="../shopping-planner.html">Shopping Planner</a>
+                </div>
+              </div>
+              <div class="nav-parent nav-parent-greenies">
+                <a class="nav-link-greenies" href="#">Greenies</a>
+                <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                  <a class="nav-greenies-planting" href="../planting-diary.html">Planting diary</a>
+                  <a class="nav-greenies-fertilization" href="../fertilization-wikipedia.html">Fertilization wikipedia</a>
+                </div>
+              </div>
+              <a href="../ptsd.html">PTSD</a>
+            </div>
+            <label class="locale-switcher">
+              <span class="locale-switcher-label">Language</span>
+              <select class="locale-select" id="locale-select" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="vi">Tieng Viet</option>
+              </select>
+            </label>
+          </nav>
+
+          <section class="hero-content hero-subpage">
+            <div class="hero-copy article-wrapper hero-capsule">
+              <h1 id="day-seven-title">Cat Can Code - Day 7 Diary</h1>
+              <p id="day-seven-subtitle">
+                Browser, Next.js, BFF, and backend finally clicked when I imagined the whole app as an onion that must be peeled layer by layer.
+              </p>
+              <div class="article-meta">
+                <span id="day-seven-author">Cat Can Code</span>
+                <span id="day-seven-date">April 9, 2026</span>
+                <span id="day-seven-reading">7 min read</span>
+              </div>
+            </div>
+          </section>
+        </header>
+
+        <main class="planner-section planner-page">
+          <article class="planner-card article-shell">
+            <div class="article-layout">
+              <aside class="toc-nav" aria-label="Table of contents">
+                <div class="toc-card">
+                  <h2 class="toc-title">Contents</h2>
+                  <ul class="toc-list">
+                    <li><a class="toc-link" href="#topic">Topic</a></li>
+                    <li><a class="toc-link" href="#onion">Imagine an Onion</a></li>
+                    <li><a class="toc-link" href="#system-map">Your App as an Onion</a></li>
+                    <li><a class="toc-link" href="#story">The Onion Restaurant</a></li>
+                    <li><a class="toc-link" href="#browser">Layer 1: Browser</a></li>
+                    <li><a class="toc-link" href="#nextjs">Layer 2: Next.js</a></li>
+                    <li><a class="toc-link" href="#bff">Layer 3: BFF</a></li>
+                    <li><a class="toc-link" href="#backend">Layer 4: Backend</a></li>
+                    <li><a class="toc-link" href="#return-trip">The Return Trip</a></li>
+                    <li><a class="toc-link" href="#rule">The Onion Rule</a></li>
+                    <li><a class="toc-link" href="#break">What Breaks</a></li>
+                    <li><a class="toc-link" href="#insight">CTO Insight</a></li>
+                    <li><a class="toc-link" href="#summary">Final Summary</a></li>
+                  </ul>
+                </div>
+              </aside>
+
+              <div class="article-body">
+                <section class="callout-card" id="topic" data-toc-section>
+                  <h2>Topic</h2>
+                  <p><strong>Onion layers</strong> through <strong>browser, Next.js, BFF, and backend</strong>.</p>
+                  <blockquote>Every request must peel through layers before it reaches the real work in the center.</blockquote>
+                </section>
+
+                <section id="onion" data-toc-section>
+                  <h2>Imagine an Onion</h2>
+                  <p>An onion has layers inside layers.</p>
+                  <p>You do not jump straight to the center. You go one layer at a time.</p>
+                </section>
+
+                <section class="callout-card" id="system-map" data-toc-section>
+                  <h2>Your App as an Onion</h2>
+                  <pre class="code-sample">OUTSIDE (what user sees)
+
+Browser
+  -&gt; Next.js (apps/web)
+      -&gt; BFF (packages/bff)
+          -&gt; Backend API
+
+CENTER (real work happens)</pre>
+                  <p>This is not extra ceremony. Each layer has a job.</p>
+                </section>
+
+                <section id="story" data-toc-section>
+                  <h2>The Onion Restaurant</h2>
+                  <p>Imagine a kid says, "I want pizza."</p>
+                  <p>The kid is the user, and the request must travel inward through the restaurant.</p>
+                  <table class="insight-table">
+                    <thead>
+                      <tr>
+                        <th>Story Role</th>
+                        <th>Real System</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Kid asking for food</td>
+                        <td>Browser user</td>
+                      </tr>
+                      <tr>
+                        <td>Door guard</td>
+                        <td>Next.js</td>
+                      </tr>
+                      <tr>
+                        <td>Smart parent</td>
+                        <td>BFF</td>
+                      </tr>
+                      <tr>
+                        <td>Kitchen</td>
+                        <td>Backend</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+
+                <section id="browser" data-toc-section>
+                  <h2>Layer 1: Browser</h2>
+                  <p>The browser is what the user touches.</p>
+                  <p>It does not cook. It does not own the business logic. It just asks.</p>
+                  <pre class="code-sample">"Give me pizza!"</pre>
+                  <blockquote>The browser is the request starter, not the final authority.</blockquote>
+                </section>
+
+                <section id="nextjs" data-toc-section>
+                  <h2>Layer 2: Next.js</h2>
+                  <p>Next.js is the door guard. It receives the request and routes it inward.</p>
+                  <ul>
+                    <li>Owns routing like <code>/api/payment</code>.</li>
+                    <li>Acts as the structured entry point.</li>
+                    <li>Passes the request deeper to the right place.</li>
+                  </ul>
+                  <p>It does not cook either. It is the controlled doorway into the system.</p>
+                  <pre class="code-sample">Browser -&gt; /api/payment -&gt; Next.js route</pre>
+                </section>
+
+                <section class="callout-card" id="bff" data-toc-section>
+                  <h2>Layer 3: BFF</h2>
+                  <p>This is the smartest middle layer in the story.</p>
+                  <p>The BFF hears a vague request and turns it into something precise and safe.</p>
+                  <pre class="code-sample">Input from UI:
+"I want something yummy"
+
+After BFF shaping:
+{ type: "pizza", size: "medium" }</pre>
+                  <p>That means the BFF owns:</p>
+                  <ul>
+                    <li>Validation</li>
+                    <li>Transformation</li>
+                    <li>Boundary control</li>
+                  </ul>
+                  <pre class="code-sample">const parsed = OrderSchema.parse(input);
+
+const payload = {
+  type: parsed.type,
+  size: parsed.size ?? "medium",
+};</pre>
+                  <blockquote>The BFF protects the backend from raw, messy, or unsafe UI input.</blockquote>
+                </section>
+
+                <section id="backend" data-toc-section>
+                  <h2>Layer 4: Backend</h2>
+                  <p>The backend is the real kitchen.</p>
+                  <p>It takes the cleaned request and does the heavy work.</p>
+                  <ul>
+                    <li>Database writes</li>
+                    <li>Payment processing</li>
+                    <li>Core business logic</li>
+                  </ul>
+                  <pre class="code-sample">{ type: "pizza", size: "medium" }</pre>
+                  <p>Now the backend can focus on real work instead of babysitting raw frontend input.</p>
+                </section>
+
+                <section class="callout-card" id="return-trip" data-toc-section>
+                  <h2>The Return Trip</h2>
+                  <p>The result does not teleport back to the user. It travels outward through the same layers.</p>
+                  <pre class="code-sample">Backend -&gt; BFF -&gt; Next.js -&gt; Browser</pre>
+                  <p>Each layer still has a job on the way back.</p>
+                  <ul>
+                    <li>The backend returns the result.</li>
+                    <li>The BFF can reshape or validate the response.</li>
+                    <li>Next.js returns it through the route boundary.</li>
+                    <li>The browser renders it safely.</li>
+                  </ul>
+                </section>
+
+                <section id="rule" data-toc-section>
+                  <h2>The Onion Rule</h2>
+                  <blockquote>You can never skip layers. The request must move step by step.</blockquote>
+                  <table class="insight-table">
+                    <thead>
+                      <tr>
+                        <th>Correct</th>
+                        <th>Why</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Browser -&gt; Next.js -&gt; BFF -&gt; Backend</td>
+                        <td>Every responsibility stays in the right place.</td>
+                      </tr>
+                      <tr>
+                        <td>Backend -&gt; BFF -&gt; Next.js -&gt; Browser</td>
+                        <td>The response stays controlled on the way back out too.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+
+                <section id="break" data-toc-section>
+                  <h2>What Breaks If You Skip a Layer</h2>
+                  <h3>Skip the BFF</h3>
+                  <pre class="code-sample">Browser -&gt; Backend</pre>
+                  <p>Then the user can send raw values directly.</p>
+                  <pre class="code-sample">{ amount: 1 }</pre>
+                  <p>instead of the safe, validated structure you expected.</p>
+                  <ul>
+                    <li>No validation boundary</li>
+                    <li>Less control over shaping data</li>
+                    <li>Higher risk of broken logic or abuse</li>
+                  </ul>
+
+                  <h3>Skip Next.js</h3>
+                  <pre class="code-sample">Browser -&gt; BFF directly</pre>
+                  <p>That makes the entry point messy and harder to control.</p>
+                  <ul>
+                    <li>You lose a clean routing boundary.</li>
+                    <li>You weaken structure and ownership.</li>
+                    <li>The app becomes harder to scale and reason about.</li>
+                  </ul>
+                </section>
+
+                <section class="callout-card">
+                  <h2>Memory Trick</h2>
+                  <blockquote>Every request must peel through layers before reaching the center.</blockquote>
+                </section>
+
+                <section class="callout-card">
+                  <h2>Final Kid Sentence</h2>
+                  <blockquote>You are not allowed to talk to the kitchen directly. You must go through the door and the parent first.</blockquote>
+                </section>
+
+                <section class="callout-card" id="insight" data-toc-section>
+                  <h2>CTO Insight</h2>
+                  <p>This onion architecture gives you three powerful things:</p>
+                  <ul>
+                    <li><strong>Security boundary</strong>: raw user input does not hit the backend untouched.</li>
+                    <li><strong>Control point</strong>: the BFF becomes the place where UI-facing decisions stay consistent.</li>
+                    <li><strong>Data shaping layer</strong>: each layer can translate data for the next one cleanly.</li>
+                  </ul>
+                  <pre class="code-sample">apps/web -&gt; packages/bff -&gt; backend</pre>
+                  <p>That is why this architecture is correct and scalable by design.</p>
+                </section>
+
+                <section class="callout-card" id="summary" data-toc-section>
+                  <h2>Final Summary</h2>
+                  <blockquote>The browser asks, Next.js routes, the BFF validates and shapes, the backend does the real work, and the whole system stays safe because nobody skips the layers.</blockquote>
+                </section>
+
+                <section>
+                  <h2>One Sentence to Remember</h2>
+                  <blockquote><strong>An app with good architecture is like an onion: each layer protects the next one.</strong></blockquote>
+                </section>
+              </div>
+            </div>
+
+            <nav class="day-navigation" aria-label="Diary navigation">
+              <a href="day-6.html">Previous: Day 6</a>
+              <span><a href="index.html">Back to diary</a></span>
+              <span>Day 8 next</span>
+            </nav>
+          </article>
+        </main>
+      </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="../script.js"></script>
+    <script>
+      (() => {
+        const sections = [...document.querySelectorAll("[data-toc-section]")];
+        const links = [...document.querySelectorAll(".toc-link")];
+
+        if (!sections.length || !links.length || !("IntersectionObserver" in window)) {
+          return;
+        }
+
+        const setActive = (id) => {
+          links.forEach((link) => {
+            const active = link.getAttribute("href") === `#${id}`;
+            link.classList.toggle("is-active", active);
+
+            if (active) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const visibleSections = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+            if (visibleSections.length > 0) {
+              setActive(visibleSections[0].target.id);
+            }
+          },
+          {
+            rootMargin: "-25% 0px -55% 0px",
+            threshold: [0.15, 0.35, 0.6],
+          }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+        setActive(sections[0].id);
+      })();
+    </script>
+  </body>
+</html>
