@@ -44,6 +44,132 @@ const greeniesParentLink = document.querySelector(".nav-link-greenies");
 const greeniesSubmenu = document.querySelector(".nav-submenu-greenies");
 const greeniesPlantingLink = document.querySelector(".nav-greenies-planting");
 const greeniesFertilizationLink = document.querySelector(".nav-greenies-fertilization");
+const numentixMapElement = document.querySelector("#numentix-map");
+const numentixZonesLayer = document.querySelector("#numentix-zones");
+const numentixChapterList = document.querySelector("#numentix-chapter-list");
+const numentixViewer = document.querySelector("#numentix-viewer");
+const numentixViewerKicker = document.querySelector("#numentix-viewer-kicker");
+const numentixViewerTitle = document.querySelector("#numentix-viewer-title");
+const numentixViewerZone = document.querySelector("#numentix-viewer-zone");
+const numentixViewerBody = document.querySelector("#numentix-viewer-body");
+const numentixPrevLink = document.querySelector("#numentix-prev");
+const numentixNextLink = document.querySelector("#numentix-next");
+const numentixProgress = document.querySelector("#numentix-progress");
+const numentixReaderSection = document.querySelector("#numentix-reader");
+
+const getSiteRootPrefix = () =>
+  window.location.pathname.includes("/cat-can-code/") ? "../" : "";
+
+const NUMENTIX_CHAPTERS = [
+  {
+    id: "awakening",
+    order: 1,
+    zoneId: "lake",
+    title: {
+      en: "The Awakening",
+      vi: "Sự Thức Tỉnh",
+    },
+    excerpt: {
+      en: "At the mirror-lake, the first pulse of Numentix rises out of silence.",
+      vi: "Bên hồ gương, nhịp đập đầu tiên của Numentix trỗi dậy từ im lặng.",
+    },
+    content: {
+      en: [
+        "Numentix was once silent, a basin of sleeping water held beneath a pale sky. No bells rang across its shores, no towers signaled from the ridge, and no names had yet settled on the map.",
+        "Then the lake stirred. Light moved under the surface like a thought trying to remember itself, and the settlements around the water began to wake in response. Fisher paths became roads. Watchfires became ritual. Listening became the first law of the realm.",
+        "The people who stayed near the water learned that the lake did not answer force. It answered patience, pattern, and return. Every future chapter begins here, where the world first decided to speak."
+      ],
+      vi: [
+        "Numentix từng im lặng, như một lòng chảo nước đang ngủ dưới bầu trời nhạt màu. Không có chuông nào vang trên bờ hồ, không có tháp nào phát tín hiệu từ dãy núi, và cũng chưa có cái tên nào thật sự nằm yên trên bản đồ.",
+        "Rồi mặt hồ chuyển động. Ánh sáng lướt dưới làn nước như một ý nghĩ đang cố nhớ lại chính mình, và những vùng dân cư quanh hồ cũng dần thức giấc theo. Lối mòn của người chài trở thành con đường. Lửa canh gác trở thành nghi thức. Lắng nghe trở thành luật đầu tiên của vương quốc.",
+        "Những người ở lại bên hồ hiểu rằng mặt nước không đáp lời bằng cưỡng ép. Nó đáp lời bằng sự kiên nhẫn, bằng nhịp điệu, bằng sự quay lại đúng lúc. Mọi chương sau này đều bắt đầu từ đây, nơi thế giới lần đầu quyết định cất tiếng."
+      ],
+    },
+  },
+  {
+    id: "first-gate",
+    order: 2,
+    zoneId: "mountain",
+    title: {
+      en: "The First Gate",
+      vi: "Cánh Cổng Đầu Tiên",
+    },
+    excerpt: {
+      en: "The mountain pass becomes the realm's threshold between memory and defense.",
+      vi: "Đèo núi trở thành ngưỡng cửa của vương quốc, nằm giữa ký ức và phòng thủ.",
+    },
+    content: {
+      en: [
+        "Beyond the mountains stood the first gate, carved into stone that remembered every storm. It was less a wall than a decision: who was trusted to enter, and what truths could survive the crossing.",
+        "Wardens lived among the high paths, measuring wind, reading the color of distant smoke, and keeping the gate open only when the valley could bear what was coming. In Numentix, protection was never only military. It was also moral and emotional geometry.",
+        "To cross the gate was to leave behind the certainty of the lake and step into a world of vigilance. The realm grew stronger there, but also more complicated."
+      ],
+      vi: [
+        "Phía sau dãy núi là cánh cổng đầu tiên, được khắc vào loại đá ghi nhớ mọi trận bão từng quét qua. Nó không chỉ là một bức tường, mà là một quyết định: ai được phép bước vào, và sự thật nào có thể sống sót sau khi băng qua.",
+        "Những người gác cổng sống dọc theo đường núi, đo hướng gió, đọc màu khói ở chân trời, và chỉ mở cổng khi thung lũng đủ sức đón điều đang tới. Ở Numentix, phòng thủ chưa bao giờ chỉ là chuyện quân sự. Nó còn là hình học của đạo đức và cảm xúc.",
+        "Bước qua cánh cổng là rời bỏ sự chắc chắn của mặt hồ để đi vào thế giới của tỉnh thức. Vương quốc mạnh hơn từ nơi đó, nhưng cũng trở nên phức tạp hơn."
+      ],
+    },
+  },
+  {
+    id: "embers-of-the-tower",
+    order: 3,
+    zoneId: "tower",
+    title: {
+      en: "Embers of the Tower",
+      vi: "Tàn Lửa Trên Tháp",
+    },
+    excerpt: {
+      en: "A high observatory records signals, failures, and the cost of seeing too far.",
+      vi: "Ngọn tháp quan sát ghi lại tín hiệu, đổ vỡ, và cái giá của việc nhìn quá xa.",
+    },
+    content: {
+      en: [
+        "The tower was built for distance. From its circular windows, scribes tracked weather fronts, migrating lights, and changes in the border routes long before anyone below could see them.",
+        "But distance has a cost. The farther the tower looked, the harder it became to remain fully present to the lives beneath it. Reports grew sharper. Relationships grew thinner. The realm gained foresight while risking detachment.",
+        "The embers kept at the top were not only for warmth. They were reminders that knowledge must still answer to care. Without that, even the clearest vision could turn cold."
+      ],
+      vi: [
+        "Ngọn tháp được xây cho khoảng cách. Từ những ô cửa tròn trên cao, các thư lại theo dõi mặt thời tiết, những luồng sáng di cư và sự thay đổi ở tuyến biên giới từ rất lâu trước khi người dưới thung lũng có thể nhìn thấy.",
+        "Nhưng khoảng cách luôn có cái giá của nó. Càng nhìn xa, ngọn tháp càng khó ở trọn vẹn với đời sống phía dưới chân mình. Báo cáo trở nên sắc bén hơn. Quan hệ giữa người với người lại mỏng đi. Vương quốc có thêm tầm nhìn, nhưng cũng đối mặt nguy cơ tách rời.",
+        "Những tàn lửa giữ trên đỉnh tháp không chỉ để sưởi ấm. Chúng nhắc rằng tri thức vẫn phải trả lời cho sự chăm sóc. Nếu không, ngay cả tầm nhìn sáng rõ nhất cũng có thể trở nên lạnh ngắt."
+      ],
+    },
+  },
+];
+
+const NUMENTIX_MAP_ZONES = [
+  {
+    id: "lake",
+    chapterId: "awakening",
+    x: 44,
+    y: 58,
+    label: {
+      en: "Mirror Lake",
+      vi: "Hồ Gương",
+    },
+  },
+  {
+    id: "mountain",
+    chapterId: "first-gate",
+    x: 63,
+    y: 31,
+    label: {
+      en: "First Gate Pass",
+      vi: "Đèo Cổng Đầu",
+    },
+  },
+  {
+    id: "tower",
+    chapterId: "embers-of-the-tower",
+    x: 28,
+    y: 24,
+    label: {
+      en: "Signal Tower",
+      vi: "Tháp Tín Hiệu",
+    },
+  },
+];
 
 const ensureCatCanCodeLink = () => {
   const navLinks = document.querySelector(".nav-links");
@@ -58,7 +184,33 @@ const ensureCatCanCodeLink = () => {
 
   link = document.createElement("a");
   link.className = "nav-cat-can-code";
-  link.href = "cat-can-code/";
+  link.href = `${getSiteRootPrefix()}cat-can-code/`;
+
+  const ptsdLink = navLinks.querySelector('a[href="ptsd.html"]');
+
+  if (ptsdLink) {
+    navLinks.insertBefore(link, ptsdLink);
+  } else {
+    navLinks.appendChild(link);
+  }
+
+  return link;
+};
+
+const ensureNumentixLink = () => {
+  const navLinks = document.querySelector(".nav-links");
+  if (!navLinks) {
+    return null;
+  }
+
+  let link = navLinks.querySelector(".nav-numentix");
+  if (link) {
+    return link;
+  }
+
+  link = document.createElement("a");
+  link.className = "nav-numentix";
+  link.href = `${getSiteRootPrefix()}numentix.html`;
 
   const ptsdLink = navLinks.querySelector('a[href="ptsd.html"]');
 
@@ -95,6 +247,7 @@ const I18N = {
     navRecipes: "Recipes",
     navShoppingPlanner: "Shopping Planner",
     navPtsd: "PTSD",
+    navNumentix: "Numentix",
     navCatCanCode: "Cat Can Code",
     backToTop: "Top",
     backToTopAria: "Back to top",
@@ -130,6 +283,7 @@ const I18N = {
       "recipes.html": "Recipes Catalogue | Home Utilities",
       "shopping-planner.html": "Shopping Planner | Home Utilities",
       "stories.html": "Stories | Home Utilities",
+      "numentix.html": "Numentix | Home Utilities",
       "ptsd.html": "PTSD | Home Utilities",
       "recipe-pho-ga.html": "Pho Ga for Slow Weekends | Home Utilities",
       "recipe-basa-tomato-soup.html": "Basa Tomato Soup | Home Utilities",
@@ -149,6 +303,8 @@ const I18N = {
         "An English weekly shopping planner translated from the approved 30-day menu document for Home Utilities.",
       "stories.html":
         "A chapter-style story page for Home Utilities, designed like an open book with a personal timeline from 1992 to 2026.",
+      "numentix.html":
+        "An interactive world map for Numentix with clickable zones, chapter lore, and a sequential reader.",
       "ptsd.html":
         "A PTSD page with family scapegoating context, evidence-based terminology, symptom references, and a treatment follow-up timeline template.",
       "recipe-pho-ga.html":
@@ -184,6 +340,7 @@ const I18N = {
     navRecipes: "Công thức",
     navShoppingPlanner: "Kế hoạch đi chợ",
     navPtsd: "PTSD",
+    navNumentix: "Numentix",
     navCatCanCode: "Cat Can Code",
     backToTop: "Lên đầu trang",
     backToTopAria: "Lên đầu trang",
@@ -777,6 +934,7 @@ const syncCommonLocaleLabels = () => {
   const backToTopButtons = document.querySelectorAll(".back-to-top");
   const primaryNav = document.querySelector(".topbar");
   const storiesLinks = document.querySelectorAll('.nav-links a[href="stories.html"], .nav-links a[href="#stories-book"]');
+  const numentixLinks = document.querySelectorAll('.nav-links a[href="numentix.html"], .nav-links a[href="#numentix-world"]');
   const kitchenNotesLinks = document.querySelectorAll('.nav-parent > a[href="index.html#kitchen-notes"], .nav-parent > a[href="#kitchen-notes"]');
   const recipesLinks = document.querySelectorAll('.nav-submenu a[href="recipes.html"], .nav-submenu a[href="#recipe-catalogue"]');
   const shoppingPlannerLinks = document.querySelectorAll('.nav-submenu a[href="shopping-planner.html"], .nav-submenu a[href="#shopping-planner"]');
@@ -798,13 +956,21 @@ const syncCommonLocaleLabels = () => {
   }
 
   const catCanCodeLink = ensureCatCanCodeLink();
+  const numentixLink = ensureNumentixLink();
   if (catCanCodeLink && localeStrings.navCatCanCode) {
     catCanCodeLink.textContent = localeStrings.navCatCanCode;
     catCanCodeLink.setAttribute("aria-label", localeStrings.navCatCanCode);
   }
+  if (numentixLink && localeStrings.navNumentix) {
+    numentixLink.textContent = localeStrings.navNumentix;
+    numentixLink.setAttribute("aria-label", localeStrings.navNumentix);
+  }
 
   storiesLinks.forEach((node) => {
     node.textContent = localeStrings.navStories;
+  });
+  numentixLinks.forEach((node) => {
+    node.textContent = localeStrings.navNumentix;
   });
   kitchenNotesLinks.forEach((node) => {
     node.textContent = localeStrings.navKitchenNotes;
@@ -893,9 +1059,234 @@ const applyLocale = async () => {
   syncCommonLocaleLabels();
   applyPageTranslations();
   syncDynamicContent();
+  renderNumentix();
   renderSavedMarketBooking();
   renderLivePlannerState();
 };
+
+const getNumentixStrings = () => {
+  if (currentLocale === "vi") {
+    return {
+      eyebrow: "World System / Bản đồ truyện",
+      title: "Numentix mở ra bằng một bản đồ có thể chạm vào từng vùng.",
+      heroText:
+        "Chọn một điểm trên bản đồ để mở chapter tương ứng, rồi đọc tiếp như một truyện dài với điều hướng trước và sau.",
+      primaryAction: "Mở bản đồ",
+      secondaryAction: "Đi tới reader",
+      ledgerLabel: "Volume zero",
+      ledgerTitle: "Map, zone, chapter",
+      ledgerItems: [
+        "Bản đồ SVG responsive",
+        "Điểm zone bấm trực tiếp",
+        "Reader tuần tự theo chương",
+        "Có thể thay bằng map thật sau này",
+      ],
+      sectionTagMap: "World map",
+      sectionTitleMap: "Bấm vào từng vùng để mở lore đúng chapter.",
+      sectionCaptionMap: "Mỗi zone sẽ cập nhật URL và nhảy xuống reader.",
+      sectionTagChapters: "Chapter index",
+      sectionTitleChapters: "Ba chương mở đầu của Numentix.",
+      sectionCaptionChapters: "Bạn có thể mở từ danh sách hoặc từ bản đồ.",
+      readerTag: "Reader",
+      readerTitle: "Đọc theo chiều của bản đồ.",
+      readerCaption: "Nội dung được render an toàn bằng text, không dùng HTML raw.",
+      chapterLabel: "Chương",
+      zoneLabel: "Vùng",
+      prevLabel: "← Chương trước",
+      nextLabel: "Chương tiếp theo →",
+      startLabel: "Bạn đang ở chương đầu tiên.",
+      endLabel: "Bạn đã tới chương cuối.",
+      openChapter: "Mở chương",
+      openFromMap: "Mở từ bản đồ",
+    };
+  }
+
+  return {
+    eyebrow: "World System / Story Map",
+    title: "Numentix opens through an interactive map of zones and chapters.",
+    heroText:
+      "Choose a point on the map to open its chapter, then read forward like a sequential story with previous and next navigation.",
+    primaryAction: "Open the map",
+    secondaryAction: "Jump to reader",
+    ledgerLabel: "Volume zero",
+    ledgerTitle: "Map, zone, chapter",
+    ledgerItems: [
+      "Responsive SVG world map",
+      "Directly clickable zone markers",
+      "Sequential chapter reader",
+      "Easy to swap with a final map asset later",
+    ],
+    sectionTagMap: "World map",
+    sectionTitleMap: "Click any zone to open the matching lore chapter.",
+    sectionCaptionMap: "Each zone updates the URL and jumps to the reader.",
+    sectionTagChapters: "Chapter index",
+    sectionTitleChapters: "Three opening chapters of Numentix.",
+    sectionCaptionChapters: "You can enter from the list or the map.",
+    readerTag: "Reader",
+    readerTitle: "Read in the direction of the map.",
+    readerCaption: "Content is rendered as text only, without raw HTML.",
+    chapterLabel: "Chapter",
+    zoneLabel: "Zone",
+    prevLabel: "← Previous chapter",
+    nextLabel: "Next chapter →",
+    startLabel: "You are at the first chapter.",
+    endLabel: "You have reached the last chapter.",
+    openChapter: "Open chapter",
+    openFromMap: "Open from map",
+  };
+};
+
+const getNumentixChapterById = (chapterId) =>
+  NUMENTIX_CHAPTERS.find((chapter) => chapter.id === chapterId) || NUMENTIX_CHAPTERS[0];
+
+const getNumentixSelectedChapter = () => {
+  const params = new URLSearchParams(window.location.search);
+  return getNumentixChapterById(params.get("chapter"));
+};
+
+const setNumentixChapterInUrl = (chapterId) => {
+  const nextUrl = new URL(window.location.href);
+  nextUrl.searchParams.set("chapter", chapterId);
+  nextUrl.hash = "numentix-reader";
+  window.history.replaceState({}, "", nextUrl);
+};
+
+const renderNumentix = () => {
+  if (
+    !numentixMapElement ||
+    !numentixZonesLayer ||
+    !numentixChapterList ||
+    !numentixViewer ||
+    !numentixViewerTitle ||
+    !numentixViewerBody ||
+    !numentixPrevLink ||
+    !numentixNextLink ||
+    !numentixProgress
+  ) {
+    return;
+  }
+
+  const strings = getNumentixStrings();
+  const chapter = getNumentixSelectedChapter();
+  const chapterIndex = NUMENTIX_CHAPTERS.findIndex((entry) => entry.id === chapter.id);
+  const prevChapter = NUMENTIX_CHAPTERS[chapterIndex - 1] || null;
+  const nextChapter = NUMENTIX_CHAPTERS[chapterIndex + 1] || null;
+  const activeZone = NUMENTIX_MAP_ZONES.find((zone) => zone.chapterId === chapter.id);
+  const locale = currentLocale === "vi" ? "vi" : "en";
+
+  const heroEyebrow = document.querySelector("#numentix-eyebrow");
+  const heroTitle = document.querySelector("#numentix-hero-title");
+  const heroText = document.querySelector("#numentix-hero-text");
+  const heroPrimary = document.querySelector("#numentix-open-map");
+  const heroSecondary = document.querySelector("#numentix-open-reader");
+  const ledgerLabel = document.querySelector("#numentix-ledger-label");
+  const ledgerTitle = document.querySelector("#numentix-ledger-title");
+  const ledgerItems = document.querySelectorAll(".numentix-ledger-list li");
+  const mapTag = document.querySelector("#numentix-map-tag");
+  const mapTitle = document.querySelector("#numentix-map-title");
+  const mapCaption = document.querySelector("#numentix-map-caption");
+  const chaptersTag = document.querySelector("#numentix-chapters-tag");
+  const chaptersTitle = document.querySelector("#numentix-chapters-title");
+  const chaptersCaption = document.querySelector("#numentix-chapters-caption");
+  const readerTag = document.querySelector("#numentix-reader-tag");
+  const readerTitle = document.querySelector("#numentix-reader-title");
+  const readerCaption = document.querySelector("#numentix-reader-caption");
+
+  if (heroEyebrow) heroEyebrow.textContent = strings.eyebrow;
+  if (heroTitle) heroTitle.textContent = strings.title;
+  if (heroText) heroText.textContent = strings.heroText;
+  if (heroPrimary) heroPrimary.textContent = strings.primaryAction;
+  if (heroSecondary) heroSecondary.textContent = strings.secondaryAction;
+  if (ledgerLabel) ledgerLabel.textContent = strings.ledgerLabel;
+  if (ledgerTitle) ledgerTitle.textContent = strings.ledgerTitle;
+  ledgerItems.forEach((item, index) => {
+    if (strings.ledgerItems[index]) {
+      item.textContent = strings.ledgerItems[index];
+    }
+  });
+  if (mapTag) mapTag.textContent = strings.sectionTagMap;
+  if (mapTitle) mapTitle.textContent = strings.sectionTitleMap;
+  if (mapCaption) mapCaption.textContent = strings.sectionCaptionMap;
+  if (chaptersTag) chaptersTag.textContent = strings.sectionTagChapters;
+  if (chaptersTitle) chaptersTitle.textContent = strings.sectionTitleChapters;
+  if (chaptersCaption) chaptersCaption.textContent = strings.sectionCaptionChapters;
+  if (readerTag) readerTag.textContent = strings.readerTag;
+  if (readerTitle) readerTitle.textContent = strings.readerTitle;
+  if (readerCaption) readerCaption.textContent = strings.readerCaption;
+
+  numentixZonesLayer.innerHTML = "";
+  NUMENTIX_MAP_ZONES.forEach((zone) => {
+    const button = document.createElement("button");
+    const isActive = zone.chapterId === chapter.id;
+    button.type = "button";
+    button.className = `numentix-zone${isActive ? " is-active" : ""}`;
+    button.style.left = `${zone.x}%`;
+    button.style.top = `${zone.y}%`;
+    button.setAttribute("aria-label", `${strings.openFromMap}: ${zone.label[locale]}`);
+    button.innerHTML = `<span>${zone.label[locale]}</span>`;
+    button.addEventListener("click", () => {
+      setNumentixChapterInUrl(zone.chapterId);
+      renderNumentix();
+      if (numentixReaderSection) {
+        numentixReaderSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+    numentixZonesLayer.appendChild(button);
+  });
+
+  numentixChapterList.innerHTML = "";
+  NUMENTIX_CHAPTERS.forEach((entry) => {
+    const item = document.createElement("a");
+    item.className = `numentix-chapter-card${entry.id === chapter.id ? " is-active" : ""}`;
+    item.href = `numentix.html?chapter=${entry.id}#numentix-reader`;
+    item.innerHTML = `
+      <span class="numentix-chapter-order">${strings.chapterLabel} ${entry.order}</span>
+      <strong>${entry.title[locale]}</strong>
+      <span>${entry.excerpt[locale]}</span>
+    `;
+    numentixChapterList.appendChild(item);
+  });
+
+  numentixViewerKicker.textContent = `${strings.chapterLabel} ${chapter.order}`;
+  numentixViewerTitle.textContent = chapter.title[locale];
+  numentixViewerZone.textContent = `${strings.zoneLabel}: ${activeZone ? activeZone.label[locale] : "Unknown"}`;
+  numentixViewerBody.innerHTML = "";
+  chapter.content[locale].forEach((paragraph) => {
+    const node = document.createElement("p");
+    node.textContent = paragraph;
+    numentixViewerBody.appendChild(node);
+  });
+
+  numentixProgress.textContent = `${chapter.order} / ${NUMENTIX_CHAPTERS.length}`;
+
+  if (prevChapter) {
+    numentixPrevLink.href = `numentix.html?chapter=${prevChapter.id}#numentix-reader`;
+    numentixPrevLink.textContent = strings.prevLabel;
+    numentixPrevLink.classList.remove("is-disabled");
+    numentixPrevLink.setAttribute("aria-disabled", "false");
+  } else {
+    numentixPrevLink.href = "#numentix-reader";
+    numentixPrevLink.textContent = strings.startLabel;
+    numentixPrevLink.classList.add("is-disabled");
+    numentixPrevLink.setAttribute("aria-disabled", "true");
+  }
+
+  if (nextChapter) {
+    numentixNextLink.href = `numentix.html?chapter=${nextChapter.id}#numentix-reader`;
+    numentixNextLink.textContent = strings.nextLabel;
+    numentixNextLink.classList.remove("is-disabled");
+    numentixNextLink.setAttribute("aria-disabled", "false");
+  } else {
+    numentixNextLink.href = "#numentix-reader";
+    numentixNextLink.textContent = strings.endLabel;
+    numentixNextLink.classList.add("is-disabled");
+    numentixNextLink.setAttribute("aria-disabled", "true");
+  }
+};
+
+window.addEventListener("popstate", () => {
+  renderNumentix();
+});
 
 const MARKET_BOOKING_KEY = "home-utilities-market-booking";
 const RECIPE_PLANNER_STATE_KEY = "home-utilities-recipe-planner-state";
