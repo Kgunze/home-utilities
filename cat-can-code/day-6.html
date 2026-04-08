@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 6 - Async Flow, Try Catch, Retry, Timeout, and Fallback | Cat Can Code</title>
+    <meta
+      name="description"
+      content="A Day 6 diary entry that explains async flow, try catch, retry, timeout, and fallback through a restaurant timeline."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .cat-page-shell {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f9f3eb 0%, #f4e6d8 100%);
+      }
+
+      .sketch-parallax {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .sketch-svg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        filter: blur(0.3px);
+      }
+
+      .sketch-layer {
+        mix-blend-mode: multiply;
+        will-change: transform;
+      }
+
+      .sketch-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(244, 233, 214, 0.4));
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cat-page-shell .page-shell {
+        position: relative;
+        z-index: 2;
+      }
+
+      .article-wrapper {
+        max-width: 820px;
+        margin: 0 auto;
+        padding-top: 1rem;
+      }
+
+      .article-shell {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-inline: clamp(1.25rem, 3vw, 2.75rem);
+      }
+
+      .article-layout {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        gap: clamp(2.5rem, 4vw, 4.5rem);
+      }
+
+      .article-main {
+        width: 100%;
+        max-width: 820px;
+        min-width: 0;
+      }
+
+      .article-meta {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .article-body {
+        color: var(--text);
+        line-height: 1.7;
+        font-size: 1.08rem;
+        display: grid;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 820px;
+        min-width: 0;
+        order: 1;
+      }
+
+      .article-body section[id] {
+        scroll-margin-top: 7.5rem;
+      }
+
+      .article-body h2,
+      .article-body h3,
+      .article-body h4 {
+        font-family: "Fraunces", serif;
+        margin: 0 0 0.45rem;
+      }
+
+      .article-body h2 {
+        font-size: 1.9rem;
+      }
+
+      .article-body h3 {
+        font-size: 1.4rem;
+      }
+
+      .article-body h4 {
+        font-size: 1.1rem;
+      }
+
+      .article-body p {
+        margin: 0 0 0.9rem;
+      }
+
+      .article-body ul,
+      .article-body ol {
+        padding-left: 1.25rem;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .article-body blockquote {
+        margin: 0.75rem 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .hero-capsule {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .hero-capsule h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 4.4rem);
+      }
+
+      .hero-capsule p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .callout-card {
+        border: 1px solid rgba(92, 81, 69, 0.22);
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.84);
+        padding: 1.15rem 1.25rem;
+        box-shadow: 0 12px 24px rgba(92, 81, 69, 0.08);
+      }
+
+      .code-sample {
+        background: #1d1a17;
+        color: #f8ebd8;
+        padding: 0.95rem 1rem;
+        border-radius: 0.85rem;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        overflow-x: auto;
+        margin: 0.85rem 0;
+        white-space: pre-wrap;
+      }
+
+      .insight-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.6rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(92, 81, 69, 0.07);
+      }
+
+      .insight-table th,
+      .insight-table td {
+        padding: 0.9rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(92, 81, 69, 0.12);
+        vertical-align: top;
+      }
+
+      .insight-table th {
+        font-family: "Fraunces", serif;
+        font-size: 1rem;
+        background: rgba(244, 230, 216, 0.8);
+      }
+
+      .insight-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .day-navigation {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .day-navigation a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .day-navigation span {
+        flex: 1;
+        display: inline-flex;
+        justify-content: center;
+      }
+
+      .toc-nav {
+        position: sticky;
+        top: 6rem;
+        align-self: start;
+        width: 250px;
+        flex: 0 0 250px;
+        order: 2;
+      }
+
+      .toc-card {
+        background: rgba(255, 250, 245, 0.82);
+        border-left: 1px solid rgba(92, 81, 69, 0.18);
+        border-radius: 1rem;
+        padding: 1rem 0 1rem 1rem;
+        box-shadow: 0 10px 24px rgba(92, 81, 69, 0.06);
+        backdrop-filter: blur(6px);
+      }
+
+      .toc-title {
+        margin: 0 0 0.8rem;
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+      }
+
+      .toc-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .toc-link {
+        display: block;
+        padding: 0.35rem 0.55rem;
+        border-radius: 0.7rem;
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.92rem;
+        line-height: 1.35;
+        transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+      }
+
+      .toc-link:hover,
+      .toc-link:focus-visible {
+        color: var(--primary);
+        background: rgba(53, 92, 74, 0.08);
+        transform: translateX(2px);
+      }
+
+      .toc-link.is-active {
+        color: var(--primary);
+        background: rgba(53, 92, 74, 0.12);
+        font-weight: 700;
+      }
+
+      @media (min-width: 1280px) {
+        .article-shell {
+          padding-inline: clamp(1.75rem, 3vw, 3.5rem);
+        }
+      }
+
+      @media (min-width: 1536px) {
+        .article-layout {
+          gap: clamp(4.5rem, 6vw, 6.5rem);
+        }
+
+        .toc-nav {
+          width: 260px;
+          flex-basis: 260px;
+        }
+      }
+
+      @media (max-width: 1279px) {
+        .article-layout {
+          display: block;
+        }
+
+        .toc-nav {
+          position: static;
+          top: auto;
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cat-page-shell">
+      <div class="sketch-parallax" aria-hidden="true">
+        <svg class="sketch-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+          <g class="sketch-layer" data-speed="0.04">
+            <path d="M92 226 C220 196 352 246 510 220" stroke="#5c5145" stroke-width="1.4" fill="none" stroke-dasharray="7 5" />
+            <text x="526" y="223" font-size="11" fill="#5c5145">Axios -&gt; Promise -&gt; await -&gt; data</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.03">
+            <rect x="228" y="348" width="156" height="74" rx="10" stroke="#5c5145" stroke-width="1.5" fill="none" />
+            <text x="254" y="392" font-size="13" fill="#5c5145">await axios.get(...)</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.06">
+            <circle cx="930" cy="185" r="34" stroke="#5c5145" stroke-width="1.2" fill="none" />
+            <text x="907" y="190" font-size="11" fill="#5c5145">Strapi</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="616" y="92" font-size="12" fill="#5c5145" opacity="0.7">wait for the data first</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="664" y="118" font-size="12" fill="#5c5145" opacity="0.7">what if the dish is gone?</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sketch-overlay"></div>
+      <div class="page-shell">
+        <header class="hero hero-subpage">
+          <nav class="topbar" aria-label="Primary">
+            <a class="brand" href="../index.html#home">Home Utilities</a>
+            <div class="nav-links">
+              <a href="../stories.html">Stories</a>
+              <div class="nav-parent">
+                <a href="../index.html#kitchen-notes">Kitchen Notes</a>
+                <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                  <a href="../recipes.html">Recipes</a>
+                  <a href="../shopping-planner.html">Shopping Planner</a>
+                </div>
+              </div>
+              <div class="nav-parent nav-parent-greenies">
+                <a class="nav-link-greenies" href="#">Greenies</a>
+                <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                  <a class="nav-greenies-planting" href="../planting-diary.html">Planting diary</a>
+                  <a class="nav-greenies-fertilization" href="../fertilization-wikipedia.html">Fertilization wikipedia</a>
+                </div>
+              </div>
+              <a href="../ptsd.html">PTSD</a>
+            </div>
+            <label class="locale-switcher">
+              <span class="locale-switcher-label">Language</span>
+              <select class="locale-select" id="locale-select" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="vi">Tieng Viet</option>
+              </select>
+            </label>
+          </nav>
+
+          <section class="hero-content hero-subpage">
+            <div class="hero-copy article-wrapper hero-capsule">
+              <h1 id="day-six-title">Cat Can Code - Day 6 Diary</h1>
+              <p id="day-six-subtitle">
+                Async flow, error handling, and resilience finally made sense when I saw Axios as the waiter, await as timing control, try/catch as the manager, and retry, timeout, and fallback as the restaurant's survival plan.
+              </p>
+              <div class="article-meta">
+                <span id="day-six-author">Cat Can Code</span>
+                <span id="day-six-date">April 8, 2026</span>
+                <span id="day-six-reading">8 min read</span>
+              </div>
+            </div>
+          </section>
+        </header>
+
+        <main class="planner-section planner-page">
+          <article class="planner-card article-shell">
+            <div class="article-layout">
+              <aside class="toc-nav" aria-label="Table of contents">
+                <div class="toc-card">
+                  <h2 class="toc-title">Contents</h2>
+                  <ul class="toc-list">
+                    <li><a class="toc-link" href="#topic">Topic</a></li>
+                    <li><a class="toc-link" href="#big-idea">Today's Big Idea</a></li>
+                    <li><a class="toc-link" href="#cast">Cast</a></li>
+                    <li><a class="toc-link" href="#happy-timeline">Happy Case Timeline</a></li>
+                    <li><a class="toc-link" href="#happy-flow">Happy Case Flow</a></li>
+                    <li><a class="toc-link" href="#nestjs-flow">Inside NestJS</a></li>
+                    <li><a class="toc-link" href="#unhappy-case">Unhappy Case</a></li>
+                    <li><a class="toc-link" href="#bug">Missing await Bug</a></li>
+                    <li><a class="toc-link" href="#visualization">Async Visualization</a></li>
+                    <li><a class="toc-link" href="#insight">Promise vs await</a></li>
+                    <li><a class="toc-link" href="#try-catch">Try Catch in the Restaurant</a></li>
+                    <li><a class="toc-link" href="#resilience">Retry, Timeout, and Fallback</a></li>
+                    <li><a class="toc-link" href="#production">Production Insight</a></li>
+                    <li><a class="toc-link" href="#summary">Final Summary</a></li>
+                  </ul>
+                </div>
+              </aside>
+
+              <div class="article-body">
+                <section class="callout-card" id="topic" data-toc-section>
+                  <h2>Topic</h2>
+                  <p><strong>Async Flow with Axios + Promise + await + Try Catch + Retry + Timeout + Fallback</strong> through a restaurant timeline.</p>
+                  <blockquote>In a real system, things do not happen instantly. Orders take time, data takes time, and network calls take time.</blockquote>
+                </section>
+
+                <section id="big-idea" data-toc-section>
+                  <h2>Today's Big Idea</h2>
+                  <p>That is why these three ideas matter together.</p>
+                  <ul>
+                    <li><strong>Promise</strong> means the result will be ready later.</li>
+                    <li><strong>await</strong> means this async function waits for the result before continuing.</li>
+                    <li><strong>Axios</strong> is the tool that sends the request across the network.</li>
+                  </ul>
+                </section>
+
+                <section id="cast" data-toc-section>
+                  <h2>Cast</h2>
+                  <table class="insight-table">
+                    <thead>
+                      <tr>
+                        <th>Restaurant Role</th>
+                        <th>System Part</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Customer</td>
+                        <td>User</td>
+                      </tr>
+                      <tr>
+                        <td>Waiter</td>
+                        <td>Axios</td>
+                      </tr>
+                      <tr>
+                        <td>Chef</td>
+                        <td>NestJS (BFF)</td>
+                      </tr>
+                      <tr>
+                        <td>Storage</td>
+                        <td>Strapi</td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse</td>
+                        <td>PostgreSQL</td>
+                      </tr>
+                      <tr>
+                        <td>Inspector</td>
+                        <td>Zod</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+
+                <section class="callout-card" id="happy-timeline" data-toc-section>
+                  <h2>Happy Case Timeline</h2>
+                  <pre class="code-sample">1. Customer orders food
+2. Waiter sends order (Axios)
+3. Chef processes (NestJS)
+4. Chef checks storage (Strapi)
+5. Storage queries warehouse (PostgreSQL)
+6. Data returns and gets validated (Zod)
+7. Chef completes order
+8. Customer receives food</pre>
+                </section>
+
+                <section id="happy-flow" data-toc-section>
+                  <h2>Happy Case Flow</h2>
+                  <p>Customer says, "I want Fried Rice."</p>
+                  <p>Waiter says, "Got it. Sending to kitchen."</p>
+                  <p>Chef says, "Let me check ingredients."</p>
+                  <p>Storage says, "Here is the data."</p>
+                  <p>Chef says, "Looks correct. Cooking now."</p>
+                  <p>Customer says, "Food is ready."</p>
+                  <pre class="code-sample">const response = await axios.post("/api/order", {
+  dishId: 1,
+  quantity: 1,
+});</pre>
+                </section>
+
+                <section id="nestjs-flow" data-toc-section>
+                  <h2>Inside NestJS</h2>
+                  <p>The chef does not guess. The chef waits for each important step to finish in order.</p>
+                  <pre class="code-sample">async createOrder(input) {
+  OrderSchema.parse(input);
+
+  const menu = await axios.get("https://strapi/api/menu");
+
+  MenuSchema.parse(menu.data);
+
+  await prisma.order.create({
+    data: input,
+  });
+
+  return { success: true };
+}</pre>
+                  <blockquote><strong>await</strong> keeps the order correct: get data first, validate it next, save only after that.</blockquote>
+                </section>
+
+                <section id="unhappy-case" data-toc-section>
+                  <h2>Unhappy Case</h2>
+                  <p>Sometimes the dish is not available, so the order flow must stop safely and let the customer choose again.</p>
+                  <pre class="code-sample">1. Customer orders dish
+2. Chef checks storage
+3. Dish is not available
+4. Chef cancels order
+5. Customer re-orders a new dish
+6. System retries flow
+7. Success</pre>
+                  <pre class="code-sample">async createOrder(input) {
+  OrderSchema.parse(input);
+
+  try {
+    const menu = await axios.get("https://strapi/api/menu");
+
+    const parsed = MenuSchema.safeParse(menu.data);
+
+    if (!parsed.success) {
+      throw new Error("Invalid menu data");
+    }
+
+    const dish = parsed.data.find((d) => d.id === input.dishId);
+
+    if (!dish) {
+      throw new Error("Dish not available");
+    }
+
+    await prisma.order.create({ data: input });
+
+    return { success: true };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Dish unavailable, please reorder",
+    };
+  }
+}</pre>
+                </section>
+
+                <section class="callout-card" id="bug" data-toc-section>
+                  <h2>Missing await Bug</h2>
+                  <p>Without <code>await</code>, the code tries to use data before the network request has finished.</p>
+                  <pre class="code-sample">const menu = axios.get("https://strapi/api/menu");
+console.log(menu.data);</pre>
+                  <p>That is like the chef cooking before ingredients arrive.</p>
+                  <ul>
+                    <li>The request has started.</li>
+                    <li>The result is still a Promise.</li>
+                    <li><code>menu.data</code> is not ready yet.</li>
+                  </ul>
+                </section>
+
+                <section class="callout-card" id="visualization" data-toc-section>
+                  <h2>Async Visualization</h2>
+                  <pre class="code-sample">Customer
+   down
+Axios (Promise)
+   down
+NestJS (await)
+   down
+Strapi (Promise)
+   down
+PostgreSQL
+   up
+Strapi
+   up
+NestJS (await resumes)
+   up
+Axios
+   up
+Customer</pre>
+                </section>
+
+                <section id="insight" data-toc-section>
+                  <h2>Promise vs await</h2>
+                  <table class="insight-table">
+                    <thead>
+                      <tr>
+                        <th>Concept</th>
+                        <th>Meaning</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Promise</td>
+                        <td>Food is being prepared for later delivery.</td>
+                      </tr>
+                      <tr>
+                        <td>await</td>
+                        <td>This async function waits until the food is ready before moving on.</td>
+                      </tr>
+                      <tr>
+                        <td>Axios</td>
+                        <td>The waiter carrying requests between systems.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+
+                <section id="try-catch" data-toc-section>
+                  <h2>Try Catch in the Restaurant</h2>
+                  <p>Async flow explains how work takes time. <code>try/catch</code> explains what the system does when that work fails.</p>
+                  <p>In the restaurant story, the manager steps in when something unexpected goes wrong.</p>
+                  <table class="insight-table">
+                    <thead>
+                      <tr>
+                        <th>Concept</th>
+                        <th>Restaurant Role</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>try</code></td>
+                        <td>Let's try to serve the dish.</td>
+                      </tr>
+                      <tr>
+                        <td><code>catch</code></td>
+                        <td>Something failed, so handle the situation safely.</td>
+                      </tr>
+                      <tr>
+                        <td><code>throw</code></td>
+                        <td>The kitchen reports that something went wrong.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <h3>Happy Case</h3>
+                  <p>No error happens, so the manager does not need to step in.</p>
+                  <pre class="code-sample">async function orderFood() {
+  try {
+    const dish = await kitchenCook("pasta");
+    console.log("Serve:", dish);
+  } catch (error) {
+    console.log("Sorry, something went wrong");
+  }
+}</pre>
+                  <blockquote>If everything works, <code>catch</code> stays silent.</blockquote>
+
+                  <h3>Unhappy Case</h3>
+                  <p>When the kitchen cannot cook the order, it throws an error and the manager takes control.</p>
+                  <pre class="code-sample">async function orderFood() {
+  try {
+    const dish = await kitchenCook("steak");
+    console.log("Serve:", dish);
+  } catch (error) {
+    console.log("Dish unavailable, suggest chicken instead");
+  }
+}</pre>
+                  <pre class="code-sample">async function kitchenCook(food: string) {
+  if (food === "steak") {
+    throw new Error("Out of ingredients");
+  }
+
+  return "Delicious " + food;
+}</pre>
+
+                  <h3>Architecture Meaning</h3>
+                  <p>This fits your BFF layer exactly: backend or validation code can throw, and the boundary layer catches errors so the UI gets a safe experience.</p>
+                  <pre class="code-sample">try {
+  const response = await BffHttpInstance.post(...);
+
+  const validation = schema.safeParse(response);
+
+  if (!validation.success) {
+    throw new SchemaValidationError(...);
+  }
+
+  return validation.data;
+} catch (error) {
+  logError(error);
+  return { success: false, message: "Please try again" };
+}</pre>
+
+                  <h3>Why This Matters</h3>
+                  <ul>
+                    <li>Without <code>try/catch</code>, a failed async call can break the flow and crash the experience.</li>
+                    <li>With <code>try/catch</code>, the system can log the real problem and show a safe message to the user.</li>
+                    <li><code>try/catch</code> does not magically fix the error. It controls what happens next.</li>
+                  </ul>
+                </section>
+
+                <section id="resilience" data-toc-section>
+                  <h2>Retry, Timeout, and Fallback</h2>
+                  <p>Real systems must handle more than simple success or failure. They also need a plan for slow responses, flaky services, and repeated problems.</p>
+                  <table class="insight-table">
+                    <thead>
+                      <tr>
+                        <th>Concept</th>
+                        <th>Restaurant Meaning</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Retry</td>
+                        <td>Ask the kitchen to try cooking again.</td>
+                      </tr>
+                      <tr>
+                        <td>Timeout</td>
+                        <td>Stop waiting if the kitchen takes too long.</td>
+                      </tr>
+                      <tr>
+                        <td>Fallback</td>
+                        <td>Offer another dish instead of leaving the customer with nothing.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <h3>Case 1: Kitchen Is Slow</h3>
+                  <p>Sometimes the kitchen does not fail. It is just too slow, and the manager decides the customer should not wait forever.</p>
+                  <pre class="code-sample">async function orderFood() {
+  try {
+    const dish = await withTimeout(kitchenCook("steak"), 3000);
+    console.log("Serve:", dish);
+  } catch (error) {
+    console.log("Sorry, kitchen is too slow. Please choose another dish.");
+  }
+}</pre>
+                  <pre class="code-sample">function withTimeout(promise: Promise&lt;any&gt;, ms: number) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Timeout")), ms)
+    ),
+  ]);
+}</pre>
+                  <blockquote>Timeout protects user experience by refusing to wait forever.</blockquote>
+
+                  <h3>Case 2: Kitchen Failed, So Try Again</h3>
+                  <p>If the first cooking attempt fails, a controlled retry can recover without bothering the customer.</p>
+                  <pre class="code-sample">async function retryCook(food: string, retries = 2) {
+  for (let i = 0; i &lt;= retries; i++) {
+    try {
+      return await kitchenCook(food);
+    } catch (error) {
+      if (i === retries) throw error;
+      console.log("Retry cooking...");
+    }
+  }
+}</pre>
+                  <table class="insight-table">
+                    <thead>
+                      <tr>
+                        <th>Attempt</th>
+                        <th>Result</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1st</td>
+                        <td>Burned</td>
+                      </tr>
+                      <tr>
+                        <td>2nd</td>
+                        <td>Success</td>
+                      </tr>
+                      <tr>
+                        <td>3rd</td>
+                        <td>Give up</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <h3>Case 3: Still Fails, So Use a Fallback</h3>
+                  <p>If retries still do not work, the system should still have a safe plan B.</p>
+                  <pre class="code-sample">async function orderWithFallback() {
+  try {
+    const dish = await retryCook("steak");
+    return dish;
+  } catch {
+    return "chicken";
+  }
+}</pre>
+                  <blockquote>Fallback means the customer still gets a result, even if it is not the first choice.</blockquote>
+
+                  <h3>Full Production Flow</h3>
+                  <pre class="code-sample">async function orderFood() {
+  try {
+    const dish = await withTimeout(
+      retryCook("steak", 2),
+      3000
+    );
+    return dish;
+  } catch (error) {
+    return "chicken";
+  }
+}</pre>
+                  <pre class="code-sample">Customer -&gt; Waiter -&gt; Kitchen
+              down
+        Retry (if fail)
+              down
+       Timeout (if slow)
+              down
+      Fallback (if still fail)
+              down
+         Final dish served</pre>
+
+                  <h3>Architecture Mapping</h3>
+                  <p>This belongs naturally in the BFF layer, because that boundary is responsible for reliability when talking to external systems.</p>
+                  <pre class="code-sample">export const getTransactionPayment = async (payload) =&gt; {
+  try {
+    const response = await BffHttpInstance.post("/api/payment", payload, {
+      retry: 2,
+      timeout: 3000,
+    });
+
+    const validation = schema.safeParse(response);
+
+    if (!validation.success) {
+      throw new Error("Invalid response");
+    }
+
+    return validation.data;
+  } catch (error) {
+    throw error;
+  }
+};</pre>
+
+                  <h3>NestJS Mapping</h3>
+                  <table class="insight-table">
+                    <thead>
+                      <tr>
+                        <th>Restaurant</th>
+                        <th>NestJS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Customer</td>
+                        <td>Controller</td>
+                      </tr>
+                      <tr>
+                        <td>Waiter</td>
+                        <td>Service</td>
+                      </tr>
+                      <tr>
+                        <td>Kitchen</td>
+                        <td>Provider or external API</td>
+                      </tr>
+                      <tr>
+                        <td>Manager</td>
+                        <td>Exception filter or interceptor</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <pre class="code-sample">src/
+├── modules/
+│   └── order/
+│       ├── order.controller.ts
+│       ├── order.service.ts
+│       └── order.module.ts
+├── common/
+│   ├── interceptors/
+│   │   ├── timeout.interceptor.ts
+│   │   └── retry.interceptor.ts
+│   ├── filters/
+│   │   └── http-exception.filter.ts
+│   └── utils/
+│       └── fallback.util.ts
+├── infrastructure/
+│   └── kitchen/
+│       └── kitchen.service.ts
+└── main.ts</pre>
+                  <pre class="code-sample">@Controller("orders")
+export class OrderController {
+  constructor(private readonly orderService: OrderService) {}
+
+  @Get()
+  async orderFood() {
+    return this.orderService.handleOrder("steak");
+  }
+}</pre>
+                  <pre class="code-sample">@Injectable()
+export class OrderService {
+  constructor(private kitchen: KitchenService) {}
+
+  async handleOrder(food: string) {
+    try {
+      const result = await this.retry(() =>
+        this.withTimeout(() => this.kitchen.cook(food), 3000)
+      );
+
+      return result;
+    } catch {
+      return "chicken";
+    }
+  }
+
+  async retry(fn: () =&gt; Promise&lt;any&gt;, retries = 2) {
+    for (let i = 0; i &lt;= retries; i++) {
+      try {
+        return await fn();
+      } catch (e) {
+        if (i === retries) throw e;
+      }
+    }
+  }
+
+  async withTimeout(fn: () =&gt; Promise&lt;any&gt;, ms: number) {
+    return Promise.race([
+      fn(),
+      new Promise((_, reject) =>
+        setTimeout(() =&gt; reject(new Error("Timeout")), ms)
+      ),
+    ]);
+  }
+}</pre>
+                  <pre class="code-sample">@Injectable()
+export class KitchenService {
+  async cook(food: string) {
+    if (food === "steak") {
+      throw new Error("Out of ingredients");
+    }
+
+    return "Delicious " + food;
+  }
+}</pre>
+                </section>
+
+                <section class="callout-card" id="production" data-toc-section>
+                  <h2>Production Insight</h2>
+                  <ul>
+                    <li>Always <code>await</code> external calls when later logic depends on their result.</li>
+                    <li>Always validate responses with Zod before trusting them.</li>
+                    <li>Always handle failure with <code>try/catch</code> or a clear error strategy.</li>
+                    <li>Limit retry attempts so recovery does not become internal overload.</li>
+                    <li>Always use timeout around risky calls to avoid infinite waiting.</li>
+                    <li>Use fallback when the user still needs a safe outcome.</li>
+                    <li>Keep internal error detail in logs and return friendly messages to users.</li>
+                  </ul>
+                </section>
+
+                <section class="callout-card" id="summary" data-toc-section>
+                  <h2>Final Summary</h2>
+                  <blockquote>The system is not instant, and it is not perfect. Axios sends, Promise represents work in progress, await keeps the order safe, try/catch controls failure, retry gives recovery another chance, timeout protects responsiveness, fallback protects user experience, Zod protects the data, and NestJS decides what happens next.</blockquote>
+                </section>
+
+                <section class="callout-card">
+                  <h2>One Sentence to Remember</h2>
+                  <blockquote><strong>await controls timing, try/catch handles failure, retry tries again, timeout stops endless waiting, and fallback makes sure the user is never abandoned.</strong></blockquote>
+                </section>
+
+                <section>
+                  <h2>What Could Come Next</h2>
+                  <ul>
+                    <li>Loading state UX while the user waits.</li>
+                    <li>Parallel async flow with <code>Promise.all</code>.</li>
+                    <li>Circuit breaker thinking for unstable services.</li>
+                  </ul>
+                </section>
+              </div>
+            </div>
+
+            <nav class="day-navigation" aria-label="Diary navigation">
+              <a href="day-5.html">Previous: Day 5</a>
+              <span><a href="index.html">Back to diary</a></span>
+              <a href="day-7.html">Next: Day 7</a>
+            </nav>
+          </article>
+        </main>
+      </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="../script.js"></script>
+    <script>
+      (() => {
+        const sections = [...document.querySelectorAll("[data-toc-section]")];
+        const links = [...document.querySelectorAll(".toc-link")];
+
+        if (!sections.length || !links.length || !("IntersectionObserver" in window)) {
+          return;
+        }
+
+        const setActive = (id) => {
+          links.forEach((link) => {
+            const active = link.getAttribute("href") === `#${id}`;
+            link.classList.toggle("is-active", active);
+
+            if (active) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const visibleSections = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+            if (visibleSections.length > 0) {
+              setActive(visibleSections[0].target.id);
+            }
+          },
+          {
+            rootMargin: "-25% 0px -55% 0px",
+            threshold: [0.15, 0.35, 0.6],
+          }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+        setActive(sections[0].id);
+      })();
+    </script>
+  </body>
+</html>
