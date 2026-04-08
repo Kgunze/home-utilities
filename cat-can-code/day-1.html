@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 1 — Thinking Like a Builder, Not Just a User | Cat Can Code</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .cat-page-shell {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f9f3eb 0%, #f4e6d8 100%);
+      }
+
+      .sketch-parallax {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .sketch-svg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        filter: blur(0.3px);
+      }
+
+      .sketch-layer {
+        mix-blend-mode: multiply;
+        will-change: transform;
+      }
+
+      .sketch-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(244, 233, 214, 0.4));
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cat-page-shell .page-shell {
+        position: relative;
+        z-index: 2;
+      }
+
+      .article-wrapper {
+        max-width: 720px;
+        margin: 0 auto;
+        padding-top: 1rem;
+      }
+
+      .article-meta {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .article-body {
+        color: var(--text);
+        line-height: 1.7;
+        font-size: 1.1rem;
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      .article-body h2 {
+        font-family: "Fraunces", serif;
+        font-size: 1.8rem;
+        margin: 0;
+      }
+
+      .article-body ul {
+        padding-left: 1.2rem;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .article-body blockquote {
+        margin: 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .hero-capsule {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .hero-capsule h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 4.4rem);
+      }
+
+      .hero-capsule p {
+        margin: 0;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cat-page-shell">
+      <div class="sketch-parallax" aria-hidden="true">
+        <svg class="sketch-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+          <g class="sketch-layer" data-speed="0.04">
+            <path d="M60 260 L180 240 L320 260" stroke="#5c5145" stroke-width="1.4" fill="none" stroke-dasharray="6 4"/>
+            <text x="190" y="252" font-size="10" fill="#5c5145">flow → deploy</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.03">
+            <rect x="220" y="340" width="120" height="70" rx="8" stroke="#5c5145" stroke-width="1.6" fill="none"/>
+            <text x="240" y="375" font-size="16" fill="#5c5145">&gt;_</text>
+            <path d="M220 420 L340 420" stroke="#5c5145" stroke-width="1.1" stroke-dasharray="5 5" />
+            <text x="222" y="435" font-size="10" fill="#5c5145">state?</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.06">
+            <circle cx="840" cy="210" r="40" stroke="#5c5145" stroke-width="1.4" fill="none"/>
+            <rect x="840" y="250" width="80" height="40" rx="10" fill="none" stroke="#5c5145" stroke-width="1.3"/>
+            <text x="860" y="270" font-size="8" fill="#5c5145">DB</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="520" y="90" font-size="12" fill="#5c5145" opacity="0.7">notes: why this works?</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sketch-overlay"></div>
+      <div class="page-shell">
+      <header class="hero hero-subpage">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="../index.html#home">Home Utilities</a>
+          <div class="nav-links">
+            <a href="../stories.html">Stories</a>
+            <div class="nav-parent">
+              <a href="../index.html#kitchen-notes">Kitchen Notes</a>
+              <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                <a href="../recipes.html">Recipes</a>
+                <a href="../shopping-planner.html">Shopping Planner</a>
+              </div>
+            </div>
+            <div class="nav-parent nav-parent-greenies">
+              <a class="nav-link-greenies" href="#">Greenies</a>
+              <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                <a class="nav-greenies-planting" href="../planting-diary.html">Planting diary</a>
+                <a class="nav-greenies-fertilization" href="../fertilization-wikipedia.html">Fertilization wikipedia</a>
+              </div>
+            </div>
+            <a href="../ptsd.html">PTSD</a>
+          </div>
+          <label class="locale-switcher">
+            <span class="locale-switcher-label">Language</span>
+            <select class="locale-select" id="locale-select" aria-label="Language selector">
+              <option value="en">English</option>
+              <option value="vi">Tiếng Việt</option>
+            </select>
+          </label>
+        </nav>
+
+        <section class="hero-content hero-subpage">
+          <div class="hero-copy article-wrapper hero-capsule">
+            <h1 id="day-one-title">Day 1 — Thinking Like a Builder, Not Just a User</h1>
+            <p id="day-one-subtitle">Starting a journey into coding with curiosity, not perfection.</p>
+            <div class="article-meta">
+              <span id="day-one-author">Cat Can Code</span>
+              <span id="day-one-date">April 4, 2026</span>
+              <span id="day-one-reading">4 min read</span>
+            </div>
+          </div>
+        </section>
+      </header>
+
+      <main class="planner-section planner-page">
+        <article class="planner-card article-wrapper">
+          <div class="article-body">
+            <section>
+              <p>Today is not about writing perfect code.</p>
+              <p>It’s about understanding how things <em>actually work</em>.</p>
+              <p>For a long time, I’ve been building products from the outside — defining features, shaping UX, pushing direction.</p>
+              <p>But something was missing.</p>
+              <p>I didn’t fully see how decisions translate into logic.</p>
+            </section>
+
+            <section>
+              <h2>What I Realized</h2>
+              <p>Code is not just syntax.</p>
+              <ul>
+                <li>Decision making</li>
+                <li>Constraints</li>
+                <li>Trade-offs</li>
+                <li>Responsibility</li>
+              </ul>
+              <p>Every “simple feature” hides layers of complexity.</p>
+            </section>
+
+            <section>
+              <h2>Today’s Focus</h2>
+              <ul>
+                <li>Understanding structure (not memorizing syntax)</li>
+                <li>Reading code instead of rushing to write</li>
+                <li>Asking: <em>why is this built this way?</em></li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>Mental Shift</h2>
+              <p>From:</p>
+              <blockquote>“What feature should we build?”</blockquote>
+              <p>To:</p>
+              <blockquote>“How will this behave under real conditions?”</blockquote>
+            </section>
+
+            <section>
+              <h2>Small Win</h2>
+              <ul>
+                <li>I can now read basic project structure</li>
+                <li>Understand how UI connects to logic</li>
+                <li>Not panic when seeing code</li>
+              </ul>
+              <p>That’s enough for Day 1.</p>
+              <p>Tomorrow, we go deeper.</p>
+            </section>
+
+            <section>
+              <h2>Recap from Real Build</h2>
+              <p>Today I watched a full-stack walkthrough — not just code, but how a real product comes together.</p>
+              <p>This wasn’t about isolated features.</p>
+              <p>It was about <strong>systems connecting end-to-end</strong>.</p>
+              <div class="my-10">
+                <iframe
+                  class="w-full aspect-video rounded-xl"
+                  src="https://www.youtube.com/embed/upo7BBbomoQ"
+                  title="Day 1 Recap Video"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <h3>What the Stack Looks Like</h3>
+              <ul>
+                <li>Frontend: React + TypeScript (Vite)</li>
+                <li>Styling: Tailwind CSS</li>
+                <li>Backend: Express</li>
+                <li>Database: PostgreSQL (Neon)</li>
+                <li>AI Layer: OpenAI</li>
+              </ul>
+              <p>At first glance, it feels like a lot. But each part has a clear responsibility.</p>
+
+              <h3>The Flow (This is the important part)</h3>
+              <p>User → UI → State → API → Backend → Database → AI → Response → UI</p>
+              <p>This is the first time I truly see:</p>
+              <blockquote>A feature is never just frontend or backend — it’s a chain.</blockquote>
+
+              <h3>What Actually Happens (Simplified)</h3>
+              <ol>
+                <li>User signs up / logs in</li>
+                <li>Auth state is stored (React Context)</li>
+                <li>
+                  User fills onboarding form:
+                  <ul>
+                    <li>Goal</li>
+                    <li>Experience</li>
+                    <li>Time availability</li>
+                    <li>Equipment</li>
+                  </ul>
+                </li>
+                <li>Data is sent to backend</li>
+                <li>Stored in database</li>
+                <li>Later → sent into AI to generate workout plan</li>
+              </ol>
+
+              <h3>Key Realizations</h3>
+              <h4>1. Structure > Code</h4>
+              <p>The hardest part is not writing code. It’s:</p>
+              <ul>
+                <li>Knowing where logic should live</li>
+                <li>Keeping boundaries clean</li>
+                <li>Avoiding chaos when things scale</li>
+              </ul>
+
+              <h4>2. AI is Just One Layer</h4>
+              <p>AI is not magic. It only works well because:</p>
+              <ul>
+                <li>Data is structured properly</li>
+                <li>Inputs are clean</li>
+                <li>Context is meaningful</li>
+              </ul>
+              <p>Bad input → bad output.</p>
+
+              <h4>3. Onboarding = Product Brain</h4>
+              <p>That questionnaire is not just UI. It defines:</p>
+              <ul>
+                <li>Personalization</li>
+                <li>Data quality</li>
+                <li>AI accuracy</li>
+              </ul>
+              <p>This is where product thinking meets engineering.</p>
+
+              <h3>Builder Thinking (New Mental Model)</h3>
+              <p>Before:</p>
+              <blockquote>“Add a feature”</blockquote>
+              <p>Now:</p>
+              <blockquote>“Design the data flow”</blockquote>
+
+              <h3>Hidden Complexity (Important)</h3>
+              <p>Things that look simple but are not:</p>
+              <ul>
+                <li>Auth (state sync + security)</li>
+                <li>Routing (protected pages)</li>
+                <li>Environment variables (never expose secrets)</li>
+                <li>API boundaries (what FE should NOT control)</li>
+              </ul>
+
+              <h3>Security Awareness (Day 1 Note)</h3>
+              <ul>
+                <li>Never expose API keys in frontend</li>
+                <li>Validate all inputs on backend</li>
+                <li>Treat user data as sensitive by default</li>
+                <li>Separate public vs protected routes strictly</li>
+              </ul>
+
+              <h3>Small Reflection</h3>
+              <p>Today I didn’t learn “how to code”. I learned:</p>
+              <blockquote>How systems think.</blockquote>
+              <p>And that changes everything.</p>
+            </section>
+          </div>
+        </article>
+      </main>
+      </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="../script.js"></script>
+  </body>
+</html>

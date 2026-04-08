@@ -1,0 +1,11 @@
+{
+  "title": "Home Utilities | Nấu ăn Việt và công thức gia đình",
+  "description": "Home Utilities là trang cá nhân về nấu ăn Việt, công thức gia đình, ghi chú bếp và kế hoạch nhà cửa có tổ chức.",
+  "translations": [
+    { "selector": ".hero-content .eyebrow", "text": "Trang cá nhân" },
+    { "selector": ".hero-content h1", "text": "Nấu ăn Việt, công thức lưu giữ và dòng chảy bếp nhà." },
+    { "selector": ".hero-content .hero-text", "text": "Home Utilities dệt nên những bữa cơm mang hồn quê, ghi chép đơn sơ và công cụ kế hoạch để mỗi ngày trong nhà thêm rõ ràng, dịu dàng." },
+    { "selector": ".hero-actions a[href=\"#kitchen-notes\"]", "text": "Mở Ghi chú bếp" },
+    { "selector": ".hero-actions a[href=\"shopping-planner.html\"]", "text": "Xem kế hoạch đi chợ" }
+  ]
+}

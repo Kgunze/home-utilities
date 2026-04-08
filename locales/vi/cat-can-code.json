@@ -1,0 +1,58 @@
+{
+  "title": "Cat Can Code | Home Utilities",
+  "description": "Ghi chép hành trình Cat Can Code, những suy nghĩ đầu tiên và bài học kỹ thuật nhẹ nhàng.",
+  "translations": [
+    {
+      "selector": "#cat-can-code-title",
+      "text": "Diary Cat Can Code"
+    },
+    {
+      "selector": "#cat-can-code-subtitle",
+      "text": "Ghi lại suy ngẫm, câu hỏi, và vài cú thú vị mỗi ngày."
+    },
+    {
+      "selector": "#cat-can-code-intro",
+      "text": "Feed kiểu Medium, tập trung vào đọc thoải mái, phản ánh nhẹ nhàng và tò mò kỹ thuật."
+    },
+    {
+      "selector": "#diary-card-title",
+      "text": "Ngày 1 — Tại sao mình bắt đầu Cat Can Code"
+    },
+    {
+      "selector": "#diary-card-excerpt",
+      "text": "Hôm nay mình bắt đầu ghi lại hành trình học code, không phải như một kỹ sư mà như người học cách tư duy như một người xây dựng."
+    },
+    {
+      "selector": "#diary-card-day",
+      "text": "Ngày 1"
+    },
+    {
+      "selector": "#diary-card-date",
+      "text": "Ngày 04 tháng 4 năm 2026"
+    },
+    {
+      "selector": "#diary-card-reading",
+      "text": "Đọc trong 4 phút"
+    },
+    {
+      "selector": "#day-two-card-title",
+      "text": "Ngày 2 — Từ tuyến đường đến hệ thống (Tư duy theo NestJS)"
+    },
+    {
+      "selector": "#day-two-card-excerpt",
+      "text": "Hôm nay mình không còn thấy backend như các endpoint đơn lẻ nữa, mà là một chiếc máy nhiệm vụ rõ ràng và tròn trịa."
+    },
+    {
+      "selector": "#day-two-card-day",
+      "text": "Ngày 2"
+    },
+    {
+      "selector": "#day-two-card-date",
+      "text": "Ngày 05 tháng 4 năm 2026"
+    },
+    {
+      "selector": "#day-two-card-reading",
+      "text": "Đọc trong 5 phút"
+    }
+  ]
+}

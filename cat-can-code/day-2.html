@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 2 — From Routes to Systems (Thinking in NestJS) | Cat Can Code</title>
+    <meta
+      name="description"
+      content="A Day 2 entry that turns NestJS routing into layered responsibility models and a new way to think about backend flow."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .cat-page-shell {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f9f3eb 0%, #f4e6d8 100%);
+      }
+
+      .sketch-parallax {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .sketch-svg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        filter: blur(0.3px);
+      }
+
+      .sketch-layer {
+        mix-blend-mode: multiply;
+        will-change: transform;
+      }
+
+      .sketch-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(244, 233, 214, 0.4));
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cat-page-shell .page-shell {
+        position: relative;
+        z-index: 2;
+      }
+
+      .article-wrapper {
+        max-width: 720px;
+        margin: 0 auto;
+        padding-top: 1rem;
+      }
+
+      .article-meta {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .article-body {
+        color: var(--text);
+        line-height: 1.7;
+        font-size: 1.1rem;
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      .article-body h2 {
+        font-family: "Fraunces", serif;
+        font-size: 1.8rem;
+        margin: 0;
+      }
+
+      .article-body h3 {
+        font-family: "Fraunces", serif;
+        font-size: 1.45rem;
+        margin-bottom: 0.35rem;
+      }
+
+      .article-body h4 {
+        font-family: "Fraunces", serif;
+        font-size: 1.2rem;
+        margin-bottom: 0.15rem;
+      }
+
+      .article-body ul {
+        padding-left: 1.2rem;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .article-body blockquote {
+        margin: 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .hero-capsule {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .hero-capsule h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 4.4rem);
+      }
+
+      .hero-capsule p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .flow-helper {
+        margin: 0;
+        max-width: 60ch;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .flow-visualizer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0;
+      }
+
+      .flow-node {
+        flex: 1;
+        min-width: 140px;
+        background: #fff;
+        border: 1px solid rgba(92, 81, 69, 0.25);
+        border-radius: 1rem;
+        padding: 0.85rem 1rem;
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+        box-shadow: 0 4px 12px rgba(92, 81, 69, 0.08);
+      }
+
+      .flow-node:hover,
+      .flow-node:focus-visible {
+        transform: translateY(-2px);
+        border-color: rgba(92, 81, 69, 0.45);
+        box-shadow: 0 8px 20px rgba(92, 81, 69, 0.18);
+      }
+
+      .flow-node-label {
+        display: block;
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+        color: var(--text);
+      }
+
+      .flow-node-reference {
+        display: block;
+        font-size: 0.88rem;
+        color: var(--muted);
+        margin-top: 0.35rem;
+      }
+
+      .flow-node-arrow {
+        position: absolute;
+        top: 50%;
+        right: -1rem;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        opacity: 0.4;
+      }
+
+      .flow-node-last .flow-node-arrow {
+        display: none;
+      }
+
+      .flow-tooltip {
+        position: fixed;
+        z-index: 20;
+        background: #1a1a1a;
+        color: #fff;
+        padding: 0.85rem;
+        border-radius: 0.85rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        width: 240px;
+        left: 50%;
+        transform: translate(-50%, -5%);
+      }
+
+      .flow-tooltip::before {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: #1a1a1a;
+      }
+
+      .flow-tooltip-title {
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .flow-tooltip-description,
+      .flow-tooltip-example,
+      .flow-tooltip-note {
+        margin: 0.25rem 0 0;
+        font-size: 0.75rem;
+        opacity: 0.88;
+      }
+
+      .flow-note-panel {
+        min-height: 2.25rem;
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
+        border-radius: 0.85rem;
+        border: 1px dashed rgba(92, 81, 69, 0.4);
+        background: rgba(255, 255, 255, 0.75);
+        color: var(--muted);
+        margin-top: 0.5rem;
+        line-height: 1.5;
+      }
+
+      .flow-note-panel.is-visible {
+        border-style: solid;
+        color: var(--text);
+        background: #fff;
+      }
+
+      .concept-timeline-section {
+        padding: 1rem 0 0;
+      }
+
+      .concept-timeline-intro {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+
+      .concept-timeline {
+        position: relative;
+        margin-top: 1rem;
+      }
+
+      .timeline-line {
+        position: absolute;
+        left: 16px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #e0d5c6;
+        border-radius: 1rem;
+      }
+
+      .concept-block {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        border: 1px solid rgba(92, 81, 69, 0.2);
+        border-radius: 1.5rem;
+        padding: 1rem;
+        margin-top: 1.5rem;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 15px 25px rgba(92, 81, 69, 0.1);
+        position: relative;
+        transition: transform 200ms ease, border-color 200ms ease;
+        cursor: pointer;
+      }
+
+      .concept-block::before {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        background: #f5b76a;
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 4px #fff;
+      }
+
+      .concept-block.is-active {
+        border-color: rgba(53, 92, 74, 0.5);
+        transform: translateY(-4px);
+      }
+
+      .concept-visual {
+        padding: 1rem;
+        border-radius: 1.25rem;
+        border: 1px dashed rgba(92, 81, 69, 0.4);
+        background: #f4e6d8;
+      }
+
+      .concept-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .concept-sketch {
+        font-size: 0.85rem;
+        font-style: italic;
+        color: rgba(33, 33, 33, 0.7);
+      }
+
+      .concept-copy h3 {
+        margin: 0 0 0.6rem;
+        font-size: 1.4rem;
+      }
+
+      .concept-layer {
+        margin-bottom: 0.9rem;
+      }
+
+      .layer-label {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(33, 33, 33, 0.55);
+      }
+
+      .layer-example {
+        margin: 0.35rem 0 0;
+        font-size: 0.85rem;
+        color: rgba(33, 33, 33, 0.7);
+      }
+
+      .concept-layer pre {
+        background: #1a1a1a;
+        color: #9ef29e;
+        padding: 0.75rem;
+        border-radius: 0.85rem;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        overflow-x: auto;
+        margin: 0.35rem 0 0;
+      }
+
+      .concept-insight {
+        font-size: 0.9rem;
+        color: #6b5e52;
+        border-left: 3px solid rgba(33, 33, 33, 0.2);
+        padding-left: 0.8rem;
+      }
+
+      .timeline-detail {
+        margin-top: 1rem;
+        padding: 0.85rem 1rem;
+        border-radius: 1rem;
+        border: 1px dashed rgba(92, 81, 69, 0.45);
+        background: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .timeline-detail.is-active {
+        border-style: solid;
+        color: var(--text);
+      }
+
+      .arguments-section {
+        margin-top: 1.5rem;
+      }
+
+      .arguments-section h2 {
+        font-size: 1.6rem;
+        margin-bottom: 0.25rem;
+        font-family: "Fraunces", serif;
+      }
+
+      .arguments-section hr {
+        border: none;
+        border-top: 1px solid rgba(92, 81, 69, 0.2);
+        margin: 2rem 0 1rem;
+      }
+
+      .arguments-section blockquote {
+        margin: 0 0 1rem;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .arguments-section ul {
+        padding-left: 1.2rem;
+        color: var(--muted);
+      }
+
+      .arguments-section a {
+        color: var(--primary);
+      }
+
+      .code-sample {
+        background: #1a1a1a;
+        color: #93fca8;
+        padding: 0.75rem;
+        border-radius: 0.85rem;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        overflow-x: auto;
+        margin: 0.5rem 0;
+      }
+      .smart-prompting {
+        margin-top: 1.5rem;
+      }
+      .smart-prompting h2 {
+        font-size: 1.6rem;
+        margin-bottom: 0.4rem;
+        font-family: "Fraunces", serif;
+      }
+      .smart-prompting h3 {
+        margin-top: 1.25rem;
+        font-size: 1.2rem;
+      }
+      .smart-prompting hr {
+        border: none;
+        border-top: 1px solid rgba(92, 81, 69, 0.25);
+        margin-bottom: 1.25rem;
+      }
+      .smart-prompting ul {
+        padding-left: 1.2rem;
+        color: var(--muted);
+      }
+      .smart-prompting p {
+        color: var(--muted);
+      }
+
+      .day-navigation {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .day-navigation a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .day-navigation span {
+        flex: 1;
+        display: inline-flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cat-page-shell">
+      <div class="sketch-parallax" aria-hidden="true">
+        <svg class="sketch-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+          <g class="sketch-layer" data-speed="0.04">
+            <path d="M60 260 L180 240 L320 260" stroke="#5c5145" stroke-width="1.4" fill="none" stroke-dasharray="6 4"/>
+            <text x="190" y="252" font-size="10" fill="#5c5145">flow → deploy</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.03">
+            <rect x="220" y="340" width="120" height="70" rx="8" stroke="#5c5145" stroke-width="1.6" fill="none"/>
+            <text x="240" y="375" font-size="16" fill="#5c5145">&gt;_</text>
+            <path d="M220 420 L340 420" stroke="#5c5145" stroke-width="1.1" stroke-dasharray="5 5" />
+            <text x="222" y="435" font-size="10" fill="#5c5145">state?</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.06">
+            <circle cx="840" cy="210" r="40" stroke="#5c5145" stroke-width="1.4" fill="none"/>
+            <rect x="840" y="250" width="80" height="40" rx="10" fill="none" stroke="#5c5145" stroke-width="1.3"/>
+            <text x="860" y="270" font-size="8" fill="#5c5145">DB</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="520" y="90" font-size="12" fill="#5c5145" opacity="0.7">notes: why this works?</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sketch-overlay"></div>
+      <div class="page-shell">
+      <header class="hero hero-subpage">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="../index.html#home">Home Utilities</a>
+          <div class="nav-links">
+            <a href="../stories.html">Stories</a>
+            <div class="nav-parent">
+              <a href="../index.html#kitchen-notes">Kitchen Notes</a>
+              <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                <a href="../recipes.html">Recipes</a>
+                <a href="../shopping-planner.html">Shopping Planner</a>
+              </div>
+            </div>
+            <div class="nav-parent nav-parent-greenies">
+              <a class="nav-link-greenies" href="#">Greenies</a>
+              <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                <a class="nav-greenies-planting" href="../planting-diary.html">Planting diary</a>
+                <a class="nav-greenies-fertilization" href="../fertilization-wikipedia.html">Fertilization wikipedia</a>
+              </div>
+            </div>
+            <a href="../ptsd.html">PTSD</a>
+          </div>
+          <label class="locale-switcher">
+            <span class="locale-switcher-label">Language</span>
+            <select class="locale-select" id="locale-select" aria-label="Language selector">
+              <option value="en">English</option>
+              <option value="vi">Tiếng Việt</option>
+            </select>
+          </label>
+        </nav>
+
+        <section class="hero-content hero-subpage">
+          <div class="hero-copy article-wrapper hero-capsule">
+            <h1 id="day-two-title">Day 2 — From Routes to Systems (Thinking in NestJS)</h1>
+            <p id="day-two-subtitle">Starting to understand backend… properly. Not as “API endpoints”. But as a system of responsibility layers.</p>
+            <div class="article-meta">
+              <span id="day-two-author">Cat Can Code</span>
+              <span id="day-two-date">April 5, 2026</span>
+              <span id="day-two-reading">5 min read</span>
+            </div>
+          </div>
+        </section>
+      </header>
+
+      <main class="planner-section planner-page">
+        <article class="planner-card article-wrapper">
+          <div class="article-body">
+            <section>
+              <p>Starting to understand backend… properly.</p>
+              <p>Not as “API endpoints”.</p>
+              <p>But as a <strong>system of responsibility layers</strong>.</p>
+            </section>
+
+            <section>
+              <h2>Recap from Learning</h2>
+              <p>Today’s focus was NestJS — a backend framework that forces structure.</p>
+              <p>At first, it feels heavier than Express.</p>
+              <p>But then I realized:</p>
+              <blockquote>It’s not heavier. It’s clearer.</blockquote>
+              <div class="my-10">
+                <iframe
+                  class="w-full aspect-video rounded-xl"
+                  src="https://www.youtube.com/embed/21_I-12f5JE"
+                  title="Day 2 NestJS Recap"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <h3>What NestJS Really Is</h3>
+              <ul>
+                <li>Controller → handles incoming requests</li>
+                <li>Service → contains business logic</li>
+                <li>Module → organizes everything</li>
+              </ul>
+              <p>This creates a system where:</p>
+              <blockquote>Each part has a job. Nothing overlaps.</blockquote>
+
+              <h3>The Flow (Interactive)</h3>
+              <p class="flow-helper">
+                Hover each block to understand what it does. Think of it as how a request travels inside the system.
+              </p>
+              <div class="flow-visualizer" id="backend-flow-visualizer">
+                <div class="flow-node" data-step="request" tabindex="0">
+                  <span class="flow-node-label">Request</span>
+                  <span class="flow-node-reference">User sends a request from UI</span>
+                  <span class="flow-node-arrow" aria-hidden="true">→</span>
+                </div>
+                <div class="flow-node" data-step="controller" tabindex="0">
+                  <span class="flow-node-label">Controller</span>
+                  <span class="flow-node-reference">Receives request and routes it</span>
+                  <span class="flow-node-arrow" aria-hidden="true">→</span>
+                </div>
+                <div class="flow-node" data-step="service" tabindex="0">
+                  <span class="flow-node-label">Service</span>
+                  <span class="flow-node-reference">Handles business logic</span>
+                  <span class="flow-node-arrow" aria-hidden="true">→</span>
+                </div>
+                <div class="flow-node" data-step="database" tabindex="0">
+                  <span class="flow-node-label">Database</span>
+                  <span class="flow-node-reference">Stores and retrieves data</span>
+                  <span class="flow-node-arrow" aria-hidden="true">→</span>
+                </div>
+                <div class="flow-node flow-node-last" data-step="response" tabindex="0">
+                  <span class="flow-node-label">Response</span>
+                  <span class="flow-node-reference">Returns result to user</span>
+                </div>
+              </div>
+              <div id="flow-tooltip" class="flow-tooltip" role="status" aria-live="polite" hidden>
+                <p class="flow-tooltip-title"></p>
+                <p class="flow-tooltip-description"></p>
+                <p class="flow-tooltip-example"></p>
+                <p class="flow-tooltip-note"></p>
+              </div>
+              <div id="flow-note-panel" class="flow-note-panel" aria-live="polite">
+                Click a block to expand the note.
+              </div>
+            </section>
+
+            <section>
+              <hr />
+              <h2>Prerequisites (Reality Check)</h2>
+              <p>Before jumping into NestJS, I see why these matter:</p>
+              <ul>
+                <li>JavaScript → core language understanding</li>
+                <li>TypeScript → structure and type safety</li>
+                <li>Node.js → runtime environment</li>
+                <li>Express → baseline backend thinking</li>
+              </ul>
+              <p>NestJS is not replacing these.</p>
+              <p>It’s organizing them.</p>
+
+              <h3>Insight</h3>
+              <p>If Express is:</p>
+              <blockquote>“Freedom to build anything”</blockquote>
+              <p>NestJS is:</p>
+              <blockquote>“Structure to scale safely”</blockquote>
+            </section>
+
+            <section class="concept-timeline-section">
+              <p class="concept-timeline-intro">
+                All three pieces work together at the same time when a request flows through the system.
+              </p>
+              <div class="concept-timeline">
+                <div class="timeline-line" aria-hidden="true"></div>
+                <article class="concept-block" data-note="Controller should stay thin — no heavy logic here">
+                  <div class="concept-visual">
+                    <div class="concept-icon">🚪</div>
+                    <div class="concept-sketch">✏️ arrow entering a box labeled controller</div>
+                  </div>
+                  <div class="concept-copy">
+                    <h3>Controller = Door</h3>
+                    <div class="concept-layer">
+                      <div class="layer-label">Business Thinking</div>
+                      <p>Receives user intent and routes it correctly.</p>
+                      <p class="layer-example">Example: User clicks “Generate Workout Plan”.</p>
+                    </div>
+                    <div class="concept-layer">
+                      <div class="layer-label">Code Logic</div>
+                      <pre>@Post('/workout')
+createWorkout(@Body() data) {
+  return this.workoutService.generate(data);
+}</pre>
+                    </div>
+                    <div class="concept-insight">
+                      Controller should stay thin — no heavy logic here.
+                    </div>
+                  </div>
+                </article>
+                <article class="concept-block" data-note="This is where your real system intelligence lives">
+                  <div class="concept-visual">
+                    <div class="concept-icon">🧠</div>
+                    <div class="concept-sketch">✏️ brain with arrows branching out</div>
+                  </div>
+                  <div class="concept-copy">
+                    <h3>Service = Brain</h3>
+                    <div class="concept-layer">
+                      <div class="layer-label">Business Thinking</div>
+                      <p>Processes logic and makes decisions.</p>
+                      <p class="layer-example">
+                        Example: Interpret user fitness data and create plan input.
+                      </p>
+                    </div>
+                    <div class="concept-layer">
+                      <div class="layer-label">Code Logic</div>
+                      <pre>generate(data) {
+  const structured = this.transform(data);
+  return structured;
+}</pre>
+                    </div>
+                    <div class="concept-insight">
+                      This is where your real system intelligence lives.
+                    </div>
+                  </div>
+                </article>
+                <article class="concept-block" data-note="Prevents chaos as system grows">
+                  <div class="concept-visual">
+                    <div class="concept-icon">📦</div>
+                    <div class="concept-sketch">✏️ boxes grouped together</div>
+                  </div>
+                  <div class="concept-copy">
+                    <h3>Module = Organizer</h3>
+                    <div class="concept-layer">
+                      <div class="layer-label">Business Thinking</div>
+                      <p>Groups related logic into domains.</p>
+                      <p class="layer-example">
+                        Example: WorkoutModule handles everything about workouts.
+                      </p>
+                    </div>
+                    <div class="concept-layer">
+                      <div class="layer-label">Code Logic</div>
+                      <pre>@Module({
+  controllers: [WorkoutController],
+  providers: [WorkoutService],
+})</pre>
+                    </div>
+                    <div class="concept-insight">
+                      Prevents chaos as system grows.
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="timeline-detail" id="timeline-detail">
+                Click or hover a concept to read the sketch note.
+              </div>
+            </section>
+
+            <section>
+              <h3>⚙️ Dependency Injection (Important Shift)</h3>
+              <p>Instead of manually connecting things, NestJS injects dependencies automatically.</p>
+              <p>Meaning:</p>
+              <blockquote>“You don’t build connections every time — the system wires it for you.”</blockquote>
+              <p>Why this matters:</p>
+              <ul>
+                <li>Less coupling</li>
+                <li>Easier testing</li>
+                <li>Cleaner scaling</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>🧠 Mental Upgrade</h3>
+              <p>Before:</p>
+              <blockquote>“Call API → get data”</blockquote>
+              <p>Now:</p>
+              <blockquote>“Route request through controlled layers”</blockquote>
+            </section>
+
+            <section class="arguments-section">
+              <hr />
+              <h2>Function Arguments = System Clarity</h2>
+              <p>Today I hit a line from <em>Clean Code</em> that looks simple, but changes how I see everything:</p>
+              <blockquote>
+                The ideal number of arguments for a function is zero → one → two. Avoid more than that.
+              </blockquote>
+              <p>At first, it feels like a coding style rule.<br />But it’s not.<br />It’s a <strong>system design rule</strong>.</p>
+
+              <h3>🔗 Connecting the Dots (Day 1 → Day 2 → Now)</h3>
+              <p>Day 1:<br />“I saw the full system flow”</p>
+              <p>Day 2:<br />“I understood backend structure (Controller → Service → Module)”</p>
+              <p>Now:<br />“I understand how <strong>data moves safely inside that structure</strong>”</p>
+
+              <h3>🧩 Where This Appears in My System</h3>
+              <p>From yesterday’s flow:</p>
+              <p><strong>Request → Controller → Service → Database → Response</strong></p>
+              <p>Now zoom into this part:</p>
+              <p><strong>Controller → Service</strong></p>
+              <p>This is where function arguments live.</p>
+
+              <h3>❌ The Wrong Way (Feels normal, but dangerous)</h3>
+              <pre class="code-sample">generateWorkoutPlan(goal, experience, daysPerWeek, equipment, injuries)</pre>
+              <p>Looks fine. But actually:</p>
+              <ul>
+                <li>Hard to read</li>
+                <li>Easy to mix up order</li>
+                <li>Hard to scale</li>
+                <li>Hard to validate</li>
+                <li>Hard to secure</li>
+              </ul>
+              <p>This is called a <strong>code smell</strong> — too many parameters usually means poor structure (<a href="https://en.wikipedia.org/wiki/Code_smell" target="_blank" rel="noreferrer">Wikipedia</a>)</p>
+
+              <h3>✅ The Better Way (System Thinking)</h3>
+              <pre class="code-sample">
+generateWorkoutPlan(userProfile)
+</pre>
+              <p>Where:</p>
+              <pre class="code-sample">
+const userProfile = {
+  goal: "lose weight",
+  experience: "beginner",
+  daysPerWeek: 3,
+  equipment: ["dumbbells"],
+  injuries: []
+}
+</pre>
+              <p>Now:<br />One argument = one meaning.</p>
+
+              <h3>🧠 What Changed (Important Insight)</h3>
+              <p>Before:<br />“Function receives values”</p>
+              <p>Now:<br />“Function receives <strong>a structured concept</strong>”</p>
+
+              <h3>🏗️ Mapping to NestJS (This clicked for me)</h3>
+              <p>Controller</p>
+              <pre class="code-sample">
+@Post('/plan')
+generate(@Body() dto: CreatePlanDto) {
+  return this.service.generate(dto)
+}
+</pre>
+              <p>Service</p>
+              <pre class="code-sample">
+generate(profile: CreatePlanDto) {
+  return this.buildPlan(profile)
+}
+</pre>
+
+              <h3>🔍 Why This Rule Exists (Deeper Truth)</h3>
+              <p>Functions with many arguments:</p>
+              <ul>
+                <li>Break readability</li>
+                <li>Increase testing complexity (<a href="https://medium.com/" target="_blank" rel="noreferrer">Medium</a>)</li>
+                <li>Hide real responsibility</li>
+              </ul>
+              <p>Which usually means:<br />“The function is doing too many things”.</p>
+
+              <h3>⚠️ Hidden Risk (System + Security)</h3>
+              <ul>
+                <li>Wrong data mapping (silent bugs)</li>
+                <li>Missing validation points</li>
+                <li>Injection risks if fields are loosely handled</li>
+                <li>Tight coupling between layers</li>
+              </ul>
+
+              <h3>🧠 Mental Model Upgrade</h3>
+              <p>Function is not just:<br />“something that runs logic”</p>
+              <p>Function is:<br />“A <strong>boundary of responsibility</strong>”</p>
+              <p>And arguments define:<br />“What is allowed to cross that boundary”</p>
+
+              <h3>🔗 Final Connection</h3>
+              <p>Controller:<br />Accept structured input (DTO)</p>
+              <p>Service:<br />Process structured logic</p>
+              <p>Database:<br />Store structured data</p>
+              <p>AI:<br />Requires structured context</p>
+
+              <h3>Small Reflection</h3>
+              <p>Today I realized:<br />“Clean code is not about writing prettier functions.”</p>
+              <p>It’s about:</p>
+              <ul>
+                <li>Designing safer systems</li>
+                <li>Reducing ambiguity</li>
+                <li>Making complexity manageable</li>
+              </ul>
+              <p>Tomorrow:<br />I want to explore how this structure connects to:<br />“AI input → prompt → output quality”.</p>
+            </section>
+            <section id="smart-prompting-day2" class="smart-prompting">
+              <hr />
+              <h2>Smart Prompting &amp; Boundaries (FE ↔ BE)</h2>
+              <p>I’m mostly working on the frontend.</p>
+              <p>But every time backend changes (new API, new fields, new flow),<br />I’m not just updating UI — I’m touching <strong>system boundaries</strong>.</p>
+              <p>If I prompt Cursor carelessly, it will:</p>
+              <ul>
+                <li>Leak backend logic into frontend</li>
+                <li>Break data contracts</li>
+                <li>Create hidden bugs</li>
+              </ul>
+              <p>So I need a <strong>clear prompting discipline</strong>.</p>
+
+              <h3>🔗 Connecting Day 1 → Day 2 → Now</h3>
+              <p>Day 1:<br />“System flow (UI → API → Backend → DB → AI)</p>
+              <p>Day 2:<br />“Backend structure (Controller → Service → Module)”</p>
+              <p>Now:<br />“Frontend must respect those boundaries — not cross them”</p>
+
+              <h3>🧩 Core Rule</h3>
+              <p><strong>Frontend = Consumer of API</strong><br /> <strong>Backend = Owner of logic</strong></p>
+              <p>Frontend should:</p>
+              <ul>
+                <li>Display</li>
+                <li>Trigger actions</li>
+                <li>Handle state</li>
+              </ul>
+              <p>Frontend should NOT:</p>
+              <ul>
+                <li>Recreate business logic</li>
+                <li>Infer hidden rules</li>
+                <li>Mutate backend data structure</li>
+              </ul>
+
+              <h3>⚠️ Common FE Mistake (Cursor often does this)</h3>
+              <pre class="code-sample">// ❌ FE trying to "fix" backend logic
+if (user.goal === "lose_weight") {
+  plan.type = "fat_loss"
+}</pre>
+              <p>This belongs to backend.</p>
+
+              <h3>✅ Correct Thinking</h3>
+              <pre class="code-sample">// ✅ FE trusts backend contract
+const plan = await api.getWorkoutPlan()
+render(plan)</pre>
+
+              <h3>🧠 Smart Prompt Structure (Use This With Cursor)</h3>
+              <p>When asking Cursor to update FE based on API:</p>
+
+              <h4>1. Define Boundary Clearly</h4>
+              <pre class="code-sample">Frontend only. Do NOT modify backend logic.
+Assume API is source of truth.</pre>
+
+              <h4>2. Define Contract (VERY IMPORTANT)</h4>
+              <pre class="code-sample">API response structure:
+{
+  goal: string
+  experience: string
+  plan: WorkoutPlan[]
+}</pre>
+
+              <h4>3. Define Responsibility</h4>
+              <pre class="code-sample">Your task:
+- Update UI rendering
+- Map API response to components
+- Do NOT transform business logic</pre>
+
+              <h4>4. Define Constraints</h4>
+              <pre class="code-sample">Constraints:
+- Do not hardcode values
+- Do not duplicate backend logic
+- Keep types aligned with API
+- Use TypeScript interfaces</pre>
+
+              <h4>5. Define Edge Handling</h4>
+              <pre class="code-sample">Handle:
+- loading state
+- empty state
+- error state</pre>
+
+              <h3>🧩 Keywords That Matter (Use in Prompt)</h3>
+              <p>These reduce ambiguity significantly:</p>
+              <h4>Boundary Keywords</h4>
+              <p>“frontend only”, “do not modify backend”, “respect API contract”, “no business logic duplication”</p>
+              <h4>Data Integrity Keywords</h4>
+              <p>“strict typing”, “DTO alignment”, “no transformation of meaning”, “pass-through data”</p>
+              <h4>System Thinking Keywords</h4>
+              <p>“single responsibility”, “separation of concerns”, “stateless UI”, “source of truth = backend”</p>
+              <h4>Safety Keywords</h4>
+              <p>“no hardcoded values”, “validate optional fields”, “handle undefined safely”</p>
+
+              <h3>🛡️ Security Awareness (FE Side)</h3>
+              <ul>
+                <li>Never expose API keys</li>
+                <li>Do not trust API blindly → handle null/invalid</li>
+                <li>Avoid logging sensitive data</li>
+                <li>Sanitize anything rendered dynamically</li>
+              </ul>
+
+              <h3>🧠 Mental Model (Important Shift)</h3>
+              <p>Before:<br />“Update UI to match API”</p>
+              <p>Now:<br />“Adapt UI to a contract without breaking system boundaries”</p>
+
+              <h3>🔍 Hidden Insight</h3>
+              <p>Bad prompts cause:</p>
+              <ul>
+                <li>Logic duplication</li>
+                <li>Inconsistent behavior</li>
+                <li>Security gaps</li>
+                <li>Tech debt</li>
+              </ul>
+              <p>Good prompts enforce:<br /><strong>Clean architecture — even when using AI</strong></p>
+
+              <h3>🧩 Simple Checklist Before Prompting Cursor</h3>
+              <ul>
+                <li>What layer am I in? (FE / BE)</li>
+                <li>What is my responsibility?</li>
+                <li>What is the API contract?</li>
+                <li>Am I duplicating logic?</li>
+                <li>Am I introducing assumptions?</li>
+              </ul>
+
+              <h3>Small Reflection</h3>
+              <p>Today I realized:<br />“Prompting is not just asking AI to code.”</p>
+              <p>It’s:</p>
+              <ul>
+                <li>Defining boundaries</li>
+                <li>Protecting system design</li>
+                <li>Preventing future bugs</li>
+              </ul>
+              <p>Tomorrow:<br />I want to connect this with:<br />“AI prompts — where bad structure becomes bad intelligence”.</p>
+            </section>
+
+            <section>
+              <h3>🔍 Backend Is Not Just Data</h3>
+              <p>I used to think backend = database operations. But actually it is:</p>
+              <ul>
+                <li>Validation layer</li>
+                <li>Logic layer</li>
+                <li>Security layer</li>
+                <li>Structure layer</li>
+              </ul>
+              <p>Database is just one part.</p>
+            </section>
+
+            <section>
+              <h3>⚠️ Hidden Complexity (Again)</h3>
+              <p>Things that look simple:</p>
+              <ul>
+                <li>Routing → actually access control problem</li>
+                <li>Services → can become messy without boundaries</li>
+                <li>Modules → require good domain thinking</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>🛡️ Security Awareness (Day 2 Note)</h3>
+              <ul>
+                <li>Never trust incoming data</li>
+                <li>Always validate DTOs</li>
+                <li>Separate public vs protected endpoints</li>
+                <li>Avoid leaking internal errors to client</li>
+                <li>Keep environment variables strictly server-side</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>🔗 Connecting Day 1 → Day 2</h3>
+              <p>Day 1:</p>
+              <blockquote>“Saw the full system”</blockquote>
+              <p>Day 2:</p>
+              <blockquote>“Understood how backend is structured inside that system”</blockquote>
+            </section>
+
+            <section>
+              <h3>Small Reflection</h3>
+              <p>Today I learned:</p>
+              <blockquote>Good backend is not about writing logic.</blockquote>
+              <p>It’s about:</p>
+              <ul>
+                <li>Designing responsibility</li>
+                <li>Enforcing boundaries</li>
+                <li>Making systems predictable</li>
+              </ul>
+              <p>Tomorrow:</p>
+              <p>I want to understand how <strong>data flows into AI properly</strong>. Because that’s where everything connects.</p>
+            </section>
+          </div>
+        </article>
+
+        <nav class="day-navigation" aria-label="Diary navigation">
+          <a href="day-1.html">← Day 1</a>
+          <span></span>
+          <a href="day-3.html">Day 3 →</a>
+        </nav>
+      </main>
+      </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+
+    <script src="../script.js"></script>
+    <script>
+      (function () {
+        const flowData = {
+          request: {
+            label: "Request",
+            description: "User sends a request from UI",
+            example: "Click 'Generate Workout Plan'",
+            note: "This starts everything",
+          },
+          controller: {
+            label: "Controller",
+            description: "Receives request and routes it",
+            example: "POST /workout",
+            note: "Like a receptionist directing traffic",
+          },
+          service: {
+            label: "Service",
+            description: "Handles business logic",
+            example: "Process user fitness data",
+            note: "This is where thinking happens",
+          },
+          database: {
+            label: "Database",
+            description: "Stores and retrieves data",
+            example: "User profile + goals",
+            note: "Memory of the system",
+          },
+          response: {
+            label: "Response",
+            description: "Returns result to user",
+            example: "Workout plan displayed",
+            note: "Final output visible to user",
+          },
+        };
+
+        const visualizer = document.getElementById("backend-flow-visualizer");
+        const tooltip = document.getElementById("flow-tooltip");
+        const notePanel = document.getElementById("flow-note-panel");
+
+        if (!visualizer || !tooltip || !notePanel) {
+          return;
+        }
+
+        const defaultNoteText = "Click a block to expand the note.";
+        let activeNoteId = null;
+
+        const updateTooltipPosition = (node) => {
+          const nodeRect = node.getBoundingClientRect();
+          const tooltipRect = tooltip.getBoundingClientRect();
+          const viewportWidth = window.innerWidth;
+          let top = nodeRect.top + window.scrollY - tooltipRect.height - 8;
+          if (top < window.scrollY + 10) {
+            top = nodeRect.bottom + window.scrollY + 10;
+          }
+          let left = nodeRect.left + window.scrollX + nodeRect.width / 2;
+          left = Math.min(
+            viewportWidth - tooltipRect.width - 12,
+            Math.max(12, left - tooltipRect.width / 2),
+          );
+          tooltip.style.top = `${top}px`;
+          tooltip.style.left = `${left}px`;
+        };
+
+        const showTooltip = (stepId, node) => {
+          const info = flowData[stepId];
+          if (!info) {
+            return;
+          }
+          tooltip.querySelector(".flow-tooltip-title").textContent = info.label;
+          tooltip.querySelector(".flow-tooltip-description").textContent = info.description;
+          tooltip.querySelector(".flow-tooltip-example").textContent = `Example: ${info.example}`;
+          tooltip.querySelector(".flow-tooltip-note").textContent = info.note;
+          tooltip.hidden = false;
+          updateTooltipPosition(node);
+        };
+
+        const hideTooltip = () => {
+          tooltip.hidden = true;
+        };
+
+        const resetNotePanel = () => {
+          notePanel.textContent = defaultNoteText;
+          notePanel.classList.remove("is-visible");
+          activeNoteId = null;
+        };
+
+        const handleNoteToggle = (stepId) => {
+          if (!stepId) {
+            return;
+          }
+          if (activeNoteId === stepId) {
+            resetNotePanel();
+            return;
+          }
+          const info = flowData[stepId];
+          if (!info) {
+            resetNotePanel();
+            return;
+          }
+          notePanel.textContent = `Note: ${info.note}`;
+          notePanel.classList.add("is-visible");
+          activeNoteId = stepId;
+        };
+
+        const nodes = visualizer.querySelectorAll(".flow-node");
+        nodes.forEach((node) => {
+          const stepId = node.dataset.step;
+          if (!stepId) {
+            return;
+          }
+          node.addEventListener("pointerenter", () => showTooltip(stepId, node));
+          node.addEventListener("pointerleave", hideTooltip);
+          node.addEventListener("focus", () => showTooltip(stepId, node));
+          node.addEventListener("blur", hideTooltip);
+          node.addEventListener("pointerdown", (event) => {
+            event.preventDefault();
+            handleNoteToggle(stepId);
+            showTooltip(stepId, node);
+          });
+        });
+
+        window.addEventListener("scroll", () => {
+          if (!tooltip.hidden && activeNoteId) {
+            const focusedNode = visualizer.querySelector(`[data-step="${activeNoteId}"]`);
+            if (focusedNode) {
+              updateTooltipPosition(focusedNode);
+            }
+          }
+        }, { passive: true });
+
+        resetNotePanel();
+      })();
+    </script>
+    <script>
+      (function () {
+        const timelineDetail = document.getElementById("timeline-detail");
+        const conceptBlocks = document.querySelectorAll(".concept-block");
+
+        if (!timelineDetail || conceptBlocks.length === 0) {
+          return;
+        }
+
+        const defaultDetail = timelineDetail.textContent;
+
+        const updateDetail = (note, active) => {
+          timelineDetail.textContent = note || defaultDetail;
+          timelineDetail.classList.toggle("is-active", Boolean(active));
+        };
+
+        const clearActive = () => {
+          conceptBlocks.forEach((block) => block.classList.remove("is-active"));
+          updateDetail("", false);
+        };
+
+        conceptBlocks.forEach((block) => {
+          const note = block.dataset.note;
+
+          const activate = () => {
+            clearActive();
+            block.classList.add("is-active");
+            updateDetail(note, true);
+          };
+
+          const deactivate = () => {
+            block.classList.remove("is-active");
+            updateDetail("", false);
+          };
+
+          block.addEventListener("pointerenter", activate);
+          block.addEventListener("focus", activate);
+          block.addEventListener("pointerleave", () => {
+            deactivate();
+            updateDetail(defaultDetail, false);
+          });
+          block.addEventListener("blur", () => {
+            deactivate();
+            updateDetail(defaultDetail, false);
+          });
+          block.addEventListener("pointerdown", (event) => {
+            event.preventDefault();
+            activate();
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

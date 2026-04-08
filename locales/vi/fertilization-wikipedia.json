@@ -1,0 +1,153 @@
+{
+  "title": "Cẩm nang phân bón | Home Utilities",
+  "description": "Giải thích đơn giản về cơ bản phân bón, lỗi thường gặp và mẹo bắt đầu.",
+  "recommendationPlaceholder": "Chọn loại cây để xem gợi ý.",
+  "quickButtons": {
+    "tomato": "Cà chua",
+    "leafy": "Rau lá",
+    "other": "Loại khác"
+  },
+  "recommendations": {
+    "tomato": "Tăng Kali khi trái bắt đầu và thêm Canxi nếu thấy đầu quả thối.",
+    "leafy": "Ưu tiên đạm lúc đầu, rồi chuyển sang phân cân bằng nhẹ nhàng khi lá dày.",
+    "other": "Chọn 10-10-10, bón nhẹ 2 tuần một lần và quan sát phản ứng."
+  },
+  "translations": [
+    {
+      "selector": "#fertilization-eyebrow",
+      "text": "Greenies / Cẩm nang phân bón"
+    },
+    {
+      "selector": "#fertilization-title",
+      "text": "Cẩm nang phân bón"
+    },
+    {
+      "selector": "#fertilization-subhead",
+      "text": "Hiểu cách cho cây ăn để cây lớn mạnh."
+    },
+    {
+      "selector": "#fertilization-subtext",
+      "text": "Hướng dẫn nhẹ nhàng giúp người mới cầm bình phun tự tin bón mỗi tuần."
+    },
+    {
+      "selector": "#start-learning-btn",
+      "text": "Bắt đầu học"
+    },
+    {
+      "selector": "#quick-recommendation-btn",
+      "text": "Gợi ý nhanh"
+    },
+    {
+      "selector": "#foundations-title",
+      "text": "Phân bón là gì?"
+    },
+    {
+      "selector": "#foundations-description",
+      "text": "Phân bón là cách bạn bù năng lượng cho cây, giống như thức ăn nuôi rễ, thân, lá."
+    },
+    {
+      "selector": "#npk-title",
+      "text": "Các nguyên tố N - P - K"
+    },
+    {
+      "selector": "#npk-n-label",
+      "text": "N (Đạm)"
+    },
+    {
+      "selector": "#npk-n-desc",
+      "text": "Cho lá xanh mướt và căng tràn."
+    },
+    {
+      "selector": "#npk-p-label",
+      "text": "P (Lân)"
+    },
+    {
+      "selector": "#npk-p-desc",
+      "text": "Giúp rễ bám chắc và hoa nở đều."
+    },
+    {
+      "selector": "#npk-k-label",
+      "text": "K (Kali)"
+    },
+    {
+      "selector": "#npk-k-desc",
+      "text": "Cho sức sống toàn diện, kháng bệnh và trái ngọt."
+    },
+    {
+      "selector": "#what-to-do-title",
+      "text": "Hôm nay nên làm gì?"
+    },
+    {
+      "selector": "#when-trigger",
+      "text": "Nên bón khi nào?"
+    },
+    {
+      "selector": "#avoid-trigger",
+      "text": "Nên tránh gì?"
+    },
+    {
+      "selector": "#use-trigger",
+      "text": "Nên dùng gì?"
+    },
+    {
+      "selector": "#when-tip-1",
+      "text": "Khi cây đang lớn mạnh (mùa xuân và đầu hè)."
+    },
+    {
+      "selector": "#when-tip-2",
+      "text": "Không bón khi cây yếu hoặc mới trồng."
+    },
+    {
+      "selector": "#when-tip-3",
+      "text": "Nên tính lượng nhỏ, đừng quá tay."
+    },
+    {
+      "selector": "#avoid-tip-1",
+      "text": "Bón quá tay dễ làm cháy rễ."
+    },
+    {
+      "selector": "#avoid-tip-2",
+      "text": "Đừng dùng phân hoa cho cây lá."
+    },
+    {
+      "selector": "#avoid-tip-3",
+      "text": "Nhất định đánh giá đất trước khi bón."
+    },
+    {
+      "selector": "#use-tip-1",
+      "text": "Hữu cơ (phân, mùn) chậm nhưng an toàn."
+    },
+    {
+      "selector": "#use-tip-2",
+      "text": "Dạng lỏng tăng nhanh khi cần sức."
+    },
+    {
+      "selector": "#use-tip-3",
+      "text": "Dạng hạt nuôi dưỡng đều, kéo dài."
+    },
+    {
+      "selector": "#highlight-title",
+      "text": "Điểm nhấn cho người mới"
+    },
+    {
+      "selector": "#highlight-text",
+      "text": "Bắt đầu với phân 10-10-10, bón 2–3 tuần một lần, quan sát đáp ứng trước khi đổi."
+    },
+    {
+      "selector": "#quick-title",
+      "text": "Gợi ý nhanh"
+    },
+    {
+      "selector": "#quick-subtitle",
+      "text": "Chọn loại cây để nhận lời khuyên bình tĩnh."
+    },
+    {
+      "selector": "#recommendation-label",
+      "text": "Gợi ý"
+    },
+    {
+      "selector": "#handbook-title",
+      "text": "Cẩm nang song ngữ"
+    }
+  ]
+}

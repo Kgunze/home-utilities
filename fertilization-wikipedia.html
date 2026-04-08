@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fertilization Guide | Home Utilities</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .hero-actions {
+        display: flex;
+        gap: 0.85rem;
+        flex-wrap: wrap;
+      }
+      .nutrient-card {
+        background: rgba(222, 233, 247, 0.7);
+      }
+      .accordion-item {
+        border-bottom: 1px solid rgba(85, 56, 39, 0.12);
+      }
+      .accordion-trigger {
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        font-size: 1rem;
+        padding: 0.75rem 0;
+        cursor: pointer;
+      }
+      .accordion-panel {
+        display: none;
+        padding-bottom: 0.5rem;
+      }
+      .accordion-panel.active {
+        display: block;
+      }
+      .highlight-box {
+        background: rgba(214, 230, 209, 0.45);
+        border-color: rgba(86, 135, 80, 0.5);
+      }
+      .button-row {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+      }
+      .quick-btn {
+        padding: 0.65rem 1rem;
+        border-radius: 999px;
+        border: 1px solid rgba(85, 56, 39, 0.3);
+        background: rgba(115, 151, 111, 0.1);
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 180ms ease, color 180ms ease;
+      }
+      .quick-btn:hover,
+      .quick-btn.is-active {
+        background: rgba(115, 151, 111, 0.25);
+      }
+      .lang-toggle {
+        display: inline-flex;
+        border: 1px solid rgba(85, 56, 39, 0.3);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .toggle-btn {
+        padding: 0.45rem 0.9rem;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .toggle-btn.active {
+        background: rgba(85, 176, 117, 0.2);
+      }
+      .hidden {
+        display: none;
+      }
+      .lang-content {
+        margin-top: 1rem;
+        display: grid;
+        gap: 0.75rem;
+      }
+      .lang-content article {
+        color: #2c211b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero hero-subpage">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="index.html#home">Home Utilities</a>
+          <div class="nav-links">
+            <a href="stories.html">Stories</a>
+            <div class="nav-parent">
+              <a href="index.html#kitchen-notes">Kitchen Notes</a>
+              <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                <a href="recipes.html">Recipes</a>
+                <a href="shopping-planner.html">Shopping Planner</a>
+              </div>
+            </div>
+            <div class="nav-parent nav-parent-greenies">
+              <a class="nav-link-greenies" href="#">Greenies</a>
+              <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                <a class="nav-greenies-planting" href="planting-diary.html">Planting diary</a>
+                <a class="nav-greenies-fertilization" href="fertilization-wikipedia.html">Fertilization wikipedia</a>
+              </div>
+            </div>
+            <a href="ptsd.html">PTSD</a>
+          </div>
+          <label class="locale-switcher">
+            <span class="locale-switcher-label">Language</span>
+            <select class="locale-select" id="locale-select" aria-label="Language selector">
+              <option value="en">English</option>
+              <option value="vi">Tiếng Việt</option>
+            </select>
+          </label>
+        </nav>
+
+        <section class="hero-content hero-planting">
+          <div class="hero-copy">
+            <p class="eyebrow" id="fertilization-eyebrow">Greenies / Fertilization Guide</p>
+            <h1 id="fertilization-title">Fertilization Guide</h1>
+            <p class="hero-text" id="fertilization-subhead">Understand how to feed your plants the right way.</p>
+            <p class="hero-text" id="fertilization-subtext">
+              This calm guide keeps agronomy simple and actionable for anyone picking up a bag of fertilizer for the first time.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" id="start-learning-btn" href="#foundations">Start Learning</a>
+              <a class="button button-secondary" id="quick-recommendation-btn" href="#what-to-do">Quick Recommendation</a>
+            </div>
+          </div>
+        </section>
+      </header>
+
+      <main class="planner-section planner-page">
+        <section class="planner-card" id="foundations">
+          <h2 id="foundations-title">What is Fertilization?</h2>
+          <p id="foundations-description">
+            Fertilization is the process of giving nutrients to plants so they can grow strong and healthy. Plants need nutrients just like humans need food.
+          </p>
+        </section>
+
+        <section class="planner-card" id="npk-section">
+          <h2 id="npk-title">N - P - K Fundamentals</h2>
+          <div class="planner-columns">
+            <article class="planner-card planner-note nutrient-card">
+              <p class="card-label" id="npk-n-label">N (Nitrogen)</p>
+              <p id="npk-n-desc">Leaf growth, green and lush foliage.</p>
+            </article>
+            <article class="planner-card planner-note nutrient-card">
+              <p class="card-label" id="npk-p-label">P (Phosphorus)</p>
+              <p id="npk-p-desc">Roots and flowers, anchoring blooms.</p>
+            </article>
+            <article class="planner-card planner-note nutrient-card">
+              <p class="card-label" id="npk-k-label">K (Potassium)</p>
+              <p id="npk-k-desc">Overall vigor, disease resistance, and sweetness.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="planner-card" id="what-to-do">
+          <h2 id="what-to-do-title">What should I do today?</h2>
+          <div class="accordion" role="region" aria-label="Daily fertilization guidance">
+            <article class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false" id="when-trigger">When should I fertilize?</button>
+              <div class="accordion-panel">
+                <ul>
+                  <li id="when-tip-1">During active growth (spring and early summer)</li>
+                  <li id="when-tip-2">Avoid fertilizing sick or newly transplanted plants</li>
+                  <li id="when-tip-3">Less is better than too much</li>
+                </ul>
+              </div>
+            </article>
+            <article class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false" id="avoid-trigger">What should I avoid?</button>
+              <div class="accordion-panel">
+                <ul>
+                  <li id="avoid-tip-1">Over-fertilizing burns roots</li>
+                  <li id="avoid-tip-2">Using the wrong type (flower fertilizer on leafy plants)</li>
+                  <li id="avoid-tip-3">Ignoring soil condition before feeding</li>
+                </ul>
+              </div>
+            </article>
+            <article class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false" id="use-trigger">What should I use?</button>
+              <div class="accordion-panel">
+                <ul>
+                  <li id="use-tip-1">Organic (compost, manure) – slow and safe</li>
+                  <li id="use-tip-2">Liquid – fast-acting, good for quick boosts</li>
+                  <li id="use-tip-3">Granular – long-lasting, steady nourishment</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="planner-card highlight-box" id="beginner-highlight">
+          <h2 id="highlight-title">Beginner Highlight</h2>
+          <p id="highlight-text">
+            Start with a balanced fertilizer (10-10-10), apply every 2–3 weeks, and observe how your plants respond before adjusting anything.
+          </p>
+        </section>
+
+        <section class="planner-card" id="quick-recommendations">
+          <h2 id="quick-title">Quick Recommendations</h2>
+          <p id="quick-subtitle">Select your plant type to get a calm suggestion:</p>
+          <div class="button-row" role="tablist" aria-label="Plant quick recommendations">
+            <button class="quick-btn" data-plant="tomato" type="button">Tomato</button>
+            <button class="quick-btn" data-plant="leafy" type="button">Leafy greens</button>
+            <button class="quick-btn" data-plant="other" type="button">Other</button>
+          </div>
+          <div id="recommendation" class="planner-note">
+            <p class="card-label" id="recommendation-label">Suggestion</p>
+            <p id="recommendation-body" data-default-text="Please select a plant type to see your tip.">Please select a plant type to see your tip.</p>
+          </div>
+        </section>
+
+        <section class="planner-card" id="handbook">
+          <h2 id="handbook-title">Handbook Rhythm</h2>
+          <div class="lang-toggle" data-target="fertilization-handbook-content" aria-label="Handbook language switch">
+            <button data-lang="en" class="toggle-btn active" type="button">EN</button>
+            <button data-lang="vi" class="toggle-btn" type="button">VI</button>
+          </div>
+          <div id="fertilization-handbook-content" class="lang-content">
+            <article data-lang-content="en">
+              <p>
+                This is the standard 15-day rotation (two weeks) that cycles through the whole arsenal you bought—Seasol, Powerfeed, Org-Hum, Amino K, Super Lan, chicken manure, disease sprays, and Neem oil. The calendar keeps mornings calm by splitting the work into two steady phases: build the vine, then tend the harvest.
+              </p>
+              <p>
+                <strong>Phase 1 – Nourish the vine from three leaves to a full canopy.</strong> Focus on strong roots, a thick stem, and wide leaves.
+              </p>
+              <ul class="planner-list">
+                <li>Monday (Week 1) – Main meal: Aussie trio at 1ml of each per liter, soak the base thoroughly.</li>
+                <li>Wednesday – Defense: Neem oil at 2ml/L, spray undersides to block thrips.</li>
+                <li>Saturday – Side-dress: Spread one handful of chicken manure around the pot rim (only once per month).</li>
+                <li>Monday (Week 2) – Repeat the Aussie trio so the vine keeps climbing.</li>
+                <li>Wednesday – Sanitize with Physan or Daconil (1ml/L) to clear hidden fungi.</li>
+              </ul>
+              <p>
+                <strong>Phase 2 – Force flowers and build sweet fruit once the vine fills the trellis.</strong>
+              </p>
+              <ul class="planner-list">
+                <li>Monday (Week 1) – Bloom push: Super Lan 10-60-10 at 2g/L, foliar to wake the female buds.</li>
+                <li>Wednesday – Keep Neem oil going so insects leave the new buds alone.</li>
+                <li>Monday (Week 2) – Sweeten with Amino K + Powerfeed at 1ml each when fruits are thumb-sized.</li>
+                <li>Wednesday – Daconil takes down powdery mildew or morning dew diseases while the fruit hangs.</li>
+                <li>Saturday – Recharge with chicken manure chunks so the vine can finish fat, heavy fruits.</li>
+              </ul>
+              <p class="card-label">Rotation reminders</p>
+              <ul class="planner-list">
+                <li>The Aussie trio is the backbone. Water it in every Monday without fail.</li>
+                <li>Super Lan only goes out on bloom Mondays for two to three weeks, then it rests.</li>
+                <li>Once fruit sets, Amino K replaces Seasol and Org-Hum; Monday feeds become Powerfeed + Amino K.</li>
+                <li>Chicken manure chunks land on a relaxed Saturday near the month’s end.</li>
+                <li>Physan or Daconil always ride on Wednesdays; pick Physan when the vine is clean, Daconil if spots appear.</li>
+                <li>Neem oil slides into the Wednesday slot on the weeks you skip disease spray.</li>
+              </ul>
+              <p class="card-label">Unbreakable rules</p>
+              <ul class="planner-list">
+                <li>The morning after any feed, flush the leaves with plain water to rinse and avoid sunburn.</li>
+                <li>Use separate syringes for fertilizer and for disease spray so one bottle never taints the next.</li>
+                <li>Pollinate by hand on a calm Sunday morning; once the female flower is dusted, close the afternoon with rest—no extra feed.</li>
+              </ul>
+              <p>
+                Have you already gathered the seven items into your cart? If yes, trust this rhythm and your rooftop garden will feel unapologetically pro.
+              </p>
+              <p>
+                Would you like me to walk you through how to hand-pollinate melon and gourd flowers? That step remains the sweetest guarantee for fruit.
+              </p>
+            </article>
+            <article data-lang-content="vi" class="hidden">
+              <p>
+                Đây là lịch tuần hoàn chuẩn 15 ngày (2 tuần) để bạn xoay tua toàn bộ kho vũ khí đã mua: Bộ 3 Úc (Seasol, Powerfeed, Org-Hum), Amino K, Siêu Lân, Phân gà cục, Thuốc bệnh Physan/Daconil và Dầu Neem. Lịch này chia thành hai giai đoạn rõ ràng để buổi sáng luôn giữ được nhịp điềm tĩnh: đầu tiên là dựng bộ khung thân cây, sau đó là chăm cho hoa trái.
+              </p>
+              <p>
+                <strong>Giai đoạn 1 – Nuôi cây và cho dây leo từ 3 lá đến khi phủ kín giàn.</strong> Mục tiêu là rễ khỏe, thân mập, lá to.
+              </p>
+              <ul class="planner-list">
+                <li>Thứ 2 (Tuần 1) – Bữa chính: Bộ 3 Úc, mỗi loại 1ml/1L nước, tưới đẫm gốc cho cây uống mạnh.</li>
+                <li>Thứ 4 – Phòng vệ: Phun Dầu Neem 2ml/1L, đảm bảo mặt dưới lá không cho bọ trĩ lẻn vào.</li>
+                <li>Thứ 7 – Bón lót: Rải 1 nắm Phân gà cục quanh thành chậu (cứ làm 1 lần/tháng).</li>
+                <li>Thứ 2 (Tuần 2) – Bữa chính: Lặp lại Bộ 3 Úc để dây leo vươn cao.</li>
+                <li>Thứ 4 – Diệt khuẩn: Physan hoặc Daconil (1ml/1L) quét sạch mầm nấm ẩn.</li>
+              </ul>
+              <p>
+                <strong>Giai đoạn 2 – Ép hoa và nuôi trái khi dây đã phủ kín giàn.</strong>
+              </p>
+              <ul class="planner-list">
+                <li>Thứ 2 (Tuần 1) – Ép hoa: Siêu Lân 10-60-10 2g/1L, phun đều để chạm nụ cái.</li>
+                <li>Thứ 4 – Phòng vệ: Duy trì Dầu Neem để sâu không ăn nụ non.</li>
+                <li>Thứ 2 (Tuần 2) – Tạo ngọt: Amino K + Powerfeed mỗi loại 1ml/1L khi trái to bằng ngón tay.</li>
+                <li>Thứ 4 – Trị nấm: Daconil đặc trị phấn trắng, sương mai lúc trái đang mang.</li>
+                <li>Thứ 7 – Bổ sung: Phân gà cục để cây đủ sức nuôi trái lớn.</li>
+              </ul>
+              <p class="card-label">Tóm tắt cách xoay tua</p>
+              <ul class="planner-list">
+                <li>Bộ 3 Úc (Seasol, Powerfeed, Org-Hum) làm xương sống, tưới Thứ 2 hàng tuần.</li>
+                <li>Siêu Lân chỉ dùng Thứ 2 khi ép hoa, 2-3 tuần rồi cất đi.</li>
+                <li>Amino K thay thế Seasol/Org-Hum khi có trái, Thứ 2 mất đi 2 loại kia.</li>
+                <li>Phân gà cục rắc vào Thứ 7 cuối tháng khi rảnh.</li>
+                <li>Physan/Daconil ưu tiên Thứ 4: Physan khi cây khỏe, Daconil khi thấy đốm nấm.</li>
+                <li>Dầu Neem phun xen kẽ vào Thứ 4 của những tuần không phun thuốc bệnh.</li>
+              </ul>
+              <p class="card-label">Quy tắc bất di bất dịch</p>
+              <ul class="planner-list">
+                <li>Sáng hôm sau khi bón phân: Tưới nước lã đẫm để rửa lại lá, tránh cháy nắng.</li>
+                <li>Hút thuốc/phân: Dùng xilanh riêng cho từng loại, không pha chung.</li>
+                <li>Khi thụ phấn: Chủ nhật rảnh sáng thì thụ phấn tay, chiều nghỉ, không bón thêm.</li>
+              </ul>
+              <p>
+                Bạn đã sắm đủ 7 món vào giỏ hàng chưa? Nếu rồi, cứ tự tin triển khai theo đúng lịch này, bảo đảm vườn sân thượng của bạn sẽ rất “pro”.
+              </p>
+              <p>
+                Bạn có cần mình giải thích thêm về cách thụ phấn tay cho dưa lưới và bầu bí không? Vì bước này là quan trọng nhất để có trái ăn đấy.
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="script.js"></script>
+  </body>
+</html>

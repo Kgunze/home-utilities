@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 5 - NestJS, Strapi, PostgreSQL, DBeaver, Zod | Cat Can Code</title>
+    <meta
+      name="description"
+      content="A Day 5 diary entry that explains NestJS, Strapi, PostgreSQL, DBeaver, and Zod through a simple restaurant story."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .cat-page-shell {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f9f3eb 0%, #f4e6d8 100%);
+      }
+
+      .sketch-parallax {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .sketch-svg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        filter: blur(0.3px);
+      }
+
+      .sketch-layer {
+        mix-blend-mode: multiply;
+        will-change: transform;
+      }
+
+      .sketch-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(244, 233, 214, 0.4));
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cat-page-shell .page-shell {
+        position: relative;
+        z-index: 2;
+      }
+
+      .article-wrapper {
+        max-width: 820px;
+        margin: 0 auto;
+        padding-top: 1rem;
+      }
+
+      .article-shell {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-inline: clamp(1.25rem, 3vw, 2.75rem);
+      }
+
+      .article-layout {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        gap: clamp(2.5rem, 4vw, 4.5rem);
+      }
+
+      .article-main {
+        width: 100%;
+        max-width: 820px;
+        min-width: 0;
+      }
+
+      .article-meta {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .article-body {
+        color: var(--text);
+        line-height: 1.7;
+        font-size: 1.08rem;
+        display: grid;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 820px;
+        min-width: 0;
+        order: 1;
+      }
+
+      .article-body section[id] {
+        scroll-margin-top: 7.5rem;
+      }
+
+      .article-body h2,
+      .article-body h3,
+      .article-body h4 {
+        font-family: "Fraunces", serif;
+        margin: 0 0 0.45rem;
+      }
+
+      .article-body h2 {
+        font-size: 1.9rem;
+      }
+
+      .article-body h3 {
+        font-size: 1.4rem;
+      }
+
+      .article-body h4 {
+        font-size: 1.1rem;
+      }
+
+      .article-body p {
+        margin: 0 0 0.9rem;
+      }
+
+      .article-body ul,
+      .article-body ol {
+        padding-left: 1.25rem;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .article-body blockquote {
+        margin: 0.75rem 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .hero-capsule {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .hero-capsule h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 4.4rem);
+      }
+
+      .hero-capsule p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .callout-card {
+        border: 1px solid rgba(92, 81, 69, 0.22);
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.84);
+        padding: 1.15rem 1.25rem;
+        box-shadow: 0 12px 24px rgba(92, 81, 69, 0.08);
+      }
+
+      .code-sample {
+        background: #1d1a17;
+        color: #f8ebd8;
+        padding: 0.95rem 1rem;
+        border-radius: 0.85rem;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        overflow-x: auto;
+        margin: 0.85rem 0;
+        white-space: pre-wrap;
+      }
+
+      .insight-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.6rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(92, 81, 69, 0.07);
+      }
+
+      .insight-table th,
+      .insight-table td {
+        padding: 0.9rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(92, 81, 69, 0.12);
+        vertical-align: top;
+      }
+
+      .insight-table th {
+        font-family: "Fraunces", serif;
+        font-size: 1rem;
+        background: rgba(244, 230, 216, 0.8);
+      }
+
+      .insight-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .day-navigation {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .day-navigation a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .day-navigation span {
+        flex: 1;
+        display: inline-flex;
+        justify-content: center;
+      }
+
+      .toc-nav {
+        position: sticky;
+        top: 6rem;
+        align-self: start;
+        width: 250px;
+        flex: 0 0 250px;
+        order: 2;
+      }
+
+      .toc-card {
+        background: rgba(255, 250, 245, 0.82);
+        border-left: 1px solid rgba(92, 81, 69, 0.18);
+        border-radius: 1rem;
+        padding: 1rem 0 1rem 1rem;
+        box-shadow: 0 10px 24px rgba(92, 81, 69, 0.06);
+        backdrop-filter: blur(6px);
+      }
+
+      .toc-title {
+        margin: 0 0 0.8rem;
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+      }
+
+      .toc-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .toc-link {
+        display: block;
+        padding: 0.35rem 0.55rem;
+        border-radius: 0.7rem;
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.92rem;
+        line-height: 1.35;
+        transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+      }
+
+      .toc-link:hover,
+      .toc-link:focus-visible {
+        color: var(--primary);
+        background: rgba(53, 92, 74, 0.08);
+        transform: translateX(2px);
+      }
+
+      .toc-link.is-active {
+        color: var(--primary);
+        background: rgba(53, 92, 74, 0.12);
+        font-weight: 700;
+      }
+
+      @media (min-width: 1280px) {
+        .article-shell {
+          padding-inline: clamp(1.75rem, 3vw, 3.5rem);
+        }
+      }
+
+      @media (min-width: 1536px) {
+        .article-layout {
+          gap: clamp(4.5rem, 6vw, 6.5rem);
+        }
+
+        .toc-nav {
+          width: 260px;
+          flex-basis: 260px;
+        }
+      }
+
+      @media (max-width: 1279px) {
+        .article-layout {
+          display: block;
+        }
+
+        .toc-nav {
+          position: static;
+          top: auto;
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cat-page-shell">
+      <div class="sketch-parallax" aria-hidden="true">
+        <svg class="sketch-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+          <g class="sketch-layer" data-speed="0.04">
+            <path d="M90 230 C220 195 340 255 520 220" stroke="#5c5145" stroke-width="1.4" fill="none" stroke-dasharray="7 5" />
+            <text x="535" y="224" font-size="11" fill="#5c5145">Customer -&gt; Axios -&gt; NestJS -&gt; DB</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.03">
+            <rect x="220" y="345" width="138" height="74" rx="10" stroke="#5c5145" stroke-width="1.5" fill="none" />
+            <text x="245" y="388" font-size="13" fill="#5c5145">schema.safeParse()</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.06">
+            <circle cx="934" cy="182" r="34" stroke="#5c5145" stroke-width="1.2" fill="none" />
+            <text x="909" y="187" font-size="11" fill="#5c5145">Strapi</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="625" y="92" font-size="12" fill="#5c5145" opacity="0.7">who owns this responsibility?</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="662" y="118" font-size="12" fill="#5c5145" opacity="0.7">validate again?</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sketch-overlay"></div>
+      <div class="page-shell">
+        <header class="hero hero-subpage">
+          <nav class="topbar" aria-label="Primary">
+            <a class="brand" href="../index.html#home">Home Utilities</a>
+            <div class="nav-links">
+              <a href="../stories.html">Stories</a>
+              <div class="nav-parent">
+                <a href="../index.html#kitchen-notes">Kitchen Notes</a>
+                <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                  <a href="../recipes.html">Recipes</a>
+                  <a href="../shopping-planner.html">Shopping Planner</a>
+                </div>
+              </div>
+              <div class="nav-parent nav-parent-greenies">
+                <a class="nav-link-greenies" href="#">Greenies</a>
+                <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                  <a class="nav-greenies-planting" href="../planting-diary.html">Planting diary</a>
+                  <a class="nav-greenies-fertilization" href="../fertilization-wikipedia.html">Fertilization wikipedia</a>
+                </div>
+              </div>
+              <a href="../ptsd.html">PTSD</a>
+            </div>
+            <label class="locale-switcher">
+              <span class="locale-switcher-label">Language</span>
+              <select class="locale-select" id="locale-select" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="vi">Tiếng Việt</option>
+              </select>
+            </label>
+          </nav>
+
+          <section class="hero-content hero-subpage">
+            <div class="hero-copy article-wrapper hero-capsule">
+              <h1 id="day-five-title">🐱 Cat Can Code - Day 5 Diary</h1>
+              <p id="day-five-subtitle">
+                NestJS, Strapi, PostgreSQL, DBeaver, and Zod finally clicked when I imagined them as roles inside one restaurant system.
+              </p>
+              <div class="article-meta">
+                <span id="day-five-author">Cat Can Code</span>
+                <span id="day-five-date">April 8, 2026</span>
+                <span id="day-five-reading">8 min read</span>
+              </div>
+            </div>
+          </section>
+        </header>
+
+        <main class="planner-section planner-page">
+          <article class="planner-card article-shell">
+            <div class="article-layout">
+              <aside class="toc-nav" aria-label="Table of contents">
+                <div class="toc-card">
+                  <h2 class="toc-title">Contents</h2>
+                  <ul class="toc-list">
+                    <li><a class="toc-link" href="#topic">Topic</a></li>
+                    <li><a class="toc-link" href="#big-picture">Today's Big Picture</a></li>
+                    <li><a class="toc-link" href="#restaurant-map">The Full Restaurant Map</a></li>
+                    <li><a class="toc-link" href="#who-is-who">Who is Who</a></li>
+                    <li><a class="toc-link" href="#full-flow">Full Flow</a></li>
+                    <li><a class="toc-link" href="#menu-scene">Chef Requests Menu Data</a></li>
+                    <li><a class="toc-link" href="#response-boundary">Strapi to NestJS Validation</a></li>
+                    <li><a class="toc-link" href="#request-boundary">Customer Order Validation</a></li>
+                    <li><a class="toc-link" href="#rules">Important Rules</a></li>
+                    <li><a class="toc-link" href="#responsibilities">Correct Responsibilities</a></li>
+                    <li><a class="toc-link" href="#security-thinking">Security Thinking</a></li>
+                    <li><a class="toc-link" href="#final-understanding">Final Understanding</a></li>
+                  </ul>
+                </div>
+              </aside>
+
+            <div class="article-body">
+              <section class="callout-card" id="topic" data-toc-section>
+                <h2>Topic</h2>
+                <p><strong>NestJS, Strapi, PostgreSQL, DBeaver, Zod</strong> through a restaurant story.</p>
+                <blockquote>When the system feels abstract, I can make it physical: waiter, chef, storage, warehouse, and inspector.</blockquote>
+              </section>
+
+              <section id="big-picture" data-toc-section>
+                <h2>Today's Big Picture</h2>
+                <p>Imagine we are building a restaurant system.</p>
+                <ul>
+                  <li>Customers come to order food.</li>
+                  <li>The kitchen makes decisions.</li>
+                  <li>Storage keeps ingredients.</li>
+                  <li>Someone checks food safety.</li>
+                </ul>
+                <p>That is exactly how the system works in tech.</p>
+              </section>
+
+              <section class="callout-card" id="restaurant-map" data-toc-section>
+                <h2>The Full Restaurant Map</h2>
+                <pre class="code-sample">Customer -&gt; Waiter -&gt; Chef -&gt; Storage -&gt; Database
+              ↑        ↑         ↑
+            Axios    NestJS    Strapi
+                         ↓
+                     PostgreSQL</pre>
+              </section>
+
+              <section id="who-is-who" data-toc-section>
+                <h2>Who is Who</h2>
+                <table class="insight-table">
+                  <thead>
+                    <tr>
+                      <th>Restaurant Role</th>
+                      <th>Tech Tool</th>
+                      <th>What it does</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Customer</td>
+                      <td>Customer</td>
+                      <td>Uses the app</td>
+                    </tr>
+                    <tr>
+                      <td>Waiter</td>
+                      <td>Axios</td>
+                      <td>Sends request</td>
+                    </tr>
+                    <tr>
+                      <td>Chef</td>
+                      <td>NestJS</td>
+                      <td>Decides what to do</td>
+                    </tr>
+                    <tr>
+                      <td>Storage manager</td>
+                      <td>Strapi</td>
+                      <td>Manages content</td>
+                    </tr>
+                    <tr>
+                      <td>Warehouse</td>
+                      <td>PostgreSQL</td>
+                      <td>Stores data</td>
+                    </tr>
+                    <tr>
+                      <td>Food inspector</td>
+                      <td>Zod</td>
+                      <td>Checks if data is correct</td>
+                    </tr>
+                    <tr>
+                      <td>Warehouse viewer</td>
+                      <td>DBeaver</td>
+                      <td>Lets you see inside DB</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+
+              <section>
+                <h2>1. NestJS = The Chef</h2>
+                <h3>NestJS</h3>
+                <h4>For a 5-year-old</h4>
+                <blockquote>The chef decides how to cook and what to do if something is missing.</blockquote>
+                <h4>In real system</h4>
+                <ul>
+                  <li>Receives request</li>
+                  <li>Runs logic like order handling and payment</li>
+                  <li>Calls database or Strapi</li>
+                  <li>Sends response back</li>
+                </ul>
+                <p>This is the main brain.</p>
+              </section>
+
+              <section>
+                <h2>2. Strapi = The Storage Manager</h2>
+                <h3>Strapi</h3>
+                <h4>For a 5-year-old</h4>
+                <blockquote>Someone in the storage room keeps the menu, pictures, and descriptions.</blockquote>
+                <h4>In real system</h4>
+                <ul>
+                  <li>Stores content like menu items, descriptions, and images</li>
+                  <li>Provides APIs automatically</li>
+                  <li>Has an admin UI so non-tech people can edit content</li>
+                </ul>
+                <p>It is not for critical logic, only content.</p>
+              </section>
+
+              <section>
+                <h2>3. PostgreSQL = The Warehouse</h2>
+                <h3>PostgreSQL</h3>
+                <h4>For a 5-year-old</h4>
+                <blockquote>A big warehouse storing all important things safely.</blockquote>
+                <h4>Stores</h4>
+                <ul>
+                  <li>Customers</li>
+                  <li>Orders</li>
+                  <li>Payments</li>
+                </ul>
+                <p>This is the source of truth.</p>
+              </section>
+
+              <section>
+                <h2>4. DBeaver = The Warehouse Viewer</h2>
+                <h3>DBeaver</h3>
+                <h4>For a 5-year-old</h4>
+                <blockquote>A window to look inside the warehouse.</blockquote>
+                <h4>In real system</h4>
+                <ul>
+                  <li>View tables</li>
+                  <li>Run SQL queries</li>
+                  <li>Debug data</li>
+                </ul>
+                <p>It does not store data. It only helps you see and manage it.</p>
+              </section>
+
+              <section>
+                <h2>5. Zod = The Food Safety Inspector</h2>
+                <h3>Zod</h3>
+                <h4>For a 5-year-old</h4>
+                <blockquote>Someone checks if food is safe before cooking and serving.</blockquote>
+              </section>
+
+              <section class="callout-card">
+                <h2>Where Zod Works</h2>
+                <h3>Before cooking (request)</h3>
+                <pre class="code-sample">Waiter -&gt; Chef
+       ↑
+      Zod checks</pre>
+                <h3>After getting ingredients (response)</h3>
+                <pre class="code-sample">Storage -&gt; Chef
+          ↑
+         Zod checks</pre>
+                <p>Zod protects every door.</p>
+              </section>
+
+              <section class="callout-card">
+                <h2>Key Insight</h2>
+                <blockquote>Zod is used many times. NestJS decides when to use it.</blockquote>
+              </section>
+
+              <section id="full-flow" data-toc-section>
+                <h2>Full Flow</h2>
+                <h3>Scenario: Customer places an order</h3>
+                <ol>
+                  <li>Customer opens the menu and places an order.</li>
+                  <li>Waiter (Axios) brings order.</li>
+                  <li>Zod checks order.</li>
+                  <li>Chef (NestJS) processes it.</li>
+                  <li>Chef checks Warehouse (PostgreSQL) and Storage (Strapi).</li>
+                  <li>Zod checks returned data again.</li>
+                  <li>Chef sends result.</li>
+                  <li>Waiter delivers to customer.</li>
+                </ol>
+              </section>
+
+              <section class="callout-card" id="menu-scene" data-toc-section>
+                <h2>Day 5 Continuation: Chef Requests Menu Data</h2>
+                <p>This is one of the most important scenes in the whole restaurant story, because it shows exactly where trust can break.</p>
+              </section>
+
+              <section>
+                <h2>Scene Script</h2>
+                <ul>
+                  <li>Chef (NestJS): "Storage, give me the menu."</li>
+                  <li>Storage Manager (Strapi): "Okay, let me get it from the warehouse."</li>
+                  <li>Warehouse (PostgreSQL): "Here is the data."</li>
+                  <li>Storage Manager: "Here's your menu."</li>
+                  <li>Chef: "Let me double-check before serving."</li>
+                </ul>
+              </section>
+
+              <section class="callout-card">
+                <h2>Reality Diagram</h2>
+                <pre class="code-sample">NestJS (Chef)
+   -&gt; HTTP Request
+Strapi (Storage Manager)
+   -&gt; Query
+PostgreSQL (Warehouse)
+   &lt;- Data
+Strapi (formats response)
+   &lt;- HTTP Response
+NestJS
+   &lt;- Zod validation</pre>
+              </section>
+
+              <section>
+                <h2>Codex Breakdown</h2>
+                <h3>1. Chef sends request</h3>
+                <pre class="code-sample">NestJS -&gt; HTTP -&gt; Strapi API</pre>
+                <ul>
+                  <li>NestJS acts as the backend controller.</li>
+                  <li>It calls a Strapi endpoint to ask for content.</li>
+                  <li>Strapi is a headless CMS that exposes APIs automatically.</li>
+                </ul>
+                <p>
+                  Source:
+                  <a href="https://strapi.io/blog/strapi-architecture?utm_source=chatgpt.com" target="_blank" rel="noreferrer">Strapi architecture</a>
+                </p>
+              </section>
+
+              <section>
+                <h3>2. Strapi processes request</h3>
+                <pre class="code-sample">Request -&gt; Strapi Controller -&gt; Service Layer</pre>
+                <ul>
+                  <li>Strapi routes the request.</li>
+                  <li>It applies middleware.</li>
+                  <li>It prepares the database query.</li>
+                </ul>
+                <p>Inside Strapi, this follows a controller, service, and database-layer style architecture.</p>
+              </section>
+
+              <section>
+                <h3>3. Strapi queries database</h3>
+                <pre class="code-sample">Strapi -&gt; PostgreSQL</pre>
+                <ul>
+                  <li>PostgreSQL stores the structured content.</li>
+                  <li>Strapi reads from it when content is requested.</li>
+                </ul>
+                <p>
+                  Source:
+                  <a href="https://strapi.io/blog/postgre-sql-and-strapi-setup?utm_source=chatgpt.com" target="_blank" rel="noreferrer">Strapi with PostgreSQL</a>
+                </p>
+              </section>
+
+              <section>
+                <h3>4. Database returns data</h3>
+                <pre class="code-sample">PostgreSQL -&gt; Strapi</pre>
+                <p>The database returns rows and raw content values back to Strapi.</p>
+              </section>
+
+              <section>
+                <h3>5. Strapi formats API response</h3>
+                <pre class="code-sample">Strapi -&gt; JSON -&gt; NestJS</pre>
+                <p>Strapi turns the database result into an API response that NestJS can consume.</p>
+                <pre class="code-sample">{
+  "data": [
+    { "id": 1, "name": "Fried Rice", "category": "food", "price": 120 }
+  ]
+}</pre>
+              </section>
+
+              <section>
+                <h3>6. Chef validates the data</h3>
+                <pre class="code-sample">Strapi Response -&gt; Zod -&gt; NestJS</pre>
+                <ul>
+                  <li>Zod checks that the structure is what NestJS expects.</li>
+                  <li>This prevents broken or surprising data from entering the system.</li>
+                </ul>
+              </section>
+
+              <section class="callout-card">
+                <h2>Codex Insight</h2>
+                <p>This scene is one of the most dangerous points in the system.</p>
+                <h3>Risk if validation is skipped</h3>
+                <pre class="code-sample">Strapi -&gt; NestJS (no validation)</pre>
+                <ul>
+                  <li>Wrong data shape</li>
+                  <li>Missing fields</li>
+                  <li>Silent UI crash</li>
+                  <li>Security vulnerabilities</li>
+                </ul>
+                <h3>Correct pattern</h3>
+                <pre class="code-sample">External API -&gt; ALWAYS validate -&gt; THEN use</pre>
+              </section>
+
+              <section>
+                <h2>Mapping to the Existing Architecture</h2>
+                <pre class="code-sample">Frontend
+   -&gt;
+BFF (validation layer)
+   -&gt;
+External API</pre>
+                <p>This exact scene matches the same architecture pattern:</p>
+                <pre class="code-sample">BFF -&gt; Strapi -&gt; Validate -&gt; Return</pre>
+              </section>
+
+              <section class="callout-card">
+                <h2>What This Scene Teaches</h2>
+                <ul>
+                  <li>Strapi is the API and content layer.</li>
+                  <li>PostgreSQL is the data storage layer.</li>
+                  <li>NestJS is the controller and decision maker.</li>
+                  <li>Zod is trust-boundary protection.</li>
+                </ul>
+                <blockquote>The chef never trusts the storage blindly. Every ingredient must be checked before cooking.</blockquote>
+              </section>
+
+              <section class="callout-card" id="response-boundary" data-toc-section>
+                <h2>Concrete Boundary Example: Strapi to NestJS</h2>
+                <p>This is the best place for a real Zod example, because it sits exactly where the risky boundary appears in the story.</p>
+                <blockquote>First I saw the scene. Now I can see the code that protects the scene.</blockquote>
+              </section>
+
+              <section>
+                <h2>Scenario: Strapi Returns Menu Data</h2>
+                <p>What comes from Strapi is still untrusted until NestJS validates it.</p>
+                <pre class="code-sample">{
+  "data": [
+    {
+      "id": 1,
+      "name": "Fried Rice",
+      "category": "food",
+      "price": "1000"
+    }
+  ]
+}</pre>
+                <p>This is dangerous if the system trusts it blindly, because <code>price</code> is a string instead of a number.</p>
+              </section>
+
+              <section>
+                <h2>Step 1 - Define Zod Schema</h2>
+                <p>The inspector needs a rule book before it can check anything.</p>
+                <pre class="code-sample">import { z } from "zod";
+
+export const DishSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  category: z.enum(["food", "drink"]),
+  price: z.number(),
+});
+
+export const MenuResponseSchema = z.object({
+  data: z.array(DishSchema),
+});</pre>
+              </section>
+
+              <section>
+                <h2>Step 2 - Validate Strapi Response</h2>
+                <p>NestJS should validate the API response before business logic touches it.</p>
+                <pre class="code-sample">const response = await fetch("https://strapi/api/menu-items");
+const json = await response.json();
+
+const parsed = MenuResponseSchema.safeParse(json);
+
+if (!parsed.success) {
+  throw new Error("Invalid data from Strapi");
+}
+
+return parsed.data;</pre>
+              </section>
+
+              <section class="callout-card">
+                <h2>What Happens Here</h2>
+                <p>Because <code>"price": "1000"</code> is a string, Zod fails the check.</p>
+                <pre class="code-sample">Expected number, received string</pre>
+                <p>The system stops here, which is exactly what safe architecture should do.</p>
+              </section>
+
+              <section>
+                <h2>Fix Option: Safe Coercion</h2>
+                <p>If the external system is messy but predictable, the schema can convert carefully.</p>
+                <pre class="code-sample">export const DishSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  category: z.enum(["food", "drink"]),
+  price: z.coerce.number(),
+});</pre>
+              </section>
+
+              <section>
+                <h2>Another Real Case: Missing Field</h2>
+                <p>Sometimes the shape is incomplete instead of just the wrong type.</p>
+                <pre class="code-sample">{
+  "data": [
+    {
+      "id": 1,
+      "price": 120
+    }
+  ]
+}</pre>
+                <p>Zod will reject it because the required <code>name</code> and <code>category</code> fields are missing.</p>
+                <pre class="code-sample">Required field "name" is missing
+Required field "category" is missing</pre>
+              </section>
+
+              <section>
+                <h2>Advanced Pattern: Strict Mode</h2>
+                <p>Strict mode is a good fit here because it hardens the boundary against unexpected fields.</p>
+                <pre class="code-sample">export const DishSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  category: z.enum(["food", "drink"]),
+  price: z.number(),
+}).strict();</pre>
+                <p>If Strapi sends extra data that NestJS did not ask for, validation fails instead of silently passing it through.</p>
+                <pre class="code-sample">{
+  "id": 1,
+  "name": "Fried Rice",
+  "category": "food",
+  "price": 1000,
+  "hack": "malicious"
+}</pre>
+              </section>
+
+              <section>
+                <h2>Transform Data Safely</h2>
+                <p>Validation can also prepare trusted data for the next layer.</p>
+                <pre class="code-sample">export const DishSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  category: z.enum(["food", "drink"]),
+  price: z.number(),
+}).transform((data) => ({
+  ...data,
+  displayPrice: `${data.price} THB`
+}));</pre>
+              </section>
+
+              <section>
+                <h2>Full Integration in NestJS</h2>
+                <p>This is the chef applying the inspection step before serving anything to the rest of the kitchen.</p>
+                <pre class="code-sample">async getMenu() {
+  const res = await fetch("https://strapi/api/menu-items");
+  const json = await res.json();
+
+  const parsed = MenuResponseSchema.safeParse(json);
+
+  if (!parsed.success) {
+    console.error(parsed.error);
+    throw new Error("Strapi response invalid");
+  }
+
+  return parsed.data;
+}</pre>
+              </section>
+
+              <section class="callout-card">
+                <h2>Real Production Insight</h2>
+                <p>Without validation, bad data can travel quietly until it explodes somewhere deeper.</p>
+                <pre class="code-sample">const dishes = json.data;
+dishes[0].price.toFixed(2);</pre>
+                <p>If <code>price</code> is a string, that becomes a runtime crash.</p>
+                <p>With Zod, the system blocks the bad data before it reaches business logic.</p>
+              </section>
+
+              <section class="callout-card">
+                <h2>Rule to Remember</h2>
+                <blockquote>If data comes from outside the system, validate with Zod before using it.</blockquote>
+                <pre class="code-sample">Strapi = untrusted
+Zod = gatekeeper
+NestJS = decision maker</pre>
+              </section>
+
+              <section class="callout-card" id="request-boundary" data-toc-section>
+                <h2>The Other Door: Customer Order Validation</h2>
+                <p>The menu scene protects the response boundary. The order scene protects the request boundary.</p>
+                <blockquote>The waiter should not send a broken order into the kitchen.</blockquote>
+              </section>
+
+              <section>
+                <h2>Scene: Customer Places Order</h2>
+                <p>Now the data moves in the other direction.</p>
+                <pre class="code-sample">Customer -&gt; Waiter -&gt; Chef
+          request
+            ↑
+           Zod checks</pre>
+              </section>
+
+              <section>
+                <h2>Order Schema</h2>
+                <pre class="code-sample">const OrderSchema = z.object({
+  customerId: z.string(),
+  items: z.array(
+    z.object({
+      dishId: z.number(),
+      quantity: z.number().min(1),
+    })
+  ).min(1),
+});</pre>
+              </section>
+
+              <section>
+                <h2>Happy Path</h2>
+                <pre class="code-sample">{
+  "customerId": "cust_123",
+  "items": [
+    { "dishId": 1, "quantity": 2 }
+  ]
+}</pre>
+                <p>Zod accepts this, so NestJS can continue to pricing, stock checks, and payment.</p>
+              </section>
+
+              <section>
+                <h2>Invalid Request Example</h2>
+                <pre class="code-sample">{
+  "customerId": "cust_123",
+  "items": [
+    { "dishId": "1", "quantity": 0 }
+  ]
+}</pre>
+                <p>This fails because <code>dishId</code> has the wrong type and <code>quantity</code> is too small.</p>
+                <pre class="code-sample">Expected number, received string
+Number must be greater than or equal to 1</pre>
+              </section>
+
+              <section>
+                <h2>NestJS Style Request Validation</h2>
+                <pre class="code-sample">async createOrder(payload: unknown) {
+  const parsed = OrderSchema.safeParse(payload);
+
+  if (!parsed.success) {
+    console.error(parsed.error);
+    throw new Error("Invalid order request");
+  }
+
+  return this.orderService.create(parsed.data);
+}</pre>
+              </section>
+
+              <section>
+                <h2>Payment Schema</h2>
+                <p>Once the order is valid, the bill can also have its own rule book.</p>
+                <pre class="code-sample">const PaymentSchema = z.object({
+  orderId: z.string(),
+  totalAmount: z.number(),
+  method: z.enum(["cash", "card"]),
+});</pre>
+              </section>
+
+              <section id="rules" data-toc-section>
+                <h2>Important Rules You Learned Today</h2>
+                <h3>Don't mix roles</h3>
+                <ul>
+                  <li>Strapi ≠ main database</li>
+                  <li>PostgreSQL ≠ API provider</li>
+                  <li>NestJS ≠ validator</li>
+                </ul>
+              </section>
+
+              <section id="responsibilities" data-toc-section>
+                <h2>Correct Responsibilities</h2>
+                <table class="insight-table">
+                  <thead>
+                    <tr>
+                      <th>Tool</th>
+                      <th>Responsibility</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>NestJS</td>
+                      <td>Logic and control</td>
+                    </tr>
+                    <tr>
+                      <td>Strapi</td>
+                      <td>Content</td>
+                    </tr>
+                    <tr>
+                      <td>PostgreSQL</td>
+                      <td>Core data</td>
+                    </tr>
+                    <tr>
+                      <td>Zod</td>
+                      <td>Validation</td>
+                    </tr>
+                    <tr>
+                      <td>DBeaver</td>
+                      <td>Debug and view</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+
+              <section class="callout-card" id="security-thinking" data-toc-section>
+                <h2>Security Thinking</h2>
+                <ul>
+                  <li>Never trust incoming request, use Zod.</li>
+                  <li>Never trust external API, validate again.</li>
+                  <li>Never expose database directly.</li>
+                  <li>Never store sensitive data in Strapi.</li>
+                </ul>
+              </section>
+
+              <section class="callout-card" id="final-understanding" data-toc-section>
+                <h2>Final Understanding</h2>
+                <blockquote>The chef (NestJS) runs the kitchen. The warehouse (PostgreSQL) keeps important stuff. The storage manager (Strapi) keeps menus and pictures. The inspector (Zod) checks everything is safe. The window (DBeaver) lets you see inside.</blockquote>
+              </section>
+
+              <section class="callout-card">
+                <h2>One Sentence to Remember</h2>
+                <blockquote><strong>NestJS controls the system, PostgreSQL stores truth, Strapi manages content, Zod protects everything.</strong></blockquote>
+              </section>
+
+              <section>
+                <h2>What's Next for Day 6</h2>
+                <ul>
+                  <li>Build a real mini flow: order API end-to-end.</li>
+                  <li>Simulate a bug when skipping Zod validation.</li>
+                </ul>
+              </section>
+            </div>
+            </div>
+
+            <nav class="day-navigation" aria-label="Diary navigation">
+              <a href="day-4.html">← Day 4</a>
+              <span><a href="index.html">Back to diary</a></span>
+              <span>Day 6 →</span>
+            </nav>
+          </article>
+        </main>
+      </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="../script.js"></script>
+    <script>
+      (() => {
+        const sections = [...document.querySelectorAll("[data-toc-section]")];
+        const links = [...document.querySelectorAll(".toc-link")];
+
+        if (!sections.length || !links.length || !("IntersectionObserver" in window)) {
+          return;
+        }
+
+        const setActive = (id) => {
+          links.forEach((link) => {
+            const active = link.getAttribute("href") === `#${id}`;
+            link.classList.toggle("is-active", active);
+
+            if (active) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const visibleSections = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+            if (visibleSections.length > 0) {
+              setActive(visibleSections[0].target.id);
+            }
+          },
+          {
+            rootMargin: "-25% 0px -55% 0px",
+            threshold: [0.15, 0.35, 0.6],
+          }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+        setActive(sections[0].id);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+{
+  "title": "Nhật ký trồng trọt | Home Utilities",
+  "description": "Ghi lại từng cây trồng, học từ thiên nhiên và làm vườn tự tin hơn mỗi mùa.",
+  "translations": [
+    {
+      "selector": "#planting-eyebrow",
+      "text": "Greenies / Nhật ký trồng trọt"
+    },
+    {
+      "selector": "#planting-title",
+      "text": "Nhật ký trồng trọt"
+    },
+    {
+      "selector": "#planting-subhead",
+      "text": "Theo dõi cây, học cùng thiên nhiên và làm vườn tự tin."
+    },
+    {
+      "selector": "#planting-subtext",
+      "text": "Sổ tay bình tĩnh này giúp bạn nhớ từng cây trồng, ngày đơm nụ và phản ứng nên mỗi mùa nhẹ lòng."
+    },
+    {
+      "selector": "#diary-what-title",
+      "text": "Nhật ký trồng trọt là gì?"
+    },
+    {
+      "selector": "#diary-what-description",
+      "text": "Cuốn sổ cá nhân lưu lại mỗi cây bạn trồng, lúc gieo và kết quả để không quên gì cả."
+    },
+    {
+      "selector": "#diary-why-label",
+      "text": "Vì sao nó quan trọng"
+    },
+    {
+      "selector": "#diary-why-1",
+      "text": "Không lặp lại lỗi sai (mùa trồng, lượng nước)."
+    },
+    {
+      "selector": "#diary-why-2",
+      "text": "Hiểu cách cây ứng xử trong môi trường của bạn."
+    },
+    {
+      "selector": "#diary-why-3",
+      "text": "Nâng cấp kết quả từng vụ."
+    },
+    {
+      "selector": "#diary-record-label",
+      "text": "Ghi lại gì"
+    },
+    {
+      "selector": "#diary-record-1",
+      "text": "Tên cây"
+    },
+    {
+      "selector": "#diary-record-2",
+      "text": "Ngày trồng"
+    },
+    {
+      "selector": "#diary-record-3",
+      "text": "Vị trí (ban công, vườn, trong nhà)"
+    },
+    {
+      "selector": "#diary-record-4",
+      "text": "Lượng ánh sáng"
+    },
+    {
+      "selector": "#diary-record-5",
+      "text": "Tần suất tưới"
+    },
+    {
+      "selector": "#diary-record-6",
+      "text": "Ghi chú (mọc lên, sự cố, cảm nhận)"
+    },
+    {
+      "selector": "#diary-entry-title",
+      "text": "Mẫu nhật ký (đã điền sẵn)"
+    },
+    {
+      "selector": "#diary-timeline-title",
+      "text": "Dòng thời gian nhật ký"
+    },
+    {
+      "selector": "#diary-security-title",
+      "text": "Bảo mật & dữ liệu"
+    },
+    {
+      "selector": "#battle-plan-title",
+      "text": "Kế hoạch tác chiến"
+    },
+    {
+      "selector": "#battle-plan-intro",
+      "text": "Chào bạn, đây là bản \"Kế hoạch tác chiến\" gọn nhẹ cho người mới, bận rộn, dùng Bộ 3 Minisize và các món bổ trợ để chinh phục vườn sân thượng."
+    },
+    {
+      "selector": "#pinching-title",
+      "text": "Hồi sức sau khi bấm ngọn"
+    }
+  ]
+}

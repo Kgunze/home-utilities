@@ -1,0 +1,26 @@
+{
+  "title": "Ngày 1 — Suy nghĩ kiểu người xây dựng | Cat Can Code",
+  "description": "Ghi chép ngày đầu tiên về tư duy người xây dựng thay vì người dùng.",
+  "translations": [
+    {
+      "selector": "#day-one-title",
+      "text": "Ngày 1 — Suy nghĩ kiểu người xây dựng, không chỉ người dùng"
+    },
+    {
+      "selector": "#day-one-subtitle",
+      "text": "Bắt đầu hành trình học code với sự tò mò, không phải hoàn hảo."
+    },
+    {
+      "selector": "#day-one-author",
+      "text": "Cat Can Code"
+    },
+    {
+      "selector": "#day-one-date",
+      "text": "04 tháng 4 năm 2026"
+    },
+    {
+      "selector": "#day-one-reading",
+      "text": "Đọc 4 phút"
+    }
+  ]
+}
