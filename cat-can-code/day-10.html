@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 10 - Kafka and the Event Bus | Cat Can Code</title>
+    <meta
+      name="description"
+      content="A Day 10 diary entry that explains Kafka, events, the event bus idea, and why event-driven systems feel different from direct API calls."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .cat-page-shell {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f6efe7 0%, #e8dccd 100%);
+      }
+
+      .sketch-parallax {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .sketch-svg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.11;
+        filter: blur(0.25px);
+      }
+
+      .sketch-layer {
+        mix-blend-mode: multiply;
+        will-change: transform;
+      }
+
+      .sketch-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(235, 223, 208, 0.44));
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cat-page-shell .page-shell {
+        position: relative;
+        z-index: 2;
+      }
+
+      .article-wrapper {
+        max-width: 820px;
+        margin: 0 auto;
+        padding-top: 1rem;
+      }
+
+      .article-shell {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-inline: clamp(1.25rem, 3vw, 2.75rem);
+      }
+
+      .article-layout {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        gap: clamp(2.5rem, 4vw, 4.5rem);
+      }
+
+      .article-meta {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .article-body {
+        color: var(--text);
+        line-height: 1.7;
+        font-size: 1.08rem;
+        display: grid;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 820px;
+        min-width: 0;
+        order: 1;
+      }
+
+      .article-body section[id] {
+        scroll-margin-top: 7.5rem;
+      }
+
+      .article-body h2,
+      .article-body h3 {
+        font-family: "Fraunces", serif;
+        margin: 0 0 0.45rem;
+      }
+
+      .article-body h2 {
+        font-size: 1.9rem;
+      }
+
+      .article-body h3 {
+        font-size: 1.35rem;
+      }
+
+      .article-body p {
+        margin: 0 0 0.9rem;
+      }
+
+      .article-body ul {
+        padding-left: 1.25rem;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .article-body blockquote {
+        margin: 0.75rem 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .hero-capsule {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .hero-capsule h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 4.4rem);
+      }
+
+      .hero-capsule p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .callout-card {
+        border: 1px solid rgba(92, 81, 69, 0.22);
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.84);
+        padding: 1.15rem 1.25rem;
+        box-shadow: 0 12px 24px rgba(92, 81, 69, 0.08);
+      }
+
+      .code-sample {
+        background: #1d1a17;
+        color: #f8ebd8;
+        padding: 0.95rem 1rem;
+        border-radius: 0.85rem;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        overflow-x: auto;
+        margin: 0.85rem 0;
+        white-space: pre-wrap;
+      }
+
+      .insight-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.6rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(92, 81, 69, 0.07);
+      }
+
+      .insight-table th,
+      .insight-table td {
+        padding: 0.9rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(92, 81, 69, 0.12);
+        vertical-align: top;
+      }
+
+      .insight-table th {
+        font-family: "Fraunces", serif;
+        font-size: 1rem;
+        background: rgba(244, 230, 216, 0.8);
+      }
+
+      .insight-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .day-navigation {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .day-navigation a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .day-navigation span {
+        flex: 1;
+        display: inline-flex;
+        justify-content: center;
+      }
+
+      .toc-nav {
+        position: sticky;
+        top: 6rem;
+        align-self: start;
+        width: 260px;
+        flex: 0 0 260px;
+        order: 2;
+      }
+
+      .toc-card {
+        background: rgba(255, 250, 245, 0.82);
+        border-left: 1px solid rgba(92, 81, 69, 0.18);
+        border-radius: 1rem;
+        padding: 1rem 0 1rem 1rem;
+        box-shadow: 0 10px 24px rgba(92, 81, 69, 0.06);
+        backdrop-filter: blur(6px);
+      }
+
+      .toc-title {
+        margin: 0 0 0.8rem;
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+      }
+
+      .toc-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .toc-link {
+        display: block;
+        padding: 0.35rem 0.55rem;
+        border-radius: 0.7rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: background-color 160ms ease, color 160ms ease;
+      }
+
+      .toc-link:hover,
+      .toc-link:focus-visible,
+      .toc-link.is-active {
+        background: rgba(53, 92, 74, 0.12);
+        color: var(--primary);
+      }
+
+      @media (max-width: 1100px) {
+        .article-layout {
+          flex-direction: column;
+        }
+
+        .toc-nav {
+          position: static;
+          width: 100%;
+          order: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cat-page-shell">
+      <div class="sketch-parallax" aria-hidden="true">
+        <svg class="sketch-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+          <g class="sketch-layer" data-speed="0.05">
+            <path
+              d="M70 210 C220 180 350 240 520 200"
+              stroke="#5c5145"
+              stroke-width="1.4"
+              stroke-dasharray="8 4"
+              fill="none"
+              vector-effect="non-scaling-stroke"
+            />
+            <text x="530" y="208" font-size="12" fill="#5c5145">event -> topic -> consumer</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.03">
+            <rect x="250" y="320" width="170" height="74" rx="10" ry="10" fill="none" stroke="#5c5145" stroke-width="1.6" />
+            <text x="302" y="364" font-size="14" fill="#5c5145">Kafka</text>
+            <path d="M180 356 L250 356" stroke="#5c5145" stroke-width="1.2" stroke-dasharray="5 5" />
+            <path d="M420 356 L520 356" stroke="#5c5145" stroke-width="1.2" stroke-dasharray="5 5" />
+          </g>
+          <g class="sketch-layer" data-speed="0.08">
+            <circle cx="910" cy="172" r="28" stroke="#5c5145" stroke-width="1.2" fill="none" />
+            <text x="885" y="178" font-size="11" fill="#5c5145">event bus</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.01">
+            <path d="M90 630 L150 670 L210 630" stroke="#5c5145" stroke-width="1.4" fill="none" />
+            <text x="220" y="657" font-size="10" fill="#5c5145">announce it</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="600" y="82" font-size="12" fill="#5c5145" opacity="0.7">who needs this?</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="635" y="114" font-size="12" fill="#5c5145" opacity="0.7">everyone can listen</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sketch-overlay"></div>
+      <div class="page-shell">
+        <header class="hero hero-subpage">
+          <nav class="topbar" aria-label="Primary">
+            <a class="brand" href="../index.html#home">Home Utilities</a>
+            <div class="nav-links">
+              <a href="../stories.html">Stories</a>
+              <div class="nav-parent">
+                <a href="../index.html#kitchen-notes">Kitchen Notes</a>
+                <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                  <a href="../recipes.html">Recipes</a>
+                  <a href="../shopping-planner.html">Shopping Planner</a>
+                </div>
+              </div>
+              <div class="nav-parent nav-parent-greenies">
+                <a class="nav-link-greenies" href="#">Greenies</a>
+                <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                  <a class="nav-greenies-planting" href="../planting-diary.html">Planting diary</a>
+                  <a class="nav-greenies-fertilization" href="../fertilization-wikipedia.html">Fertilization wikipedia</a>
+                </div>
+              </div>
+              <a href="../ptsd.html">PTSD</a>
+            </div>
+            <label class="locale-switcher">
+              <span class="locale-switcher-label">Language</span>
+              <select class="locale-select" id="locale-select" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="vi">Vietnamese</option>
+              </select>
+            </label>
+          </nav>
+
+          <section class="hero-content hero-subpage">
+            <div class="hero-copy article-wrapper">
+              <div class="hero-capsule">
+                <p class="eyebrow">Cat Can Code</p>
+                <h1>Day 10 - Kafka and the Event Bus</h1>
+                <p>
+                  Today the system changed again: instead of one service calling another, the picture became a shared stream of events that many services can react to at the same time.
+                </p>
+              </div>
+            </div>
+          </section>
+        </header>
+
+        <main class="article-shell">
+          <article class="article-wrapper">
+            <div class="article-meta">
+              <span>April 12, 2026</span>
+              <span>Day 10</span>
+              <span>10 min read</span>
+            </div>
+
+            <div class="article-layout">
+              <aside class="toc-nav" aria-label="Table of contents">
+                <div class="toc-card">
+                  <h2 class="toc-title">On this page</h2>
+                  <ul class="toc-list">
+                    <li><a class="toc-link" href="#what-is-kafka">What Is Kafka</a></li>
+                    <li><a class="toc-link" href="#event">What Is an Event</a></li>
+                    <li><a class="toc-link" href="#event-bus">Event Bus</a></li>
+                    <li><a class="toc-link" href="#restaurant">Restaurant Analogy</a></li>
+                    <li><a class="toc-link" href="#how-it-works">How Kafka Works</a></li>
+                    <li><a class="toc-link" href="#origin-problem">Why Kafka Exists</a></li>
+                    <li><a class="toc-link" href="#origin-story">Origin Story</a></li>
+                    <li><a class="toc-link" href="#compare">Kafka vs Queue</a></li>
+                    <li><a class="toc-link" href="#architecture">Where It Fits</a></li>
+                    <li><a class="toc-link" href="#security">Security Thinking</a></li>
+                    <li><a class="toc-link" href="#upgrade">Mental Upgrade</a></li>
+                    <li><a class="toc-link" href="#cat-story">Cat Version</a></li>
+                    <li><a class="toc-link" href="#takeaway">Day 10 Takeaway</a></li>
+                  </ul>
+                </div>
+              </aside>
+
+              <div class="article-body">
+                <section class="callout-card" id="what-is-kafka" data-toc-section>
+                  <h2>What Is Kafka?</h2>
+                  <p>Apache Kafka is a system that lets services send, store, and process streams of events in real time.</p>
+                  <blockquote>Kafka is a high-speed pipeline where systems send and receive events continuously.</blockquote>
+                </section>
+
+                <section id="event" data-toc-section>
+                  <h2>What Is an Event?</h2>
+                  <p>An event is simply something that happened in the system.</p>
+                  <ul>
+                    <li>Order placed</li>
+                    <li>Payment completed</li>
+                    <li>User logged in</li>
+                  </ul>
+                  <blockquote>Systems do not only call each other. They emit events.</blockquote>
+                </section>
+
+                <section class="callout-card" id="event-bus" data-toc-section>
+                  <h2>What Is an Event Bus?</h2>
+                  <p>An event bus is a shared communication channel where events flow between services.</p>
+                  <h3>Without an event bus</h3>
+                  <pre class="code-sample">Service A -> Service B -> Service C</pre>
+                  <ul>
+                    <li>Hard dependencies</li>
+                    <li>Fragile system</li>
+                    <li>Hard to scale</li>
+                  </ul>
+                  <h3>With an event bus</h3>
+                  <pre class="code-sample">Service A -> Event Bus -> Service B
+                        -> Service C
+                        -> Service D</pre>
+                  <blockquote>Services do not talk directly. They listen to events.</blockquote>
+                </section>
+
+                <section id="restaurant" data-toc-section>
+                  <h2>Restaurant Analogy</h2>
+                  <h3>Without an event bus</h3>
+                  <pre class="code-sample">Waiter -> Chef -> Sous Chef -> Cashier</pre>
+                  <p>Everything is chained.</p>
+                  <h3>With Kafka</h3>
+                  <pre class="code-sample">Order Board (Event Bus)
+
+Waiter posts order
+   ->
+Chef sees it
+Cashier sees it
+Kitchen sees it</pre>
+                  <blockquote>Kafka is the digital order board.</blockquote>
+                </section>
+
+                <section class="callout-card" id="how-it-works" data-toc-section>
+                  <h2>How Kafka Works</h2>
+                  <h3>Step 1 - Producer</h3>
+                  <p>The producer sends an event, such as:</p>
+                  <pre class="code-sample">"OrderCreated"</pre>
+                  <h3>Step 2 - Kafka</h3>
+                  <ul>
+                    <li>Stores events in topics</li>
+                    <li>Keeps history</li>
+                  </ul>
+                  <h3>Step 3 - Consumer</h3>
+                  <p>Consumers listen and react, such as a payment service or notification service.</p>
+                  <pre class="code-sample">Producer -> Kafka -> Consumers</pre>
+                </section>
+
+                <section id="origin-problem" data-toc-section>
+                  <h2>Why Kafka Exists</h2>
+                  <p>Before Kafka, systems mostly used direct API calls or simple queues.</p>
+                  <ul>
+                    <li>Tight coupling between services</li>
+                    <li>Data loss when messages were not stored well</li>
+                    <li>Too many direct connections to maintain</li>
+                  </ul>
+                  <blockquote>Kafka solved decoupling, persistent event storage, and high throughput.</blockquote>
+                </section>
+
+                <section class="callout-card" id="origin-story" data-toc-section>
+                  <h2>Origin Story of Kafka</h2>
+                  <p>Kafka was created at LinkedIn because LinkedIn needed to handle massive activity streams and real-time updates across many systems.</p>
+                  <p>They needed one central event pipeline that many services could depend on at the same time.</p>
+                  <p>The name comes from Franz Kafka, a nod to the complexity of deeply interconnected systems.</p>
+                </section>
+
+                <section id="compare" data-toc-section>
+                  <h2>Kafka vs Traditional Queue</h2>
+                  <table class="insight-table">
+                    <thead>
+                      <tr>
+                        <th>Feature</th>
+                        <th>Traditional Queue</th>
+                        <th>Kafka</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Message storage</td>
+                        <td>Temporary</td>
+                        <td>Persistent</td>
+                      </tr>
+                      <tr>
+                        <td>Replay events</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                      </tr>
+                      <tr>
+                        <td>Throughput</td>
+                        <td>Medium</td>
+                        <td>Very high</td>
+                      </tr>
+                      <tr>
+                        <td>Consumers</td>
+                        <td>1-to-1</td>
+                        <td>1-to-many</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+
+                <section class="callout-card" id="architecture" data-toc-section>
+                  <h2>Where Kafka Fits in Your Architecture</h2>
+                  <pre class="code-sample">User
+ ->
+Next.js (BFF)
+ ->
+NestJS
+ ->
+Kafka (Event Bus)
+ ->
+Other Services
+ ->
+Database / Cache</pre>
+                  <p>When a user orders food, the Order service can publish an <code>OrderCreated</code> event.</p>
+                  <pre class="code-sample">OrderCreated event -> Kafka
+   ->
+Payment Service
+   ->
+Notification Service
+   ->
+Analytics Service</pre>
+                </section>
+
+                <section id="security" data-toc-section>
+                  <h2>Security and System Insight</h2>
+                  <h3>Benefits</h3>
+                  <ul>
+                    <li>Loose coupling</li>
+                    <li>Scalable design</li>
+                    <li>Fault tolerance</li>
+                  </ul>
+                  <h3>Risks</h3>
+                  <ul>
+                    <li>Event explosion if too many events are introduced carelessly</li>
+                    <li>Harder debugging across many asynchronous consumers</li>
+                    <li>Event ordering issues in the wrong design</li>
+                  </ul>
+                </section>
+
+                <section class="callout-card" id="upgrade" data-toc-section>
+                  <h2>Mental Model Upgrade</h2>
+                  <pre class="code-sample">API = request-response
+Kafka = event-driven system</pre>
+                  <p>Before, the system felt like this:</p>
+                  <blockquote>Call this service.</blockquote>
+                  <p>Now the system feels like this:</p>
+                  <blockquote>Announce what happened.</blockquote>
+                </section>
+
+                <section id="cat-story" data-toc-section>
+                  <h2>Cat Version</h2>
+                  <p>Cat orders fish.</p>
+                  <h3>Without Kafka</h3>
+                  <ul>
+                    <li>Waiter tells chef</li>
+                    <li>Chef tells cashier</li>
+                    <li>Cashier tells the system</li>
+                  </ul>
+                  <h3>With Kafka</h3>
+                  <pre class="code-sample">"Fish ordered"</pre>
+                  <p>Everyone reacts:</p>
+                  <ul>
+                    <li>Chef cooks</li>
+                    <li>Cashier prepares the bill</li>
+                    <li>System logs the data</li>
+                  </ul>
+                  <blockquote>I do not need to tell everyone. I just announce it.</blockquote>
+                </section>
+
+                <section class="callout-card" id="takeaway" data-toc-section>
+                  <h2>Final Day 10 Takeaway</h2>
+                  <p>Kafka is the backbone of event-driven systems, allowing services to communicate through events instead of direct calls.</p>
+                  <blockquote><strong>Kafka is the event pipeline, and the event bus is the communication system for events.</strong></blockquote>
+                  <p>Next step: simulate a real flow like booking -> payment -> notification using Kafka.</p>
+                </section>
+              </div>
+            </div>
+
+            <nav class="day-navigation" aria-label="Diary navigation">
+              <a href="day-9.html">Previous: Day 9</a>
+              <span><a href="index.html">Back to diary</a></span>
+              <span>Day 11 next</span>
+            </nav>
+          </article>
+        </main>
+      </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="../script.js"></script>
+    <script>
+      (() => {
+        const sections = [...document.querySelectorAll("[data-toc-section]")];
+        const links = [...document.querySelectorAll(".toc-link")];
+
+        if (!sections.length || !links.length || !("IntersectionObserver" in window)) {
+          return;
+        }
+
+        const setActive = (id) => {
+          links.forEach((link) => {
+            const active = link.getAttribute("href") === `#${id}`;
+            link.classList.toggle("is-active", active);
+
+            if (active) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const visibleSections = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+            if (visibleSections.length > 0) {
+              setActive(visibleSections[0].target.id);
+            }
+          },
+          {
+            rootMargin: "-25% 0px -55% 0px",
+            threshold: [0.15, 0.35, 0.6],
+          }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+        setActive(sections[0].id);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 9 - From Restaurant to AWS Cloud | Cat Can Code</title>
+    <meta
+      name="description"
+      content="A Day 9 diary entry that maps a restaurant system into AWS services, from CloudFront and S3 to EC2, Redis, RDS, VPC, and IAM."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .cat-page-shell {
+        position: relative;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f5efe5 0%, #ebddca 100%);
+      }
+
+      .sketch-parallax {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .sketch-svg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.11;
+        filter: blur(0.25px);
+      }
+
+      .sketch-layer {
+        mix-blend-mode: multiply;
+        will-change: transform;
+      }
+
+      .sketch-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(236, 223, 204, 0.44));
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cat-page-shell .page-shell {
+        position: relative;
+        z-index: 2;
+      }
+
+      .article-wrapper {
+        max-width: 820px;
+        margin: 0 auto;
+        padding-top: 1rem;
+      }
+
+      .article-shell {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-inline: clamp(1.25rem, 3vw, 2.75rem);
+      }
+
+      .article-layout {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        gap: clamp(2.5rem, 4vw, 4.5rem);
+      }
+
+      .article-meta {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .article-body {
+        color: var(--text);
+        line-height: 1.7;
+        font-size: 1.08rem;
+        display: grid;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 820px;
+        min-width: 0;
+        order: 1;
+      }
+
+      .article-body section[id] {
+        scroll-margin-top: 7.5rem;
+      }
+
+      .article-body h2,
+      .article-body h3 {
+        font-family: "Fraunces", serif;
+        margin: 0 0 0.45rem;
+      }
+
+      .article-body h2 {
+        font-size: 1.9rem;
+      }
+
+      .article-body h3 {
+        font-size: 1.35rem;
+      }
+
+      .article-body p {
+        margin: 0 0 0.9rem;
+      }
+
+      .article-body ul {
+        padding-left: 1.25rem;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .article-body blockquote {
+        margin: 0.75rem 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--primary);
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .hero-capsule {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .hero-capsule h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 4.4rem);
+      }
+
+      .hero-capsule p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .callout-card {
+        border: 1px solid rgba(92, 81, 69, 0.22);
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.84);
+        padding: 1.15rem 1.25rem;
+        box-shadow: 0 12px 24px rgba(92, 81, 69, 0.08);
+      }
+
+      .code-sample {
+        background: #1d1a17;
+        color: #f8ebd8;
+        padding: 0.95rem 1rem;
+        border-radius: 0.85rem;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        overflow-x: auto;
+        margin: 0.85rem 0;
+        white-space: pre-wrap;
+      }
+
+      .insight-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.6rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(92, 81, 69, 0.07);
+      }
+
+      .insight-table th,
+      .insight-table td {
+        padding: 0.9rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(92, 81, 69, 0.12);
+        vertical-align: top;
+      }
+
+      .insight-table th {
+        font-family: "Fraunces", serif;
+        font-size: 1rem;
+        background: rgba(244, 230, 216, 0.8);
+      }
+
+      .insight-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .day-navigation {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .day-navigation a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .day-navigation span {
+        flex: 1;
+        display: inline-flex;
+        justify-content: center;
+      }
+
+      .toc-nav {
+        position: sticky;
+        top: 6rem;
+        align-self: start;
+        width: 260px;
+        flex: 0 0 260px;
+        order: 2;
+      }
+
+      .toc-card {
+        background: rgba(255, 250, 245, 0.82);
+        border-left: 1px solid rgba(92, 81, 69, 0.18);
+        border-radius: 1rem;
+        padding: 1rem 0 1rem 1rem;
+        box-shadow: 0 10px 24px rgba(92, 81, 69, 0.06);
+        backdrop-filter: blur(6px);
+      }
+
+      .toc-title {
+        margin: 0 0 0.8rem;
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+      }
+
+      .toc-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .toc-link {
+        display: block;
+        padding: 0.35rem 0.55rem;
+        border-radius: 0.7rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: background-color 160ms ease, color 160ms ease;
+      }
+
+      .toc-link:hover,
+      .toc-link:focus-visible,
+      .toc-link.is-active {
+        background: rgba(53, 92, 74, 0.12);
+        color: var(--primary);
+      }
+
+      @media (max-width: 1100px) {
+        .article-layout {
+          flex-direction: column;
+        }
+
+        .toc-nav {
+          position: static;
+          width: 100%;
+          order: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cat-page-shell">
+      <div class="sketch-parallax" aria-hidden="true">
+        <svg class="sketch-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+          <g class="sketch-layer" data-speed="0.05">
+            <path
+              d="M80 190 C210 165 360 210 520 185"
+              stroke="#5c5145"
+              stroke-width="1.4"
+              stroke-dasharray="8 4"
+              fill="none"
+              vector-effect="non-scaling-stroke"
+            />
+            <text x="535" y="192" font-size="12" fill="#5c5145">edge -> app -> data</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.03">
+            <rect x="200" y="320" width="150" height="72" rx="10" ry="10" fill="none" stroke="#5c5145" stroke-width="1.6"/>
+            <text x="230" y="362" font-size="14" fill="#5c5145">CloudFront</text>
+            <path d="M350 356 L460 356" stroke="#5c5145" stroke-width="1.2" stroke-dasharray="5 5" />
+            <text x="468" y="360" font-size="10" fill="#5c5145">cache first</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.08">
+            <path d="M815 155 C855 125 945 125 985 155" stroke="#5c5145" stroke-width="1.3" fill="none" />
+            <text x="900" y="202" font-size="10" fill="#5c5145">aws</text>
+          </g>
+          <g class="sketch-layer" data-speed="0.01">
+            <path d="M95 620 L155 660 L215 620" stroke="#5c5145" stroke-width="1.4" fill="none" />
+            <text x="225" y="648" font-size="10" fill="#5c5145">specialized services</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="620" y="85" font-size="12" fill="#5c5145" opacity="0.7">who does what?</text>
+          </g>
+          <g class="sketch-layer floating-thought" data-speed="0.02">
+            <text x="645" y="115" font-size="12" fill="#5c5145" opacity="0.7">one job each</text>
+          </g>
+        </svg>
+      </div>
+      <div class="sketch-overlay"></div>
+      <div class="page-shell">
+        <header class="hero hero-subpage">
+          <nav class="topbar" aria-label="Primary">
+            <a class="brand" href="../index.html#home">Home Utilities</a>
+            <div class="nav-links">
+              <a href="../stories.html">Stories</a>
+              <div class="nav-parent">
+                <a href="../index.html#kitchen-notes">Kitchen Notes</a>
+                <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                  <a href="../recipes.html">Recipes</a>
+                  <a href="../shopping-planner.html">Shopping Planner</a>
+                </div>
+              </div>
+              <div class="nav-parent nav-parent-greenies">
+                <a class="nav-link-greenies" href="#">Greenies</a>
+                <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                  <a class="nav-greenies-planting" href="../planting-diary.html">Planting diary</a>
+                  <a class="nav-greenies-fertilization" href="../fertilization-wikipedia.html">Fertilization wikipedia</a>
+                </div>
+              </div>
+              <a href="../ptsd.html">PTSD</a>
+            </div>
+            <label class="locale-switcher">
+              <span class="locale-switcher-label">Language</span>
+              <select class="locale-select" id="locale-select" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="vi">Vietnamese</option>
+              </select>
+            </label>
+          </nav>
+
+          <section class="hero-content hero-subpage">
+            <div class="hero-copy article-wrapper">
+              <div class="hero-capsule">
+                <p class="eyebrow">Cat Can Code</p>
+                <h1>Day 9 - From Restaurant to AWS Cloud</h1>
+                <p>
+                  Today the restaurant model expanded into the cloud, and the full system started to feel like a set of coordinated services instead of one giant machine.
+                </p>
+              </div>
+            </div>
+          </section>
+        </header>
+
+        <main class="article-shell">
+          <article class="article-wrapper">
+            <div class="article-meta">
+              <span>April 11, 2026</span>
+              <span>Day 9</span>
+              <span>9 min read</span>
+            </div>
+
+            <div class="article-layout">
+              <aside class="toc-nav" aria-label="Table of contents">
+                <div class="toc-card">
+                  <h2 class="toc-title">On this page</h2>
+                  <ul class="toc-list">
+                    <li><a class="toc-link" href="#achieved">What You Achieved</a></li>
+                    <li><a class="toc-link" href="#cloud-picture">Full Cloud Picture</a></li>
+                    <li><a class="toc-link" href="#mapping">Restaurant to AWS</a></li>
+                    <li><a class="toc-link" href="#flashcards">Flashcards</a></li>
+                    <li><a class="toc-link" href="#flow">Real Flow</a></li>
+                    <li><a class="toc-link" href="#insight">Architecture Insight</a></li>
+                    <li><a class="toc-link" href="#build-options">Two Ways to Build</a></li>
+                    <li><a class="toc-link" href="#security">Security Thinking</a></li>
+                    <li><a class="toc-link" href="#leap">Big Leap</a></li>
+                    <li><a class="toc-link" href="#story">Final Cat Story</a></li>
+                    <li><a class="toc-link" href="#takeaway">Day 9 Takeaway</a></li>
+                  </ul>
+                </div>
+              </aside>
+
+              <div class="article-body">
+                <section class="callout-card" id="achieved" data-toc-section>
+                  <h2>What You Achieved Today</h2>
+                  <p>You moved from understanding backend architecture to understanding how real systems run in the cloud.</p>
+                  <blockquote>Today was the jump from app structure to cloud structure.</blockquote>
+                </section>
+
+                <section id="cloud-picture" data-toc-section>
+                  <h2>The Full Cloud Picture</h2>
+                  <p>This is the clean AWS shape of the system you have been building in your head.</p>
+                  <pre class="code-sample">User
+  ->
+CloudFront (global delivery)
+  ->
+S3 (static assets)
+  ->
+API Gateway / Next.js (BFF)
+  ->
+NestJS (backend on EC2)
+  ->
+ElastiCache (Redis)
+  ->
+RDS (database)</pre>
+                </section>
+
+                <section class="callout-card" id="mapping" data-toc-section>
+                  <h2>Restaurant to AWS Mapping</h2>
+                  <table class="insight-table">
+                    <thead>
+                      <tr>
+                        <th>Restaurant Role</th>
+                        <th>System Role</th>
+                        <th>AWS Service</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Delivery network</td>
+                        <td>Global content delivery</td>
+                        <td>CloudFront</td>
+                      </tr>
+                      <tr>
+                        <td>Storage room</td>
+                        <td>Static files</td>
+                        <td>S3</td>
+                      </tr>
+                      <tr>
+                        <td>Waiter</td>
+                        <td>UI</td>
+                        <td>Next.js</td>
+                      </tr>
+                      <tr>
+                        <td>Manager</td>
+                        <td>BFF</td>
+                        <td>API Gateway / Next.js server</td>
+                      </tr>
+                      <tr>
+                        <td>Chef</td>
+                        <td>Backend logic</td>
+                        <td>NestJS on EC2</td>
+                      </tr>
+                      <tr>
+                        <td>Sous chef</td>
+                        <td>Services</td>
+                        <td>NestJS modules</td>
+                      </tr>
+                      <tr>
+                        <td>Pre-cooked food</td>
+                        <td>Cache</td>
+                        <td>ElastiCache (Redis)</td>
+                      </tr>
+                      <tr>
+                        <td>Ingredient storage</td>
+                        <td>Database</td>
+                        <td>RDS</td>
+                      </tr>
+                      <tr>
+                        <td>Building</td>
+                        <td>Network</td>
+                        <td>VPC</td>
+                      </tr>
+                      <tr>
+                        <td>Security guard</td>
+                        <td>Permissions</td>
+                        <td>IAM</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+
+                <section id="flashcards" data-toc-section>
+                  <h2>Flashcards - AWS Core Concepts</h2>
+                  <table class="insight-table">
+                    <thead>
+                      <tr>
+                        <th>Service</th>
+                        <th>Meaning</th>
+                        <th>Mental model</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>CloudFront</td>
+                        <td>CDN that speeds up global delivery.</td>
+                        <td>Food delivery hubs worldwide.</td>
+                      </tr>
+                      <tr>
+                        <td>S3</td>
+                        <td>Scalable file storage for images, videos, and static assets.</td>
+                        <td>Storage warehouse.</td>
+                      </tr>
+                      <tr>
+                        <td>EC2</td>
+                        <td>Virtual server that runs backend applications.</td>
+                        <td>Your kitchen space.</td>
+                      </tr>
+                      <tr>
+                        <td>Lambda</td>
+                        <td>Serverless compute that runs code on demand.</td>
+                        <td>On-demand mini chef.</td>
+                      </tr>
+                      <tr>
+                        <td>API Gateway</td>
+                        <td>Entry point for APIs, routing, and auth.</td>
+                        <td>Restaurant front door.</td>
+                      </tr>
+                      <tr>
+                        <td>RDS</td>
+                        <td>Managed SQL database.</td>
+                        <td>Ingredient database.</td>
+                      </tr>
+                      <tr>
+                        <td>ElastiCache</td>
+                        <td>Managed Redis for faster reads.</td>
+                        <td>Pre-cooked meals.</td>
+                      </tr>
+                      <tr>
+                        <td>VPC</td>
+                        <td>Private network that isolates your system.</td>
+                        <td>Restaurant land.</td>
+                      </tr>
+                      <tr>
+                        <td>IAM</td>
+                        <td>Users, roles, and permissions.</td>
+                        <td>Security guard.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+
+                <section class="callout-card" id="flow" data-toc-section>
+                  <h2>Real Flow</h2>
+                  <p>Here is what happens when Cat opens the app.</p>
+                  <pre class="code-sample">1. Request hits CloudFront
+2. Static content comes from S3
+3. Dynamic request goes to BFF (Next.js / API Gateway)
+4. BFF calls NestJS on EC2
+5. Backend checks Redis in ElastiCache
+6. If needed, backend fetches from RDS
+7. Response goes back to the user</pre>
+                </section>
+
+                <section id="insight" data-toc-section>
+                  <h2>Key Architecture Insight</h2>
+                  <pre class="code-sample">Delivery -> CloudFront
+Storage -> S3
+Compute -> EC2 / Lambda
+Cache -> Redis
+Database -> RDS
+Security -> IAM</pre>
+                  <blockquote>Each AWS service solves one problem extremely well.</blockquote>
+                </section>
+
+                <section class="callout-card" id="build-options" data-toc-section>
+                  <h2>Two Ways to Build</h2>
+                  <h3>Option 1: Server-based</h3>
+                  <pre class="code-sample">EC2 -> run everything</pre>
+                  <ul>
+                    <li>More control.</li>
+                    <li>More DevOps responsibility.</li>
+                  </ul>
+                  <h3>Option 2: Serverless</h3>
+                  <pre class="code-sample">Lambda + API Gateway</pre>
+                  <ul>
+                    <li>Less management.</li>
+                    <li>Easier scaling.</li>
+                  </ul>
+                  <p>Most real systems end up hybrid, because different parts want different tradeoffs.</p>
+                </section>
+
+                <section id="security" data-toc-section>
+                  <h2>Security Thinking</h2>
+                  <ul>
+                    <li>IAM controls who can access what.</li>
+                    <li>VPC isolates the network.</li>
+                    <li>BFF validates requests before they spread inward.</li>
+                    <li>Backend enforces business rules.</li>
+                  </ul>
+                  <blockquote>Security is layered, not single-point.</blockquote>
+                </section>
+
+                <section class="callout-card" id="leap" data-toc-section>
+                  <h2>What You Understand Now</h2>
+                  <ul>
+                    <li>You can map frontend, backend, and cloud together.</li>
+                    <li>You understand where each service fits.</li>
+                    <li>You are thinking in systems, not tools.</li>
+                    <li>You can start designing scalable architecture.</li>
+                  </ul>
+                </section>
+
+                <section id="story" data-toc-section>
+                  <h2>Final Cat Story</h2>
+                  <p>Cat opens a global restaurant.</p>
+                  <ul>
+                    <li>CloudFront delivers food worldwide.</li>
+                    <li>S3 stores menus and images.</li>
+                    <li>The waiter takes the order.</li>
+                    <li>The manager processes it.</li>
+                    <li>The chef cooks it.</li>
+                    <li>Redis serves the fast dishes.</li>
+                    <li>RDS stores the ingredients.</li>
+                  </ul>
+                  <blockquote>A great restaurant is not one kitchen. It is a system of coordinated services.</blockquote>
+                </section>
+
+                <section class="callout-card" id="takeaway" data-toc-section>
+                  <h2>Final Day 9 Takeaway</h2>
+                  <ul>
+                    <li>AWS is a system of specialized services.</li>
+                    <li>Architecture is how you connect them.</li>
+                    <li>Scaling comes from better composition, not just bigger machines.</li>
+                  </ul>
+                  <blockquote><strong>Cloud architecture means connecting the right services instead of building everything yourself.</strong></blockquote>
+                  <p>Next step: design a real AWS blueprint for Optibide.</p>
+                </section>
+              </div>
+            </div>
+
+            <nav class="day-navigation" aria-label="Diary navigation">
+              <a href="day-8.html">Previous: Day 8</a>
+              <span><a href="index.html">Back to diary</a></span>
+              <a href="day-10.html">Next: Day 10</a>
+            </nav>
+          </article>
+        </main>
+      </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="../script.js"></script>
+    <script>
+      (() => {
+        const sections = [...document.querySelectorAll("[data-toc-section]")];
+        const links = [...document.querySelectorAll(".toc-link")];
+
+        if (!sections.length || !links.length || !("IntersectionObserver" in window)) {
+          return;
+        }
+
+        const setActive = (id) => {
+          links.forEach((link) => {
+            const active = link.getAttribute("href") === `#${id}`;
+            link.classList.toggle("is-active", active);
+
+            if (active) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const visibleSections = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+            if (visibleSections.length > 0) {
+              setActive(visibleSections[0].target.id);
+            }
+          },
+          {
+            rootMargin: "-25% 0px -55% 0px",
+            threshold: [0.15, 0.35, 0.6],
+          }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+        setActive(sections[0].id);
+      })();
+    </script>
+  </body>
+</html>
