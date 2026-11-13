@@ -1,0 +1,51 @@
+{
+  "title": "Guía de Fertilización | Home Utilities",
+  "description": "Explicación sencilla sobre fertilizantes básicos, errores comunes y consejos para empezar.",
+  "recommendationPlaceholder": "Selecciona un tipo de planta para ver la recomendación.",
+  "quickButtons": {
+    "tomato": "Tomates",
+    "leafy": "Hojas verdes",
+    "other": "Otras plantas"
+  },
+  "recommendations": {
+    "tomato": "Aumenta el Potasio (K) al iniciar la fructificación y añade Calcio si notas pudrición apical.",
+    "leafy": "Prioriza el Nitrógeno (N) al inicio y cambia a una fórmula balanceada suave cuando el follaje sea denso.",
+    "other": "Usa una fórmula balanceada 10-10-10 cada 2 semanas en dosis ligeras y observa la respuesta."
+  },
+  "translations": [
+    { "selector": "#fertilization-eyebrow", "text": "Greenies / Guía de Fertilización" },
+    { "selector": "#fertilization-title", "text": "Guía de Fertilización" },
+    { "selector": "#fertilization-subhead", "text": "Aprende a nutrir tus plantas para que crezcan sanas y fuertes." },
+    { "selector": "#fertilization-subtext", "text": "Una guía clara y práctica para abonar con seguridad cada semana." },
+    { "selector": "#start-learning-btn", "text": "Empezar a aprender" },
+    { "selector": "#quick-recommendation-btn", "text": "Recomendación rápida" },
+    { "selector": "#foundations-title", "text": "¿Qué es el fertilizante?" },
+    { "selector": "#foundations-description", "text": "El fertilizante repone los nutrientes esenciales del suelo que alimentan raíces, tallos, hojas y frutos." },
+    { "selector": "#npk-title", "text": "Los elementos N - P - K" },
+    { "selector": "#npk-n-label", "text": "N (Nitrógeno)" },
+    { "selector": "#npk-n-desc", "text": "Impulsa hojas verdes, vigorosas y llenas de vida." },
+    { "selector": "#npk-p-label", "text": "P (Fósforo)" },
+    { "selector": "#npk-p-desc", "text": "Fortalece las raíces y estimula la floración." },
+    { "selector": "#npk-k-label", "text": "K (Potasio)" },
+    { "selector": "#npk-k-desc", "text": "Mejora la resistencia general contra plagas y la calidad de los frutos." },
+    { "selector": "#what-to-do-title", "text": "¿Qué hacer hoy?" },
+    { "selector": "#when-trigger", "text": "¿Cuándo abonar?" },
+    { "selector": "#avoid-trigger", "text": "¿Qué evitar?" },
+    { "selector": "#use-trigger", "text": "¿Qué tipo usar?" },
+    { "selector": "#when-tip-1", "text": "Durante la etapa de crecimiento activo (primavera y principios de verano)." },
+    { "selector": "#when-tip-2", "text": "No abones plantas recién trasplantadas o estresadas." },
+    { "selector": "#when-tip-3", "text": "Usa dosis pequeñas; menos es más." },
+    { "selector": "#avoid-tip-1", "text": "El exceso de fertilizante puede quemar las raíces." },
+    { "selector": "#avoid-tip-2", "text": "Evita usar fertilizante de floración en hortalizas de hoja." },
+    { "selector": "#avoid-tip-3", "text": "Riega siempre el sustrato antes de aplicar fertilizante." },
+    { "selector": "#use-tip-1", "text": "Orgánico (compost, humus): acción lenta pero muy segura." },
+    { "selector": "#use-tip-2", "text": "Líquido: absorción rápida cuando la planta necesita impulso." },
+    { "selector": "#use-tip-3", "text": "Granulado: liberación gradual y constante." },
+    { "selector": "#highlight-title", "text": "Consejo clave para principiantes" },
+    { "selector": "#highlight-text", "text": "Comienza con un 10-10-10 balanceado cada 2–3 semanas y observa cómo responde la planta antes de ajustar." },
+    { "selector": "#quick-title", "text": "Recomendación Rápida" },
+    { "selector": "#quick-subtitle", "text": "Elige un tipo de planta para recibir un consejo práctico." },
+    { "selector": "#recommendation-label", "text": "Recomendación" },
+    { "selector": "#handbook-title", "text": "Manual Práctico" }
+  ]
+}

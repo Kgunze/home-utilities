@@ -1,0 +1,38 @@
+{
+  "title": "Historias | Home Utilities",
+  "description": "Un archivo de historias estilo libro con una línea de tiempo personal desde 1992 hasta 2026.",
+  "translations": [
+    { "selector": ".subpage-hero-copy .eyebrow", "text": "Historias / Libro por Capítulos" },
+    { "selector": ".subpage-hero-copy h1", "text": "Un archivo de historias estilo libro con una línea de tiempo de 1992 a 2026." },
+    { "selector": ".subpage-hero-copy .hero-text", "text": "Esta página trata los recuerdos como capítulos en lugar de notas sueltas. Cada etapa se lee como un libro abierto con espacio para la familia, el hogar, la recuperación y las rutinas." },
+    { "selector": ".hero-actions a[href=\"#chapter-index\"]", "text": "Abrir índice de capítulos" },
+    { "selector": ".hero-actions a[href=\"#timeline-rail\"]", "text": "Ver línea de tiempo completa" },
+    { "selector": ".story-ledger-card .card-label", "text": "Volumen uno" },
+    { "selector": ".story-ledger-card h2", "text": "Diseño de capítulos e historias" },
+    { "selector": ".story-ledger-card .feature-list li", "all": [
+      "Diseño de libro abierto con tarjetas de capítulos",
+      "Línea de tiempo desde 1992 hasta 2026",
+      "Momentos sobre infancia, cambio y reconstrucción",
+      "Estructura flexible para futuras páginas personales"
+    ] },
+    { "selector": ".story-ledger-card .story-ledger-note", "text": "El texto a continuación está estructurado como marco editorial para crecer con nuevos capítulos de vida." },
+    { "selector": "#chapter-index .section-tag", "text": "Índice de capítulos" },
+    { "selector": "#chapter-index h2", "text": "Un diseño de libro abierto para historias de largo aliento." },
+    { "selector": "#chapter-index .planner-caption", "text": "Cada capítulo cubre un período en la línea de tiempo y puede expandirse en su propia página." },
+    { "selector": ".chapter-kicker", "all": ["Capítulo 1", "Capítulo 2", "Capítulo 3", "Capítulo 4", "Capítulo 5", "Capítulo 6"] },
+    { "selector": ".chapter-index-card strong", "all": ["Orígenes", "Años de escuela", "Identidad y presión", "Trabajo, hogar y ruptura", "Tratamiento y replanteamiento", "Reconstruyendo el sistema"] },
+    { "selector": ".story-book-section .section-tag", "index": 1, "text": "Línea de tiempo" },
+    { "selector": ".story-book-section h2", "index": 1, "text": "El recorrido completo de 1992 a 2026." },
+    { "selector": ".story-book-section .planner-caption", "index": 1, "text": "Una columna visual para toda la historia, desde los orígenes hasta el presente." },
+    { "selector": ".timeline-stop p", "all": [
+      "Nacimiento y primeros comienzos familiares.",
+      "Primeros años escolares y memoria del hogar.",
+      "Adolescencia, presión y cambio de identidad.",
+      "Encrucijadas entre estudio, trabajo y pertenencia.",
+      "Tensión, ruptura y grandes cambios.",
+      "Registros de tratamiento, comprensión de síntomas y recalibración.",
+      "Reflexión actual, sistemas del hogar y el próximo capítulo."
+    ] },
+    { "selector": ".story-modal-close", "text": "Cerrar" }
+  ]
+}
