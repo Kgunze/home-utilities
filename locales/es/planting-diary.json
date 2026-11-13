@@ -1,0 +1,29 @@
+{
+  "title": "Diario de Siembra | Home Utilities",
+  "description": "Registra tus plantas, aprende de la naturaleza y cultiva con confianza cada temporada.",
+  "translations": [
+    { "selector": "#planting-eyebrow", "text": "Greenies / Diario de Siembra" },
+    { "selector": "#planting-title", "text": "Diario de Siembra" },
+    { "selector": "#planting-subhead", "text": "Sigue tus plantas, aprende de la naturaleza y cultiva con confianza." },
+    { "selector": "#planting-subtext", "text": "Esta bitácora tranquila te ayuda a recordar qué sembraste, cuándo lo hiciste y cómo respondió cada planta." },
+    { "selector": "#diary-what-title", "text": "¿Qué es un Diario de Siembra?" },
+    { "selector": "#diary-what-description", "text": "Tu registro personal de todo lo que cultivas: qué sembraste, cuándo y cómo evolucionó con el tiempo." },
+    { "selector": "#diary-why-label", "text": "Por qué es importante" },
+    { "selector": "#diary-why-1", "text": "Evitar repetir errores (estación incorrecta, exceso de riego, etc.)" },
+    { "selector": "#diary-why-2", "text": "Comprender el comportamiento de las plantas en tu clima local" },
+    { "selector": "#diary-why-3", "text": "Mejorar tus resultados temporada tras temporada" },
+    { "selector": "#diary-record-label", "text": "Qué registrar" },
+    { "selector": "#diary-record-1", "text": "Nombre de la planta" },
+    { "selector": "#diary-record-2", "text": "Fecha de siembra" },
+    { "selector": "#diary-record-3", "text": "Ubicación (balcón, jardín, interior)" },
+    { "selector": "#diary-record-4", "text": "Exposición solar" },
+    { "selector": "#diary-record-5", "text": "Frecuencia de riego" },
+    { "selector": "#diary-record-6", "text": "Notas (crecimiento, problemas, observaciones)" },
+    { "selector": "#diary-entry-title", "text": "Entrada del Diario (ejemplo)" },
+    { "selector": "#diary-timeline-title", "text": "Línea de Tiempo del Diario" },
+    { "selector": "#diary-security-title", "text": "Privacidad y Datos" },
+    { "selector": "#battle-plan-title", "text": "Plan de Acción" },
+    { "selector": "#battle-plan-intro", "text": "Un plan práctico para principiantes ocupados que buscan cuidar su huerto en terraza o balcón sin complicaciones." },
+    { "selector": "#pinching-title", "text": "Recuperación tras la poda de brotes" }
+  ]
+}

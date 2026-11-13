@@ -1,0 +1,19 @@
+{
+  "title": "Cat Can Code | Home Utilities",
+  "description": "Diario de aprendizaje de Cat Can Code: reflexiones diarias, preguntas y notas de arquitectura de software.",
+  "translations": [
+    { "selector": "#cat-can-code-title", "text": "Diario Cat Can Code" },
+    { "selector": "#cat-can-code-subtitle", "text": "Reflexiones diarias, preguntas y descubrimientos técnicos paso a paso." },
+    { "selector": "#cat-can-code-intro", "text": "Un espacio de lectura estilo Medium enfocado en curiosidad técnica y pensamiento de constructor." },
+    { "selector": "#diary-card-title", "text": "Día 1 — Por qué empecé Cat Can Code" },
+    { "selector": "#diary-card-excerpt", "text": "Hoy empiezo a documentar mi camino aprendiendo a programar, pensando como constructor y no solo como usuario." },
+    { "selector": "#diary-card-day", "text": "Día 1" },
+    { "selector": "#diary-card-date", "text": "4 de abril de 2026" },
+    { "selector": "#diary-card-reading", "text": "Lectura de 4 min" },
+    { "selector": "#day-two-card-title", "text": "Día 2 — De rutas a sistemas (Pensando en NestJS)" },
+    { "selector": "#day-two-card-excerpt", "text": "Hoy dejé de ver el backend como endpoints aislados y empecé a verlo como un sistema organizado de responsabilidades." },
+    { "selector": "#day-two-card-day", "text": "Día 2" },
+    { "selector": "#day-two-card-date", "text": "5 de abril de 2026" },
+    { "selector": "#day-two-card-reading", "text": "Lectura de 5 min" }
+  ]
+}

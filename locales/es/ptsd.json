@@ -1,0 +1,26 @@
+{
+  "title": "PTSD | Home Utilities",
+  "description": "Página sobre PTSD con contexto de chivo expiatorio familiar, terminología científica, referencias de síntomas y plantilla de seguimiento médico.",
+  "translations": [
+    { "selector": ".subpage-hero-copy .eyebrow", "text": "Apoyo / PTSD" },
+    { "selector": ".subpage-hero-copy h1", "text": "PTSD, dinámicas familiares e historial de tratamiento en una página clara." },
+    { "selector": ".subpage-hero-copy .hero-text", "text": "Esta página separa las dinámicas del sistema familiar del diagnóstico formal y resume la terminología del PTSD, los grupos de síntomas y el seguimiento terapéutico con referencias basadas en evidencia." },
+    { "selector": ".ptsd-hero-card .card-label", "text": "Alcance" },
+    { "selector": ".ptsd-hero-card h2", "text": "Tres secciones" },
+    { "selector": ".ptsd-hero-card .feature-list li", "all": [
+      "Artículos sobre el rol de chivo expiatorio en la familia",
+      "Terminología científica y grupos de síntomas",
+      "Plantilla de seguimiento psiquiátrico y tratamiento de un año"
+    ] },
+    { "selector": ".ptsd-note", "text": "Esta página es informativa y organizativa. No constituye un diagnóstico ni sustituye la atención médica profesional." },
+    { "selector": "#family-scapegoat .section-tag", "text": "Artículos" },
+    { "selector": "#family-scapegoat h2", "text": "El PTSD en el contexto del chivo expiatorio familiar." },
+    { "selector": "#family-scapegoat .planner-caption", "text": "El rol de chivo expiatorio es un patrón del sistema familiar, no un diagnóstico del DSM." },
+    { "selector": "#scientific-record .section-tag", "text": "Registro científico" },
+    { "selector": "#scientific-record h2", "text": "Terminología psicológica, interpretación del trauma y grupos de síntomas." },
+    { "selector": "#scientific-record .planner-caption", "text": "Basado en referencias del NIMH y NCBI/PMC." },
+    { "selector": "#medical-follow-up .section-tag", "text": "Registro médico" },
+    { "selector": "#medical-follow-up h2", "text": "Traducción de recetas médicas con notas sobre medicamentos." },
+    { "selector": "#medical-follow-up .planner-caption", "text": "Basado en el registro de prescripción del 2 de junio de 2023." }
+  ]
+}

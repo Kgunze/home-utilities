@@ -171,57 +171,38 @@ const NUMENTIX_MAP_ZONES = [
   },
 ];
 
-const ensureCatCanCodeLink = () => {
+const ensureNavLink = (className, relativePath, afterSelector = null) => {
   const navLinks = document.querySelector(".nav-links");
   if (!navLinks) {
     return null;
   }
 
-  let link = navLinks.querySelector(".nav-cat-can-code");
-  if (link) {
-    return link;
+  let link = navLinks.querySelector(`.${className}`);
+  if (!link) {
+    link = document.createElement("a");
+    link.className = className;
+    link.href = `${getSiteRootPrefix()}${relativePath}`;
+
+    const ptsdLink = navLinks.querySelector('a[href="ptsd.html"], a[href="../ptsd.html"]');
+    if (ptsdLink) {
+      navLinks.insertBefore(link, ptsdLink);
+    } else {
+      navLinks.appendChild(link);
+    }
   }
 
-  link = document.createElement("a");
-  link.className = "nav-cat-can-code";
-  link.href = `${getSiteRootPrefix()}cat-can-code/`;
-
-  const ptsdLink = navLinks.querySelector('a[href="ptsd.html"]');
-
-  if (ptsdLink) {
-    navLinks.insertBefore(link, ptsdLink);
-  } else {
-    navLinks.appendChild(link);
-  }
-
-  return link;
-};
-
-const ensureNumentixLink = () => {
-  const navLinks = document.querySelector(".nav-links");
-  if (!navLinks) {
-    return null;
-  }
-
-  let link = navLinks.querySelector(".nav-numentix");
-  if (link) {
-    return link;
-  }
-
-  link = document.createElement("a");
-  link.className = "nav-numentix";
-  link.href = `${getSiteRootPrefix()}numentix.html`;
-
-  const ptsdLink = navLinks.querySelector('a[href="ptsd.html"]');
-
-  if (ptsdLink) {
-    navLinks.insertBefore(link, ptsdLink);
-  } else {
-    navLinks.appendChild(link);
+  const afterNode = afterSelector ? navLinks.querySelector(afterSelector) : null;
+  if (afterNode && afterNode.nextElementSibling !== link) {
+    afterNode.insertAdjacentElement("afterend", link);
   }
 
   return link;
 };
+
+const ensureCatCanCodeLink = () => ensureNavLink("nav-cat-can-code", "cat-can-code/");
+const ensureNumentixLink = () => ensureNavLink("nav-numentix", "numentix.html");
+const ensureKiemTheLink = () => ensureNavLink("nav-kiem-the", "kiem-the-system-map.html");
+const ensureDoomsdayLink = () => ensureNavLink("nav-doomsday", "doomsday-guide.html", ".nav-kiem-the");
 const accordionTriggers = document.querySelectorAll(".accordion-trigger");
 const quickButtons = document.querySelectorAll(".quick-btn");
 const recommendationBody = document.querySelector("#recommendation-body");
@@ -240,6 +221,7 @@ const I18N = {
     languageLabel: "Language",
     localeOptionEnglish: "English",
     localeOptionVietnamese: "Tiếng Việt",
+    localeOptionSpanish: "Español (PR)",
     navPrimary: "Primary",
     navStories: "Stories",
     navKitchenNotes: "Kitchen Notes",
@@ -247,6 +229,8 @@ const I18N = {
     navRecipes: "Recipes",
     navShoppingPlanner: "Shopping Planner",
     navPtsd: "PTSD",
+    navKiemThe: "Kiem The System",
+    navDoomsday: "Doomsday: Last Survivors",
     navNumentix: "Numentix",
     navCatCanCode: "Cat Can Code",
     backToTop: "Top",
@@ -283,6 +267,7 @@ const I18N = {
       "recipes.html": "Recipes Catalogue | Home Utilities",
       "shopping-planner.html": "Shopping Planner | Home Utilities",
       "stories.html": "Stories | Home Utilities",
+      "kiem-the-system-map.html": "Kiem The System Map | Home Utilities",
       "numentix.html": "Numentix | Home Utilities",
       "ptsd.html": "PTSD | Home Utilities",
       "recipe-pho-ga.html": "Pho Ga for Slow Weekends | Home Utilities",
@@ -303,6 +288,8 @@ const I18N = {
         "An English weekly shopping planner translated from the approved 30-day menu document for Home Utilities.",
       "stories.html":
         "A chapter-style story page for Home Utilities, designed like an open book with a personal timeline from 1992 to 2026.",
+      "kiem-the-system-map.html":
+        "An interactive Kiem The system map that visualizes core systems, combat flow, and the evolution from Lv109 to KT69.",
       "numentix.html":
         "An interactive world map for Numentix with clickable zones, chapter lore, and a sequential reader.",
       "ptsd.html":
@@ -333,6 +320,7 @@ const I18N = {
     languageLabel: "Ngôn ngữ",
     localeOptionEnglish: "English",
     localeOptionVietnamese: "Tiếng Việt",
+    localeOptionSpanish: "Español (PR)",
     navPrimary: "Điều hướng chính",
     navStories: "Câu chuyện",
     navKitchenNotes: "Ghi chú bếp",
@@ -340,6 +328,8 @@ const I18N = {
     navRecipes: "Công thức",
     navShoppingPlanner: "Kế hoạch đi chợ",
     navPtsd: "PTSD",
+    navKiemThe: "Hệ thống Kiếm Thế",
+    navDoomsday: "Doomsday: Last Survivors",
     navNumentix: "Numentix",
     navCatCanCode: "Cat Can Code",
     backToTop: "Lên đầu trang",
@@ -418,6 +408,56 @@ const I18N = {
     navGreeniesSubmenu: "Menu phụ Greenies",
     navPlantingDiary: "Nhật ký trồng trọt",
     navFertilizationWikipedia: "Bách khoa phân bón",
+  },
+  es: {
+    languageLabel: "Idioma",
+    localeOptionEnglish: "English",
+    localeOptionVietnamese: "Tiếng Việt",
+    localeOptionSpanish: "Español (PR)",
+    navPrimary: "Navegación principal",
+    navStories: "Historias",
+    navKitchenNotes: "Notas de Cocina",
+    navKitchenNotesSubmenu: "Submenú de Notas de Cocina",
+    navRecipes: "Recetas",
+    navShoppingPlanner: "Planificador de Compras",
+    navPtsd: "PTSD",
+    navKiemThe: "Sistema Kiem The",
+    navDoomsday: "Doomsday: Last Survivors",
+    navNumentix: "Numentix",
+    navCatCanCode: "Cat Can Code",
+    navGreenies: "Greenies",
+    navGreeniesSubmenu: "Submenú de Greenies",
+    navPlantingDiary: "Diario de Siembra",
+    navFertilizationWikipedia: "Guía de Fertilización",
+    backToTop: "Arriba",
+    backToTopAria: "Volver arriba",
+    livePlannerWaiting: "Esperando selecciones.",
+    plannerStatePrefix: "Estado del planificador",
+    ingredientCount: (count) => `${count} ingrediente${count === 1 ? "" : "s"}`,
+    ingredientCountNone: "sin ingredientes",
+    selectedRecipesCount: (count) => `${count} receta${count === 1 ? "" : "s"} seleccionada${count === 1 ? "" : "s"}`,
+    selectedRecipesCountNone: "sin recetas seleccionadas",
+    peopleCount: (count) => `${count} persona${count === 1 ? "" : "s"}`,
+    dateNone: "sin fecha aún",
+    noSavedMarketBooking: "Aún no hay visita guardada al mercado Binh Dien.",
+    marketDuration: (hours) => `${hours} hora${hours === 1 ? "" : "s"}`,
+    marketBookingSummary: (dateText, timeText, durationText) =>
+      `${dateText} a las ${timeText} por ${durationText}`,
+    googleCalendarText: "Visita al Mercado Binh Dien",
+    googleCalendarDetails:
+      "Compra semanal planificada desde el Planificador de Compras de Home Utilities.",
+    googleCalendarLocation: "Mercado Binh Dien, Ciudad Ho Chi Minh",
+    storyFallbackTitle: "Historia",
+    storyFallbackKicker: "Capítulo",
+    mealSummaryEmpty: "Selecciona al menos una receta para armar tu plan de comidas.",
+    ingredientTotalsEmpty: "Los totales de ingredientes aparecerán al elegir recetas.",
+    ingredientPickerPrompt: "Elige ingredientes para ver recetas compatibles.",
+    ingredientMatchPrompt: "Selecciona ingredientes para ver qué recetas coinciden.",
+    ingredientMatchNone: "Aún no hay coincidencias. Prueba agregando un ingrediente más.",
+    recipeTypes: {
+      broth: "Con caldo",
+      "non-broth": "Sin caldo",
+    },
   },
 };
 
@@ -655,19 +695,31 @@ const getLocaleStrings = () => ({
   ...(localeData.common || {}),
 });
 
+const SUPPORTED_LOCALES = ["en", "vi", "es"];
+const originalNodeText = new Map();
+
+const cacheNodeText = (node) => {
+  if (node && !originalNodeText.has(node)) {
+    originalNodeText.set(node, node.textContent);
+  }
+};
+
+const restoreOriginalTexts = () => {
+  originalNodeText.forEach((text, node) => {
+    node.textContent = text;
+  });
+};
+
 const getInitialLocale = () => {
   const saved = window.localStorage.getItem(LOCALE_STORAGE_KEY);
-  return saved === "en" || saved === "vi" ? saved : DEFAULT_LOCALE;
+  return SUPPORTED_LOCALES.includes(saved) ? saved : DEFAULT_LOCALE;
 };
 
 const setTextContentBySelector = (selector, value, index = 0) => {
   const nodes = document.querySelectorAll(selector);
-  if (!nodes.length) {
-    return;
-  }
-
   const target = nodes[index];
   if (target) {
+    cacheNodeText(target);
     target.textContent = value;
   }
 };
@@ -677,6 +729,7 @@ const setTextAcrossSelector = (selector, values) => {
   values.forEach((value, index) => {
     const node = nodes[index];
     if (node) {
+      cacheNodeText(node);
       node.textContent = value;
     }
   });
@@ -699,10 +752,11 @@ const safeFetchJson = async (path) => {
 const loadLocaleData = async () => {
   const page = getCurrentPage();
   const pageKey = page.replace(/\.html$/i, "");
+  const prefix = getSiteRootPrefix();
 
   const [commonData, pageData] = await Promise.all([
-    safeFetchJson(`locales/${currentLocale}/common.json`),
-    safeFetchJson(`locales/${currentLocale}/${pageKey}.json`),
+    safeFetchJson(`${prefix}locales/${currentLocale}/common.json`),
+    safeFetchJson(`${prefix}locales/${currentLocale}/${pageKey}.json`),
   ]);
 
   localeData = {
@@ -712,6 +766,7 @@ const loadLocaleData = async () => {
 };
 
 const applyPageTranslations = () => {
+  restoreOriginalTexts();
   const page = getCurrentPage();
   const entries =
     Array.isArray(localeData.page.translations) && localeData.page.translations.length > 0
@@ -934,6 +989,7 @@ const syncCommonLocaleLabels = () => {
   const backToTopButtons = document.querySelectorAll(".back-to-top");
   const primaryNav = document.querySelector(".topbar");
   const storiesLinks = document.querySelectorAll('.nav-links a[href="stories.html"], .nav-links a[href="#stories-book"]');
+  const kiemTheLinks = document.querySelectorAll('.nav-links a[href="kiem-the-system-map.html"], .nav-links a[href="#kt-system-map"]');
   const numentixLinks = document.querySelectorAll('.nav-links a[href="numentix.html"], .nav-links a[href="#numentix-world"]');
   const kitchenNotesLinks = document.querySelectorAll('.nav-parent > a[href="index.html#kitchen-notes"], .nav-parent > a[href="#kitchen-notes"]');
   const recipesLinks = document.querySelectorAll('.nav-submenu a[href="recipes.html"], .nav-submenu a[href="#recipe-catalogue"]');
@@ -956,10 +1012,20 @@ const syncCommonLocaleLabels = () => {
   }
 
   const catCanCodeLink = ensureCatCanCodeLink();
+  const kiemTheLink = ensureKiemTheLink();
+  const doomsdayLink = ensureDoomsdayLink();
   const numentixLink = ensureNumentixLink();
   if (catCanCodeLink && localeStrings.navCatCanCode) {
     catCanCodeLink.textContent = localeStrings.navCatCanCode;
     catCanCodeLink.setAttribute("aria-label", localeStrings.navCatCanCode);
+  }
+  if (kiemTheLink && localeStrings.navKiemThe) {
+    kiemTheLink.textContent = localeStrings.navKiemThe;
+    kiemTheLink.setAttribute("aria-label", localeStrings.navKiemThe);
+  }
+  if (doomsdayLink && localeStrings.navDoomsday) {
+    doomsdayLink.textContent = localeStrings.navDoomsday;
+    doomsdayLink.setAttribute("aria-label", localeStrings.navDoomsday);
   }
   if (numentixLink && localeStrings.navNumentix) {
     numentixLink.textContent = localeStrings.navNumentix;
@@ -968,6 +1034,9 @@ const syncCommonLocaleLabels = () => {
 
   storiesLinks.forEach((node) => {
     node.textContent = localeStrings.navStories;
+  });
+  kiemTheLinks.forEach((node) => {
+    node.textContent = localeStrings.navKiemThe;
   });
   numentixLinks.forEach((node) => {
     node.textContent = localeStrings.navNumentix;
@@ -1005,6 +1074,9 @@ const syncCommonLocaleLabels = () => {
   if (localeOptions[1]) {
     localeOptions[1].textContent = localeStrings.localeOptionVietnamese;
   }
+  if (localeOptions[2]) {
+    localeOptions[2].textContent = localeStrings.localeOptionSpanish || "Español (PR)";
+  }
 
   backToTopButtons.forEach((button) => {
     button.textContent = localeStrings.backToTop;
@@ -1012,11 +1084,24 @@ const syncCommonLocaleLabels = () => {
   });
 };
 
+const ensureLocaleOptions = (localeSelect) => {
+  if (!localeSelect) {
+    return;
+  }
+  if (!localeSelect.querySelector('option[value="es"]')) {
+    const esOption = document.createElement("option");
+    esOption.value = "es";
+    esOption.textContent = "Español (PR)";
+    localeSelect.appendChild(esOption);
+  }
+};
+
 const bindLocaleSwitcher = (localeSelect) => {
   if (!localeSelect) {
     return;
   }
 
+  ensureLocaleOptions(localeSelect);
   localeSelect.value = currentLocale;
   localeSelect.addEventListener("change", (event) => {
     currentLocale = event.target.value;
@@ -1044,6 +1129,7 @@ const injectLocaleSwitcher = () => {
     <select class="locale-select" id="locale-select" aria-label="Language selector">
       <option value="en">English</option>
       <option value="vi">Tiếng Việt</option>
+      <option value="es">Español (PR)</option>
     </select>
   `;
 
@@ -1051,6 +1137,71 @@ const injectLocaleSwitcher = () => {
 
   const localeSelect = localeSwitcher.querySelector("#locale-select");
   bindLocaleSwitcher(localeSelect);
+};
+
+const initHamburgerMenu = () => {
+  if (!topbar || topbar.querySelector(".nav-hamburger")) {
+    return;
+  }
+
+  const navLinks = topbar.querySelector(".nav-links");
+  const localeSwitcher = topbar.querySelector(".locale-switcher");
+  if (!navLinks) {
+    return;
+  }
+
+  const menuPanel = document.createElement("div");
+  menuPanel.className = "nav-menu-panel";
+  menuPanel.id = "primary-nav-panel";
+
+  const toggleBtn = document.createElement("button");
+  toggleBtn.type = "button";
+  toggleBtn.className = "nav-hamburger";
+  toggleBtn.setAttribute("aria-expanded", "false");
+  toggleBtn.setAttribute("aria-controls", "primary-nav-panel");
+  toggleBtn.setAttribute("aria-label", "Toggle navigation menu");
+  toggleBtn.innerHTML = "<span></span><span></span><span></span>";
+
+  topbar.appendChild(toggleBtn);
+  menuPanel.appendChild(navLinks);
+  if (localeSwitcher) {
+    menuPanel.appendChild(localeSwitcher);
+  }
+  topbar.appendChild(menuPanel);
+
+  const setMenuOpen = (isOpen) => {
+    topbar.classList.toggle("is-menu-open", isOpen);
+    toggleBtn.setAttribute("aria-expanded", String(isOpen));
+  };
+
+  toggleBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    setMenuOpen(!topbar.classList.contains("is-menu-open"));
+  });
+
+  menuPanel.addEventListener("click", (event) => {
+    const link = event.target.closest("a");
+    if (!link) {
+      return;
+    }
+    if (link.getAttribute("href") === "#") {
+      event.preventDefault();
+      return;
+    }
+    setMenuOpen(false);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!topbar.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      setMenuOpen(false);
+    }
+  });
 };
 
 const applyLocale = async () => {
@@ -1606,6 +1757,7 @@ initSketchParallax();
 
 currentLocale = getInitialLocale();
 injectLocaleSwitcher();
+initHamburgerMenu();
 applyLocale();
 
 const renderMonthCalendar = (dateValue) => {
