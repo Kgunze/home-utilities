@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ranged Barracks & Troop Tiers | Doomsday: Last Survivors</title>
+    <meta name="description" content="Doomsday: Last Survivors Ranged Barracks guide featuring T1–T6 Ranged troop unit tables, tier-to-tier % difference & output comparator, and Basic vs. Advance buff tables." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero hero-subpage">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="index.html#home">Home Utilities</a>
+          <div class="nav-links">
+            <a href="stories.html">Stories</a>
+            <div class="nav-parent">
+              <a href="index.html#kitchen-notes">Kitchen Notes</a>
+              <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                <a href="recipes.html">Recipes</a>
+                <a href="shopping-planner.html">Shopping Planner</a>
+              </div>
+            </div>
+            <a href="kiem-the-system-map.html" class="nav-kiem-the">Kiem The System</a>
+            <div class="nav-parent nav-parent-doomsday">
+              <a href="doomsday-guide.html" class="nav-doomsday">Doomsday: Last Survivors</a>
+              <div class="nav-submenu nav-submenu-doomsday" aria-label="Doomsday submenu">
+                <a href="doomsday-infantry-heroes.html" class="nav-doomsday-infantry">Infantry Heroes & Combos</a>
+                <a href="doomsday-ranged-barracks.html" class="nav-doomsday-ranged">Ranged Barracks</a>
+              </div>
+            </div>
+            <div class="nav-parent nav-parent-greenies">
+              <a class="nav-link-greenies" href="#">Greenies</a>
+              <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                <a class="nav-greenies-planting" href="planting-diary.html">Planting diary</a>
+                <a class="nav-greenies-fertilization" href="fertilization-wikipedia.html">Fertilization wikipedia</a>
+              </div>
+            </div>
+            <a href="ptsd.html">PTSD</a>
+          </div>
+          <label class="locale-switcher">
+            <span class="locale-switcher-label">Language</span>
+            <select class="locale-select" id="locale-select" aria-label="Language selector">
+              <option value="en">English</option>
+              <option value="vi">Tiếng Việt</option>
+              <option value="es">Español (PR)</option>
+            </select>
+          </label>
+        </nav>
+
+        <section class="planner-hero-grid" id="ranged-barracks-hero">
+          <div class="subpage-hero-copy">
+            <p class="eyebrow" id="rb-eyebrow">Doomsday: Last Survivors / Barracks Guide</p>
+            <h1 id="rb-hero-title">Ranged Barracks — Ranged Heroes, T1 to T6 Unit Tiers, % Differences & Output.</h1>
+            <p class="hero-text" id="rb-hero-text">
+              Detailed breakdown of the Ranged Barracks (Level 24), all 14 Legendary Ranged commanders (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria Moretti, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra) with a Hero Pairing & Combo Calculator, T1–T6 troop tiers, and Basic vs. Advance squad buff calculations.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" id="rb-cta-heroes" href="#ranged-heroes-section">Ranged Heroes</a>
+              <a class="button button-secondary" id="rb-cta-tiers" href="#troop-tiers-table">Unit Tiers Table</a>
+              <a class="button button-secondary" id="rb-cta-compare" href="#tier-compare-section">Compare % & Output</a>
+            </div>
+          </div>
+
+          <aside class="month-calendar-card" aria-label="Ranged Barracks overview">
+            <p class="card-label" id="rb-building-label">Facility Snapshot · Level 24</p>
+            <h2 class="month-calendar-title" id="rb-building-title">Ranged Barracks</h2>
+            <p id="rb-building-desc">Trains backline high-DPS Ranged squads. Ranged units counter Infantry (Shield) squads and are vulnerable to fast Rider flanking marches.</p>
+            <img class="recipe-inline-image" src="assets/doomsday/ranged/ranged-barracks-lv24.jpg" alt="Ranged Barracks Level 24 training Elite Heart Piercer" loading="lazy" />
+          </aside>
+        </section>
+      </header>
+
+      <main>
+        <section class="notes-section" id="ranged-heroes-section">
+          <div class="section-heading">
+            <div>
+              <p class="section-tag" id="rb-heroes-tag">1. Legendary Ranged Heroes & Pairing Calculator</p>
+              <h2 id="rb-heroes-heading">Pair any two of the 14 Ranged commanders (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra) to inspect combined stats, perks, and Lv 1–Lv 5 skills.</h2>
+            </div>
+          </div>
+
+          <article class="planner-card" style="margin-bottom: 1.5rem">
+            <p class="card-label" id="rb-pair-preset-label">Recommended Ranged Meta Pairs (One-Click Load)</p>
+            <div class="combo-preset-grid" id="rb-preset-combos"></div>
+            <div class="calculator-controls">
+              <div><label class="form-label" for="rb-leader-select" id="rb-leader-label">Leader Hero</label><select id="rb-leader-select" class="planner-input"></select></div>
+              <div><label class="form-label" for="rb-assist-select" id="rb-assist-label">Assistant Hero</label><select id="rb-assist-select" class="planner-input"></select></div>
+              <div>
+                <label class="form-label" for="rb-skill-level" id="rb-skill-level-label">Skill Upgrade Level</label>
+                <select id="rb-skill-level" class="planner-input">
+                  <option value="0">Level 1 (Base 1-1-1-1)</option>
+                  <option value="1">Level 2 (2-2-2-2)</option>
+                  <option value="2">Level 3 (3-3-3-3)</option>
+                  <option value="3">Level 4 (4-4-4-4)</option>
+                  <option value="4" selected>Level 5 (Awakened 5-5-5-5)</option>
+                </select>
+              </div>
+            </div>
+            <div class="table-wrap"><table class="summary-table"><thead id="rb-pair-thead"></thead><tbody id="rb-pair-tbody"></tbody></table></div>
+            <div class="planner-note" id="rb-pair-perks"></div>
+          </article>
+          <div class="planner-columns" id="rb-ranged-heroes-grid"></div>
+        </section>
+
+        <section class="notes-section" id="troop-visual-cards">
+          <div class="section-heading"><div><p class="section-tag" id="rb-gallery-tag">2. Ranged Squad Lineup (T1 – T6)</p><h2 id="rb-gallery-heading">Visual progression from wooden bows to heavy anti-materiel sniper rifles.</h2></div></div>
+          <div class="planner-columns" id="rb-unit-cards"></div>
+        </section>
+
+        <section class="recipes-section" id="troop-tiers-table">
+          <div class="section-heading"><div><p class="section-tag" id="rb-table-tag">3. Troop Unit Tiers Table</p><h2 id="rb-table-heading">Base stats, active commander/tech bonus, and total combat output (T1–T6).</h2></div></div>
+          <article class="planner-card"><div class="table-wrap"><table class="summary-table" id="rb-tiers-summary-table"><thead id="rb-tiers-thead"></thead><tbody id="rb-tiers-tbody"></tbody></table></div></article>
+        </section>
+
+        <section class="notes-section" id="tier-compare-section">
+          <div class="section-heading"><div><p class="section-tag" id="rb-compare-tag">4. Interactive Output Calculator</p><h2 id="rb-compare-heading">Compare % stat leaps, total output, and Basic/Advance buff scaling between any two tiers.</h2></div></div>
+          <article class="planner-card">
+            <p class="card-label" id="rb-interactive-label">Interactive Output Calculator</p>
+            <h3 id="rb-interactive-title">Select Two Tiers & Buff Profile</h3>
+            <div class="calculator-controls">
+              <div><label class="form-label" for="rb-tier-from" id="rb-from-label">Baseline Tier</label><select id="rb-tier-from" class="planner-input"></select></div>
+              <div><label class="form-label" for="rb-tier-to" id="rb-to-label">Target Tier</label><select id="rb-tier-to" class="planner-input"></select></div>
+              <div><label class="form-label" for="rb-buff-profile" id="rb-buff-label">Buff Profile</label><select id="rb-buff-profile" class="planner-input"></select></div>
+            </div>
+            <div class="table-wrap"><table class="summary-table"><thead id="rb-comp-thead"></thead><tbody id="rb-comp-tbody"></tbody></table></div>
+          </article>
+        </section>
+
+        <section class="recipes-section" id="tier-progression-section">
+          <div class="section-heading"><div><p class="section-tag" id="rb-step-tag">5. Step-by-Step Tier Progression (T1 → T6)</p><h2 id="rb-step-heading">Full tier-by-tier % differences and output scaling across all six Ranged unit tiers.</h2></div></div>
+          <article class="planner-card">
+            <p class="card-label" id="rb-step-label">Step-by-Step Progression</p>
+            <h3 id="rb-step-title">Tier-to-Tier % Differences (T1 → T6)</h3>
+            <div class="table-wrap"><table class="summary-table"><thead id="rb-delta-thead"></thead><tbody id="rb-delta-tbody"></tbody></table></div>
+          </article>
+        </section>
+
+        <section class="ptsd-section" id="buff-csv-section">
+          <div class="section-heading"><div><p class="section-tag" id="rb-buff-tag">6. Basic vs. Advance Squad Buffs (CSV Reference)</p><h2 id="rb-buff-heading">Min %, Max %, and output impact across Basic and Advance stat pools.</h2></div></div>
+          <article class="planner-card"><div class="table-wrap"><table class="summary-table"><thead id="rb-csv-thead"></thead><tbody id="rb-csv-tbody"></tbody></table></div></article>
+        </section>
+      </main>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="script.js"></script>
+    <script src="doomsday-ranged-data.js"></script>
+    <script src="doomsday-ranged-barracks.js"></script>
+  </body>
+</html>

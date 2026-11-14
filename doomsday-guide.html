@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doomsday: Last Survivors Guide | Home Utilities</title>
-    <meta name="description" content="A practical guide to Doomsday: Last Survivors covering game introduction, cross-platform gameplay, basic strategy, and early skirmish setup." />
+    <meta name="description" content="A practical guide to Doomsday: Last Survivors covering game introduction, cross-platform gameplay, hero roster, early skirmish setup, and basic strategy." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -25,7 +25,13 @@
               </div>
             </div>
             <a href="kiem-the-system-map.html" class="nav-kiem-the">Kiem The System</a>
-            <a href="#doomsday-guide" class="nav-doomsday">Doomsday: Last Survivors</a>
+            <div class="nav-parent nav-parent-doomsday">
+              <a href="#doomsday-guide" class="nav-doomsday">Doomsday: Last Survivors</a>
+              <div class="nav-submenu nav-submenu-doomsday" aria-label="Doomsday submenu">
+                <a href="doomsday-infantry-heroes.html" class="nav-doomsday-infantry">Infantry Heroes & Combos</a>
+                <a href="doomsday-ranged-barracks.html" class="nav-doomsday-ranged">Ranged Barracks</a>
+              </div>
+            </div>
             <div class="nav-parent nav-parent-greenies">
               <a class="nav-link-greenies" href="#">Greenies</a>
               <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
@@ -48,13 +54,11 @@
         <section class="planner-hero-grid" id="doomsday-guide">
           <div class="subpage-hero-copy">
             <p class="eyebrow" id="dls-eyebrow">Game Guide / Strategy & Survival</p>
-            <h1 id="dls-hero-title">Doomsday: Last Survivors — Overview, Platforms & Core Strategy.</h1>
-            <p class="hero-text" id="dls-hero-text">
-              A structured handbook for IGG's hybrid zombie survival strategy game, combining tactical tower-defense combat, cross-platform PC/mobile play, and early skirmish progression.
-            </p>
+            <h1 id="dls-hero-title">Doomsday: Last Survivors — Overview, Heroes & Core Strategy.</h1>
+            <p class="hero-text" id="dls-hero-text">A structured handbook for IGG's hybrid zombie survival strategy game, featuring the 12-hero roster, early skirmish progression, and a dedicated Ranged Barracks subpage.</p>
             <div class="hero-actions">
-              <a class="button button-primary" id="dls-cta-intro" href="#early-skirmish">Early Skirmish Guide</a>
-              <a class="button button-secondary" id="dls-cta-strategy" href="#basic-strategy">Basic Strategy</a>
+              <a class="button button-primary" id="dls-cta-intro" href="#hero-roster">Hero Roster</a>
+              <a class="button button-secondary" id="dls-cta-barracks" href="doomsday-ranged-barracks.html">Open Ranged Barracks</a>
             </div>
           </div>
           <aside class="month-calendar-card" aria-label="Quick summary">
@@ -64,19 +68,14 @@
               <li>Hybrid 4X Real-Time Strategy + Tower Defense</li>
               <li>Cross-save on iOS, Android, Windows PC & Steam</li>
               <li>Early Skirmish: Angela, Kris & Michele to Lv 32</li>
-              <li>Event-driven resource & hero fragment discipline</li>
+              <li>Ranged Barracks T1–T6 Tiers & Buff Calculator</li>
             </ul>
           </aside>
         </section>
       </header>
       <main>
         <section class="notes-section" id="game-intro">
-          <div class="section-heading">
-            <div>
-              <p class="section-tag" id="dls-intro-tag">1. Game Introduction</p>
-              <h2 id="dls-intro-heading">Where tactical tower defense meets open-field alliance warfare.</h2>
-            </div>
-          </div>
+          <div class="section-heading"><div><p class="section-tag" id="dls-intro-tag">1. Game Introduction</p><h2 id="dls-intro-heading">Where tactical tower defense meets open-field alliance warfare.</h2></div></div>
           <div class="notes-grid">
             <article class="note-card">
               <p class="card-label" id="dls-intro-card1-label">Premise & World</p>
@@ -97,12 +96,7 @@
         </section>
 
         <section class="recipes-section" id="gameplay-platforms">
-          <div class="section-heading">
-            <div>
-              <p class="section-tag" id="dls-platform-tag">2. Gameplay & Platforms</p>
-              <h2 id="dls-platform-heading">Seamless cross-platform play across Mobile and PC.</h2>
-            </div>
-          </div>
+          <div class="section-heading"><div><p class="section-tag" id="dls-platform-tag">2. Gameplay & Platforms</p><h2 id="dls-platform-heading">Seamless cross-platform play across Mobile and PC.</h2></div></div>
           <div class="planner-columns">
             <article class="planner-card">
               <p class="card-label" id="dls-plat-card1-label">Supported Platforms</p>
@@ -125,13 +119,16 @@
           </div>
         </section>
 
-        <section class="notes-section" id="early-skirmish">
+        <section class="notes-section" id="hero-roster">
           <div class="section-heading">
-            <div>
-              <p class="section-tag" id="dls-skirmish-tag">3. Early Skirmish (Base Exploration)</p>
-              <h2 id="dls-skirmish-heading">Step-by-step opening setup to sweep early Shelter plots cleanly.</h2>
-            </div>
+            <div><p class="section-tag" id="dls-roster-tag">3. Hero Roster Listing</p><h2 id="dls-roster-heading">Current 12-Hero Roster by Rarity, Level, Stars, and Tactical Role.</h2></div>
+            <div class="button-row" id="dls-hero-filters"></div>
           </div>
+          <div class="notes-grid" id="dls-hero-grid"></div>
+        </section>
+
+        <section class="notes-section" id="early-skirmish">
+          <div class="section-heading"><div><p class="section-tag" id="dls-skirmish-tag">4. Early Skirmish (Base Exploration)</p><h2 id="dls-skirmish-heading">Step-by-step opening setup to sweep early Shelter plots cleanly.</h2></div></div>
           <div class="planner-columns">
             <article class="planner-card">
               <p class="card-label" id="dls-skirmish-0-label">Base Exploration Zone</p>
@@ -161,12 +158,7 @@
         </section>
 
         <section class="ptsd-section" id="basic-strategy">
-          <div class="section-heading">
-            <div>
-              <p class="section-tag" id="dls-strat-tag">4. Basic Strategy</p>
-              <h2 id="dls-strat-heading">Four golden rules for long-term growth and combat readiness.</h2>
-            </div>
-          </div>
+          <div class="section-heading"><div><p class="section-tag" id="dls-strat-tag">5. Basic Strategy</p><h2 id="dls-strat-heading">Four golden rules for long-term growth and combat readiness.</h2></div></div>
           <div class="notes-grid">
             <article class="note-card">
               <p class="card-label" id="dls-strat-1-label">Rule 01 · Economy & VIP</p>
@@ -194,5 +186,6 @@
     </div>
     <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
     <script src="script.js"></script>
+    <script src="doomsday-heroes.js"></script>
   </body>
 </html>

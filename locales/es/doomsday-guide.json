@@ -5,8 +5,10 @@
     { "selector": "#dls-eyebrow", "text": "Guía del Juego / Estrategia y Supervivencia" },
     { "selector": "#dls-hero-title", "text": "Doomsday: Last Survivors — Resumen, Plataformas y Estrategia Clave." },
     { "selector": "#dls-hero-text", "text": "Manual práctico para el juego híbrido de supervivencia zombi de IGG: combina defensa de torres táctica, juego cruzado en PC/Móvil y el método exacto para limpiar la Escaramuza inicial." },
-    { "selector": "#dls-cta-intro", "text": "Guía de Escaramuza Inicial" },
-    { "selector": "#dls-cta-strategy", "text": "Estrategia Básica" },
+    { "selector": "#dls-cta-intro", "text": "Lista de Héroes" },
+    { "selector": "#dls-cta-barracks", "text": "Abrir Cuartel de Tiradores" },
+    { "selector": "#dls-roster-tag", "text": "3. Lista de Héroes (Hero Roster)" },
+    { "selector": "#dls-roster-heading", "text": "12 Héroes actuales por Rareza, Nivel, Estrellas y Rol Táctico." },
     { "selector": "#dls-summary-label", "text": "De un Vistazo" },
     { "selector": "#dls-summary-title", "text": "Pilares Clave" },
     { "selector": "#dls-summary-list li", "all": [

@@ -1,0 +1,32 @@
+{
+  "title": "Infantry Barracks, 16 Heroes & T1–T6 Unit Tiers | Doomsday: Last Survivors",
+  "description": "Doomsday: Last Survivors Infantry Barracks (Lv 24) & 16 Legendary Infantry commanders guide featuring filterable skill tables, an interactive Hero Pairing Calculator, and T1–T6 Infantry unit tiers.",
+  "translations": [
+    { "selector": "#ih-eyebrow", "text": "Doomsday: Last Survivors / Infantry Barracks & Commanders" },
+    { "selector": "#ih-hero-title", "text": "Infantry Barracks — 16 Infantry Heroes, Pair Calculator & T1–T6 Unit Tiers." },
+    { "selector": "#ih-hero-text", "text": "Complete Infantry Barracks (Level 24) and 16-Hero Infantry compendium featuring extracted portraits, Rage & Passive skill scaling (Lv 1 to Lv 5 & Transcend), an interactive Leader + Assistant Pairing Calculator, and all six Infantry troop tiers from T1 Ruffian to T6 Ace Destroyer." },
+    { "selector": "#ih-cta-calc", "text": "Pair Combo Calculator" },
+    { "selector": "#ih-cta-roster", "text": "16 Infantry Heroes" },
+    { "selector": "#ih-cta-units", "text": "T1–T6 Infantry Units" },
+    { "selector": "#ih-summary-label", "text": "Facility Snapshot · Level 24" },
+    { "selector": "#ih-summary-title", "text": "Infantry Barracks" },
+    { "selector": "#ih-building-desc", "text": "Trains frontline high-DEF/HP Shield & Shotgun Infantry squads. Infantry units counter fast Rider marches and absorb heavy damage in Rallies and Shelter Garrisons." },
+    { "selector": "#ih-calc-tag", "text": "1. Hero Pairing & Skill Combination Calculator" },
+    { "selector": "#ih-calc-heading", "text": "Pair any Leader and Assistant hero or select a preset combo to calculate stacked buffs and perks." },
+    { "selector": "#ih-preset-label", "text": "Recommended Meta Combos (One-Click Load)" },
+    { "selector": "#ih-leader-label", "text": "Leader Hero" },
+    { "selector": "#ih-assist-label", "text": "Assistant Hero" },
+    { "selector": "#ih-level-label", "text": "Skill Upgrade Level" },
+    { "selector": "#ih-roster-tag", "text": "2. Complete 16-Hero Infantry Directory & Skills" },
+    { "selector": "#ih-roster-heading", "text": "Filter by Role, Obtain Source, or Tactical Specialty and click any hero to pair them above." },
+    { "selector": "#ih-units-tag", "text": "3. Infantry Barracks Lineup (T1 – T6)" },
+    { "selector": "#ih-units-heading", "text": "Visual progression from improvised pipe axes to heavy steel shields and assault rifles." },
+    { "selector": "#ih-table-tag", "text": "4. Infantry Unit Tiers Table & Output Calculator" },
+    { "selector": "#ih-table-heading", "text": "Base stats, active commander/tech bonus (+108.3% ATK, +98.9% DEF, +57.1% HP), and T1–T6 % progression." },
+    { "selector": "#ih-comp-label", "text": "Interactive Infantry Output Comparator" },
+    { "selector": "#ih-from-label", "text": "Baseline Tier" },
+    { "selector": "#ih-to-label", "text": "Target Tier" },
+    { "selector": "#ih-buff-label", "text": "Buff Profile" },
+    { "selector": "#ih-delta-label", "text": "Step-by-Step Tier Progression (T1 → T6)" }
+  ]
+}
