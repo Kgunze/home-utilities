@@ -1,0 +1,25 @@
+{
+  "title": "Biobeast (Bestia Bioquímica) y Pluto Jellyfish | Doomsday: Last Survivors",
+  "description": "Guía completa del sistema Biobeast en Doomsday: Last Survivors: Daño Directo e Indirecto (Corrosión), mecánicas de Combo/Contraataque/CRIT/Escudo, estadísticas de Pluto Jellyfish (Nv.100) y mejores parejas de Héroes y Tropas.",
+  "translations": [
+    { "selector": "#bb-eyebrow", "text": "Doomsday: Last Survivors / Compañero Bestia Bioquímica" },
+    { "selector": "#bb-hero-title", "text": "Biobeast — Atributos de Combate, Pluto Jellyfish (Nv.100) y Mejores Parejas." },
+    { "selector": "#bb-hero-text", "text": "Guía completa del sistema Biobeast: Daño Directo e Indirecto (Corrosión), activaciones adicionales de Habilidad Activa por Combo (41.2%) y Contraataque (25.9%), Valor de Escudo, conversión de exceso de daño a tropas y perfil completo de Pluto Jellyfish Nv.100." },
+    { "selector": "#bb-cta-battles", "text": "Reglas y Atributos" },
+    { "selector": "#bb-cta-pluto", "text": "Pluto Jellyfish y Parejas" },
+    { "selector": "#bb-cta-sim", "text": "Simulador de Combate y HP" },
+    { "selector": "#bb-summary-label", "text": "Instalación del Refugio · Cámara de Biocontención" },
+    { "selector": "#bb-summary-title", "text": "Laboratorio de Bestias Bioquímicas" },
+    { "selector": "#bb-building-desc", "text": "Incuba, evoluciona y modifica Bestias Bioquímicas que marchan junto a tus escuadrones de Infantería, Tiradores y Jinetes." },
+    { "selector": "#bb-rules-tag", "text": "1. Mecánicas Oficiales de Batalla y Atributos Especiales de Biobeast" },
+    { "selector": "#bb-rules-heading", "text": "Cómo luchan las Bestias Bioquímicas, convierten el exceso de daño a las tropas enemigas y activan Combo, Contraataque, CRIT y Escudo." },
+    { "selector": "#bb-attr-table-label", "text": "Detalles Oficiales · Tipos de Daño y Mecánicas de Atributos Especiales" },
+    { "selector": "#bb-pluto-tag", "text": "2. Perfil Biobeast: Pluto Jellyfish (Raro · Nv.100 · Corrosión / Combo / Contraataque)" },
+    { "selector": "#bb-pluto-heading", "text": "Atributos Nv.100, las 4 Habilidades (Toxic Tide, Invisible Whip, Stinging Echo, Abyssal Power) y Mejores Parejas de Héroes y Tropas." },
+    { "selector": "#bb-sim-tag", "text": "3. Simulador Interactivo de Duelo Biobeast, HP en Rally y Conversión a Tropas" },
+    { "selector": "#bb-sim-heading", "text": "Simula duelos con Pluto Jellyfish (Nv.100), activaciones de Combo/Contraataque y escalado de HP en Rally/Guarnición." },
+    { "selector": "#bb-mode-label", "text": "Modo de Combate" },
+    { "selector": "#bb-troop-label", "text": "Tamaño y Nivel de Tropas" },
+    { "selector": "#bb-target-label", "text": "Estado de la Bestia Enemiga" }
+  ]
+}

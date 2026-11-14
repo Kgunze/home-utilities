@@ -1,0 +1,25 @@
+{
+  "title": "Thú Sinh Hóa (Biobeast) & Pluto Jellyfish | Doomsday: Last Survivors",
+  "description": "Cẩm nang chi tiết Thú Sinh Hóa (Biobeast) trong Doomsday: Last Survivors: Sát thương Trực tiếp & Gián tiếp (Ăn mòn), cơ chế Combo/Counter/CRIT/Khiên, chỉ số & kỹ năng Pluto Jellyfish (Lv.100) và gợi ý ghép Tướng & Loại Lính tối ưu.",
+  "translations": [
+    { "selector": "#bb-eyebrow", "text": "Doomsday: Last Survivors / Thú Sinh Hóa Đồng Hành (Biobeast)" },
+    { "selector": "#bb-hero-title", "text": "Biobeast — Thuộc tính Chiến đấu, Pluto Jellyfish (Lv.100) & Ghép Tướng Tối ưu." },
+    { "selector": "#bb-hero-text", "text": "Hướng dẫn toàn diện hệ thống Thú Sinh Hóa (Biobeast): Sát thương Trực tiếp & Gián tiếp (Corrosion), cơ chế Combo (41.2%) & Phản đòn Counter (25.9%) tự động tung Kỹ năng Chủ động, Giá trị Khiên, chuyển hóa sát thương dư sang Lính địch và chi tiết Pluto Jellyfish Lv.100." },
+    { "selector": "#bb-cta-battles", "text": "Quy tắc Đấu Thú & Thuộc tính" },
+    { "selector": "#bb-cta-pluto", "text": "Pluto Jellyfish & Ghép Tướng" },
+    { "selector": "#bb-cta-sim", "text": "Mô phỏng Đấu Thú & HP" },
+    { "selector": "#bb-summary-label", "text": "Công trình Căn cứ · Buồng Ấp Sinh Hóa" },
+    { "selector": "#bb-summary-title", "text": "Phòng Thí Nghiệm Thú Sinh Hóa" },
+    { "selector": "#bb-building-desc", "text": "Ấp, tiến hóa và cải tạo gen cho Thú Sinh Hóa (Biobeast) đồng hành cùng các đội hình Bộ binh, Cung thủ và Kỵ binh trên chiến trường." },
+    { "selector": "#bb-rules-tag", "text": "1. Cơ chế Chiến đấu & Thuộc tính Đặc biệt Của Thú Sinh Hóa" },
+    { "selector": "#bb-rules-heading", "text": "Cách Thú Sinh Hóa giao chiến độc lập, chuyển hóa sát thương dư vào lính địch và kích hoạt Combo, Counter, CRIT & Khiên." },
+    { "selector": "#bb-attr-table-label", "text": "Bảng Giải thích Thuộc tính Chính thức · Sát thương Trực tiếp/Gián tiếp, Combo, Counter, CRIT & Khiên" },
+    { "selector": "#bb-pluto-tag", "text": "2. Hồ sơ Biobeast: Pluto Jellyfish (Rare · Lv.100 · Ăn mòn / Combo / Phản đòn)" },
+    { "selector": "#bb-pluto-heading", "text": "Chi tiết chỉ số Lv.100, đủ 4 kỹ năng (Toxic Tide, Invisible Whip, Stinging Echo, Abyssal Power) & Cặp Tướng / Loại Lính phù hợp nhất." },
+    { "selector": "#bb-sim-tag", "text": "3. Máy tính Mô phỏng Đấu Thú Pluto Jellyfish, Tăng HP Tập kết & Sát thương Lính" },
+    { "selector": "#bb-sim-heading", "text": "Mô phỏng Pluto Jellyfish (Lv.100) đấu Thú, kích hoạt Combo/Counter cộng dồn Ăn mòn và chuyển hóa sát thương dư sang lính địch." },
+    { "selector": "#bb-mode-label", "text": "Chế độ Chiến đấu" },
+    { "selector": "#bb-troop-label", "text": "Quy mô & Cấp Lính Đội hình" },
+    { "selector": "#bb-target-label", "text": "Trạng thái Biobeast Địch" }
+  ]
+}
