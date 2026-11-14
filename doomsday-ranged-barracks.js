@@ -49,9 +49,9 @@
       type: "Type", name: "Buff Name", min: "Min %", max: "Max %", spread: "Spread (Max - Min)", t6Impact: "T6 Ace Output Impact", fixed: "Fixed", obtain: "Obtain from", priority: "Skill Priority",
       pickLeader: "Use as Leader", pickAssist: "Use as Assistant", leaderCol: "Leader", assistCol: "Assistant", totalCol: "Combined Pair Result", perksTitle: "Active Ranged Pair Perks & Synergy",
       rAtk: "Ranged Squad ATK", rDef: "Ranged Squad DEF", rHp: "Ranged Squad HP", rSpd: "Ranged Travel Speed", rSkill: "Bonus DMG / Skill DMG Amp", rRed: "DMG Taken Reduction", rRage: "Skill DMG Factor (Rage)", rHeal: "Heal Factor / Rage Recovery",
-      roles: [["all", "All Roles (14)"], ["leader", "Leaders (6)"], ["assistant", "Assistants / Support (8)"]],
-      tagsLabel: "Source & Specialty:", searchPlaceholder: "Search ranged hero, skill, or effect...", reset: "Reset Filters", showing: (n) => `Showing ${n} of 14 Ranged Commanders`,
-      chips: [["all", "All Tags"], ["All-Star Night", "All-Star Night (6)"], ["Lucky Roulette", "Lucky Roulette (6)"], ["Police Station", "Police Station (2)"], ["Horde Defense", "Horde Defense (1)"], ["Siege / Rally", "Siege / Rally"], ["Garrison", "Garrison"], ["General", "General / Open Field"], ["Support / Heal", "Support / Heal"]],
+      roles: [["all", "All Roles (15)"], ["leader", "Leaders (7)"], ["assistant", "Assistants / Support (8)"]],
+      tagsLabel: "Source & Specialty:", searchPlaceholder: "Search ranged hero, skill, or effect...", reset: "Reset Filters", showing: (n) => `Showing ${n} of 15 Ranged Commanders`,
+      chips: [["all", "All Tags"], ["All-Star Night", "All-Star Night (6)"], ["Lucky Roulette", "Lucky Roulette (7)"], ["Police Station", "Police Station (2)"], ["Horde Defense", "Horde Defense (1)"], ["Siege / Rally", "Siege / Rally"], ["Garrison", "Garrison"], ["General", "General / Open Field"], ["Support / Heal", "Support / Heal"]],
     },
     vi: {
       tier: "Cấp", unit: "Đơn vị", atk: "ATK (Gốc + Cộng = Đầu ra)", def: "DEF (Gốc + Cộng = Đầu ra)", hp: "HP (Gốc + Cộng = Đầu ra)", spd: "Tốc độ chạy", load: "Tải trọng", might: "Lực chiến",
@@ -59,9 +59,9 @@
       type: "Loại", name: "Tên Chỉ số Buff", min: "Min %", max: "Max %", spread: "Biên độ (Max - Min)", t6Impact: "Tác động Đầu ra T6", fixed: "Cố định", obtain: "Nguồn nhận", priority: "Thứ tự Nâng kỹ năng",
       pickLeader: "Chọn làm Tướng Chính", pickAssist: "Chọn làm Tướng Phụ", leaderCol: "Tướng Chính", assistCol: "Tướng Phụ", totalCol: "Tổng Hiệu quả Cặp", perksTitle: "Nội tại Cặp Tướng Tầm Xa & Cộng hưởng",
       rAtk: "ATK Tầm xa", rDef: "DEF Tầm xa", rHp: "HP Tầm xa", rSpd: "Tốc độ Hành quân", rSkill: "Tăng Sát thương / Kỹ năng", rRed: "Giảm Sát thương Nhận vào", rRage: "Hệ số Sát thương Kỹ năng", rHeal: "Hệ số Hồi máu / Hồi Nộ",
-      roles: [["all", "Tất cả Vai trò (14)"], ["leader", "Tướng Chính (6)"], ["assistant", "Tướng Phụ / Hỗ trợ (8)"]],
-      tagsLabel: "Nguồn & Chuyên môn:", searchPlaceholder: "Tìm tướng tầm xa, kỹ năng hoặc hiệu ứng...", reset: "Xóa bộ lọc", showing: (n) => `Hiển thị ${n} / 14 Chỉ huy Tầm xa`,
-      chips: [["all", "Mọi Nhãn"], ["All-Star Night", "All-Star Night (6)"], ["Lucky Roulette", "Vòng Quay (6)"], ["Police Station", "Đồn Cảnh Sát (2)"], ["Horde Defense", "Horde Defense (1)"], ["Siege / Rally", "Tập kết / Công thành"], ["Garrison", "Đồn trú"], ["General", "Đa năng / Đánh đồng"], ["Support / Heal", "Hỗ trợ / Hồi máu"]],
+      roles: [["all", "Tất cả Vai trò (15)"], ["leader", "Tướng Chính (7)"], ["assistant", "Tướng Phụ / Hỗ trợ (8)"]],
+      tagsLabel: "Nguồn & Chuyên môn:", searchPlaceholder: "Tìm tướng tầm xa, kỹ năng hoặc hiệu ứng...", reset: "Xóa bộ lọc", showing: (n) => `Hiển thị ${n} / 15 Chỉ huy Tầm xa`,
+      chips: [["all", "Mọi Nhãn"], ["All-Star Night", "All-Star Night (6)"], ["Lucky Roulette", "Vòng Quay (7)"], ["Police Station", "Đồn Cảnh Sát (2)"], ["Horde Defense", "Horde Defense (1)"], ["Siege / Rally", "Tập kết / Công thành"], ["Garrison", "Đồn trú"], ["General", "Đa năng / Đánh đồng"], ["Support / Heal", "Hỗ trợ / Hồi máu"]],
     },
     es: {
       tier: "Nivel", unit: "Unidad", atk: "ATQ (Base + Bono = Salida)", def: "DEF (Base + Bono = Salida)", hp: "HP (Base + Bono = Salida)", spd: "Velocidad", load: "Carga", might: "Poder",
@@ -69,9 +69,9 @@
       type: "Tipo", name: "Nombre del Bono", min: "Mín %", max: "Máx %", spread: "Rango (Máx - Mín)", t6Impact: "Impacto en Salida T6", fixed: "Fijo", obtain: "Obtención", priority: "Prioridad de Habilidad",
       pickLeader: "Usar como Líder", pickAssist: "Usar como Asistente", leaderCol: "Líder", assistCol: "Asistente", totalCol: "Resultado Combinado", perksTitle: "Ventajas Activas de la Pareja y Sinergia",
       rAtk: "ATQ a Distancia", rDef: "DEF a Distancia", rHp: "HP a Distancia", rSpd: "Velocidad de Marcha", rSkill: "Daño Adicional / Habilidad", rRed: "Reducción de Daño Recibido", rRage: "Factor de Daño de Habilidad", rHeal: "Curación / Recuperación de Ira",
-      roles: [["all", "Todos los Roles (14)"], ["leader", "Líderes (6)"], ["assistant", "Asistentes / Soporte (8)"]],
-      tagsLabel: "Fuente y Especialidad:", searchPlaceholder: "Buscar héroe, habilidad o efecto...", reset: "Restablecer", showing: (n) => `Mostrando ${n} de 14 Comandantes`,
-      chips: [["all", "Todas"], ["All-Star Night", "All-Star Night (6)"], ["Lucky Roulette", "Ruleta (6)"], ["Police Station", "Estación de Policía (2)"], ["Horde Defense", "Horde Defense (1)"], ["Siege / Rally", "Asedio / Rally"], ["Garrison", "Guarnición"], ["General", "General / Campo"], ["Support / Heal", "Soporte / Curación"]],
+      roles: [["all", "Todos los Roles (15)"], ["leader", "Líderes (7)"], ["assistant", "Asistentes / Soporte (8)"]],
+      tagsLabel: "Fuente y Especialidad:", searchPlaceholder: "Buscar héroe, habilidad o efecto...", reset: "Restablecer", showing: (n) => `Mostrando ${n} de 15 Comandantes`,
+      chips: [["all", "Todas"], ["All-Star Night", "All-Star Night (6)"], ["Lucky Roulette", "Ruleta (7)"], ["Police Station", "Estación de Policía (2)"], ["Horde Defense", "Horde Defense (1)"], ["Siege / Rally", "Asedio / Rally"], ["Garrison", "Guarnición"], ["General", "General / Campo"], ["Support / Heal", "Soporte / Curación"]],
     },
   };
 

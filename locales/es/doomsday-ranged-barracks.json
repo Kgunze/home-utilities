@@ -1,10 +1,10 @@
 {
   "title": "Cuartel de Tiradores y Niveles de Tropas | Doomsday: Last Survivors",
-  "description": "Guía del Cuartel de Tiradores (Ranged Barracks) en Doomsday: Last Survivors con 14 héroes Legendarios (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria Moretti, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric y Spectra), Calculadora de Parejas, tablas de tropas T1–T6 y bonos Basic vs. Advance.",
+  "description": "Guía del Cuartel de Tiradores (Ranged Barracks) en Doomsday: Last Survivors con 15 héroes Legendarios (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria Moretti, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra y Charon), Calculadora de Parejas, tablas de tropas T1–T6 y bonos Basic vs. Advance.",
   "translations": [
     { "selector": "#rb-eyebrow", "text": "Doomsday: Last Survivors / Guía de Cuarteles" },
     { "selector": "#rb-hero-title", "text": "Cuartel de Tiradores — Héroes a Distancia, Niveles T1 a T6, % de Diferencia y Salida." },
-    { "selector": "#rb-hero-text", "text": "Desglose completo del Cuartel de Tiradores (Nivel 24), los 14 comandantes Legendarios a distancia (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria Moretti, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric y Spectra) con Calculadora de Parejas, los seis niveles de tropas (T1–T6) y tablas de bonos Basic vs. Advance." },
+    { "selector": "#rb-hero-text", "text": "Desglose completo del Cuartel de Tiradores (Nivel 24), los 15 comandantes Legendarios a distancia (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria Moretti, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra y Charon) con Calculadora de Parejas, los seis niveles de tropas (T1–T6) y tablas de bonos Basic vs. Advance." },
     { "selector": "#rb-cta-heroes", "text": "Héroes a Distancia" },
     { "selector": "#rb-cta-tiers", "text": "Tabla de Tropas T1–T6" },
     { "selector": "#rb-cta-compare", "text": "Comparar % y Salida" },
@@ -12,7 +12,7 @@
     { "selector": "#rb-building-title", "text": "Cuartel de Tiradores (Ranged Barracks)" },
     { "selector": "#rb-building-desc", "text": "Entrena escuadrones a distancia de alto DPS. Los Tiradores contrarrestan a la Infantería pero son vulnerables al flanqueo rápido de los Jinetes." },
     { "selector": "#rb-heroes-tag", "text": "1. Héroes Legendarios a Distancia y Calculadora de Parejas" },
-    { "selector": "#rb-heroes-heading", "text": "Empareja dos de los 14 comandantes a distancia (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra) para revisar estadísticas combinadas, ventajas y habilidades Nv. 1–Nv. 5." },
+    { "selector": "#rb-heroes-heading", "text": "Empareja dos de los 15 comandantes a distancia (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra, Charon) para revisar estadísticas combinadas, ventajas y habilidades Nv. 1–Nv. 5." },
     { "selector": "#rb-pair-preset-label", "text": "Parejas Meta a Distancia Recomendadas (Carga en un clic)" },
     { "selector": "#rb-leader-label", "text": "Héroe Líder" },
     { "selector": "#rb-assist-label", "text": "Héroe Asistente" },
