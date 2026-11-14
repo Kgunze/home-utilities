@@ -1,25 +1,12 @@
 (() => {
   const rData = window.DLS_RANGED_DATA;
-  const presetBar = document.querySelector("#rb-preset-combos");
-  const leaderSel = document.querySelector("#rb-leader-select");
-  const assistSel = document.querySelector("#rb-assist-select");
-  const levelSel = document.querySelector("#rb-skill-level");
-  const pairThead = document.querySelector("#rb-pair-thead");
-  const pairTbody = document.querySelector("#rb-pair-tbody");
-  const pairPerks = document.querySelector("#rb-pair-perks");
-  const heroesGrid = document.querySelector("#rb-ranged-heroes-grid");
-  const unitCards = document.querySelector("#rb-unit-cards");
-  const tiersThead = document.querySelector("#rb-tiers-thead");
-  const tiersTbody = document.querySelector("#rb-tiers-tbody");
-  const fromSelect = document.querySelector("#rb-tier-from");
-  const toSelect = document.querySelector("#rb-tier-to");
-  const buffSelect = document.querySelector("#rb-buff-profile");
-  const compThead = document.querySelector("#rb-comp-thead");
-  const compTbody = document.querySelector("#rb-comp-tbody");
-  const deltaThead = document.querySelector("#rb-delta-thead");
-  const deltaTbody = document.querySelector("#rb-delta-tbody");
-  const csvThead = document.querySelector("#rb-csv-thead");
-  const csvTbody = document.querySelector("#rb-csv-tbody");
+  const presetBar = document.querySelector("#rb-preset-combos"), leaderSel = document.querySelector("#rb-leader-select"), assistSel = document.querySelector("#rb-assist-select"), levelSel = document.querySelector("#rb-skill-level");
+  const pairThead = document.querySelector("#rb-pair-thead"), pairTbody = document.querySelector("#rb-pair-tbody"), pairPerks = document.querySelector("#rb-pair-perks");
+  const filterBar = document.querySelector("#rb-hero-filters"), heroesGrid = document.querySelector("#rb-ranged-heroes-grid"), unitCards = document.querySelector("#rb-unit-cards");
+  const tiersThead = document.querySelector("#rb-tiers-thead"), tiersTbody = document.querySelector("#rb-tiers-tbody");
+  const fromSelect = document.querySelector("#rb-tier-from"), toSelect = document.querySelector("#rb-tier-to"), buffSelect = document.querySelector("#rb-buff-profile");
+  const compThead = document.querySelector("#rb-comp-thead"), compTbody = document.querySelector("#rb-comp-tbody");
+  const deltaThead = document.querySelector("#rb-delta-thead"), deltaTbody = document.querySelector("#rb-delta-tbody"), csvThead = document.querySelector("#rb-csv-thead"), csvTbody = document.querySelector("#rb-csv-tbody");
   if (!unitCards || !tiersTbody || !rData) return;
 
   const TIERS = [
@@ -62,6 +49,9 @@
       type: "Type", name: "Buff Name", min: "Min %", max: "Max %", spread: "Spread (Max - Min)", t6Impact: "T6 Ace Output Impact", fixed: "Fixed", obtain: "Obtain from", priority: "Skill Priority",
       pickLeader: "Use as Leader", pickAssist: "Use as Assistant", leaderCol: "Leader", assistCol: "Assistant", totalCol: "Combined Pair Result", perksTitle: "Active Ranged Pair Perks & Synergy",
       rAtk: "Ranged Squad ATK", rDef: "Ranged Squad DEF", rHp: "Ranged Squad HP", rSpd: "Ranged Travel Speed", rSkill: "Bonus DMG / Skill DMG Amp", rRed: "DMG Taken Reduction", rRage: "Skill DMG Factor (Rage)", rHeal: "Heal Factor / Rage Recovery",
+      roles: [["all", "All Roles (14)"], ["leader", "Leaders (6)"], ["assistant", "Assistants / Support (8)"]],
+      tagsLabel: "Source & Specialty:", searchPlaceholder: "Search ranged hero, skill, or effect...", reset: "Reset Filters", showing: (n) => `Showing ${n} of 14 Ranged Commanders`,
+      chips: [["all", "All Tags"], ["All-Star Night", "All-Star Night (6)"], ["Lucky Roulette", "Lucky Roulette (6)"], ["Police Station", "Police Station (2)"], ["Horde Defense", "Horde Defense (1)"], ["Siege / Rally", "Siege / Rally"], ["Garrison", "Garrison"], ["General", "General / Open Field"], ["Support / Heal", "Support / Heal"]],
     },
     vi: {
       tier: "Cấp", unit: "Đơn vị", atk: "ATK (Gốc + Cộng = Đầu ra)", def: "DEF (Gốc + Cộng = Đầu ra)", hp: "HP (Gốc + Cộng = Đầu ra)", spd: "Tốc độ chạy", load: "Tải trọng", might: "Lực chiến",
@@ -69,6 +59,9 @@
       type: "Loại", name: "Tên Chỉ số Buff", min: "Min %", max: "Max %", spread: "Biên độ (Max - Min)", t6Impact: "Tác động Đầu ra T6", fixed: "Cố định", obtain: "Nguồn nhận", priority: "Thứ tự Nâng kỹ năng",
       pickLeader: "Chọn làm Tướng Chính", pickAssist: "Chọn làm Tướng Phụ", leaderCol: "Tướng Chính", assistCol: "Tướng Phụ", totalCol: "Tổng Hiệu quả Cặp", perksTitle: "Nội tại Cặp Tướng Tầm Xa & Cộng hưởng",
       rAtk: "ATK Tầm xa", rDef: "DEF Tầm xa", rHp: "HP Tầm xa", rSpd: "Tốc độ Hành quân", rSkill: "Tăng Sát thương / Kỹ năng", rRed: "Giảm Sát thương Nhận vào", rRage: "Hệ số Sát thương Kỹ năng", rHeal: "Hệ số Hồi máu / Hồi Nộ",
+      roles: [["all", "Tất cả Vai trò (14)"], ["leader", "Tướng Chính (6)"], ["assistant", "Tướng Phụ / Hỗ trợ (8)"]],
+      tagsLabel: "Nguồn & Chuyên môn:", searchPlaceholder: "Tìm tướng tầm xa, kỹ năng hoặc hiệu ứng...", reset: "Xóa bộ lọc", showing: (n) => `Hiển thị ${n} / 14 Chỉ huy Tầm xa`,
+      chips: [["all", "Mọi Nhãn"], ["All-Star Night", "All-Star Night (6)"], ["Lucky Roulette", "Vòng Quay (6)"], ["Police Station", "Đồn Cảnh Sát (2)"], ["Horde Defense", "Horde Defense (1)"], ["Siege / Rally", "Tập kết / Công thành"], ["Garrison", "Đồn trú"], ["General", "Đa năng / Đánh đồng"], ["Support / Heal", "Hỗ trợ / Hồi máu"]],
     },
     es: {
       tier: "Nivel", unit: "Unidad", atk: "ATQ (Base + Bono = Salida)", def: "DEF (Base + Bono = Salida)", hp: "HP (Base + Bono = Salida)", spd: "Velocidad", load: "Carga", might: "Poder",
@@ -76,9 +69,13 @@
       type: "Tipo", name: "Nombre del Bono", min: "Mín %", max: "Máx %", spread: "Rango (Máx - Mín)", t6Impact: "Impacto en Salida T6", fixed: "Fijo", obtain: "Obtención", priority: "Prioridad de Habilidad",
       pickLeader: "Usar como Líder", pickAssist: "Usar como Asistente", leaderCol: "Líder", assistCol: "Asistente", totalCol: "Resultado Combinado", perksTitle: "Ventajas Activas de la Pareja y Sinergia",
       rAtk: "ATQ a Distancia", rDef: "DEF a Distancia", rHp: "HP a Distancia", rSpd: "Velocidad de Marcha", rSkill: "Daño Adicional / Habilidad", rRed: "Reducción de Daño Recibido", rRage: "Factor de Daño de Habilidad", rHeal: "Curación / Recuperación de Ira",
+      roles: [["all", "Todos los Roles (14)"], ["leader", "Líderes (6)"], ["assistant", "Asistentes / Soporte (8)"]],
+      tagsLabel: "Fuente y Especialidad:", searchPlaceholder: "Buscar héroe, habilidad o efecto...", reset: "Restablecer", showing: (n) => `Mostrando ${n} de 14 Comandantes`,
+      chips: [["all", "Todas"], ["All-Star Night", "All-Star Night (6)"], ["Lucky Roulette", "Ruleta (6)"], ["Police Station", "Estación de Policía (2)"], ["Horde Defense", "Horde Defense (1)"], ["Siege / Rally", "Asedio / Rally"], ["Garrison", "Guarnición"], ["General", "General / Campo"], ["Support / Heal", "Soporte / Curación"]],
     },
   };
 
+  let activeRole = "all", activeChip = "all", searchQuery = "";
   const getLang = () => (["vi", "es"].includes(document.documentElement.lang) ? document.documentElement.lang : "en");
   const findHero = (id) => rData.heroes.find((h) => h.id === id) || rData.heroes[0];
   const pct = (a, b) => `${b >= a ? "+" : ""}${(((b - a) / a) * 100).toFixed(1)}%`;
@@ -86,13 +83,11 @@
 
   const renderPairCalc = () => {
     if (!leaderSel || !pairTbody) return;
-    const lang = getLang(), c = COPY[lang], hL = findHero(leaderSel.value), hA = findHero(assistSel.value);
-    const lv = Math.max(0, Math.min(4, Number(levelSel.value) ?? 4));
+    const lang = getLang(), c = COPY[lang], hL = findHero(leaderSel.value), hA = findHero(assistSel.value), lv = Math.max(0, Math.min(4, Number(levelSel.value) ?? 4));
     pairThead.innerHTML = `<tr><th>${c.stat}</th><th>${c.leaderCol}: ${hL.name}</th><th>${c.assistCol}: ${hA.name}</th><th>${c.totalCol}</th></tr>`;
     const keys = [[c.rAtk, "atk", "%"], [c.rDef, "def", "%"], [c.rHp, "hp", "%"], [c.rSpd, "spd", "%"], [c.rSkill, "skillDmg", "%"], [c.rRed, "dmgRed", "%"], [c.rRage, "rageFactor", ""], [c.rHeal, "healRage", ""]];
     pairTbody.innerHTML = keys.map(([label, k, unit]) => {
-      const vL = hL.stats[k][lv] ?? 0, vA = hA.stats[k][lv] ?? 0, sum = +(vL + vA).toFixed(1);
-      const fmt = (v) => (unit === "%" ? `+${v}%` : v.toLocaleString());
+      const vL = hL.stats[k][lv] ?? 0, vA = hA.stats[k][lv] ?? 0, sum = +(vL + vA).toFixed(1), fmt = (v) => (unit === "%" ? `+${v}%` : v.toLocaleString());
       return `<tr><td><strong>${label}</strong></td><td>${fmt(vL)}</td><td>${fmt(vA)}</td><td><strong>${fmt(sum)}</strong></td></tr>`;
     }).join("");
     const cb = rData.combos.find((x) => x.leader === hL.id && x.assistant === hA.id);
@@ -104,66 +99,45 @@
     });
   };
 
+  const renderHeroesRoster = (preserveFocus = false) => {
+    if (!heroesGrid) return;
+    const lang = getLang(), c = COPY[lang], q = searchQuery.trim().toLowerCase();
+    const list = rData.heroes.filter((h) => (activeRole === "all" || h.role === activeRole) && (activeChip === "all" || h.source.includes(activeChip) || h.spec.includes(activeChip)) && (!q || h.name.toLowerCase().includes(q) || h.source.toLowerCase().includes(q) || h.spec.toLowerCase().includes(q) || h.skills.some(([t, d]) => t.toLowerCase().includes(q) || d.toLowerCase().includes(q))));
+    if (filterBar && !preserveFocus) {
+      filterBar.innerHTML = `<div class="filter-toolbar-top"><div class="filter-segmented" role="tablist">${c.roles.map(([k, lbl]) => `<button type="button" class="filter-seg-btn${activeRole === k ? " is-active" : ""}" data-role="${k}">${lbl}</button>`).join("")}</div><div class="filter-search-wrap"><input type="search" class="filter-search-input" id="rb-search-input" placeholder="${c.searchPlaceholder}" value="${searchQuery}" /></div></div><div class="filter-toolbar-bottom"><div class="filter-chip-group"><span class="filter-group-label">${c.tagsLabel}</span>${c.chips.map(([k, lbl]) => `<button type="button" class="quick-btn${activeChip === k ? " is-active" : ""}" data-chip="${k}">${lbl}</button>`).join("")}</div><div class="filter-chip-group"><span class="filter-status-meta" id="rb-filter-count">${c.showing(list.length)}</span>${activeRole !== "all" || activeChip !== "all" || q ? `<button type="button" class="quick-btn" data-reset="1">${c.reset}</button>` : ""}</div></div>`;
+    } else if (filterBar) {
+      const cnt = filterBar.querySelector("#rb-filter-count");
+      if (cnt) cnt.textContent = c.showing(list.length);
+    }
+    heroesGrid.innerHTML = list.map((h) => `<article class="planner-card dls-infantry-card"><div class="dls-hero-head"><img class="dls-infantry-portrait" src="${h.img}" alt="${h.name}" loading="lazy" /><div><p class="card-label">Tier ${h.tier} · ${c.obtain}: ${h.source}</p><h3>${h.name}</h3><p class="dls-hero-tags">${h.spec} · ${c.priority}: ${h.priority}</p></div></div><ul class="planner-list">${h.skills.map(([t, d]) => `<li><strong>${t}:</strong> ${d}</li>`).join("")}</ul><div class="button-row"><button type="button" class="quick-btn" data-pick-leader="${h.id}">${c.pickLeader}</button><button type="button" class="quick-btn" data-pick-assist="${h.id}">${c.pickAssist}</button></div></article>`).join("");
+  };
+
   const renderComparator = () => {
-    const lang = getLang(), c = COPY[lang], tA = TIERS[Number(fromSelect.value) || 0], tB = TIERS[Number(toSelect.value) || 5];
-    const prof = BUFF_PROFILES.find((p) => p.id === buffSelect.value) || BUFF_PROFILES[0];
+    const lang = getLang(), c = COPY[lang], tA = TIERS[Number(fromSelect.value) || 0], tB = TIERS[Number(toSelect.value) || 5], prof = BUFF_PROFILES.find((p) => p.id === buffSelect.value) || BUFF_PROFILES[0];
     compThead.innerHTML = `<tr><th>${c.stat}</th><th>${tA.tier} ${tA.name}</th><th>${tB.tier} ${tB.name}</th><th>${c.rawDiff}</th><th>${c.pctDiff}</th></tr>`;
-    const rows = [
-      ["ATK", calcOut(tA.atk[0], tA.atk[1], prof, "atkPct"), calcOut(tB.atk[0], tB.atk[1], prof, "atkPct")],
-      ["DEF", calcOut(tA.def[0], tA.def[1], prof, "defPct"), calcOut(tB.def[0], tB.def[1], prof, "defPct")],
-      ["HP", calcOut(tA.hp[0], tA.hp[1], prof, "hpPct"), calcOut(tB.hp[0], tB.hp[1], prof, "hpPct")],
-      [c.spd, prof.id === "ingame" ? tA.spd[0] + tA.spd[1] : tA.spd[0], prof.id === "ingame" ? tB.spd[0] + tB.spd[1] : tB.spd[0]],
-      [c.load, tA.load, tB.load], [c.might, tA.might, tB.might],
-    ];
-    compTbody.innerHTML = rows.map(([label, vA, vB]) => {
-      const diff = +(vB - vA).toFixed(1);
-      return `<tr><td><strong>${label}</strong></td><td>${vA}</td><td><strong>${vB}</strong></td><td>${diff >= 0 ? "+" : ""}${diff}</td><td><strong>${pct(vA, vB)}</strong></td></tr>`;
-    }).join("");
+    const rows = [["ATK", calcOut(tA.atk[0], tA.atk[1], prof, "atkPct"), calcOut(tB.atk[0], tB.atk[1], prof, "atkPct")], ["DEF", calcOut(tA.def[0], tA.def[1], prof, "defPct"), calcOut(tB.def[0], tB.def[1], prof, "defPct")], ["HP", calcOut(tA.hp[0], tA.hp[1], prof, "hpPct"), calcOut(tB.hp[0], tB.hp[1], prof, "hpPct")], [c.spd, prof.id === "ingame" ? tA.spd[0] + tA.spd[1] : tA.spd[0], prof.id === "ingame" ? tB.spd[0] + tB.spd[1] : tB.spd[0]], [c.load, tA.load, tB.load], [c.might, tA.might, tB.might]];
+    compTbody.innerHTML = rows.map(([label, vA, vB]) => `<tr><td><strong>${label}</strong></td><td>${vA}</td><td><strong>${vB}</strong></td><td>${vB - vA >= 0 ? "+" : ""}${+(vB - vA).toFixed(1)}</td><td><strong>${pct(vA, vB)}</strong></td></tr>`).join("");
   };
 
   const renderAll = () => {
     const lang = getLang(), c = COPY[lang];
-    if (heroesGrid) {
-      heroesGrid.innerHTML = rData.heroes.map((h) => `
-        <article class="planner-card dls-infantry-card">
-          <div class="dls-hero-head">
-            <img class="dls-infantry-portrait" src="${h.img}" alt="${h.name}" loading="lazy" />
-            <div>
-              <p class="card-label">Tier ${h.tier} · ${c.obtain}: ${h.source}</p>
-              <h3>${h.name}</h3>
-              <p class="dls-hero-tags">${h.spec} · ${c.priority}: ${h.priority}</p>
-            </div>
-          </div>
-          <ul class="planner-list">${h.skills.map(([t, d]) => `<li><strong>${t}:</strong> ${d}</li>`).join("")}</ul>
-          <div class="button-row">
-            <button type="button" class="quick-btn" data-pick-leader="${h.id}">${c.pickLeader}</button>
-            <button type="button" class="quick-btn" data-pick-assist="${h.id}">${c.pickAssist}</button>
-          </div>
-        </article>`).join("");
-    }
-    renderPairCalc();
+    renderHeroesRoster(); renderPairCalc();
     unitCards.innerHTML = TIERS.map((t) => `<article class="planner-card"><p class="card-label">${t.tier} · ${c.might}: ${t.might} · ${c.load}: ${t.load}</p><h3>${t.name}</h3><p>${t.desc[lang]}</p><img class="recipe-inline-image" src="${t.img}" alt="${t.tier} ${t.name}" loading="lazy" /></article>`).join("");
     tiersThead.innerHTML = `<tr><th>${c.tier}</th><th>${c.unit}</th><th>${c.atk}</th><th>${c.def}</th><th>${c.hp}</th><th>${c.spd}</th><th>${c.load}</th><th>${c.might}</th></tr>`;
     tiersTbody.innerHTML = TIERS.map((t) => `<tr><td><strong>${t.tier}</strong></td><td><strong>${t.name}</strong></td><td>${t.atk[0]} +${t.atk[1]} = <strong>${t.atk[0] + t.atk[1]}</strong></td><td>${t.def[0]} +${t.def[1]} = <strong>${t.def[0] + t.def[1]}</strong></td><td>${t.hp[0]} +${t.hp[1]} = <strong>${t.hp[0] + t.hp[1]}</strong></td><td>${t.spd[0]} +${t.spd[1]} = <strong>${t.spd[0] + t.spd[1]}</strong></td><td>${t.load}</td><td><strong>${t.might}</strong></td></tr>`).join("");
-
     const prevFrom = fromSelect.value || "0", prevTo = toSelect.value || "5", prevBuff = buffSelect.value || "ingame";
     fromSelect.innerHTML = TIERS.map((t, i) => `<option value="${i}">${t.tier} — ${t.name}</option>`).join("");
     toSelect.innerHTML = TIERS.map((t, i) => `<option value="${i}">${t.tier} — ${t.name}</option>`).join("");
     buffSelect.innerHTML = BUFF_PROFILES.map((p) => `<option value="${p.id}">${p.label[lang]}</option>`).join("");
     fromSelect.value = prevFrom; toSelect.value = prevTo; buffSelect.value = prevBuff;
     renderComparator();
-
     deltaThead.innerHTML = `<tr><th>${c.step}</th><th>${c.atkDiff}</th><th>${c.defDiff}</th><th>${c.hpDiff}</th><th>${c.spdDiff}</th><th>${c.mightDiff}</th></tr>`;
     deltaTbody.innerHTML = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [0, 5]].map(([i, j]) => {
       const a = TIERS[i], b = TIERS[j], aAtk = a.atk[0] + a.atk[1], bAtk = b.atk[0] + b.atk[1], aDef = a.def[0] + a.def[1], bDef = b.def[0] + b.def[1], aHp = a.hp[0] + a.hp[1], bHp = b.hp[0] + b.hp[1];
       return `<tr><td><strong>${a.tier} → ${b.tier}</strong></td><td>${pct(aAtk, bAtk)} (${aAtk}→${bAtk})</td><td>${pct(aDef, bDef)} (${aDef}→${bDef})</td><td>${pct(aHp, bHp)} (${aHp}→${bHp})</td><td>${pct(a.spd[0], b.spd[0])}</td><td>${a.might} → ${b.might} (${(b.might / a.might).toFixed(1)}×)</td></tr>`;
     }).join("");
-
     csvThead.innerHTML = `<tr><th>${c.type}</th><th>${c.name}</th><th>${c.min}</th><th>${c.max}</th><th>${c.spread}</th><th>${c.t6Impact}</th></tr>`;
-    csvTbody.innerHTML = CSV_BUFFS.map(([type, name, min, max, note]) => {
-      const spread = max !== null ? `${max - min >= 0 ? "+" : ""}${(max - min).toFixed(1)}% (${(max / min).toFixed(1)}×)` : c.fixed;
-      return `<tr><td><strong>${type}</strong></td><td>${name}</td><td>${min}%</td><td>${max !== null ? `${max}%` : "—"}</td><td><strong>${spread}</strong></td><td>${note}</td></tr>`;
-    }).join("");
+    csvTbody.innerHTML = CSV_BUFFS.map(([type, name, min, max, note]) => `<tr><td><strong>${type}</strong></td><td>${name}</td><td>${min}%</td><td>${max !== null ? `${max}%` : "—"}</td><td><strong>${max !== null ? `${max - min >= 0 ? "+" : ""}${(max - min).toFixed(1)}% (${(max / min).toFixed(1)}×)` : c.fixed}</strong></td><td>${note}</td></tr>`).join("");
   };
 
   if (leaderSel && assistSel) {
@@ -179,6 +153,14 @@
     });
   }
   [leaderSel, assistSel, levelSel].forEach((el) => el?.addEventListener("change", renderPairCalc));
+  filterBar?.addEventListener("click", (e) => {
+    const rBtn = e.target.closest("[data-role]"), cBtn = e.target.closest("[data-chip]"), rst = e.target.closest("[data-reset]");
+    if (rBtn) activeRole = rBtn.dataset.role;
+    if (cBtn) activeChip = cBtn.dataset.chip;
+    if (rst) { activeRole = "all"; activeChip = "all"; searchQuery = ""; }
+    if (rBtn || cBtn || rst) renderHeroesRoster();
+  });
+  filterBar?.addEventListener("input", (e) => { if (e.target.matches("#rb-search-input")) { searchQuery = e.target.value; renderHeroesRoster(true); } });
   heroesGrid?.addEventListener("click", (e) => {
     const lBtn = e.target.closest("[data-pick-leader]"), aBtn = e.target.closest("[data-pick-assist]");
     if (lBtn) leaderSel.value = lBtn.dataset.pickLeader;

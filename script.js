@@ -235,6 +235,20 @@ const ensureDoomsdayLink = () => {
     rngLink.textContent = "Ranged Barracks";
     sub.appendChild(rngLink);
   }
+  if (sub && !sub.querySelector(".nav-doomsday-riders")) {
+    const ridLink = document.createElement("a");
+    ridLink.className = "nav-doomsday-riders";
+    ridLink.href = `${prefix}doomsday-riders-barracks.html`;
+    ridLink.textContent = "Rider Heroes & Stats";
+    sub.appendChild(ridLink);
+  }
+  if (sub && !sub.querySelector(".nav-doomsday-biobeast")) {
+    const bioLink = document.createElement("a");
+    bioLink.className = "nav-doomsday-biobeast";
+    bioLink.href = `${prefix}doomsday-biobeast.html`;
+    bioLink.textContent = "Biobeast";
+    sub.appendChild(bioLink);
+  }
   const kiemThe = navLinks.querySelector(".nav-kiem-the");
   if (kiemThe && kiemThe.nextElementSibling !== parent) {
     kiemThe.insertAdjacentElement("afterend", parent);
@@ -1075,6 +1089,14 @@ const syncCommonLocaleLabels = () => {
   const doomsdayRangedLink = document.querySelector(".nav-doomsday-ranged");
   if (doomsdayRangedLink && localeStrings.navDoomsdayRanged) {
     doomsdayRangedLink.textContent = localeStrings.navDoomsdayRanged;
+  }
+  const doomsdayRidersLink = document.querySelector(".nav-doomsday-riders");
+  if (doomsdayRidersLink && localeStrings.navDoomsdayRiders) {
+    doomsdayRidersLink.textContent = localeStrings.navDoomsdayRiders;
+  }
+  const doomsdayBiobeastLink = document.querySelector(".nav-doomsday-biobeast");
+  if (doomsdayBiobeastLink && localeStrings.navDoomsdayBiobeast) {
+    doomsdayBiobeastLink.textContent = localeStrings.navDoomsdayBiobeast;
   }
   if (numentixLink && localeStrings.navNumentix) {
     numentixLink.textContent = localeStrings.navNumentix;
