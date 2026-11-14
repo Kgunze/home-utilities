@@ -3,6 +3,7 @@
   if (!data) return;
 
   const leaderSel = document.querySelector("#ih-leader-select"), assistSel = document.querySelector("#ih-assist-select"), levelSel = document.querySelector("#ih-skill-level");
+  const pairBPreset = document.querySelector("#ih-pair-b-preset"), leaderBSel = document.querySelector("#ih-leader-b-select"), assistBSel = document.querySelector("#ih-assist-b-select");
   const presetBar = document.querySelector("#ih-preset-combos"), comboThead = document.querySelector("#ih-combo-thead"), comboTbody = document.querySelector("#ih-combo-tbody");
   const transcendWrap = document.querySelector("#ih-transcend-wrap"), comboPerks = document.querySelector("#ih-combo-perks");
   const filterBar = document.querySelector("#ih-hero-filters"), heroGrid = document.querySelector("#ih-hero-grid");
@@ -13,13 +14,13 @@
 
   const COPY = {
     en: {
-      stat: "Combined Attribute / Effect", leaderCol: "Leader", assistCol: "Assistant", totalCol: "Combined Result",
-      transCol: "✦ Transcend Pair Result (vs Lv 5)", transTitle: "✦ Sakura Transcend Mode — Skill-by-Skill Additions & Pair Impact",
+      stat: "Combined Attribute / Effect", pairACol: "Pair A", pairBCol: "Pair B", totalACol: "Pair A Total", totalBCol: "Pair B Total", diffCol: "Stat Diff (Pair A vs. Pair B)", tie: "0 (Tie)", customPair: "Custom Pair B Selection",
+      transCol: "✦ Pair A Transcend", transTitle: "✦ Sakura Transcend Mode — Skill Additions & Pair Impact",
       skillCol: "Sakura Skill", lv5Col: "Normal Lv 5 (Awakened)", trCol: "✦ Transcend Addition", gainCol: "Transcend Gain (+Δ)",
       atk: "Infantry Squad ATK", def: "Infantry Squad DEF", hp: "Infantry Squad HP", spd: "Infantry Travel Speed",
       counter: "Squad Counter DMG", dmgRed: "DMG Taken Reduction", rageFactor: "Skill DMG Factor (Rage + Awakened)", shieldHeal: "Shield / Heal Factor",
-      perksTitle: "Active Pair Perks & Skill Triggers", roleLeader: "Leader", roleAssist: "Assistant", obtain: "Obtain",
-      pickLeader: "Use as Leader", pickAssist: "Use as Assistant",
+      perksTitle: "Active Infantry Pair-vs-Pair Perks & Synergy", roleLeader: "Leader", roleAssist: "Assistant", obtain: "Obtain",
+      pickLeader: "Pair A Leader", pickAssist: "Pair A Assist", pickLeaderB: "Pair B Leader", pickAssistB: "Pair B Assist",
       roles: [["all", "All Roles (16)"], ["leader", "Leaders (8)"], ["assistant", "Assistants / General (8)"]],
       tagsLabel: "Source & Specialty:", searchPlaceholder: "Search hero, skill, or effect...", reset: "Reset Filters",
       showing: (n) => `Showing ${n} of 16 Commanders`,
@@ -28,13 +29,13 @@
       rawDiff: "Output Diff", pctDiff: "% Difference", step: "Transition", atkDiff: "ATK % Diff (Output)", defDiff: "DEF % Diff (Output)", hpDiff: "HP % Diff (Output)", spdDiff: "Speed % Diff", mightDiff: "Might Ratio",
     },
     vi: {
-      stat: "Chỉ số / Hiệu ứng Kết hợp", leaderCol: "Tướng Chính", assistCol: "Tướng Phụ", totalCol: "Tổng Hiệu quả Cặp",
-      transCol: "✦ Tổng Cặp Transcend (so với Lv 5)", transTitle: "✦ Chế độ Transcend của Sakura — Chi tiết Kỹ năng & Cộng hưởng Cặp",
+      stat: "Chỉ số / Hiệu ứng Kết hợp", pairACol: "Cặp A", pairBCol: "Cặp B", totalACol: "Tổng Cặp A", totalBCol: "Tổng Cặp B", diffCol: "Chênh lệch (Cặp A vs Cặp B)", tie: "0 (Bằng nhau)", customPair: "Tùy chỉnh Cặp B",
+      transCol: "✦ Cặp A Transcend", transTitle: "✦ Chế độ Transcend của Sakura — Chi tiết Kỹ năng & Cộng hưởng Cặp",
       skillCol: "Kỹ năng của Sakura", lv5Col: "Lv 5 Thường (Thức tỉnh)", trCol: "✦ Hiệu ứng Transcend", gainCol: "Mức tăng Transcend (+Δ)",
       atk: "ATK Bộ binh", def: "DEF Bộ binh", hp: "HP Bộ binh", spd: "Tốc độ Hành quân",
       counter: "Sát thương Phản đòn", dmgRed: "Giảm Sát thương Nhận vào", rageFactor: "Hệ số Sát thương Kỹ năng", shieldHeal: "Hệ số Khiên / Hồi máu",
-      perksTitle: "Nội tại Cặp đôi & Hiệu ứng Kích hoạt", roleLeader: "Tướng Chính", roleAssist: "Tướng Phụ", obtain: "Nguồn nhận",
-      pickLeader: "Chọn làm Tướng Chính", pickAssist: "Chọn làm Tướng Phụ",
+      perksTitle: "So sánh Nội tại & Cộng hưởng Cặp A vs Cặp B", roleLeader: "Tướng Chính", roleAssist: "Tướng Phụ", obtain: "Nguồn nhận",
+      pickLeader: "Tướng Chính A", pickAssist: "Tướng Phụ A", pickLeaderB: "Tướng Chính B", pickAssistB: "Tướng Phụ B",
       roles: [["all", "Tất cả Vai trò (16)"], ["leader", "Tướng Chính (8)"], ["assistant", "Tướng Phụ / Đa năng (8)"]],
       tagsLabel: "Nguồn & Chuyên môn:", searchPlaceholder: "Tìm tên tướng, kỹ năng hoặc hiệu ứng...", reset: "Xóa bộ lọc",
       showing: (n) => `Hiển thị ${n} / 16 Chỉ huy`,
@@ -43,13 +44,13 @@
       rawDiff: "Chênh lệch Đầu ra", pctDiff: "% Chênh lệch", step: "Bước chuyển", atkDiff: "% Tăng ATK (Đầu ra)", defDiff: "% Tăng DEF (Đầu ra)", hpDiff: "% Tăng HP (Đầu ra)", spdDiff: "% Tốc độ", mightDiff: "Tỷ lệ Lực chiến",
     },
     es: {
-      stat: "Atributo / Efecto Combinado", leaderCol: "Líder", assistCol: "Asistente", totalCol: "Resultado Combinado",
-      transCol: "✦ Total en Modo Transcend (vs Nv. 5)", transTitle: "✦ Modo Transcend de Sakura — Adiciones por Habilidad e Impacto",
+      stat: "Atributo / Efecto Combinado", pairACol: "Pareja A", pairBCol: "Pareja B", totalACol: "Total Par A", totalBCol: "Total Par B", diffCol: "Diferencia (Par A vs Par B)", tie: "0 (Empate)", customPair: "Selección Personalizada Par B",
+      transCol: "✦ Pareja A Transcend", transTitle: "✦ Modo Transcend de Sakura — Adiciones por Habilidad e Impacto",
       skillCol: "Habilidad de Sakura", lv5Col: "Nv. 5 Normal (Despertar)", trCol: "✦ Adición Transcend", gainCol: "Mejora Transcend (+Δ)",
       atk: "ATQ de Infantería", def: "DEF de Infantería", hp: "HP de Infantería", spd: "Velocidad de Marcha",
       counter: "Daño de Contraataque", dmgRed: "Reducción de Daño Recibido", rageFactor: "Factor de Daño de Habilidad", shieldHeal: "Factor de Escudo / Curación",
-      perksTitle: "Ventajas Activas de la Pareja y Efectos", roleLeader: "Líder", roleAssist: "Asistente", obtain: "Obtención",
-      pickLeader: "Usar como Líder", pickAssist: "Usar como Asistente",
+      perksTitle: "Comparación de Ventajas y Sinergia (Par A vs Par B)", roleLeader: "Líder", roleAssist: "Asistente", obtain: "Obtención",
+      pickLeader: "Líder Par A", pickAssist: "Asist. Par A", pickLeaderB: "Líder Par B", pickAssistB: "Asist. Par B",
       roles: [["all", "Todos los Roles (16)"], ["leader", "Líderes (8)"], ["assistant", "Asistentes / General (8)"]],
       tagsLabel: "Fuente y Especialidad:", searchPlaceholder: "Buscar héroe, habilidad o efecto...", reset: "Restablecer",
       showing: (n) => `Mostrando ${n} de 16 Comandantes`,
@@ -67,27 +68,28 @@
   const calcOut = (base, bonus, prof, key) => (prof.id === "ingame" ? base + bonus : +(base * (1 + (prof[key] || 0) / 100)).toFixed(1));
 
   const renderCalculator = () => {
-    const lang = getLang(), c = COPY[lang], hL = findHero(leaderSel.value), hA = findHero(assistSel.value);
-    const lvIdx = Math.max(0, Math.min(5, Number(levelSel.value) ?? 5)), hasTranscend = Boolean(hL.transcend || hA.transcend);
-    comboThead.innerHTML = `<tr><th>${c.stat}</th><th>${c.leaderCol}: ${hL.name}</th><th>${c.assistCol}: ${hA.name}</th><th>${c.totalCol}</th>${hasTranscend ? `<th>${c.transCol}</th>` : ""}</tr>`;
+    const lang = getLang(), c = COPY[lang], lvIdx = Math.max(0, Math.min(5, Number(levelSel.value) ?? 5));
+    const hLA = findHero(leaderSel.value), hAA = findHero(assistSel.value);
+    const hLB = findHero(leaderBSel?.value || "julien"), hAB = findHero(assistBSel?.value || "miyamoto-doichi");
+    comboThead.innerHTML = `<tr><th>${c.stat}</th><th>${c.pairACol}: ${hLA.name} + ${hAA.name}</th><th>${c.totalACol}</th><th>${c.pairBCol}: ${hLB.name} + ${hAB.name}</th><th>${c.totalBCol}</th><th>${c.diffCol}</th></tr>`;
     const keys = [[c.atk, "atk", "%"], [c.def, "def", "%"], [c.hp, "hp", "%"], [c.spd, "spd", "%"], [c.counter, "counter", "%"], [c.dmgRed, "dmgRed", "%"], [c.rageFactor, "rageFactor", ""], [c.shieldHeal, "shieldHeal", ""]];
     comboTbody.innerHTML = keys.map(([label, k, unit]) => {
-      const vL = valAt(hL.stats[k], lvIdx), vA = valAt(hA.stats[k], lvIdx), sum = +(vL + vA).toFixed(1);
-      const lv5Sum = +(valAt(hL.stats[k], 4) + valAt(hA.stats[k], 4)).toFixed(1), trSum = +(valAt(hL.stats[k], 5) + valAt(hA.stats[k], 5)).toFixed(1), delta = +(trSum - lv5Sum).toFixed(1);
-      const fmt = (v) => (unit === "%" ? `+${v}%` : v.toLocaleString());
-      const trCell = hasTranscend ? `<td><strong>${fmt(trSum)}</strong>${delta > 0 ? ` <span class="dls-hero-tags">(+${unit === "%" ? `${delta}%` : delta.toLocaleString()} vs Lv5)</span>` : ""}</td>` : "";
-      return `<tr><td><strong>${label}</strong></td><td>${fmt(vL)}</td><td>${fmt(vA)}</td><td><strong>${fmt(sum)}</strong></td>${trCell}</tr>`;
+      const vLA = valAt(hLA.stats[k], lvIdx), vAA = valAt(hAA.stats[k], lvIdx), sumA = +(vLA + vAA).toFixed(1);
+      const vLB = valAt(hLB.stats[k], lvIdx), vAB = valAt(hAB.stats[k], lvIdx), sumB = +(vLB + vAB).toFixed(1);
+      const diff = +(sumA - sumB).toFixed(1), fmt = (v) => (unit === "%" ? `+${v}%` : v.toLocaleString());
+      const diffTxt = diff === 0 ? c.tie : `${diff > 0 ? "+" : ""}${unit === "%" ? `${diff}%` : diff.toLocaleString()} (${diff > 0 ? `${c.pairACol} ▲` : `${c.pairBCol} ▲`})`;
+      return `<tr><td><strong>${label}</strong></td><td>${fmt(vLA)} + ${fmt(vAA)}</td><td><strong>${fmt(sumA)}</strong></td><td>${fmt(vLB)} + ${fmt(vAB)}</td><td><strong>${fmt(sumB)}</strong></td><td><strong>${diffTxt}</strong></td></tr>`;
     }).join("");
-    const trHero = hL.transcend ? hL : hA.transcend ? hA : null;
+    const trHero = hLA.transcend ? hLA : hAA.transcend ? hAA : null;
     if (transcendWrap) {
       transcendWrap.innerHTML = trHero ? `<p class="card-label" style="margin-top:1.1rem">${c.transTitle}</p><table class="summary-table"><thead><tr><th>${c.skillCol}</th><th>${c.lv5Col}</th><th>${c.trCol}</th><th>${c.gainCol}</th></tr></thead><tbody>${trHero.transcend.map(([sk, n5, tr, d]) => `<tr><td><strong>${sk}</strong></td><td>${n5}</td><td><strong>${tr}</strong></td><td><span class="dls-hero-tags">${d}</span></td></tr>`).join("")}</tbody></table>` : "";
     }
-    const matchedCombo = data.combos.find((cb) => cb.leader === hL.id && cb.assistant === hA.id);
-    const allPerks = [...hL.perks.map((p) => `<strong>${hL.name}:</strong> ${p}`), ...hA.perks.map((p) => `<strong>${hA.name}:</strong> ${p}`)];
-    comboPerks.innerHTML = `<p class="card-label">${c.perksTitle}${matchedCombo ? ` · ★ ${matchedCombo.tag}` : ""}</p>${matchedCombo ? `<p><strong>Meta Synergy:</strong> ${matchedCombo.note}</p>` : ""}<ul class="planner-list">${allPerks.map((p) => `<li>${p}</li>`).join("")}</ul>`;
+    const cbA = data.combos.find((cb) => cb.leader === hLA.id && cb.assistant === hAA.id), cbB = data.combos.find((cb) => cb.leader === hLB.id && cb.assistant === hAB.id);
+    if (pairBPreset) pairBPreset.value = cbB ? cbB.id : "custom";
+    comboPerks.innerHTML = `<p class="card-label">${c.perksTitle}</p><p><strong>${c.pairACol} (${hLA.name} + ${hAA.name})${cbA ? ` · ★ ${cbA.tag}` : ""}:</strong> ${cbA ? cbA.note : `${hLA.perks[0]} | ${hAA.perks[0]}`}</p><p><strong>${c.pairBCol} (${hLB.name} + ${hAB.name})${cbB ? ` · ★ ${cbB.tag}` : ""}:</strong> ${cbB ? cbB.note : `${hLB.perks[0]} | ${hAB.perks[0]}`}</p><ul class="planner-list">${[...hLA.perks.map((p) => `<li><strong>[${c.pairACol}] ${hLA.name}:</strong> ${p}</li>`), ...hAA.perks.map((p) => `<li><strong>[${c.pairACol}] ${hAA.name}:</strong> ${p}</li>`), ...hLB.perks.map((p) => `<li><strong>[${c.pairBCol}] ${hLB.name}:</strong> ${p}</li>`), ...hAB.perks.map((p) => `<li><strong>[${c.pairBCol}] ${hAB.name}:</strong> ${p}</li>`)].join("")}</ul>`;
     presetBar?.querySelectorAll("[data-combo]").forEach((btn) => {
       const cb = data.combos.find((x) => x.id === btn.dataset.combo);
-      btn.classList.toggle("is-active", Boolean(cb && cb.leader === hL.id && cb.assistant === hA.id));
+      btn.classList.toggle("is-active", Boolean(cb && cb.leader === hLA.id && cb.assistant === hAA.id));
     });
   };
 
@@ -100,7 +102,7 @@
       const countNode = filterBar.querySelector("#ih-filter-count");
       if (countNode) countNode.textContent = c.showing(list.length);
     }
-    heroGrid.innerHTML = list.map((h) => `<article class="planner-card dls-infantry-card"><div class="dls-hero-head"><img class="dls-infantry-portrait" src="${h.img}" alt="${h.name}" loading="lazy" /><div><p class="card-label">${h.role === "leader" ? c.roleLeader : c.roleAssist} · Tier ${h.tier} · ${c.obtain}: ${h.source}</p><h3>${h.name}</h3><p class="dls-hero-tags">${h.tags.join(" · ")}</p></div></div><ul class="planner-list">${h.skills.map(([title, desc]) => `<li><strong>${title}:</strong> ${desc}</li>`).join("")}</ul><div class="button-row"><button type="button" class="quick-btn" data-pick-leader="${h.id}">${c.pickLeader}</button><button type="button" class="quick-btn" data-pick-assist="${h.id}">${c.pickAssist}</button></div></article>`).join("");
+    heroGrid.innerHTML = list.map((h) => `<article class="planner-card dls-infantry-card"><div class="dls-hero-head"><img class="dls-infantry-portrait" src="${h.img}" alt="${h.name}" loading="lazy" /><div><p class="card-label">${h.role === "leader" ? c.roleLeader : c.roleAssist} · Tier ${h.tier} · ${c.obtain}: ${h.source}</p><h3>${h.name}</h3><p class="dls-hero-tags">${h.tags.join(" · ")}</p></div></div><ul class="planner-list">${h.skills.map(([title, desc]) => `<li><strong>${title}:</strong> ${desc}</li>`).join("")}</ul><div class="button-row"><button type="button" class="quick-btn" data-pick-leader="${h.id}">${c.pickLeader}</button><button type="button" class="quick-btn" data-pick-assist="${h.id}">${c.pickAssist}</button><button type="button" class="quick-btn" data-pick-leader-b="${h.id}">${c.pickLeaderB}</button><button type="button" class="quick-btn" data-pick-assist-b="${h.id}">${c.pickAssistB}</button></div></article>`).join("");
   };
 
   const renderComparator = () => {
@@ -115,6 +117,11 @@
   const renderUnits = () => {
     if (!unitCards || !data.tiers) return;
     const lang = getLang(), c = COPY[lang], T = data.tiers;
+    if (pairBPreset) {
+      const prevP = pairBPreset.value || "julien-doichi";
+      pairBPreset.innerHTML = `<option value="custom">— ${c.customPair} —</option>` + data.combos.map((cb) => `<option value="${cb.id}">★ ${findHero(cb.leader).name} + ${findHero(cb.assistant).name} (${cb.tag})</option>`).join("");
+      pairBPreset.value = prevP;
+    }
     unitCards.innerHTML = T.map((t) => `<article class="planner-card"><p class="card-label">${t.tier} · ${c.might}: ${t.might} · ${c.load}: ${t.load}</p><h3>${t.name}</h3><p>${t.desc[lang]}</p><img class="recipe-inline-image" src="${t.img}" alt="${t.tier} ${t.name}" loading="lazy" /></article>`).join("");
     tiersThead.innerHTML = `<tr><th>${c.tier}</th><th>${c.unit}</th><th>${c.uAtk}</th><th>${c.uDef}</th><th>${c.uHp}</th><th>${c.uSpd}</th><th>${c.load}</th><th>${c.might}</th></tr>`;
     tiersTbody.innerHTML = T.map((t) => `<tr><td><strong>${t.tier}</strong></td><td><strong>${t.name}</strong></td><td>${t.atk[0]} +${t.atk[1]} = <strong>${t.atk[0] + t.atk[1]}</strong></td><td>${t.def[0]} +${t.def[1]} = <strong>${t.def[0] + t.def[1]}</strong></td><td>${t.hp[0]} +${t.hp[1]} = <strong>${t.hp[0] + t.hp[1]}</strong></td><td>${t.spd[0]} +${t.spd[1]} = <strong>${t.spd[0] + t.spd[1]}</strong></td><td>${t.load}</td><td><strong>${t.might}</strong></td></tr>`).join("");
@@ -131,17 +138,22 @@
     }).join("");
   };
 
-  leaderSel.innerHTML = data.heroes.map((h) => `<option value="${h.id}">${h.name} (${h.role === "leader" ? "Leader" : "Assistant"} · ${h.tier})</option>`).join("");
-  assistSel.innerHTML = data.heroes.map((h) => `<option value="${h.id}">${h.name} (${h.role === "assistant" ? "Assistant" : "Leader"} · ${h.tier})</option>`).join("");
+  const opts = data.heroes.map((h) => `<option value="${h.id}">${h.name} (${h.role === "leader" ? "Leader" : "Assistant"} · ${h.tier})</option>`).join("");
+  leaderSel.innerHTML = opts; assistSel.innerHTML = opts;
+  if (leaderBSel && assistBSel) { leaderBSel.innerHTML = opts; assistBSel.innerHTML = opts; leaderBSel.value = "julien"; assistBSel.value = "miyamoto-doichi"; }
   leaderSel.value = "sakura"; assistSel.value = "ammara";
   if (presetBar) {
     presetBar.innerHTML = data.combos.map((cb) => `<button type="button" class="combo-preset-chip" data-combo="${cb.id}"><span class="combo-preset-tag">★ ${cb.tag}</span><strong class="combo-preset-title">${findHero(cb.leader).name} + ${findHero(cb.assistant).name}</strong></button>`).join("");
   }
-  [leaderSel, assistSel, levelSel].forEach((el) => el?.addEventListener("change", renderCalculator));
+  [leaderSel, assistSel, levelSel, leaderBSel, assistBSel].forEach((el) => el?.addEventListener("change", renderCalculator));
   [fromSel, toSel, buffSel].forEach((el) => el?.addEventListener("change", renderComparator));
   presetBar?.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-combo]"), cb = btn && data.combos.find((x) => x.id === btn.dataset.combo);
     if (cb) { leaderSel.value = cb.leader; assistSel.value = cb.assistant; renderCalculator(); }
+  });
+  pairBPreset?.addEventListener("change", () => {
+    const cb = data.combos.find((x) => x.id === pairBPreset.value);
+    if (cb && leaderBSel && assistBSel) { leaderBSel.value = cb.leader; assistBSel.value = cb.assistant; renderCalculator(); }
   });
   filterBar?.addEventListener("click", (e) => {
     const rBtn = e.target.closest("[data-role]"), cBtn = e.target.closest("[data-chip]"), rst = e.target.closest("[data-reset]");
@@ -152,11 +164,12 @@
   });
   filterBar?.addEventListener("input", (e) => { if (e.target.matches("#ih-search-input")) { searchQuery = e.target.value; renderRoster(true); } });
   heroGrid.addEventListener("click", (e) => {
-    const lBtn = e.target.closest("[data-pick-leader]"), aBtn = e.target.closest("[data-pick-assist]");
-    if (lBtn) leaderSel.value = lBtn.dataset.pickLeader;
-    if (aBtn) assistSel.value = aBtn.dataset.pickAssist;
-    if (lBtn || aBtn) { renderCalculator(); document.querySelector("#combo-calculator-section")?.scrollIntoView({ behavior: "smooth" }); }
+    const lA = e.target.closest("[data-pick-leader]"), aA = e.target.closest("[data-pick-assist]"), lB = e.target.closest("[data-pick-leader-b]"), aB = e.target.closest("[data-pick-assist-b]");
+    if (lA) leaderSel.value = lA.dataset.pickLeader;
+    if (aA) assistSel.value = aA.dataset.pickAssist;
+    if (lB && leaderBSel) leaderBSel.value = lB.dataset.pickLeaderB;
+    if (aB && assistBSel) assistBSel.value = aB.dataset.pickAssistB;
+    if (lA || aA || lB || aB) { renderCalculator(); document.querySelector("#combo-calculator-section")?.scrollIntoView({ behavior: "smooth" }); }
   });
   renderCalculator(); renderRoster(); renderUnits();
-  new MutationObserver(() => { renderCalculator(); renderRoster(); renderUnits(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
 })();

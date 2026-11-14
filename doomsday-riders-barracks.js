@@ -3,10 +3,10 @@
   if (!rData) return;
 
   const presetBar = document.querySelector("#rd-preset-combos"), leaderSel = document.querySelector("#rd-leader-select"), assistSel = document.querySelector("#rd-assist-select"), levelSel = document.querySelector("#rd-skill-level");
+  const pairBPreset = document.querySelector("#rd-pair-b-preset"), leaderBSel = document.querySelector("#rd-leader-b-select"), assistBSel = document.querySelector("#rd-assist-b-select");
   const pairThead = document.querySelector("#rd-pair-thead"), pairTbody = document.querySelector("#rd-pair-tbody"), pairPerks = document.querySelector("#rd-pair-perks");
   const filterBar = document.querySelector("#rd-hero-filters"), heroesGrid = document.querySelector("#rd-riders-heroes-grid");
-  const matrixThead = document.querySelector("#rd-matrix-thead"), matrixTbody = document.querySelector("#rd-matrix-tbody");
-  const combosThead = document.querySelector("#rd-combos-thead"), combosTbody = document.querySelector("#rd-combos-tbody");
+  const matrixThead = document.querySelector("#rd-matrix-thead"), matrixTbody = document.querySelector("#rd-matrix-tbody"), combosThead = document.querySelector("#rd-combos-thead"), combosTbody = document.querySelector("#rd-combos-tbody");
   const unitCards = document.querySelector("#rd-unit-cards"), tiersThead = document.querySelector("#rd-tiers-thead"), tiersTbody = document.querySelector("#rd-tiers-tbody");
   const fromSel = document.querySelector("#rd-tier-from"), toSel = document.querySelector("#rd-tier-to"), buffSel = document.querySelector("#rd-buff-profile");
   const compThead = document.querySelector("#rd-comp-thead"), compTbody = document.querySelector("#rd-comp-tbody"), deltaThead = document.querySelector("#rd-delta-thead"), deltaTbody = document.querySelector("#rd-delta-tbody");
@@ -28,7 +28,8 @@
     en: {
       tier: "Tier", unit: "Unit", atk: "ATK (Base + Bonus = Output)", def: "DEF (Base + Bonus = Output)", hp: "HP (Base + Bonus = Output)", spd: "Travel Speed", load: "Load", might: "Might",
       stat: "Attribute", rawDiff: "Output Diff", pctDiff: "% Difference", obtain: "Obtain from", priority: "Skill Priority",
-      pickLeader: "Use as Leader", pickAssist: "Use as Assistant", leaderCol: "Leader", assistCol: "Assistant", totalCol: "Combined Pair Result", perksTitle: "Active Rider Pair Perks & Synergy",
+      pickLeader: "Pair A Leader", pickAssist: "Pair A Assist", pickLeaderB: "Pair B Leader", pickAssistB: "Pair B Assist",
+      pairACol: "Pair A", pairBCol: "Pair B", totalACol: "Pair A Total", totalBCol: "Pair B Total", diffCol: "Stat Diff (Pair A vs. Pair B)", tie: "0 (Tie)", customPair: "Custom Pair B Selection", perksTitle: "Active Rider Pair-vs-Pair Perks & Synergy",
       rAtk: "Rider Squad ATK", rDef: "Rider Squad DEF", rHp: "Rider Squad HP", rSpd: "Rider Travel Speed", rSkill: "Bonus DMG / Slow / Amp", rRed: "DMG Taken Reduction", rRage: "Skill DMG Factor (Rage)", rHeal: "Heal Factor / Rage Recovery",
       heroCol: "Hero", roleCol: "Role / Tier", srcCol: "Obtain Source", pairCol: "Rider Meta Pair", tagCol: "Tactical Role",
       type: "Type", name: "Buff Name", min: "Min %", max: "Max %", spread: "Spread (Max - Min)", t6Impact: "Rider Output Impact", fixed: "Fixed",
@@ -40,7 +41,8 @@
     vi: {
       tier: "Cấp", unit: "Đơn vị", atk: "ATK (Gốc + Cộng = Đầu ra)", def: "DEF (Gốc + Cộng = Đầu ra)", hp: "HP (Gốc + Cộng = Đầu ra)", spd: "Tốc độ chạy", load: "Tải trọng", might: "Lực chiến",
       stat: "Chỉ số", rawDiff: "Chênh lệch Đầu ra", pctDiff: "% Chênh lệch", obtain: "Nguồn nhận", priority: "Thứ tự Nâng kỹ năng",
-      pickLeader: "Chọn làm Tướng Chính", pickAssist: "Chọn làm Tướng Phụ", leaderCol: "Tướng Chính", assistCol: "Tướng Phụ", totalCol: "Tổng Hiệu quả Cặp", perksTitle: "Nội tại Cặp Tướng Kỵ Binh & Cộng hưởng",
+      pickLeader: "Tướng Chính A", pickAssist: "Tướng Phụ A", pickLeaderB: "Tướng Chính B", pickAssistB: "Tướng Phụ B",
+      pairACol: "Cặp A", pairBCol: "Cặp B", totalACol: "Tổng Cặp A", totalBCol: "Tổng Cặp B", diffCol: "Chênh lệch (Cặp A vs Cặp B)", tie: "0 (Bằng nhau)", customPair: "Tùy chỉnh Cặp B", perksTitle: "So sánh Nội tại & Cộng hưởng Cặp A vs Cặp B",
       rAtk: "ATK Kỵ binh", rDef: "DEF Kỵ binh", rHp: "HP Kỵ binh", rSpd: "Tốc độ Hành quân", rSkill: "Tăng Sát thương / Làm chậm", rRed: "Giảm Sát thương Nhận vào", rRage: "Hệ số Sát thương Kỹ năng", rHeal: "Hệ số Hồi máu / Hồi Nộ",
       heroCol: "Tướng", roleCol: "Vai trò / Bậc", srcCol: "Nguồn nhận", pairCol: "Cặp Kỵ Binh Meta", tagCol: "Chuyên môn Chiến thuật",
       type: "Loại", name: "Tên Chỉ số Buff", min: "Min %", max: "Max %", spread: "Biên độ (Max - Min)", t6Impact: "Tác động Kỵ binh", fixed: "Cố định",
@@ -52,7 +54,8 @@
     es: {
       tier: "Nivel", unit: "Unidad", atk: "ATQ (Base + Bono = Salida)", def: "DEF (Base + Bono = Salida)", hp: "HP (Base + Bono = Salida)", spd: "Velocidad", load: "Carga", might: "Poder",
       stat: "Atributo", rawDiff: "Dif. de Salida", pctDiff: "% de Diferencia", obtain: "Obtención", priority: "Prioridad de Habilidad",
-      pickLeader: "Usar como Líder", pickAssist: "Usar como Asistente", leaderCol: "Líder", assistCol: "Asistente", totalCol: "Resultado Combinado", perksTitle: "Ventajas Activas de la Pareja de Jinetes",
+      pickLeader: "Líder Par A", pickAssist: "Asist. Par A", pickLeaderB: "Líder Par B", pickAssistB: "Asist. Par B",
+      pairACol: "Pareja A", pairBCol: "Pareja B", totalACol: "Total Par A", totalBCol: "Total Par B", diffCol: "Diferencia (Par A vs Par B)", tie: "0 (Empate)", customPair: "Selección Personalizada Par B", perksTitle: "Comparación de Ventajas y Sinergia (Par A vs Par B)",
       rAtk: "ATQ de Jinetes", rDef: "DEF de Jinetes", rHp: "HP de Jinetes", rSpd: "Velocidad de Marcha", rSkill: "Daño Adicional / Ralentización", rRed: "Reducción de Daño Recibido", rRage: "Factor de Daño de Habilidad", rHeal: "Curación / Recuperación de Ira",
       heroCol: "Héroe", roleCol: "Rol / Nivel", srcCol: "Obtención", pairCol: "Pareja Meta de Jinetes", tagCol: "Rol Táctico",
       type: "Tipo", name: "Nombre del Bono", min: "Mín %", max: "Máx %", spread: "Rango (Máx - Mín)", t6Impact: "Impacto en Jinetes", fixed: "Fijo",
@@ -71,19 +74,24 @@
 
   const renderPairCalc = () => {
     if (!leaderSel || !pairTbody) return;
-    const lang = getLang(), c = COPY[lang], hL = findHero(leaderSel.value), hA = findHero(assistSel.value), lv = Math.max(0, Math.min(4, Number(levelSel.value) ?? 4));
-    pairThead.innerHTML = `<tr><th>${c.stat}</th><th>${c.leaderCol}: ${hL.name}</th><th>${c.assistCol}: ${hA.name}</th><th>${c.totalCol}</th></tr>`;
+    const lang = getLang(), c = COPY[lang], lv = Math.max(0, Math.min(4, Number(levelSel.value) ?? 4));
+    const hLA = findHero(leaderSel.value), hAA = findHero(assistSel.value);
+    const hLB = findHero(leaderBSel?.value || "rick-light"), hAB = findHero(assistBSel?.value || "janet-light");
+    pairThead.innerHTML = `<tr><th>${c.stat}</th><th>${c.pairACol}: ${hLA.name} + ${hAA.name}</th><th>${c.totalACol}</th><th>${c.pairBCol}: ${hLB.name} + ${hAB.name}</th><th>${c.totalBCol}</th><th>${c.diffCol}</th></tr>`;
     const keys = [[c.rAtk, "atk", "%"], [c.rDef, "def", "%"], [c.rHp, "hp", "%"], [c.rSpd, "spd", "%"], [c.rSkill, "skillDmg", "%"], [c.rRed, "dmgRed", "%"], [c.rRage, "rageFactor", ""], [c.rHeal, "healRage", ""]];
     pairTbody.innerHTML = keys.map(([label, k, unit]) => {
-      const vL = hL.stats[k][lv] ?? 0, vA = hA.stats[k][lv] ?? 0, sum = +(vL + vA).toFixed(1), fmt = (v) => (unit === "%" ? `+${v}%` : v.toLocaleString());
-      return `<tr><td><strong>${label}</strong></td><td>${fmt(vL)}</td><td>${fmt(vA)}</td><td><strong>${fmt(sum)}</strong></td></tr>`;
+      const vLA = hLA.stats[k][lv] ?? 0, vAA = hAA.stats[k][lv] ?? 0, sumA = +(vLA + vAA).toFixed(1);
+      const vLB = hLB.stats[k][lv] ?? 0, vAB = hAB.stats[k][lv] ?? 0, sumB = +(vLB + vAB).toFixed(1);
+      const diff = +(sumA - sumB).toFixed(1), fmt = (v) => (unit === "%" ? `+${v}%` : v.toLocaleString());
+      const diffTxt = diff === 0 ? c.tie : `${diff > 0 ? "+" : ""}${unit === "%" ? `${diff}%` : diff.toLocaleString()} (${diff > 0 ? `${c.pairACol} ▲` : `${c.pairBCol} ▲`})`;
+      return `<tr><td><strong>${label}</strong></td><td>${fmt(vLA)} + ${fmt(vAA)}</td><td><strong>${fmt(sumA)}</strong></td><td>${fmt(vLB)} + ${fmt(vAB)}</td><td><strong>${fmt(sumB)}</strong></td><td><strong>${diffTxt}</strong></td></tr>`;
     }).join("");
-    const cb = rData.combos.find((x) => x.leader === hL.id && x.assistant === hA.id);
-    const perks = [...hL.perks.map((p) => `<strong>${hL.name}:</strong> ${p}`), ...hA.perks.map((p) => `<strong>${hA.name}:</strong> ${p}`)];
-    pairPerks.innerHTML = `<p class="card-label">${c.perksTitle}${cb ? ` · ★ ${cb.tag}` : ""}</p>${cb ? `<p><strong>Meta Synergy:</strong> ${cb.note}</p>` : ""}<ul class="planner-list">${perks.map((p) => `<li>${p}</li>`).join("")}</ul>`;
+    const cbA = rData.combos.find((x) => x.leader === hLA.id && x.assistant === hAA.id), cbB = rData.combos.find((x) => x.leader === hLB.id && x.assistant === hAB.id);
+    if (pairBPreset) pairBPreset.value = cbB ? cbB.id : "custom";
+    pairPerks.innerHTML = `<p class="card-label">${c.perksTitle}</p><p><strong>${c.pairACol} (${hLA.name} + ${hAA.name})${cbA ? ` · ★ ${cbA.tag}` : ""}:</strong> ${cbA ? cbA.note : `${hLA.perks[0]} | ${hAA.perks[0]}`}</p><p><strong>${c.pairBCol} (${hLB.name} + ${hAB.name})${cbB ? ` · ★ ${cbB.tag}` : ""}:</strong> ${cbB ? cbB.note : `${hLB.perks[0]} | ${hAB.perks[0]}`}</p><ul class="planner-list">${[...hLA.perks.map((p) => `<li><strong>[${c.pairACol}] ${hLA.name}:</strong> ${p}</li>`), ...hAA.perks.map((p) => `<li><strong>[${c.pairACol}] ${hAA.name}:</strong> ${p}</li>`), ...hLB.perks.map((p) => `<li><strong>[${c.pairBCol}] ${hLB.name}:</strong> ${p}</li>`), ...hAB.perks.map((p) => `<li><strong>[${c.pairBCol}] ${hAB.name}:</strong> ${p}</li>`)].join("")}</ul>`;
     presetBar?.querySelectorAll("[data-combo]").forEach((btn) => {
       const item = rData.combos.find((x) => x.id === btn.dataset.combo);
-      btn.classList.toggle("is-active", Boolean(item && item.leader === hL.id && item.assistant === hA.id));
+      btn.classList.toggle("is-active", Boolean(item && item.leader === hLA.id && item.assistant === hAA.id));
     });
   };
 
@@ -97,7 +105,7 @@
       const cnt = filterBar.querySelector("#rd-filter-count");
       if (cnt) cnt.textContent = c.showing(list.length);
     }
-    heroesGrid.innerHTML = list.map((h) => `<article class="planner-card dls-infantry-card"><div class="dls-hero-head"><img class="dls-infantry-portrait" src="${h.img}" alt="${h.name}" loading="lazy" /><div><p class="card-label">Tier ${h.tier} · ${c.obtain}: ${h.source}</p><h3>${h.name}</h3><p class="dls-hero-tags">${h.spec} · ${c.priority}: ${h.priority}</p></div></div><ul class="planner-list">${h.skills.map(([t, d]) => `<li><strong>${t}:</strong> ${d}</li>`).join("")}</ul><div class="button-row"><button type="button" class="quick-btn" data-pick-leader="${h.id}">${c.pickLeader}</button><button type="button" class="quick-btn" data-pick-assist="${h.id}">${c.pickAssist}</button></div></article>`).join("");
+    heroesGrid.innerHTML = list.map((h) => `<article class="planner-card dls-infantry-card"><div class="dls-hero-head"><img class="dls-infantry-portrait" src="${h.img}" alt="${h.name}" loading="lazy" /><div><p class="card-label">Tier ${h.tier} · ${c.obtain}: ${h.source}</p><h3>${h.name}</h3><p class="dls-hero-tags">${h.spec} · ${c.priority}: ${h.priority}</p></div></div><ul class="planner-list">${h.skills.map(([t, d]) => `<li><strong>${t}:</strong> ${d}</li>`).join("")}</ul><div class="button-row"><button type="button" class="quick-btn" data-pick-leader="${h.id}">${c.pickLeader}</button><button type="button" class="quick-btn" data-pick-assist="${h.id}">${c.pickAssist}</button><button type="button" class="quick-btn" data-pick-leader-b="${h.id}">${c.pickLeaderB}</button><button type="button" class="quick-btn" data-pick-assist-b="${h.id}">${c.pickAssistB}</button></div></article>`).join("");
   };
 
   const renderComparator = () => {
@@ -109,9 +117,14 @@
 
   const renderAll = () => {
     const lang = getLang(), c = COPY[lang], T = rData.tiers;
+    if (pairBPreset) {
+      const prevP = pairBPreset.value || "rick-janet";
+      pairBPreset.innerHTML = `<option value="custom">— ${c.customPair} —</option>` + rData.combos.map((cb) => `<option value="${cb.id}">★ ${findHero(cb.leader).name} + ${findHero(cb.assistant).name} (${cb.tag})</option>`).join("");
+      pairBPreset.value = prevP;
+    }
     renderHeroesRoster(); renderPairCalc();
     matrixThead.innerHTML = `<tr><th>${c.heroCol}</th><th>${c.roleCol}</th><th>${c.srcCol}</th><th>${c.rAtk}</th><th>${c.rDef}</th><th>${c.rHp}</th><th>${c.rSpd}</th><th>${c.rSkill}</th><th>${c.rRed}</th><th>${c.rRage}</th><th>${c.rHeal}</th></tr>`;
-    matrixTbody.innerHTML = rData.heroes.map((h) => `<tr><td><strong>${h.name}</strong></td><td>${h.role === "leader" ? c.leaderCol : c.assistCol} · <strong>${h.tier}</strong></td><td>${h.source}</td><td>+${h.stats.atk[4]}%</td><td>+${h.stats.def[4]}%</td><td>+${h.stats.hp[4]}%</td><td>+${h.stats.spd[4]}%</td><td>+${h.stats.skillDmg[4]}%</td><td>+${h.stats.dmgRed[4]}%</td><td><strong>${h.stats.rageFactor[4].toLocaleString()}</strong></td><td>${h.stats.healRage[4].toLocaleString()}</td></tr>`).join("");
+    matrixTbody.innerHTML = rData.heroes.map((h) => `<tr><td><strong>${h.name}</strong></td><td>${h.role === "leader" ? "Leader" : "Assistant"} · <strong>${h.tier}</strong></td><td>${h.source}</td><td>+${h.stats.atk[4]}%</td><td>+${h.stats.def[4]}%</td><td>+${h.stats.hp[4]}%</td><td>+${h.stats.spd[4]}%</td><td>+${h.stats.skillDmg[4]}%</td><td>+${h.stats.dmgRed[4]}%</td><td><strong>${h.stats.rageFactor[4].toLocaleString()}</strong></td><td>${h.stats.healRage[4].toLocaleString()}</td></tr>`).join("");
     combosThead.innerHTML = `<tr><th>${c.pairCol}</th><th>${c.tagCol}</th><th>${c.rAtk}</th><th>${c.rDef}</th><th>${c.rHp}</th><th>${c.rSpd}</th><th>${c.rRed}</th><th>${c.rRage}</th><th>${c.rHeal}</th></tr>`;
     combosTbody.innerHTML = rData.combos.map((cb) => {
       const L = findHero(cb.leader), A = findHero(cb.assistant);
@@ -137,11 +150,10 @@
     csvTbody.innerHTML = CSV_BUFFS.map(([type, name, min, max, note]) => `<tr><td><strong>${type}</strong></td><td>${name}</td><td>${min}%</td><td>${max !== null ? `${max}%` : "—"}</td><td><strong>${max !== null ? `${max - min >= 0 ? "+" : ""}${(max - min).toFixed(1)}% (${(max / min).toFixed(1)}×)` : c.fixed}</strong></td><td>${note}</td></tr>`).join("");
   };
 
-  if (leaderSel && assistSel) {
-    leaderSel.innerHTML = rData.heroes.map((h) => `<option value="${h.id}">${h.name} (${h.tier} · ${h.spec.split(" · ")[1]})</option>`).join("");
-    assistSel.innerHTML = rData.heroes.map((h) => `<option value="${h.id}">${h.name} (${h.tier} · ${h.spec.split(" · ")[1]})</option>`).join("");
-    leaderSel.value = "metok-tso"; assistSel.value = "rubina";
-  }
+  const opts = rData.heroes.map((h) => `<option value="${h.id}">${h.name} (${h.tier} · ${h.spec.split(" · ")[1]})</option>`).join("");
+  leaderSel.innerHTML = opts; assistSel.innerHTML = opts;
+  if (leaderBSel && assistBSel) { leaderBSel.innerHTML = opts; assistBSel.innerHTML = opts; leaderBSel.value = "rick-light"; assistBSel.value = "janet-light"; }
+  leaderSel.value = "metok-tso"; assistSel.value = "rubina";
   if (presetBar) {
     presetBar.innerHTML = rData.combos.map((cb) => `<button type="button" class="combo-preset-chip" data-combo="${cb.id}"><span class="combo-preset-tag">★ ${cb.tag}</span><strong class="combo-preset-title">${findHero(cb.leader).name} + ${findHero(cb.assistant).name}</strong></button>`).join("");
     presetBar.addEventListener("click", (e) => {
@@ -149,7 +161,11 @@
       if (cb) { leaderSel.value = cb.leader; assistSel.value = cb.assistant; renderPairCalc(); }
     });
   }
-  [leaderSel, assistSel, levelSel].forEach((el) => el?.addEventListener("change", renderPairCalc));
+  pairBPreset?.addEventListener("change", () => {
+    const cb = rData.combos.find((x) => x.id === pairBPreset.value);
+    if (cb && leaderBSel && assistBSel) { leaderBSel.value = cb.leader; assistBSel.value = cb.assistant; renderPairCalc(); }
+  });
+  [leaderSel, assistSel, levelSel, leaderBSel, assistBSel].forEach((el) => el?.addEventListener("change", renderPairCalc));
   filterBar?.addEventListener("click", (e) => {
     const rBtn = e.target.closest("[data-role]"), cBtn = e.target.closest("[data-chip]"), rst = e.target.closest("[data-reset]");
     if (rBtn) activeRole = rBtn.dataset.role;
@@ -159,12 +175,13 @@
   });
   filterBar?.addEventListener("input", (e) => { if (e.target.matches("#rd-search-input")) { searchQuery = e.target.value; renderHeroesRoster(true); } });
   heroesGrid?.addEventListener("click", (e) => {
-    const lBtn = e.target.closest("[data-pick-leader]"), aBtn = e.target.closest("[data-pick-assist]");
-    if (lBtn) leaderSel.value = lBtn.dataset.pickLeader;
-    if (aBtn) assistSel.value = aBtn.dataset.pickAssist;
-    if (lBtn || aBtn) { renderPairCalc(); document.querySelector("#rider-heroes-section")?.scrollIntoView({ behavior: "smooth" }); }
+    const lA = e.target.closest("[data-pick-leader]"), aA = e.target.closest("[data-pick-assist]"), lB = e.target.closest("[data-pick-leader-b]"), aB = e.target.closest("[data-pick-assist-b]");
+    if (lA) leaderSel.value = lA.dataset.pickLeader;
+    if (aA) assistSel.value = aA.dataset.pickAssist;
+    if (lB && leaderBSel) leaderBSel.value = lB.dataset.pickLeaderB;
+    if (aB && assistBSel) assistBSel.value = aB.dataset.pickAssistB;
+    if (lA || aA || lB || aB) { renderPairCalc(); document.querySelector("#rider-heroes-section")?.scrollIntoView({ behavior: "smooth" }); }
   });
   [fromSel, toSel, buffSel].forEach((el) => el?.addEventListener("change", renderComparator));
   renderAll();
-  new MutationObserver(renderAll).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
 })();
