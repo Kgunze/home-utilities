@@ -1,10 +1,10 @@
 {
   "title": "Ranged Barracks & Troop Tiers | Doomsday: Last Survivors",
-  "description": "Doomsday: Last Survivors Ranged Barracks guide featuring all 14 Legendary Ranged heroes (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria Moretti, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra) with a Pairing Calculator, T1–T6 unit tables, and Basic vs. Advance buff tables.",
+  "description": "Doomsday: Last Survivors Ranged Barracks guide featuring all 15 Legendary Ranged heroes (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria Moretti, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra, Charon) with a Pairing Calculator, T1–T6 unit tables, and Basic vs. Advance buff tables.",
   "translations": [
     { "selector": "#rb-eyebrow", "text": "Doomsday: Last Survivors / Barracks Guide" },
     { "selector": "#rb-hero-title", "text": "Ranged Barracks — Ranged Heroes, T1 to T6 Unit Tiers, % Differences & Output." },
-    { "selector": "#rb-hero-text", "text": "Detailed breakdown of the Ranged Barracks (Level 24), all 14 Legendary Ranged commanders (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria Moretti, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra) with a Hero Pairing & Combo Calculator, T1–T6 troop tiers, and Basic vs. Advance squad buff calculations." },
+    { "selector": "#rb-hero-text", "text": "Detailed breakdown of the Ranged Barracks (Level 24), all 15 Legendary Ranged commanders (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria Moretti, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra, Charon) with a Hero Pairing & Combo Calculator, T1–T6 troop tiers, and Basic vs. Advance squad buff calculations." },
     { "selector": "#rb-cta-heroes", "text": "Ranged Heroes" },
     { "selector": "#rb-cta-tiers", "text": "Unit Tiers Table" },
     { "selector": "#rb-cta-compare", "text": "Compare % & Output" },
@@ -12,7 +12,7 @@
     { "selector": "#rb-building-title", "text": "Ranged Barracks" },
     { "selector": "#rb-building-desc", "text": "Trains backline high-DPS Ranged squads. Ranged units counter Infantry (Shield) squads and are vulnerable to fast Rider flanking marches." },
     { "selector": "#rb-heroes-tag", "text": "1. Legendary Ranged Heroes & Pairing Calculator" },
-    { "selector": "#rb-heroes-heading", "text": "Pair any two of the 14 Ranged commanders (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra) to inspect combined stats, perks, and Lv 1–Lv 5 skills." },
+    { "selector": "#rb-heroes-heading", "text": "Pair any two of the 15 Ranged commanders (Sebastian, Nova, Ethan, Sophie, Bard, Julia, Valeria, Lynne, Jacob, Chun, Nakano Maaya, Louis, Cedric, Spectra, Charon) to inspect combined stats, perks, and Lv 1–Lv 5 skills." },
     { "selector": "#rb-pair-preset-label", "text": "Recommended Ranged Meta Pairs (One-Click Load)" },
     { "selector": "#rb-leader-label", "text": "Leader Hero" },
     { "selector": "#rb-assist-label", "text": "Assistant Hero" },
