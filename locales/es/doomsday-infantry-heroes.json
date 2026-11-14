@@ -2,31 +2,121 @@
   "title": "Cuartel de Infantería, 16 Héroes y Tropas T1–T6 | Doomsday: Last Survivors",
   "description": "Guía del Cuartel de Infantería (Nivel 24) y los 16 Héroes Legendarios de Infantería en Doomsday: Last Survivors con Calculadora de Parejas y tablas de unidades T1–T6.",
   "translations": [
-    { "selector": "#ih-eyebrow", "text": "Doomsday: Last Survivors / Cuartel y Comandantes de Infantería" },
-    { "selector": "#ih-hero-title", "text": "Cuartel de Infantería — 16 Héroes, Calculadora de Parejas y Niveles T1–T6." },
-    { "selector": "#ih-hero-text", "text": "Compendio completo del Cuartel de Infantería (Nivel 24) y los 16 héroes de Infantería con retratos, escalado Nv. 1–Nv. 5 y Transcend, Calculadora de Parejas Líder + Asistente y los seis niveles de tropas desde T1 Ruffian hasta T6 Ace Destroyer." },
-    { "selector": "#ih-cta-calc", "text": "Calculadora de Combos" },
-    { "selector": "#ih-cta-roster", "text": "16 Héroes de Infantería" },
-    { "selector": "#ih-cta-units", "text": "Tropas T1–T6" },
-    { "selector": "#ih-summary-label", "text": "Instalación · Nivel 24" },
-    { "selector": "#ih-summary-title", "text": "Cuartel de Infantería (Infantry Barracks)" },
-    { "selector": "#ih-building-desc", "text": "Entrena escuadrones de Infantería de primera línea con alta DEF/HP. La Infantería contrarresta a los Jinetes rápidos y absorbe daño masivo en Rallies y Guarniciones." },
-    { "selector": "#ih-calc-tag", "text": "1. Calculadora de Parejas y Combinación de Habilidades" },
-    { "selector": "#ih-calc-heading", "text": "Empareja cualquier Líder y Asistente o elige un combo meta para calcular las ventajas y bonos acumulados." },
-    { "selector": "#ih-preset-label", "text": "Combos Meta Recomendados (Carga en un clic)" },
-    { "selector": "#ih-leader-label", "text": "Héroe Líder" },
-    { "selector": "#ih-assist-label", "text": "Héroe Asistente" },
-    { "selector": "#ih-level-label", "text": "Nivel de Habilidad" },
-    { "selector": "#ih-roster-tag", "text": "2. Directorio Completo de 16 Héroes de Infantería y Habilidades" },
-    { "selector": "#ih-roster-heading", "text": "Filtra por Rol, Fuente de Obtención o Especialidad y haz clic en cualquier héroe para emparejarlo arriba." },
-    { "selector": "#ih-units-tag", "text": "3. Evolución de Escuadrones de Infantería (T1 – T6)" },
-    { "selector": "#ih-units-heading", "text": "Progresión visual desde hachas de tubería improvisadas hasta escudos de acero pesado y rifles de asalto." },
-    { "selector": "#ih-table-tag", "text": "4. Tabla de Unidades de Infantería (T1–T6) y Calculadora de Salida" },
-    { "selector": "#ih-table-heading", "text": "Estadísticas base, bono activo (+108.3% ATQ, +98.9% DEF, +57.1% HP) y progresión porcentual T1–T6." },
-    { "selector": "#ih-comp-label", "text": "Comparador Interactivo de Salida de Infantería" },
-    { "selector": "#ih-from-label", "text": "Nivel Base" },
-    { "selector": "#ih-to-label", "text": "Nivel Objetivo" },
-    { "selector": "#ih-buff-label", "text": "Perfil de Bono" },
-    { "selector": "#ih-delta-label", "text": "Progresión Paso a Paso por Nivel (T1 → T6)" }
+    {
+      "selector": "#ih-eyebrow",
+      "text": "Doomsday: Last Survivors / Cuartel y Comandantes de Infantería"
+    },
+    {
+      "selector": "#ih-hero-title",
+      "text": "Cuartel de Infantería — 16 Héroes, Calculadora de Parejas y Niveles T1–T6."
+    },
+    {
+      "selector": "#ih-hero-text",
+      "text": "Compendio completo del Cuartel de Infantería (Nivel 24) y los 16 héroes de Infantería con retratos, escalado Nv. 1–Nv. 5 y Transcend, Calculadora de Parejas Líder + Asistente y los seis niveles de tropas desde T1 Ruffian hasta T6 Ace Destroyer."
+    },
+    {
+      "selector": "#ih-cta-calc",
+      "text": "Calculadora de Combos"
+    },
+    {
+      "selector": "#ih-cta-roster",
+      "text": "16 Héroes de Infantería"
+    },
+    {
+      "selector": "#ih-cta-units",
+      "text": "Tropas T1–T6"
+    },
+    {
+      "selector": "#ih-summary-label",
+      "text": "Instalación · Nivel 24"
+    },
+    {
+      "selector": "#ih-summary-title",
+      "text": "Cuartel de Infantería (Infantry Barracks)"
+    },
+    {
+      "selector": "#ih-building-desc",
+      "text": "Entrena escuadrones de Infantería de primera línea con alta DEF/HP. La Infantería contrarresta a los Jinetes rápidos y absorbe daño masivo en Rallies y Guarniciones."
+    },
+    {
+      "selector": "#ih-calc-tag",
+      "text": "1. Calculadora de Parejas y Combinación de Habilidades"
+    },
+    {
+      "selector": "#ih-calc-heading",
+      "text": "Empareja cualquier Líder y Asistente o elige un combo meta para calcular las ventajas y bonos acumulados."
+    },
+    {
+      "selector": "#ih-preset-label",
+      "text": "Parejas Meta Recomendadas (Cargar en Par A)"
+    },
+    {
+      "selector": "#ih-leader-label",
+      "text": "Par A — Líder"
+    },
+    {
+      "selector": "#ih-assist-label",
+      "text": "Par A — Asistente"
+    },
+    {
+      "selector": "#ih-level-label",
+      "text": "Nivel de Habilidad"
+    },
+    {
+      "selector": "#ih-pair-b-preset-label",
+      "text": "Comparar Par B — Ajuste Rápido"
+    },
+    {
+      "selector": "#ih-leader-b-label",
+      "text": "Par B — Líder"
+    },
+    {
+      "selector": "#ih-assist-b-label",
+      "text": "Par B — Asistente"
+    },
+    {
+      "selector": "#ih-roster-tag",
+      "text": "2. Directorio Completo de 16 Héroes de Infantería y Habilidades"
+    },
+    {
+      "selector": "#ih-roster-heading",
+      "text": "Filtra por Rol, Fuente de Obtención o Especialidad y haz clic en cualquier héroe para emparejarlo arriba."
+    },
+    {
+      "selector": "#ih-units-tag",
+      "text": "3. Evolución de Escuadrones de Infantería (T1 – T6)"
+    },
+    {
+      "selector": "#ih-units-heading",
+      "text": "Progresión visual desde hachas de tubería improvisadas hasta escudos de acero pesado y rifles de asalto."
+    },
+    {
+      "selector": "#ih-table-tag",
+      "text": "4. Tabla de Unidades de Infantería (T1–T6) y Calculadora de Salida"
+    },
+    {
+      "selector": "#ih-table-heading",
+      "text": "Estadísticas base, bono activo (+108.3% ATQ, +98.9% DEF, +57.1% HP) y progresión porcentual T1–T6."
+    },
+    {
+      "selector": "#ih-comp-label",
+      "text": "Comparador Interactivo de Salida de Infantería"
+    },
+    {
+      "selector": "#ih-from-label",
+      "text": "Nivel Base"
+    },
+    {
+      "selector": "#ih-to-label",
+      "text": "Nivel Objetivo"
+    },
+    {
+      "selector": "#ih-buff-label",
+      "text": "Perfil de Bono"
+    },
+    {
+      "selector": "#ih-delta-label",
+      "text": "Progresión Paso a Paso por Nivel (T1 → T6)"
+    }
   ]
 }

@@ -2,33 +2,129 @@
   "title": "Héroes Jinetes, Calculadora de Parejas y Tablas de Estadísticas | Doomsday: Last Survivors",
   "description": "Guía de los 13 Héroes Jinetes (Rider) en Doomsday: Last Survivors con Metok Tso, Rubina, Rick Light, Janet Light, Maxwell, Chasey, Daryl, Felix, Elena, Jonathan, Sven Schaefer, Catherine y Cynthia, Calculadora de Parejas, tablas de estadísticas Nv. 5 y bonos Basic vs. Advance.",
   "translations": [
-    { "selector": "#rd-eyebrow", "text": "Doomsday: Last Survivors / Comandantes Jinetes y Estadísticas" },
-    { "selector": "#rd-hero-title", "text": "Héroes Jinetes — Calculadora de Parejas, Escalado y Tablas de Estadísticas." },
-    { "selector": "#rd-hero-text", "text": "Desglose completo de los 13 comandantes Legendarios de Jinetes (Metok Tso, Rubina, Rick Light, Janet Light, Maxwell, Chasey, Daryl, Felix, Elena, Jonathan, Sven Schaefer, Catherine, Cynthia), Calculadora de Parejas Líder + Asistente, matriz comparativa Nv. 1–Nv. 5, simulador T1–T6 y tablas de bonos Basic vs. Advance." },
-    { "selector": "#rd-cta-pair", "text": "Calculadora de Parejas" },
-    { "selector": "#rd-cta-matrix", "text": "Matriz de Estadísticas" },
-    { "selector": "#rd-cta-tiers", "text": "Salida T1–T6 y Bonos" },
-    { "selector": "#rd-summary-label", "text": "Resumen de Instalación · Nivel 24" },
-    { "selector": "#rd-summary-title", "text": "Cuartel de Jinetes (Moto Service)" },
-    { "selector": "#rd-building-desc", "text": "Entrena escuadrones de motocicletas y exploradores blindados de alta velocidad que flanquean a los Tiradores. Entrenando T4 Elite Trailblazer." },
-    { "selector": "#rd-heroes-tag", "text": "1. Héroes Legendarios Jinetes y Calculadora de Parejas" },
-    { "selector": "#rd-heroes-heading", "text": "Empareja dos de los 13 comandantes de Jinetes (Metok Tso, Rubina, Rick Light, Janet Light, Maxwell, Chasey, Daryl, Felix, Elena, Jonathan, Sven Schaefer, Catherine, Cynthia) para revisar estadísticas combinadas, ventajas y habilidades Nv. 1–Nv. 5." },
-    { "selector": "#rd-pair-preset-label", "text": "Parejas Meta de Jinetes Recomendadas (Carga en un clic)" },
-    { "selector": "#rd-leader-label", "text": "Héroe Líder" },
-    { "selector": "#rd-assist-label", "text": "Héroe Asistente" },
-    { "selector": "#rd-skill-level-label", "text": "Nivel de Habilidad" },
-    { "selector": "#rd-matrix-tag", "text": "2. Matriz de Estadísticas de Héroes y Parejas de Jinetes (Nv. 5 Despertar)" },
-    { "selector": "#rd-matrix-heading", "text": "Comparación estadística lado a lado de todos los comandantes de Jinetes y las mejores parejas meta." },
-    { "selector": "#rd-hero-matrix-label", "text": "Tabla de Estadísticas Individuales de Comandantes Jinetes (Nv. 5 Máx.)" },
-    { "selector": "#rd-combo-matrix-label", "text": "Tabla de Estadísticas Combinadas de Parejas de Jinetes (Nv. 5 Máx.)" },
-    { "selector": "#rd-tiers-tag", "text": "3. Unidades del Cuartel de Jinetes (T1–T6) y Simulador de Salida" },
-    { "selector": "#rd-tiers-heading", "text": "Compara estadísticas de T1 Iron Cavalry a T6 Ace Trailblazer (+81.1% ATQ, +59.8% DEF, +39.3% HP, +38.3% Vel.) y simula la salida total." },
-    { "selector": "#rd-comp-label", "text": "Comparador Interactivo de Salida de Jinetes" },
-    { "selector": "#rd-from-label", "text": "Nivel Base" },
-    { "selector": "#rd-to-label", "text": "Nivel Objetivo" },
-    { "selector": "#rd-buff-label", "text": "Perfil de Bono de Pareja" },
-    { "selector": "#rd-delta-label", "text": "Progresión Paso a Paso por Nivel de Jinetes (T1 → T6)" },
-    { "selector": "#rd-buff-tag", "text": "4. Bonos de Escuadrón de Jinetes Basic vs. Advance (Referencia CSV)" },
-    { "selector": "#rd-buff-heading", "text": "Mín %, Máx %, rango de variación e impacto en la salida de escuadrones de Jinetes." }
+    {
+      "selector": "#rd-eyebrow",
+      "text": "Doomsday: Last Survivors / Comandantes Jinetes y Estadísticas"
+    },
+    {
+      "selector": "#rd-hero-title",
+      "text": "Héroes Jinetes — Calculadora de Parejas, Escalado y Tablas de Estadísticas."
+    },
+    {
+      "selector": "#rd-hero-text",
+      "text": "Desglose completo de los 13 comandantes Legendarios de Jinetes (Metok Tso, Rubina, Rick Light, Janet Light, Maxwell, Chasey, Daryl, Felix, Elena, Jonathan, Sven Schaefer, Catherine, Cynthia), Calculadora de Parejas Líder + Asistente, matriz comparativa Nv. 1–Nv. 5, simulador T1–T6 y tablas de bonos Basic vs. Advance."
+    },
+    {
+      "selector": "#rd-cta-pair",
+      "text": "Calculadora de Parejas"
+    },
+    {
+      "selector": "#rd-cta-matrix",
+      "text": "Matriz de Estadísticas"
+    },
+    {
+      "selector": "#rd-cta-tiers",
+      "text": "Salida T1–T6 y Bonos"
+    },
+    {
+      "selector": "#rd-summary-label",
+      "text": "Resumen de Instalación · Nivel 24"
+    },
+    {
+      "selector": "#rd-summary-title",
+      "text": "Cuartel de Jinetes (Moto Service)"
+    },
+    {
+      "selector": "#rd-building-desc",
+      "text": "Entrena escuadrones de motocicletas y exploradores blindados de alta velocidad que flanquean a los Tiradores. Entrenando T4 Elite Trailblazer."
+    },
+    {
+      "selector": "#rd-heroes-tag",
+      "text": "1. Héroes Legendarios Jinetes y Calculadora de Parejas"
+    },
+    {
+      "selector": "#rd-heroes-heading",
+      "text": "Empareja dos de los 13 comandantes de Jinetes (Metok Tso, Rubina, Rick Light, Janet Light, Maxwell, Chasey, Daryl, Felix, Elena, Jonathan, Sven Schaefer, Catherine, Cynthia) para revisar estadísticas combinadas, ventajas y habilidades Nv. 1–Nv. 5."
+    },
+    {
+      "selector": "#rd-pair-preset-label",
+      "text": "Parejas Meta de Jinetes (Cargar en Par A)"
+    },
+    {
+      "selector": "#rd-leader-label",
+      "text": "Par A — Líder"
+    },
+    {
+      "selector": "#rd-assist-label",
+      "text": "Par A — Asistente"
+    },
+    {
+      "selector": "#rd-skill-level-label",
+      "text": "Nivel de Habilidad"
+    },
+    {
+      "selector": "#rd-pair-b-preset-label",
+      "text": "Comparar Par B — Ajuste Rápido"
+    },
+    {
+      "selector": "#rd-leader-b-label",
+      "text": "Par B — Líder"
+    },
+    {
+      "selector": "#rd-assist-b-label",
+      "text": "Par B — Asistente"
+    },
+    {
+      "selector": "#rd-matrix-tag",
+      "text": "2. Matriz de Estadísticas de Héroes y Parejas de Jinetes (Nv. 5 Despertar)"
+    },
+    {
+      "selector": "#rd-matrix-heading",
+      "text": "Comparación estadística lado a lado de todos los comandantes de Jinetes y las mejores parejas meta."
+    },
+    {
+      "selector": "#rd-hero-matrix-label",
+      "text": "Tabla de Estadísticas Individuales de Comandantes Jinetes (Nv. 5 Máx.)"
+    },
+    {
+      "selector": "#rd-combo-matrix-label",
+      "text": "Tabla de Estadísticas Combinadas de Parejas de Jinetes (Nv. 5 Máx.)"
+    },
+    {
+      "selector": "#rd-tiers-tag",
+      "text": "3. Unidades del Cuartel de Jinetes (T1–T6) y Simulador de Salida"
+    },
+    {
+      "selector": "#rd-tiers-heading",
+      "text": "Compara estadísticas de T1 Iron Cavalry a T6 Ace Trailblazer (+81.1% ATQ, +59.8% DEF, +39.3% HP, +38.3% Vel.) y simula la salida total."
+    },
+    {
+      "selector": "#rd-comp-label",
+      "text": "Comparador Interactivo de Salida de Jinetes"
+    },
+    {
+      "selector": "#rd-from-label",
+      "text": "Nivel Base"
+    },
+    {
+      "selector": "#rd-to-label",
+      "text": "Nivel Objetivo"
+    },
+    {
+      "selector": "#rd-buff-label",
+      "text": "Perfil de Bono de Pareja"
+    },
+    {
+      "selector": "#rd-delta-label",
+      "text": "Progresión Paso a Paso por Nivel de Jinetes (T1 → T6)"
+    },
+    {
+      "selector": "#rd-buff-tag",
+      "text": "4. Bonos de Escuadrón de Jinetes Basic vs. Advance (Referencia CSV)"
+    },
+    {
+      "selector": "#rd-buff-heading",
+      "text": "Mín %, Máx %, rango de variación e impacto en la salida de escuadrones de Jinetes."
+    }
   ]
 }

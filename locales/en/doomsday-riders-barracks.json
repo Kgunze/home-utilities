@@ -2,33 +2,129 @@
   "title": "Rider Heroes, Pairing Calculator & Statistics Tables | Doomsday: Last Survivors",
   "description": "Doomsday: Last Survivors Rider Heroes & Statistics guide featuring all 13 Rider commanders (Metok Tso, Rubina, Rick Light, Janet Light, Maxwell, Chasey, Daryl, Felix, Elena, Jonathan, Sven Schaefer, Catherine, Cynthia), an interactive Rider Pairing Calculator, Lv 1–Lv 5 statistics tables, and Basic vs. Advance Rider buffs.",
   "translations": [
-    { "selector": "#rd-eyebrow", "text": "Doomsday: Last Survivors / Rider Commanders & Statistics" },
-    { "selector": "#rd-hero-title", "text": "Rider Heroes — Pairing Calculator, Skill Scaling & Statistics Tables." },
-    { "selector": "#rd-hero-text", "text": "Detailed breakdown of all 13 Legendary Rider commanders (Metok Tso, Rubina, Rick Light, Janet Light, Maxwell, Chasey, Daryl, Felix, Elena, Jonathan, Sven Schaefer, Catherine, Cynthia), interactive Leader + Assistant Pairing Calculator, Lv 1–Lv 5 statistics comparison matrix, T1–T6 Rider output simulator, and Basic vs. Advance Rider squad buff tables." },
-    { "selector": "#rd-cta-pair", "text": "Rider Pairing Calculator" },
-    { "selector": "#rd-cta-matrix", "text": "Hero Statistics Matrix" },
-    { "selector": "#rd-cta-tiers", "text": "T1–T6 Output & Buffs" },
-    { "selector": "#rd-summary-label", "text": "Facility Snapshot · Level 24" },
-    { "selector": "#rd-summary-title", "text": "Rider Barracks (Moto Service)" },
-    { "selector": "#rd-building-desc", "text": "Trains high-speed motorcycle & armored trailblazer squads that flank and counter backline Ranged squads. Currently training T4 Elite Trailblazers." },
-    { "selector": "#rd-heroes-tag", "text": "1. Legendary Rider Heroes & Pairing Calculator" },
-    { "selector": "#rd-heroes-heading", "text": "Pair any two of the 13 Rider commanders (Metok Tso, Rubina, Rick Light, Janet Light, Maxwell, Chasey, Daryl, Felix, Elena, Jonathan, Sven Schaefer, Catherine, Cynthia) to inspect combined stats, perks, and Lv 1–Lv 5 skills." },
-    { "selector": "#rd-pair-preset-label", "text": "Recommended Rider Meta Pairs (One-Click Load)" },
-    { "selector": "#rd-leader-label", "text": "Leader Hero" },
-    { "selector": "#rd-assist-label", "text": "Assistant Hero" },
-    { "selector": "#rd-skill-level-label", "text": "Skill Upgrade Level" },
-    { "selector": "#rd-matrix-tag", "text": "2. Rider Hero Statistics & Pair Matrix (Lv 5 Awakened)" },
-    { "selector": "#rd-matrix-heading", "text": "Side-by-side statistical comparison across all Rider commanders and top meta pairings." },
-    { "selector": "#rd-hero-matrix-label", "text": "Individual Rider Commander Statistics Table (Lv 5 Max)" },
-    { "selector": "#rd-combo-matrix-label", "text": "Combined Rider Pairings Statistics Table (Lv 5 Max)" },
-    { "selector": "#rd-tiers-tag", "text": "3. Rider Barracks Lineup (T1–T6) & Unit Output Simulator" },
-    { "selector": "#rd-tiers-heading", "text": "Compare T1 Iron Cavalry to T6 Ace Trailblazer stats (+81.1% ATK, +59.8% DEF, +39.3% HP, +38.3% Speed) and simulate combat output." },
-    { "selector": "#rd-comp-label", "text": "Interactive Rider Tier Output Comparator" },
-    { "selector": "#rd-from-label", "text": "Baseline Tier" },
-    { "selector": "#rd-to-label", "text": "Target Tier" },
-    { "selector": "#rd-buff-label", "text": "Rider Pair Buff Profile" },
-    { "selector": "#rd-delta-label", "text": "Step-by-Step Rider Tier Progression (T1 → T6)" },
-    { "selector": "#rd-buff-tag", "text": "4. Basic vs. Advance Rider Squad Buffs (CSV Reference)" },
-    { "selector": "#rd-buff-heading", "text": "Min %, Max %, and output impact across Basic and Advance stat pools for Rider squads." }
+    {
+      "selector": "#rd-eyebrow",
+      "text": "Doomsday: Last Survivors / Rider Commanders & Statistics"
+    },
+    {
+      "selector": "#rd-hero-title",
+      "text": "Rider Heroes — Pairing Calculator, Skill Scaling & Statistics Tables."
+    },
+    {
+      "selector": "#rd-hero-text",
+      "text": "Detailed breakdown of all 13 Legendary Rider commanders (Metok Tso, Rubina, Rick Light, Janet Light, Maxwell, Chasey, Daryl, Felix, Elena, Jonathan, Sven Schaefer, Catherine, Cynthia), interactive Leader + Assistant Pairing Calculator, Lv 1–Lv 5 statistics comparison matrix, T1–T6 Rider output simulator, and Basic vs. Advance Rider squad buff tables."
+    },
+    {
+      "selector": "#rd-cta-pair",
+      "text": "Rider Pairing Calculator"
+    },
+    {
+      "selector": "#rd-cta-matrix",
+      "text": "Hero Statistics Matrix"
+    },
+    {
+      "selector": "#rd-cta-tiers",
+      "text": "T1–T6 Output & Buffs"
+    },
+    {
+      "selector": "#rd-summary-label",
+      "text": "Facility Snapshot · Level 24"
+    },
+    {
+      "selector": "#rd-summary-title",
+      "text": "Rider Barracks (Moto Service)"
+    },
+    {
+      "selector": "#rd-building-desc",
+      "text": "Trains high-speed motorcycle & armored trailblazer squads that flank and counter backline Ranged squads. Currently training T4 Elite Trailblazers."
+    },
+    {
+      "selector": "#rd-heroes-tag",
+      "text": "1. Legendary Rider Heroes & Pairing Calculator"
+    },
+    {
+      "selector": "#rd-heroes-heading",
+      "text": "Pair any two of the 13 Rider commanders (Metok Tso, Rubina, Rick Light, Janet Light, Maxwell, Chasey, Daryl, Felix, Elena, Jonathan, Sven Schaefer, Catherine, Cynthia) to inspect combined stats, perks, and Lv 1–Lv 5 skills."
+    },
+    {
+      "selector": "#rd-pair-preset-label",
+      "text": "Recommended Rider Meta Pairs (One-Click Load into Pair A)"
+    },
+    {
+      "selector": "#rd-leader-label",
+      "text": "Pair A — Leader Hero"
+    },
+    {
+      "selector": "#rd-assist-label",
+      "text": "Pair A — Assistant Hero"
+    },
+    {
+      "selector": "#rd-skill-level-label",
+      "text": "Skill Upgrade Level"
+    },
+    {
+      "selector": "#rd-pair-b-preset-label",
+      "text": "Compare Pair B — Quick Preset"
+    },
+    {
+      "selector": "#rd-leader-b-label",
+      "text": "Pair B — Leader Hero"
+    },
+    {
+      "selector": "#rd-assist-b-label",
+      "text": "Pair B — Assistant Hero"
+    },
+    {
+      "selector": "#rd-matrix-tag",
+      "text": "2. Rider Hero Statistics & Pair Matrix (Lv 5 Awakened)"
+    },
+    {
+      "selector": "#rd-matrix-heading",
+      "text": "Side-by-side statistical comparison across all Rider commanders and top meta pairings."
+    },
+    {
+      "selector": "#rd-hero-matrix-label",
+      "text": "Individual Rider Commander Statistics Table (Lv 5 Max)"
+    },
+    {
+      "selector": "#rd-combo-matrix-label",
+      "text": "Combined Rider Pairings Statistics Table (Lv 5 Max)"
+    },
+    {
+      "selector": "#rd-tiers-tag",
+      "text": "3. Rider Barracks Lineup (T1–T6) & Unit Output Simulator"
+    },
+    {
+      "selector": "#rd-tiers-heading",
+      "text": "Compare T1 Iron Cavalry to T6 Ace Trailblazer stats (+81.1% ATK, +59.8% DEF, +39.3% HP, +38.3% Speed) and simulate combat output."
+    },
+    {
+      "selector": "#rd-comp-label",
+      "text": "Interactive Rider Tier Output Comparator"
+    },
+    {
+      "selector": "#rd-from-label",
+      "text": "Baseline Tier"
+    },
+    {
+      "selector": "#rd-to-label",
+      "text": "Target Tier"
+    },
+    {
+      "selector": "#rd-buff-label",
+      "text": "Rider Pair Buff Profile"
+    },
+    {
+      "selector": "#rd-delta-label",
+      "text": "Step-by-Step Rider Tier Progression (T1 → T6)"
+    },
+    {
+      "selector": "#rd-buff-tag",
+      "text": "4. Basic vs. Advance Rider Squad Buffs (CSV Reference)"
+    },
+    {
+      "selector": "#rd-buff-heading",
+      "text": "Min %, Max %, and output impact across Basic and Advance stat pools for Rider squads."
+    }
   ]
 }
