@@ -1,12 +1,12 @@
 {
-  "title": "Biobeast (Biochemical Beast) & Pluto Jellyfish Guide | Doomsday: Last Survivors",
-  "description": "Complete Doomsday: Last Survivors Biobeast (Biochemical Beast) guide: Direct vs. Indirect DMG, Combo/Counter/CRIT/Shield mechanics, Pluto Jellyfish (Lv.100) stats & skill tiers, and best Hero & Unit pairings.",
+  "title": "Biobeast (Pluto Jellyfish & Fraudrin) Companion Guide | Doomsday: Last Survivors",
+  "description": "Complete Doomsday: Last Survivors Biobeast guide: Direct vs. Indirect DMG, Combo/Counter/CRIT/Shield mechanics, Pluto Jellyfish & Fraudrin (Lv.100) stats, all 4 skill tiers, and best Hero & Unit pairings.",
   "translations": [
     { "selector": "#bb-eyebrow", "text": "Doomsday: Last Survivors / Biochemical Beast Companion" },
-    { "selector": "#bb-hero-title", "text": "Biobeast — Combat Attributes, Pluto Jellyfish (Lv.100) & Best Hero Pairings." },
-    { "selector": "#bb-hero-text", "text": "Complete guide to the Biochemical Beast (Biobeast) system: Direct vs. Indirect DMG (Corrosion), Combo (41.2%) & Counter (25.9%) free Active Skill procs, Shield Value, excess Troop DMG conversion, and full Lv.100 Pluto Jellyfish stats, skill tiers, and optimal Hero & Unit pairings." },
+    { "selector": "#bb-hero-title", "text": "Biobeast — Pluto Jellyfish & Fraudrin (Lv.100), Skill Tiers & Hero Pairings." },
+    { "selector": "#bb-hero-text", "text": "Complete guide to the Biochemical Beast (Biobeast) system: Direct vs. Indirect DMG (Corrosion), Combo (41.2%) & Counter (525 on Fraudrin / 210 on Pluto Jellyfish) free Active Skill procs, Shield Value, excess Troop DMG conversion, and full Lv.100 profiles for Pluto Jellyfish and Fraudrin." },
     { "selector": "#bb-cta-battles", "text": "Battle & Attribute Rules" },
-    { "selector": "#bb-cta-pluto", "text": "Pluto Jellyfish & Pairings" },
+    { "selector": "#bb-cta-pluto", "text": "Pluto Jellyfish & Fraudrin" },
     { "selector": "#bb-cta-sim", "text": "Combat & HP Simulator" },
     { "selector": "#bb-summary-label", "text": "Shelter Facility · Bio-Containment Chamber" },
     { "selector": "#bb-summary-title", "text": "Biochemical Beast Lab" },
@@ -14,12 +14,12 @@
     { "selector": "#bb-rules-tag", "text": "1. Official Biochemical Beast Battle Mechanics & Special Attributes" },
     { "selector": "#bb-rules-heading", "text": "How Biochemical Beasts duel, convert excess DMG to enemy troops, and trigger Combo, Counter, CRIT & Shield effects." },
     { "selector": "#bb-attr-table-label", "text": "Official Details Modal · Damage Types & Special Attribute Mechanics" },
-    { "selector": "#bb-pluto-tag", "text": "2. Biobeast Showcase: Pluto Jellyfish (Rare · Lv.100 · Corrode / Combo / Counter)" },
-    { "selector": "#bb-pluto-heading", "text": "Full Lv.100 Attributes, All 4 Skill Tiers (Toxic Tide, Invisible Whip, Stinging Echo, Abyssal Power) & Best Hero/Unit Pairings." },
+    { "selector": "#bb-pluto-tag", "text": "2. Biobeast Profiles: Pluto Jellyfish & Fraudrin (Lv.100 · Water / Corrosion)" },
+    { "selector": "#bb-pluto-heading", "text": "Full Lv.100 Attributes, All 4 Skill Tiers (Tier 0 → Tier 12 / Tier ★) & Recommended Hero/Unit Pairings." },
     { "selector": "#bb-sim-tag", "text": "3. Interactive Biobeast Combat, Rally HP & Troop Conversion Simulator" },
-    { "selector": "#bb-sim-heading", "text": "Simulate Pluto Jellyfish (Lv.100) Beast-vs-Beast duels, Combo/Counter Corrosion procs, and Rally/Garrison HP scaling." },
+    { "selector": "#bb-sim-heading", "text": "Simulate Pluto Jellyfish & Fraudrin (Lv.100) Beast-vs-Beast duels, Combo/Counter Corrosion procs, and Rally/Garrison HP scaling." },
     { "selector": "#bb-mode-label", "text": "Combat Mode" },
-    { "selector": "#bb-troop-label", "text": "Squad Troop Size & Tier" },
+    { "selector": "#bb-troop-label", "text": "Biobeast & Squad Setup" },
     { "selector": "#bb-target-label", "text": "Enemy Biobeast State" }
   ]
 }
