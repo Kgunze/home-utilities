@@ -1,0 +1,32 @@
+{
+  "title": "Trại Bộ Binh, 16 Tướng & Bảng Lính T1–T6 | Doomsday: Last Survivors",
+  "description": "Cẩm nang Trại Bộ Binh (Cấp 24) và 16 Tướng Bộ Binh Huyền Thoại trong Doomsday: Last Survivors gồm Máy tính Phối cặp, bộ lọc kỹ năng và bảng thông số lính T1–T6.",
+  "translations": [
+    { "selector": "#ih-eyebrow", "text": "Doomsday: Last Survivors / Trại Bộ Binh & Chỉ huy" },
+    { "selector": "#ih-hero-title", "text": "Trại Bộ Binh — 16 Tướng Bộ Binh, Máy tính Phối cặp & Bảng Cấp T1–T6." },
+    { "selector": "#ih-hero-text", "text": "Phân tích toàn diện Trại Bộ Binh (Cấp 24) và 16 tướng Bộ binh Huyền thoại kèm chân dung, thông số kỹ năng Cấp 1–Cấp 5 & Transcend, Máy tính Phối cặp Tướng Chính + Tướng Phụ và toàn bộ 6 cấp lính Bộ binh từ T1 Ruffian đến T6 Ace Destroyer." },
+    { "selector": "#ih-cta-calc", "text": "Máy tính Phối cặp" },
+    { "selector": "#ih-cta-roster", "text": "16 Tướng Bộ binh" },
+    { "selector": "#ih-cta-units", "text": "Binh chủng T1–T6" },
+    { "selector": "#ih-summary-label", "text": "Công trình · Cấp 24" },
+    { "selector": "#ih-summary-title", "text": "Trại Bộ Binh (Infantry Barracks)" },
+    { "selector": "#ih-building-desc", "text": "Huấn luyện binh chủng Bộ binh Khiên & Shotgun có DEF/HP cực cao đứng tuyến đầu. Bộ binh khắc chế Kỵ binh cơ động và chống chịu sát thương chủ lực khi Tập kết và Đồn trú." },
+    { "selector": "#ih-calc-tag", "text": "1. Máy tính Phối cặp Tướng & Kết hợp Kỹ năng" },
+    { "selector": "#ih-calc-heading", "text": "Ghép bất kỳ Tướng Chính và Tướng Phụ hoặc chọn sẵn Combo Meta để tính tổng chỉ số buff và nội tại." },
+    { "selector": "#ih-preset-label", "text": "Combo Meta Đề xuất (Nhấn để chọn nhanh)" },
+    { "selector": "#ih-leader-label", "text": "Tướng Chính (Leader)" },
+    { "selector": "#ih-assist-label", "text": "Tướng Phụ (Assistant)" },
+    { "selector": "#ih-level-label", "text": "Cấp độ Kỹ năng" },
+    { "selector": "#ih-roster-tag", "text": "2. Danh sách 16 Tướng Bộ binh & Chi tiết Kỹ năng" },
+    { "selector": "#ih-roster-heading", "text": "Lọc theo Vai trò, Nguồn nhận hoặc Chuyên môn và nhấn chọn tướng để đưa vào bảng ghép cặp." },
+    { "selector": "#ih-units-tag", "text": "3. Đội hình Binh chủng Bộ binh (T1 – T6)" },
+    { "selector": "#ih-units-heading", "text": "Tiến hóa trang bị từ rìu ống nước tự chế đến khiên thép hạng nặng và súng trường tấn công." },
+    { "selector": "#ih-table-tag", "text": "4. Bảng Thông số Binh chủng Bộ binh (T1–T6) & Máy tính Đầu ra" },
+    { "selector": "#ih-table-heading", "text": "Chỉ số gốc, chỉ số cộng thêm (+108.3% ATK, +98.9% DEF, +57.1% HP) và % tăng trưởng từ T1 đến T6." },
+    { "selector": "#ih-comp-label", "text": "Máy tính So sánh Đầu ra Bộ binh" },
+    { "selector": "#ih-from-label", "text": "Cấp lính Gốc" },
+    { "selector": "#ih-to-label", "text": "Cấp lính Đích" },
+    { "selector": "#ih-buff-label", "text": "Cấu hình Buff" },
+    { "selector": "#ih-delta-label", "text": "Bảng Tăng trưởng Từng Bậc (T1 → T6)" }
+  ]
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infantry Heroes & Pair Combo Calculator | Doomsday: Last Survivors</title>
+    <meta name="description" content="Doomsday: Last Survivors Infantry Heroes guide featuring all 16 Legendary Infantry commanders, filterable skill tables, and an interactive Hero Pairing & Combo Perks Calculator." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero hero-subpage">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="index.html#home">Home Utilities</a>
+          <div class="nav-links">
+            <a href="stories.html">Stories</a>
+            <div class="nav-parent">
+              <a href="index.html#kitchen-notes">Kitchen Notes</a>
+              <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                <a href="recipes.html">Recipes</a>
+                <a href="shopping-planner.html">Shopping Planner</a>
+              </div>
+            </div>
+            <a href="kiem-the-system-map.html" class="nav-kiem-the">Kiem The System</a>
+            <div class="nav-parent nav-parent-doomsday">
+              <a href="doomsday-guide.html" class="nav-doomsday">Doomsday: Last Survivors</a>
+              <div class="nav-submenu nav-submenu-doomsday" aria-label="Doomsday submenu">
+                <a href="doomsday-infantry-heroes.html" class="nav-doomsday-infantry">Infantry Heroes & Combos</a>
+                <a href="doomsday-ranged-barracks.html" class="nav-doomsday-ranged">Ranged Barracks</a>
+              </div>
+            </div>
+            <div class="nav-parent nav-parent-greenies">
+              <a class="nav-link-greenies" href="#">Greenies</a>
+              <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                <a class="nav-greenies-planting" href="planting-diary.html">Planting diary</a>
+                <a class="nav-greenies-fertilization" href="fertilization-wikipedia.html">Fertilization wikipedia</a>
+              </div>
+            </div>
+            <a href="ptsd.html">PTSD</a>
+          </div>
+          <label class="locale-switcher">
+            <span class="locale-switcher-label">Language</span>
+            <select class="locale-select" id="locale-select" aria-label="Language selector">
+              <option value="en">English</option>
+              <option value="vi">Tiếng Việt</option>
+              <option value="es">Español (PR)</option>
+            </select>
+          </label>
+        </nav>
+
+        <section class="planner-hero-grid" id="infantry-heroes-hero">
+          <div class="subpage-hero-copy">
+            <p class="eyebrow" id="ih-eyebrow">Doomsday: Last Survivors / Infantry Barracks & Commanders</p>
+            <h1 id="ih-hero-title">Infantry Barracks — 16 Infantry Heroes, Pair Calculator & T1–T6 Unit Tiers.</h1>
+            <p class="hero-text" id="ih-hero-text">
+              Complete Infantry Barracks (Level 24) and 16-Hero Infantry compendium featuring extracted portraits, Rage & Passive skill scaling (Lv 1 to Lv 5 & Transcend), an interactive Leader + Assistant Pairing Calculator, and all six Infantry troop tiers from T1 Ruffian to T6 Ace Destroyer.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" id="ih-cta-calc" href="#combo-calculator-section">Pair Combo Calculator</a>
+              <a class="button button-secondary" id="ih-cta-roster" href="#infantry-roster-section">16 Infantry Heroes</a>
+              <a class="button button-secondary" id="ih-cta-units" href="#infantry-units-section">T1–T6 Infantry Units</a>
+            </div>
+          </div>
+
+          <aside class="month-calendar-card" aria-label="Infantry Barracks Snapshot">
+            <p class="card-label" id="ih-summary-label">Facility Snapshot · Level 24</p>
+            <h2 class="month-calendar-title" id="ih-summary-title">Infantry Barracks</h2>
+            <p id="ih-building-desc">Trains frontline high-DEF/HP Shield & Shotgun Infantry squads. Infantry units counter fast Rider marches and absorb heavy damage in Rallies and Shelter Garrisons.</p>
+            <img class="recipe-inline-image" src="assets/doomsday/infantry-heroes/infantry-barracks-lv24.jpg" alt="Infantry Barracks Level 24 training Elite Destroyer" loading="lazy" />
+          </aside>
+        </section>
+      </header>
+
+      <main>
+        <section class="notes-section" id="combo-calculator-section">
+          <div class="section-heading">
+            <div>
+              <p class="section-tag" id="ih-calc-tag">1. Hero Pairing & Skill Combination Calculator</p>
+              <h2 id="ih-calc-heading">Pair any Leader and Assistant hero or select a preset combo to calculate stacked buffs and perks.</h2>
+            </div>
+          </div>
+
+          <article class="planner-card">
+            <p class="card-label" id="ih-preset-label">Recommended Meta Combos (One-Click Load)</p>
+            <div class="combo-preset-grid" id="ih-preset-combos"></div>
+
+            <div class="calculator-controls">
+              <div>
+                <label class="form-label" for="ih-leader-select" id="ih-leader-label">Leader Hero</label>
+                <select id="ih-leader-select" class="planner-input"></select>
+              </div>
+              <div>
+                <label class="form-label" for="ih-assist-select" id="ih-assist-label">Assistant Hero</label>
+                <select id="ih-assist-select" class="planner-input"></select>
+              </div>
+              <div>
+                <label class="form-label" for="ih-skill-level" id="ih-level-label">Skill Upgrade Level</label>
+                <select id="ih-skill-level" class="planner-input">
+                  <option value="0">Level 1 (Base 1-1-1-1)</option>
+                  <option value="1">Level 2 (2-2-2-2)</option>
+                  <option value="2">Level 3 (3-3-3-3)</option>
+                  <option value="3">Level 4 (4-4-4-4)</option>
+                  <option value="4">Level 5 (Awakened 5-5-5-5)</option>
+                  <option value="5" selected>✦ Transcend Mode (Sakura Transcended)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table class="summary-table">
+                <thead id="ih-combo-thead"></thead>
+                <tbody id="ih-combo-tbody"></tbody>
+              </table>
+            </div>
+
+            <div class="table-wrap" id="ih-transcend-wrap"></div>
+            <div class="planner-note" id="ih-combo-perks"></div>
+          </article>
+        </section>
+
+        <section class="recipes-section" id="infantry-roster-section">
+          <div class="section-heading">
+            <div>
+              <p class="section-tag" id="ih-roster-tag">2. Complete 16-Hero Infantry Directory & Skills</p>
+              <h2 id="ih-roster-heading">Filter by Role, Obtain Source, or Tactical Specialty and click any hero to pair them above.</h2>
+            </div>
+          </div>
+          <div class="filter-toolbar" id="ih-hero-filters"></div>
+          <div class="planner-columns" id="ih-hero-grid"></div>
+        </section>
+
+        <section class="notes-section" id="infantry-units-section">
+          <div class="section-heading"><div><p class="section-tag" id="ih-units-tag">3. Infantry Barracks Lineup (T1 – T6)</p><h2 id="ih-units-heading">Visual progression from improvised pipe axes to heavy steel shields and assault rifles.</h2></div></div>
+          <div class="planner-columns" id="ih-unit-cards"></div>
+        </section>
+
+        <section class="recipes-section" id="infantry-tiers-table-section">
+          <div class="section-heading"><div><p class="section-tag" id="ih-table-tag">4. Infantry Unit Tiers Table & Output Calculator</p><h2 id="ih-table-heading">Base stats, active commander/tech bonus (+108.3% ATK, +98.9% DEF, +57.1% HP), and T1–T6 % progression.</h2></div></div>
+          <article class="planner-card" style="margin-bottom: 1.5rem"><div class="table-wrap"><table class="summary-table"><thead id="ih-tiers-thead"></thead><tbody id="ih-tiers-tbody"></tbody></table></div></article>
+          <article class="planner-card" style="margin-bottom: 1.5rem">
+            <p class="card-label" id="ih-comp-label">Interactive Infantry Output Comparator</p>
+            <div class="calculator-controls">
+              <div><label class="form-label" for="ih-tier-from" id="ih-from-label">Baseline Tier</label><select id="ih-tier-from" class="planner-input"></select></div>
+              <div><label class="form-label" for="ih-tier-to" id="ih-to-label">Target Tier</label><select id="ih-tier-to" class="planner-input"></select></div>
+              <div><label class="form-label" for="ih-buff-profile" id="ih-buff-label">Buff Profile</label><select id="ih-buff-profile" class="planner-input"></select></div>
+            </div>
+            <div class="table-wrap"><table class="summary-table"><thead id="ih-comp-thead"></thead><tbody id="ih-comp-tbody"></tbody></table></div>
+          </article>
+          <article class="planner-card">
+            <p class="card-label" id="ih-delta-label">Step-by-Step Tier Progression (T1 → T6)</p>
+            <div class="table-wrap"><table class="summary-table"><thead id="ih-delta-thead"></thead><tbody id="ih-delta-tbody"></tbody></table></div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top">Top</button>
+    <script src="script.js"></script>
+    <script src="doomsday-infantry-data.js"></script>
+    <script src="doomsday-infantry-heroes.js"></script>
+  </body>
+</html>

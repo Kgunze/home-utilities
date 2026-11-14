@@ -202,7 +202,45 @@ const ensureNavLink = (className, relativePath, afterSelector = null) => {
 const ensureCatCanCodeLink = () => ensureNavLink("nav-cat-can-code", "cat-can-code/");
 const ensureNumentixLink = () => ensureNavLink("nav-numentix", "numentix.html");
 const ensureKiemTheLink = () => ensureNavLink("nav-kiem-the", "kiem-the-system-map.html");
-const ensureDoomsdayLink = () => ensureNavLink("nav-doomsday", "doomsday-guide.html", ".nav-kiem-the");
+const ensureDoomsdayLink = () => {
+  const navLinks = document.querySelector(".nav-links");
+  if (!navLinks) return null;
+  const prefix = getSiteRootPrefix();
+  let parent = navLinks.querySelector(".nav-parent-doomsday");
+  if (!parent) {
+    parent = document.createElement("div");
+    parent.className = "nav-parent nav-parent-doomsday";
+    const existingLink = navLinks.querySelector(".nav-doomsday");
+    const mainLink = existingLink || document.createElement("a");
+    mainLink.className = "nav-doomsday";
+    mainLink.href = `${prefix}doomsday-guide.html`;
+    const sub = document.createElement("div");
+    sub.className = "nav-submenu nav-submenu-doomsday";
+    sub.setAttribute("aria-label", "Doomsday submenu");
+    parent.append(mainLink, sub);
+    navLinks.appendChild(parent);
+  }
+  const sub = parent.querySelector(".nav-submenu-doomsday");
+  if (sub && !sub.querySelector(".nav-doomsday-infantry")) {
+    const infLink = document.createElement("a");
+    infLink.className = "nav-doomsday-infantry";
+    infLink.href = `${prefix}doomsday-infantry-heroes.html`;
+    infLink.textContent = "Infantry Heroes & Combos";
+    sub.prepend(infLink);
+  }
+  if (sub && !sub.querySelector(".nav-doomsday-ranged")) {
+    const rngLink = document.createElement("a");
+    rngLink.className = "nav-doomsday-ranged";
+    rngLink.href = `${prefix}doomsday-ranged-barracks.html`;
+    rngLink.textContent = "Ranged Barracks";
+    sub.appendChild(rngLink);
+  }
+  const kiemThe = navLinks.querySelector(".nav-kiem-the");
+  if (kiemThe && kiemThe.nextElementSibling !== parent) {
+    kiemThe.insertAdjacentElement("afterend", parent);
+  }
+  return parent.querySelector(".nav-doomsday");
+};
 const accordionTriggers = document.querySelectorAll(".accordion-trigger");
 const quickButtons = document.querySelectorAll(".quick-btn");
 const recommendationBody = document.querySelector("#recommendation-body");
@@ -231,6 +269,7 @@ const I18N = {
     navPtsd: "PTSD",
     navKiemThe: "Kiem The System",
     navDoomsday: "Doomsday: Last Survivors",
+    navDoomsdayRanged: "Ranged Barracks",
     navNumentix: "Numentix",
     navCatCanCode: "Cat Can Code",
     backToTop: "Top",
@@ -330,6 +369,7 @@ const I18N = {
     navPtsd: "PTSD",
     navKiemThe: "Hệ thống Kiếm Thế",
     navDoomsday: "Doomsday: Last Survivors",
+    navDoomsdayRanged: "Trại Cung Thủ (Ranged)",
     navNumentix: "Numentix",
     navCatCanCode: "Cat Can Code",
     backToTop: "Lên đầu trang",
@@ -423,6 +463,7 @@ const I18N = {
     navPtsd: "PTSD",
     navKiemThe: "Sistema Kiem The",
     navDoomsday: "Doomsday: Last Survivors",
+    navDoomsdayRanged: "Cuartel de Tiradores",
     navNumentix: "Numentix",
     navCatCanCode: "Cat Can Code",
     navGreenies: "Greenies",
@@ -1026,6 +1067,14 @@ const syncCommonLocaleLabels = () => {
   if (doomsdayLink && localeStrings.navDoomsday) {
     doomsdayLink.textContent = localeStrings.navDoomsday;
     doomsdayLink.setAttribute("aria-label", localeStrings.navDoomsday);
+  }
+  const doomsdayInfantryLink = document.querySelector(".nav-doomsday-infantry");
+  if (doomsdayInfantryLink && localeStrings.navDoomsdayInfantry) {
+    doomsdayInfantryLink.textContent = localeStrings.navDoomsdayInfantry;
+  }
+  const doomsdayRangedLink = document.querySelector(".nav-doomsday-ranged");
+  if (doomsdayRangedLink && localeStrings.navDoomsdayRanged) {
+    doomsdayRangedLink.textContent = localeStrings.navDoomsdayRanged;
   }
   if (numentixLink && localeStrings.navNumentix) {
     numentixLink.textContent = localeStrings.navNumentix;

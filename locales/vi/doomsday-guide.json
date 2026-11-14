@@ -5,8 +5,10 @@
     { "selector": "#dls-eyebrow", "text": "Cẩm nang Game / Chiến thuật & Sinh tồn" },
     { "selector": "#dls-hero-title", "text": "Doomsday: Last Survivors — Giới thiệu, Nền tảng & Chiến thuật cốt lõi." },
     { "selector": "#dls-hero-text", "text": "Sổ tay tổng hợp cho tựa game chiến thuật sinh tồn zombie của IGG, kết hợp lối chơi thủ tháp chiến thuật, đồng bộ đa nền tảng PC/Mobile và mẹo càn quét Skirmish đầu game." },
-    { "selector": "#dls-cta-intro", "text": "Mẹo Skirmish đầu game" },
-    { "selector": "#dls-cta-strategy", "text": "Chiến thuật cơ bản" },
+    { "selector": "#dls-cta-intro", "text": "Danh sách Tướng" },
+    { "selector": "#dls-cta-barracks", "text": "Mở Trại Cung Thủ (Ranged)" },
+    { "selector": "#dls-roster-tag", "text": "3. Danh sách Tướng Hiện có (Hero Roster)" },
+    { "selector": "#dls-roster-heading", "text": "12 Tướng theo Phẩm chất, Cấp độ, Sao và Vai trò Chiến thuật." },
     { "selector": "#dls-summary-label", "text": "Tổng quan nhanh" },
     { "selector": "#dls-summary-title", "text": "Trụ cột chính" },
     { "selector": "#dls-summary-list li", "all": [
