@@ -57,8 +57,7 @@ const numentixNextLink = document.querySelector("#numentix-next");
 const numentixProgress = document.querySelector("#numentix-progress");
 const numentixReaderSection = document.querySelector("#numentix-reader");
 
-const getSiteRootPrefix = () =>
-  window.location.pathname.includes("/cat-can-code/") ? "../" : "";
+const getSiteRootPrefix = () => "";
 
 const NUMENTIX_CHAPTERS = [
   {
@@ -199,7 +198,6 @@ const ensureNavLink = (className, relativePath, afterSelector = null) => {
   return link;
 };
 
-const ensureCatCanCodeLink = () => ensureNavLink("nav-cat-can-code", "cat-can-code/");
 const ensureNumentixLink = () => ensureNavLink("nav-numentix", "numentix.html");
 const ensureKiemTheLink = () => ensureNavLink("nav-kiem-the", "kiem-the-system-map.html");
 const ensureDoomsdayLink = () => {
@@ -285,7 +283,6 @@ const I18N = {
     navDoomsday: "Doomsday: Last Survivors",
     navDoomsdayRanged: "Ranged Barracks",
     navNumentix: "Numentix",
-    navCatCanCode: "Cat Can Code",
     backToTop: "Top",
     backToTopAria: "Back to top",
     livePlannerWaiting: "Waiting for selections.",
@@ -385,7 +382,6 @@ const I18N = {
     navDoomsday: "Doomsday: Last Survivors",
     navDoomsdayRanged: "Trại Cung Thủ (Ranged)",
     navNumentix: "Numentix",
-    navCatCanCode: "Cat Can Code",
     backToTop: "Lên đầu trang",
     backToTopAria: "Lên đầu trang",
     livePlannerWaiting: "Đang chờ lựa chọn.",
@@ -479,7 +475,6 @@ const I18N = {
     navDoomsday: "Doomsday: Last Survivors",
     navDoomsdayRanged: "Cuartel de Tiradores",
     navNumentix: "Numentix",
-    navCatCanCode: "Cat Can Code",
     navGreenies: "Greenies",
     navGreeniesSubmenu: "Submenú de Greenies",
     navPlantingDiary: "Diario de Siembra",
@@ -730,16 +725,6 @@ let localeData = {
 
 const getCurrentPage = () => {
   const path = window.location.pathname;
-  const dayMatch = path.match(/\/cat-can-code\/day-(\d+)/);
-
-  if (dayMatch) {
-    return `cat-can-code-day-${dayMatch[1]}.html`;
-  }
-
-  if (path.includes("/cat-can-code")) {
-    return "cat-can-code.html";
-  }
-
   const name = path.split("/").pop();
   return name || "index.html";
 };
@@ -1066,14 +1051,9 @@ const syncCommonLocaleLabels = () => {
     greeniesSubmenu.setAttribute("aria-label", localeStrings.navGreeniesSubmenu);
   }
 
-  const catCanCodeLink = ensureCatCanCodeLink();
   const kiemTheLink = ensureKiemTheLink();
   const doomsdayLink = ensureDoomsdayLink();
   const numentixLink = ensureNumentixLink();
-  if (catCanCodeLink && localeStrings.navCatCanCode) {
-    catCanCodeLink.textContent = localeStrings.navCatCanCode;
-    catCanCodeLink.setAttribute("aria-label", localeStrings.navCatCanCode);
-  }
   if (kiemTheLink && localeStrings.navKiemThe) {
     kiemTheLink.textContent = localeStrings.navKiemThe;
     kiemTheLink.setAttribute("aria-label", localeStrings.navKiemThe);
