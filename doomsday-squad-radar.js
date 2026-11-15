@@ -1,14 +1,16 @@
 (() => {
   const RADAR_AXES = [
-    { key: "atk", max: 150, label: "ATK" },
-    { key: "def", max: 140, label: "DEF" },
-    { key: "hp", max: 80, label: "HP" },
-    { key: "spd", max: 50, label: "Speed" },
-    { key: "skillDmg", max: 70, label: "Skill Amp" },
-    { key: "dmgRed", max: 70, label: "DMG Red" },
-    { key: "rageFactor", max: 45000, label: "Skill Rage" },
-    { key: "healRage", max: 6000, label: "Heal/Rage" },
+    { key: "atk", max: 150, labels: { en: "ATK", vi: "Công", es: "ATQ" } },
+    { key: "def", max: 140, labels: { en: "DEF", vi: "Thủ", es: "DEF" } },
+    { key: "hp", max: 80, labels: { en: "HP", vi: "Máu", es: "SAL" } },
+    { key: "spd", max: 50, labels: { en: "Speed", vi: "Tốc", es: "Vel" } },
+    { key: "skillDmg", max: 70, labels: { en: "Skill Amp", vi: "Tăng ST Kỹ", es: "Amp Hab" } },
+    { key: "dmgRed", max: 70, labels: { en: "DMG Red", vi: "Giảm ST", es: "Red DAÑ" } },
+    { key: "rageFactor", max: 45000, labels: { en: "Skill Rage", vi: "ST Nộ", es: "Daño Furia" } },
+    { key: "healRage", max: 6000, labels: { en: "Heal/Rage", vi: "Hồi/Nộ", es: "Cur/Furia" } },
   ];
+
+  const getLang = () => (["vi", "es"].includes(document.documentElement.lang) ? document.documentElement.lang : "en");
 
   const buildPolygon = (values, cx, cy, r) => {
     const n = RADAR_AXES.length;
@@ -22,7 +24,7 @@
   };
 
   const drawRadar = (title, subtitle, values, strokeColor, fillColor) => {
-    const cx = 160, cy = 160, r = 100, n = RADAR_AXES.length;
+    const cx = 160, cy = 160, r = 100, n = RADAR_AXES.length, lang = getLang();
     const rings = [0.25, 0.5, 0.75, 1].map((scale) => {
       const pts = RADAR_AXES.map((_, i) => {
         const angle = (Math.PI * 2 / n) * i - Math.PI / 2;
@@ -37,7 +39,8 @@
       const y2 = (cy + r * Math.sin(angle)).toFixed(1);
       const lx = (cx + (r + 20) * Math.cos(angle)).toFixed(1);
       const ly = (cy + (r + 14) * Math.sin(angle)).toFixed(1);
-      return `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="rgba(255,255,255,0.12)" stroke-width="1" /><text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="central" fill="#c7b9a5" font-size="10" font-weight="600">${axis.label}</text>`;
+      const label = axis.labels[lang] || axis.labels.en;
+      return `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="rgba(255,255,255,0.12)" stroke-width="1" /><text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="central" fill="#c7b9a5" font-size="10" font-weight="600">${label}</text>`;
     }).join("");
 
     const poly = buildPolygon(values, cx, cy, r);

@@ -2,10 +2,294 @@
   "title": "Danh mục công thức | Home Utilities",
   "description": "Danh mục công thức của Home Utilities với điều hướng món nước và món khô, liên kết với nguyên liệu từ trang Kế hoạch đi chợ.",
   "translations": [
-    { "selector": ".subpage-hero-copy .eyebrow", "text": "Ghi chú bếp / Công thức" },
-    { "selector": ".subpage-hero-copy h1", "text": "Danh mục công thức đan dệt xưa nay giữa món nước và món khô." },
-    { "selector": ".subpage-hero-copy .hero-text", "text": "Trang này chuyển những gói nguyên liệu trong Kế hoạch đi chợ thành một tủ nấu ăn đầy trí nhớ, nơi mỗi công thức là một lời mời vào bàn cơm gia đình." },
-    { "selector": ".hero-actions a[href=\"#broth-recipes\"]", "text": "Xem món nước" },
-    { "selector": ".hero-actions a[href=\"#non-broth-recipes\"]", "text": "Xem món khô" }
+    {
+      "selector": ".subpage-hero-copy .eyebrow",
+      "text": "Ghi chú bếp / Công thức"
+    },
+    {
+      "selector": ".subpage-hero-copy h1",
+      "text": "Danh mục công thức được sắp theo món nước và món khô."
+    },
+    {
+      "selector": ".subpage-hero-copy .hero-text",
+      "text": "Trang này biến Kế hoạch đi chợ thành một kệ nấu ăn có thể dùng ngay. Công thức được nhóm theo kiểu món, nối với luồng nguyên liệu của kế hoạch tuần và dẫn sang các trang đọc kiểu blog."
+    },
+    {
+      "selector": ".hero-actions a[href=\"#broth-recipes\"]",
+      "text": "Xem món nước"
+    },
+    {
+      "selector": ".hero-actions a[href=\"#non-broth-recipes\"]",
+      "text": "Xem món khô"
+    },
+    {
+      "selector": ".recipe-side-card .card-label",
+      "index": 0,
+      "text": "Liên kết với kế hoạch"
+    },
+    {
+      "selector": ".recipe-side-card h2",
+      "text": "Được xây từ nguyên liệu đi chợ hằng tuần"
+    },
+    {
+      "selector": ".feature-list li",
+      "all": [
+        "Gà, heo, sườn, bò, tôm, mực và basa",
+        "Bí đỏ, cà chua, dưa leo, nấm, rau xanh và bắp cải",
+        "Trứng, đậu hũ, rong biển, rau thơm và các món pantry cơ bản"
+      ]
+    },
+    {
+      "selector": ".story-ledger-note",
+      "text": "Hãy xem đây là nửa còn lại của kế hoạch: một trang để quyết định nấu gì từ những gì đã có sẵn."
+    },
+    {
+      "selector": ".catalogue-sidebar .sidebar-title",
+      "text": "Điều hướng công thức"
+    },
+    {
+      "selector": ".tree-menu a[href=\"#catalogue-overview\"]",
+      "text": "Tổng quan danh mục"
+    },
+    {
+      "selector": ".tree-menu a[href=\"#meal-calculator\"]",
+      "text": "Máy tính bữa ăn"
+    },
+    {
+      "selector": ".tree-menu a[href=\"#ingredient-planner\"]",
+      "text": "Lập kế hoạch theo nguyên liệu"
+    },
+    {
+      "selector": ".tree-menu a[href=\"#broth-recipes\"]",
+      "text": "Món nước"
+    },
+    {
+      "selector": ".tree-menu a[href=\"#non-broth-recipes\"]",
+      "text": "Món khô"
+    },
+    {
+      "selector": "#planning-stepper .section-tag",
+      "text": "Luồng gợi ý"
+    },
+    {
+      "selector": "#planning-stepper h2",
+      "text": "Đi từ nguyên liệu sang lập bữa ăn rồi tới đọc công thức."
+    },
+    {
+      "selector": ".live-planner-bar strong",
+      "text": "Trạng thái kế hoạch"
+    },
+    {
+      "selector": ".stepper-item strong",
+      "all": [
+        "Nguyên liệu",
+        "Bữa ăn",
+        "Công thức"
+      ]
+    },
+    {
+      "selector": ".stepper-item span",
+      "all": [
+        "Bắt đầu từ những gì bạn có hoặc có thể mua",
+        "Chọn ngày, số người và loại món",
+        "Đọc và chuẩn bị món đã chọn"
+      ]
+    },
+    {
+      "selector": "#catalogue-overview .section-tag",
+      "text": "Danh mục"
+    },
+    {
+      "selector": "#catalogue-overview h2",
+      "text": "Từ danh sách đi chợ thành bữa ăn thực sự."
+    },
+    {
+      "selector": "#catalogue-overview .recipe-story-lead",
+      "text": "Kế hoạch đi chợ đã xác định nguyên liệu. Danh mục này biến chính những nguyên liệu ấy thành một bản đồ nấu ăn mà bạn có thể điều hướng."
+    },
+    {
+      "selector": "#catalogue-overview .recipe-story-body p",
+      "all": [
+        "Món nước là các tô, món canh và bữa ăn nhẹ phụ thuộc vào nước dùng, quá trình hầm hoặc nền nước. Món khô là các món kho, xào, bữa sáng và nước chấm tạo cấu trúc cho phần còn lại của tuần.",
+        "Mỗi công thức bên dưới đều gắn với các nguyên liệu đã có trong kế hoạch, nên danh mục mang cảm giác thực tế thay vì chỉ để mơ ước."
+      ]
+    },
+    {
+      "selector": "#ingredient-planner .section-tag",
+      "text": "Lập theo nguyên liệu"
+    },
+    {
+      "selector": "#ingredient-planner h2",
+      "text": "Bắt đầu từ những nguyên liệu bạn có hoặc có thể mua."
+    },
+    {
+      "selector": "#ingredient-planner .planner-caption",
+      "text": "Một góc nhìn linh hoạt cho những ngày nguyên liệu đi trước và công thức đi sau."
+    },
+    {
+      "selector": "#ingredient-planner .recipe-story-body p",
+      "text": "Dùng chế độ này khi kế hoạch không xoay quanh thực đơn cố định mà xoay quanh những gì đã có trong bếp hoặc dễ mua nhất. Hãy chọn các nguyên liệu bạn đang có, trang sẽ gợi ý những công thức phù hợp từ danh mục."
+    },
+    {
+      "selector": ".ingredient-chip",
+      "all": [
+        "Gà",
+        "Heo",
+        "Sườn non",
+        "Bò",
+        "Phi lê basa",
+        "Đậu hũ",
+        "Rong biển",
+        "Trứng",
+        "Bí đỏ",
+        "Cà chua",
+        "Dưa leo",
+        "Rau thơm",
+        "Gừng",
+        "Nước mắm",
+        "Bánh mì",
+        "Bánh phở"
+      ]
+    },
+    {
+      "selector": ".ingredient-summary-layout .card-label",
+      "index": 0,
+      "text": "Khớp món"
+    },
+    {
+      "selector": ".ingredient-summary-layout h3",
+      "index": 0,
+      "text": "Những công thức hợp với nguyên liệu đã chọn"
+    },
+    {
+      "selector": ".summary-table th",
+      "all": [
+        "Công thức",
+        "Loại",
+        "Nguyên liệu khớp",
+        "Ngày",
+        "Công thức",
+        "Loại",
+        "Phần ăn",
+        "Nguyên liệu",
+        "Tổng cần"
+      ]
+    },
+    {
+      "selector": ".ingredient-summary-layout .card-label",
+      "index": 1,
+      "text": "Nguyên liệu hiện có"
+    },
+    {
+      "selector": ".ingredient-summary-layout h3",
+      "index": 1,
+      "text": "Lựa chọn nguyên liệu hiện tại"
+    },
+    {
+      "selector": "#step-to-calculator",
+      "text": "Tiếp tục tới lập bữa ăn"
+    },
+    {
+      "selector": "#meal-calculator .section-tag",
+      "text": "Máy tính"
+    },
+    {
+      "selector": "#meal-calculator h2",
+      "text": "Lập bữa ăn theo ngày, số người và loại món."
+    },
+    {
+      "selector": "#print-meal-plan",
+      "text": "In kế hoạch bữa ăn"
+    },
+    {
+      "selector": "label[for=\"meal-date\"]",
+      "text": "Ngày ăn"
+    },
+    {
+      "selector": "label[for=\"meal-people\"]",
+      "text": "Số người"
+    },
+    {
+      "selector": "label[for=\"meal-recipe-type\"]",
+      "text": "Loại công thức"
+    },
+    {
+      "selector": "#meal-recipe-type option[value=\"all\"]",
+      "text": "Tất cả công thức"
+    },
+    {
+      "selector": "#meal-recipe-type option[value=\"broth\"]",
+      "text": "Công thức món nước"
+    },
+    {
+      "selector": "#meal-recipe-type option[value=\"non-broth\"]",
+      "text": "Công thức món khô"
+    },
+    {
+      "selector": ".recipe-picker-card strong",
+      "all": [
+        "Phở gà",
+        "Canh cá basa nấu cà",
+        "Canh rong biển đậu hũ",
+        "Canh sườn bí đỏ",
+        "Thịt kho",
+        "Bò xào bí đỏ",
+        "Đĩa bánh mì",
+        "Nước mắm gừng"
+      ]
+    },
+    {
+      "selector": ".recipe-picker-card span",
+      "all": [
+        "Món nước",
+        "Món nước",
+        "Món nước",
+        "Món nước",
+        "Món khô",
+        "Món khô",
+        "Món khô",
+        "Món khô"
+      ]
+    },
+    {
+      "selector": ".calculator-summary .card-label",
+      "index": 0,
+      "text": "Tóm tắt bữa ăn"
+    },
+    {
+      "selector": ".calculator-summary h3",
+      "index": 0,
+      "text": "Những món đã chọn cho ngày"
+    },
+    {
+      "selector": ".calculator-summary .card-label",
+      "index": 1,
+      "text": "Nguyên liệu"
+    },
+    {
+      "selector": ".calculator-summary h3",
+      "index": 1,
+      "text": "Tổng nguyên liệu gộp lại"
+    },
+    {
+      "selector": "#step-to-recipes",
+      "text": "Tiếp tục tới đọc công thức"
+    },
+    {
+      "selector": "#broth-recipes .section-tag",
+      "text": "Món nước"
+    },
+    {
+      "selector": "#broth-recipes h2",
+      "text": "Dùng khi tuần cần sự ấm áp và mềm dịu."
+    },
+    {
+      "selector": "#non-broth-recipes .section-tag",
+      "text": "Món khô"
+    },
+    {
+      "selector": "#non-broth-recipes h2",
+      "text": "Dùng khi tuần cần độ đầy, kết cấu và cấu trúc."
+    }
   ]
 }

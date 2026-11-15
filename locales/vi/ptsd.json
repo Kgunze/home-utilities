@@ -2,8 +2,73 @@
   "title": "PTSD | Home Utilities",
   "description": "Trang PTSD với bối cảnh bị đổ lỗi trong gia đình, thuật ngữ dựa trên bằng chứng, tham chiếu triệu chứng và mẫu theo dõi điều trị.",
   "translations": [
-    { "selector": ".subpage-hero-copy .eyebrow", "text": "Hỗ trợ / PTSD" },
-    { "selector": ".subpage-hero-copy h1", "text": "PTSD và những câu chuyện được hiểu lại trong ánh mắt gia đình." },
-    { "selector": ".subpage-hero-copy .hero-text", "text": "Trang này viết lại chứng lý về PTSD bằng lời dịu dàng, phân biệt giữa tiếng khóc không phải là tội lỗi và những chứng cứ cần bảo lưu." }
+    {
+      "selector": ".subpage-hero-copy .eyebrow",
+      "text": "Hỗ trợ / PTSD"
+    },
+    {
+      "selector": ".subpage-hero-copy h1",
+      "text": "PTSD, việc bị đổ lỗi trong gia đình và lịch sử điều trị trong một trang vững vàng."
+    },
+    {
+      "selector": ".subpage-hero-copy .hero-text",
+      "text": "Trang này tách động lực hệ gia đình khỏi chẩn đoán chính thức, rồi tóm tắt thuật ngữ PTSD, các cụm triệu chứng và theo dõi điều trị bằng tài liệu dựa trên bằng chứng cùng mẫu lưu trữ riêng tư."
+    },
+    {
+      "selector": ".ptsd-hero-card .card-label",
+      "text": "Phạm vi"
+    },
+    {
+      "selector": ".ptsd-hero-card h2",
+      "text": "Ba phần"
+    },
+    {
+      "selector": ".ptsd-hero-card .feature-list li",
+      "all": [
+        "Bài viết về việc trở thành người bị đổ lỗi trong gia đình",
+        "Thuật ngữ khoa học và các cụm triệu chứng",
+        "Mẫu theo dõi điều trị và tái khám bác sĩ tâm thần trong một năm"
+      ]
+    },
+    {
+      "selector": ".ptsd-note",
+      "text": "Trang này nhằm mục đích thông tin và tổ chức. Đây không phải là chẩn đoán hay sự thay thế cho chăm sóc y tế chuyên môn."
+    },
+    {
+      "selector": "#family-scapegoat .section-tag",
+      "text": "Bài viết"
+    },
+    {
+      "selector": "#family-scapegoat h2",
+      "text": "PTSD trong bối cảnh bị xem là vật tế thần của gia đình."
+    },
+    {
+      "selector": "#family-scapegoat .planner-caption",
+      "text": "Việc đổ lỗi trong gia đình là một mô thức hệ thống gia đình, không phải chẩn đoán DSM."
+    },
+    {
+      "selector": "#scientific-record .section-tag",
+      "text": "Hồ sơ khoa học"
+    },
+    {
+      "selector": "#scientific-record h2",
+      "text": "Thuật ngữ tâm lý, cách diễn giải tổn thương và các cụm triệu chứng."
+    },
+    {
+      "selector": "#scientific-record .planner-caption",
+      "text": "Dựa trên tài liệu NIMH và NCBI/PMC."
+    },
+    {
+      "selector": "#medical-follow-up .section-tag",
+      "text": "Hồ sơ y khoa"
+    },
+    {
+      "selector": "#medical-follow-up h2",
+      "text": "Bản dịch đơn thuốc sang tiếng Anh kèm ghi chú về thuốc."
+    },
+    {
+      "selector": "#medical-follow-up .planner-caption",
+      "text": "Dựa trên toa thuốc hiển thị ngày 2 tháng 6 năm 2023, không nhúng hình ảnh."
+    }
   ]
 }

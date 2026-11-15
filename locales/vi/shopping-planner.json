@@ -2,9 +2,203 @@
   "title": "Kế hoạch đi chợ | Home Utilities",
   "description": "Trang kế hoạch đi chợ hằng tuần của Home Utilities, dựa trên tài liệu thực đơn 30 ngày đã được duyệt.",
   "translations": [
-    { "selector": ".subpage-hero-copy .eyebrow", "text": "Ghi chú bếp / Kế hoạch đi chợ" },
-    { "selector": ".subpage-hero-copy h1", "text": "Kế hoạch đi chợ hằng tuần được dịch lại để cả nhà cùng hiểu." },
-    { "selector": ".subpage-hero-copy .hero-text", "text": "Trang này dựa trên thực đơn 30 ngày đã được duyệt, gom nguyên liệu theo mỗi tuần để cha mẹ chỉ cần đi chợ vài lần vẫn giữ được nhịp sống nhẹ nhõm." },
-    { "selector": ".duration-suffix", "text": "giờ" }
+    {
+      "selector": ".subpage-hero-copy .eyebrow",
+      "text": "Ghi chú bếp / Kế hoạch đi chợ"
+    },
+    {
+      "selector": ".subpage-hero-copy h1",
+      "text": "Kế hoạch đi chợ hằng tuần đã được chuyển ngữ sang tiếng Anh."
+    },
+    {
+      "selector": ".subpage-hero-copy .hero-text",
+      "text": "Trang này dựa trên file PDF thực đơn 30 ngày đã được duyệt. Các nguyên liệu lặp lại được gom theo từng tuần để chỉ cần đi chợ một hoặc hai lần mỗi tuần là đủ cho gia đình."
+    },
+    {
+      "selector": ".month-calendar-card .card-label",
+      "text": "Xem theo tháng"
+    },
+    {
+      "selector": ".month-calendar-caption",
+      "text": "Làm nổi bật ngày đi chợ bạn đã chọn."
+    },
+    {
+      "selector": ".month-weekdays span",
+      "all": [
+        "CN",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7"
+      ]
+    },
+    {
+      "selector": ".planner-page .section-tag",
+      "text": "Tóm tắt tài liệu"
+    },
+    {
+      "selector": ".planner-page h2",
+      "text": "Hướng dẫn đi chợ hằng tuần thực tế cho 3 người."
+    },
+    {
+      "selector": ".planner-page .planner-caption",
+      "index": 0,
+      "text": "Khẩu phần được tính cho 7 ngày với khoảng 150k mỗi ngày, chưa bao gồm gạo và gia vị cơ bản."
+    },
+    {
+      "selector": ".planner-sidebar .sidebar-title",
+      "text": "Cây kế hoạch"
+    },
+    {
+      "selector": ".tree-menu a[href=\"#planner-overview\"]",
+      "text": "Tổng quan"
+    },
+    {
+      "selector": ".tree-menu a[href=\"#market-scheduler\"]",
+      "text": "Giờ đi chợ Bình Điền"
+    },
+    {
+      "selector": ".tree-menu a[href=\"#weekly-formula\"]",
+      "text": "Công thức tuần trung bình"
+    },
+    {
+      "selector": ".tree-toggle",
+      "text": "Danh sách đi chợ theo tuần"
+    },
+    {
+      "selector": ".tree-links a[href=\"#week-1\"]",
+      "text": "Tuần 1 | Ngày 1-7"
+    },
+    {
+      "selector": ".tree-links a[href=\"#week-2\"]",
+      "text": "Tuần 2 | Ngày 8-14"
+    },
+    {
+      "selector": ".tree-links a[href=\"#week-3\"]",
+      "text": "Tuần 3 | Ngày 15-21"
+    },
+    {
+      "selector": ".tree-links a[href=\"#week-4\"]",
+      "text": "Tuần 4 | Ngày 22-28"
+    },
+    {
+      "selector": ".tree-links a[href=\"#refill-days\"]",
+      "text": "Ngày 29-30 bổ sung"
+    },
+    {
+      "selector": ".tree-menu a[href=\"#smart-tips\"]",
+      "text": "Mẹo đi chợ thông minh"
+    },
+    {
+      "selector": "#planner-overview .card-label",
+      "text": "Phần mở đầu đã dịch"
+    },
+    {
+      "selector": "#planner-overview h3",
+      "text": "Danh sách đi chợ hằng tuần dựa trên thực đơn 30 ngày đã được duyệt."
+    },
+    {
+      "selector": "#planner-overview p",
+      "text": "Các nguyên liệu lặp lại đã được gộp trong từng tuần để phụ huynh chỉ cần đi chợ một hoặc hai lần mỗi tuần. Số lượng được tính cho 3 người trong 7 ngày, với khoảng 150k mỗi ngày, không bao gồm gạo và gia vị."
+    },
+    {
+      "selector": "#market-scheduler .card-label",
+      "text": "Lên lịch đi chợ"
+    },
+    {
+      "selector": "#market-scheduler h3",
+      "text": "Đánh dấu giờ đi chợ Bình Điền."
+    },
+    {
+      "selector": "#market-scheduler > p",
+      "text": "Chọn ngày và giờ, lưu lại như lời nhắc trên thiết bị này hoặc mở trực tiếp trong Google Calendar khi bạn đã đăng nhập tài khoản Google của mình."
+    },
+    {
+      "selector": "label[for=\"market-date\"]",
+      "text": "Ngày"
+    },
+    {
+      "selector": "label[for=\"market-time\"]",
+      "text": "Giờ"
+    },
+    {
+      "selector": "label[for=\"market-duration\"]",
+      "text": "Thời lượng"
+    },
+    {
+      "selector": ".duration-suffix",
+      "text": "giờ"
+    },
+    {
+      "selector": ".summary-chip",
+      "text": "Dấu lưu cá nhân"
+    },
+    {
+      "selector": ".market-summary h4",
+      "text": "Lịch đi chợ đã lưu"
+    },
+    {
+      "selector": "#bookmark-market-time",
+      "text": "Lưu dấu"
+    },
+    {
+      "selector": "#add-google-calendar",
+      "text": "Thêm vào Google Calendar"
+    },
+    {
+      "selector": ".market-help",
+      "text": "Google Calendar sẽ mở trong trình duyệt và dùng tài khoản Google đang đăng nhập ở đó, để bạn tự xem lại và lưu sự kiện."
+    },
+    {
+      "selector": "#weekly-formula .card-label",
+      "text": "Mức mua trung bình mỗi tuần"
+    },
+    {
+      "selector": "#weekly-formula h3",
+      "text": "Một công thức cố định có thể dùng lại mỗi tuần."
+    },
+    {
+      "selector": "#weekly-formula .planner-list li",
+      "all": [
+        "Thịt heo: khoảng 900g",
+        "Hải sản hỗn hợp: khoảng 700-900g",
+        "Thịt bò: khoảng 300g",
+        "Sườn non: khoảng 500g",
+        "Gà: khoảng nửa con",
+        "Trứng: 10-12 quả",
+        "Rau củ: 4-5kg",
+        "Đậu hũ: 4 bìa"
+      ]
+    },
+    {
+      "selector": "#weekly-formula .planner-note p",
+      "text": "Công thức này có thể dùng lại cho bất kỳ tuần nào mà không cần tính lại cả thực đơn."
+    },
+    {
+      "selector": "#refill-days .card-label",
+      "text": "Đi chợ bổ sung"
+    },
+    {
+      "selector": "#refill-days h3",
+      "text": "Danh sách bổ sung ngày 29-30"
+    },
+    {
+      "selector": "#smart-tips .card-label",
+      "text": "Mẹo đi chợ thông minh"
+    },
+    {
+      "selector": "#smart-tips h3",
+      "text": "Những cách đơn giản để tiết kiệm công và chi phí."
+    },
+    {
+      "selector": "#smart-tips .planner-list li",
+      "all": [
+        "Mua thịt một lần, chia túi rồi cấp đông.",
+        "Mua rau hai lần mỗi tuần để rau tươi và rẻ hơn.",
+        "Mua hải sản đông lạnh để tiết kiệm khoảng 25-35%."
+      ]
+    }
   ]
 }

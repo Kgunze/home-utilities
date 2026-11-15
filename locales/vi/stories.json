@@ -2,10 +2,111 @@
   "title": "Câu chuyện | Home Utilities",
   "description": "Trang câu chuyện dạng chương của Home Utilities, thiết kế như một cuốn sách mở với dòng thời gian cá nhân từ 1992 đến 2026.",
   "translations": [
-    { "selector": ".subpage-hero-copy .eyebrow", "text": "Câu chuyện / Sách theo chương" },
-    { "selector": ".subpage-hero-copy h1", "text": "Một cuốn sách mở, bắc nối ký ức từ 1992 đến 2026." },
-    { "selector": ".subpage-hero-copy .hero-text", "text": "Trang này gom mọi thời đoạn như những chương sách, cho phép ký ức thở nhẹ và được viết lại bằng ngôn ngữ ấm áp của Nguyễn Ngọc Ánh." },
-    { "selector": ".hero-actions a[href=\"#chapter-index\"]", "text": "Mở mục lục chương" },
-    { "selector": ".hero-actions a[href=\"#timeline-rail\"]", "text": "Xem toàn bộ dòng thời gian" }
+    {
+      "selector": ".subpage-hero-copy .eyebrow",
+      "text": "Câu chuyện / Sách theo chương"
+    },
+    {
+      "selector": ".subpage-hero-copy h1",
+      "text": "Kho lưu trữ câu chuyện kiểu sách với dòng thời gian cuộc đời từ 1992 đến 2026."
+    },
+    {
+      "selector": ".subpage-hero-copy .hero-text",
+      "text": "Trang này xem ký ức như những chương thay vì ghi chú rời rạc. Mỗi giai đoạn được đọc như một trang đôi trong một cuốn sách cá nhân, có chỗ cho gia đình, ngôi nhà, hồi phục, thói quen và ý nghĩa nối chúng lại."
+    },
+    {
+      "selector": ".hero-actions a[href=\"#chapter-index\"]",
+      "text": "Mở mục lục chương"
+    },
+    {
+      "selector": ".hero-actions a[href=\"#timeline-rail\"]",
+      "text": "Xem toàn bộ dòng thời gian"
+    },
+    {
+      "selector": ".story-ledger-card .card-label",
+      "text": "Tập một"
+    },
+    {
+      "selector": ".story-ledger-card h2",
+      "text": "Thiết kế trang chương và trang truyện"
+    },
+    {
+      "selector": ".story-ledger-card .feature-list li",
+      "all": [
+        "Bố cục sách mở với thẻ chương",
+        "Dòng thời gian từ 1992 đến 2026",
+        "Nhịp truyện cho tuổi thơ, thay đổi và tái dựng",
+        "Cấu trúc linh hoạt cho những bài viết cá nhân sau này"
+      ]
+    },
+    {
+      "selector": ".story-ledger-card .story-ledger-note",
+      "text": "Phần viết bên dưới được cố ý đặt trong khung biên tập để có thể lớn dần thành những chương đời đầy đặn hơn theo thời gian."
+    },
+    {
+      "selector": "#chapter-index .section-tag",
+      "text": "Mục lục chương"
+    },
+    {
+      "selector": "#chapter-index h2",
+      "text": "Bố cục sách mở cho những câu chuyện dài."
+    },
+    {
+      "selector": "#chapter-index .planner-caption",
+      "text": "Mỗi chương bao phủ một giai đoạn trong dòng thời gian và sau này có thể tách thành trang riêng."
+    },
+    {
+      "selector": ".chapter-kicker",
+      "all": [
+        "Chương 1",
+        "Chương 2",
+        "Chương 3",
+        "Chương 4",
+        "Chương 5",
+        "Chương 6"
+      ]
+    },
+    {
+      "selector": ".chapter-index-card strong",
+      "all": [
+        "Khởi nguồn",
+        "Những năm đi học",
+        "Bản sắc và áp lực",
+        "Công việc, ngôi nhà và rạn vỡ",
+        "Điều trị và tái khung",
+        "Xây lại hệ thống"
+      ]
+    },
+    {
+      "selector": ".story-book-section .section-tag",
+      "index": 1,
+      "text": "Dòng thời gian"
+    },
+    {
+      "selector": ".story-book-section h2",
+      "index": 1,
+      "text": "Đường ray dài từ 1992 đến 2026."
+    },
+    {
+      "selector": ".story-book-section .planner-caption",
+      "index": 1,
+      "text": "Một trục thị giác cho toàn bộ câu chuyện, từ khởi đầu tới hiện tại."
+    },
+    {
+      "selector": ".timeline-stop p",
+      "all": [
+        "Sự ra đời và những khởi đầu của gia đình.",
+        "Những năm đầu đi học và ký ức gia đình.",
+        "Tuổi thiếu niên, áp lực và bản sắc thay đổi.",
+        "Ngã rẽ giữa học tập, công việc và cảm giác thuộc về.",
+        "Căng thẳng, rạn vỡ và thay đổi lớn.",
+        "Hồ sơ điều trị, gọi tên triệu chứng và cân chỉnh lại.",
+        "Suy ngẫm hiện tại, hệ thống trong nhà và chương tiếp theo."
+      ]
+    },
+    {
+      "selector": ".story-modal-close",
+      "text": "Đóng"
+    }
   ]
 }

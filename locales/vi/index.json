@@ -2,10 +2,230 @@
   "title": "Home Utilities | Nấu ăn Việt và công thức gia đình",
   "description": "Home Utilities là trang cá nhân về nấu ăn Việt, công thức gia đình, ghi chú bếp và kế hoạch nhà cửa có tổ chức.",
   "translations": [
-    { "selector": ".hero-content .eyebrow", "text": "Trang cá nhân" },
-    { "selector": ".hero-content h1", "text": "Nấu ăn Việt, công thức lưu giữ và dòng chảy bếp nhà." },
-    { "selector": ".hero-content .hero-text", "text": "Home Utilities dệt nên những bữa cơm mang hồn quê, ghi chép đơn sơ và công cụ kế hoạch để mỗi ngày trong nhà thêm rõ ràng, dịu dàng." },
-    { "selector": ".hero-actions a[href=\"#kitchen-notes\"]", "text": "Mở Ghi chú bếp" },
-    { "selector": ".hero-actions a[href=\"shopping-planner.html\"]", "text": "Xem kế hoạch đi chợ" }
+    {
+      "selector": ".hero-content .eyebrow",
+      "text": "Trang cá nhân"
+    },
+    {
+      "selector": ".hero-content h1",
+      "text": "Nấu ăn Việt, công thức gia đình và kế hoạch bếp thực tế."
+    },
+    {
+      "selector": ".hero-content .hero-text",
+      "text": "Home Utilities tập hợp những bữa cơm Việt kiểu gia đình, ghi chú công thức tại nhà và công cụ lập kế hoạch giúp việc nấu nướng hằng tuần trở nên đơn giản và có chủ đích hơn."
+    },
+    {
+      "selector": ".hero-actions a[href=\"#kitchen-notes\"]",
+      "text": "Mở Ghi chú bếp"
+    },
+    {
+      "selector": ".hero-actions a[href=\"shopping-planner.html\"]",
+      "text": "Xem kế hoạch đi chợ"
+    },
+    {
+      "selector": ".hero-card .card-label",
+      "text": "Điểm bắt đầu"
+    },
+    {
+      "selector": ".hero-card h2",
+      "text": "Ghi chú bếp là phần tổ chức chính"
+    },
+    {
+      "selector": ".hero-card p:not(.card-label)",
+      "index": 0,
+      "text": "Công thức và Kế hoạch đi chợ giờ nằm dưới một nhóm cha, giúp trang web dễ theo dõi hơn như một kho công thức và cũng là một hệ thống sinh hoạt trong nhà."
+    },
+    {
+      "selector": ".hero-card .feature-list li",
+      "all": [
+        "Nấu ăn Việt và công thức gia đình",
+        "Kế hoạch đi chợ tiếng Anh từ bản PDF",
+        "Cấu trúc sinh hoạt hằng tuần",
+        "Ghi chú hỗ trợ tại nhà theo hướng hiểu sang chấn"
+      ]
+    },
+    {
+      "selector": "#stories .story-panel .section-tag",
+      "index": 0,
+      "text": "Vì sao có trang này"
+    },
+    {
+      "selector": "#stories .story-panel h2",
+      "index": 0,
+      "text": "Một kho lưu trữ cá nhân cho những bữa ăn có ý nghĩa."
+    },
+    {
+      "selector": "#stories .story-panel p",
+      "index": 1,
+      "text": "Có món là để ăn mừng. Có món là bữa cơm lặp lại nhiều đến mức thành nhịp sống gia đình. Trang web này được tạo ra để giữ lại cả hương vị lẫn hệ thống phía sau những bữa ăn ấy."
+    },
+    {
+      "selector": "#stories .story-panel .text-link[href=\"stories.html\"]",
+      "text": "Mở sổ chuyện"
+    },
+    {
+      "selector": "#stories .story-panel .section-tag",
+      "index": 1,
+      "text": "Bạn sẽ thấy gì"
+    },
+    {
+      "selector": "#stories .story-panel h2",
+      "index": 1,
+      "text": "Công thức rõ ràng, văn phong ấm và công cụ lập kế hoạch hữu ích."
+    },
+    {
+      "selector": "#stories .story-panel p",
+      "index": 3,
+      "text": "Công thức, cấu trúc đi chợ hằng tuần và ghi chú gia đình được nhóm lại theo cách thực tế cho việc nấu ăn mỗi ngày thay vì tách rời thành nhiều ý riêng."
+    },
+    {
+      "selector": "#stories .story-panel .text-link[href=\"stories.html#chapter-index\"]",
+      "text": "Xem các chương và dòng thời gian"
+    },
+    {
+      "selector": "#kitchen-notes .section-tag",
+      "text": "Ghi chú bếp"
+    },
+    {
+      "selector": "#kitchen-notes h2",
+      "text": "Không gian cha cho công thức và kế hoạch đi chợ."
+    },
+    {
+      "selector": "#kitchen-notes .note-card .card-label",
+      "index": 0,
+      "text": "Mục con"
+    },
+    {
+      "selector": "#kitchen-notes .note-card h3",
+      "index": 0,
+      "text": "Công thức"
+    },
+    {
+      "selector": "#kitchen-notes .note-card p",
+      "index": 0,
+      "text": "Một bộ sưu tập đang phát triển về món Việt và công thức gia đình, tập trung vào các bữa ăn dễ chịu, sự linh hoạt với nguyên liệu sẵn có và món ăn kiểu gia đình."
+    },
+    {
+      "selector": "#kitchen-notes .note-card .text-link[href=\"recipes.html\"]",
+      "text": "Mở danh mục công thức"
+    },
+    {
+      "selector": "#kitchen-notes .note-card .card-label",
+      "index": 1,
+      "text": "Mục con"
+    },
+    {
+      "selector": "#kitchen-notes .note-card h3",
+      "index": 1,
+      "text": "Kế hoạch đi chợ"
+    },
+    {
+      "selector": "#kitchen-notes .note-card p",
+      "index": 1,
+      "text": "Một trang lập kế hoạch riêng với toàn bộ tài liệu đi chợ hằng tuần đã dịch, được sắp xếp theo phần tổng quan, công thức tuần và danh sách từng tuần."
+    },
+    {
+      "selector": "#kitchen-notes .note-card .text-link[href=\"shopping-planner.html\"]",
+      "text": "Mở trang kế hoạch"
+    },
+    {
+      "selector": "#kitchen-notes .note-card .card-label",
+      "index": 2,
+      "text": "Thói quen bếp"
+    },
+    {
+      "selector": "#kitchen-notes .note-card h3",
+      "index": 2,
+      "text": "Xây pantry trước"
+    },
+    {
+      "selector": "#kitchen-notes .note-card p",
+      "index": 2,
+      "text": "Nước mắm, bún bánh phở, tiêu đen, hành tím, tỏi và rau thơm tạo thành nền nguyên liệu đáng tin cho hàng chục bữa tối trong tuần."
+    },
+    {
+      "selector": "#recipes .section-tag",
+      "text": "Công thức"
+    },
+    {
+      "selector": "#recipes h2",
+      "text": "Bắt đầu với những món hiện đã nằm trong một danh mục đầy đủ."
+    },
+    {
+      "selector": "#recipes .button[href=\"recipes.html\"]",
+      "text": "Mở trang công thức"
+    },
+    {
+      "selector": "#recipes .note-card .card-label",
+      "index": 0,
+      "text": "Danh mục"
+    },
+    {
+      "selector": "#recipes .note-card h3",
+      "index": 0,
+      "text": "Điều hướng món nước và món khô"
+    },
+    {
+      "selector": "#recipes .note-card p",
+      "index": 0,
+      "text": "Trang công thức hiện tách các món canh, nước dùng khỏi món kho, món xào, món sáng và nước chấm bằng thanh điều hướng bên trái."
+    },
+    {
+      "selector": "#recipes .note-card .card-label",
+      "index": 1,
+      "text": "Liên kết với kế hoạch"
+    },
+    {
+      "selector": "#recipes .note-card h3",
+      "index": 1,
+      "text": "Công thức gắn với nguyên liệu đi chợ"
+    },
+    {
+      "selector": "#recipes .note-card p",
+      "index": 1,
+      "text": "Danh mục giờ được xây quanh các nguyên liệu đã có trong Kế hoạch đi chợ, để trang hoạt động giống một hệ thống nấu nướng thực tế hơn."
+    },
+    {
+      "selector": "#ptsd .section-tag",
+      "text": "PTSD"
+    },
+    {
+      "selector": "#ptsd h2",
+      "text": "Một không gian nhẹ để hỗ trợ gia đình theo hướng hiểu sang chấn."
+    },
+    {
+      "selector": "#ptsd .planner-caption",
+      "text": "Một chuyên mục tạm giữ các thói quen, công cụ neo tâm và thực hành trong nhà giúp điều hòa tốt hơn."
+    },
+    {
+      "selector": "#ptsd .ptsd-card .card-label",
+      "index": 0,
+      "text": "Neo tâm"
+    },
+    {
+      "selector": "#ptsd .ptsd-card h3",
+      "index": 0,
+      "text": "Những điểm tựa nhỏ mỗi ngày"
+    },
+    {
+      "selector": "#ptsd .ptsd-card p",
+      "index": 0,
+      "text": "Xây những nghi thức lặp lại như trà, nghỉ thở, bữa ăn yên tĩnh và khoảnh khắc reset nhẹ để ngôi nhà trở nên an toàn và dễ đoán hơn."
+    },
+    {
+      "selector": "#ptsd .ptsd-card .card-label",
+      "index": 1,
+      "text": "Môi trường"
+    },
+    {
+      "selector": "#ptsd .ptsd-card h3",
+      "index": 1,
+      "text": "Hệ thống nhà ít ma sát hơn"
+    },
+    {
+      "selector": "#ptsd .ptsd-card p",
+      "index": 1,
+      "text": "Sắp xếp việc đi chợ, chuẩn bị bữa ăn và lưu trữ theo cách giảm quá tải và làm nhẹ bớt quyết định thường ngày."
+    }
   ]
 }
