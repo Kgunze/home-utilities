@@ -1,0 +1,25 @@
+{
+  "title": "Doomsday 2048: Minijuego de Fusión de Armamento | Home Utilities",
+  "description": "Combina munición, pistolas, subfusiles y cañones rotativos Gatling en este minijuego estilo 2048 ambientado en Doomsday: Last Survivors.",
+  "translations": [
+    { "selector": "#g2048-eyebrow", "text": "Doomsday: Last Survivors / Minijuego de Supervivencia" },
+    { "selector": "#g2048-hero-title", "text": "Doomsday 2048 — Minijuego de Fusión de Munición y Armas." },
+    { "selector": "#g2048-hero-text", "text": "Desliza y fusiona proyectiles, pistolas, fusiles y cañones Gatling para forjar el armamento apocalíptico definitivo. ¿Podrás desbloquear la Minigun Vulcan Doble Nivel 11 y el Soberano Triple Gatling Nivel 12?" },
+    { "selector": "#g2048-cta-play", "text": "Jugar Ahora" },
+    { "selector": "#g2048-cta-armory", "text": "Línea de Evolución de Armas" },
+    { "selector": "#g2048-cta-guide", "text": "Volver a la Guía Principal" },
+    { "selector": "#g2048-hud-label", "text": "HUD del Arsenal del Refugio" },
+    { "selector": "#g2048-hud-title", "text": "Arma Objetivo: Nivel 12" },
+    { "selector": "#g2048-hud-desc", "text": "Combina balas de 9mm hasta obtener artillería pesada. Juega con teclas de dirección, WASD, controles en pantalla o gestos táctiles." },
+    { "selector": "#g2048-tag", "text": "1. Campo de Fusión de Armamento" },
+    { "selector": "#g2048-heading", "text": "Fusiona armas idénticas para subir de nivel y superar tu récord de puntos." },
+    { "selector": "#g2048-score-label", "text": "Puntos" },
+    { "selector": "#g2048-best-label", "text": "Puntuación Más Alta" },
+    { "selector": "#g2048-restart", "text": "Reiniciar Misión" },
+    { "selector": "#g2048-status", "text": "¡Desliza o usa las Flechas del teclado para fusionar armas y mejorar tu arsenal!" },
+    { "selector": "#g2048-rules-label", "text": "Reglas de Fusión Táctica" },
+    { "selector": "#g2048-rules-title", "text": "Cómo Funciona la Mejora de Armamento" },
+    { "selector": "#g2048-armory-tag", "text": "2. Directorio del Arsenal del Refugio" },
+    { "selector": "#g2048-armory-heading", "text": "Evolución completa de 12 niveles de armas, desde la bala de 9mm hasta el Soberano Triple Gatling." }
+  ]
+}

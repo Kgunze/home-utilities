@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doomsday 2048: Weapon Fusion Minigame | Home Utilities</title>
+    <meta name="description" content="Merge ammo, pistols, submachine guns, and rotary Gatling cannons in this Doomsday: Last Survivors themed 2048 mini webgame." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="doomsday-2048.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero hero-subpage">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="index.html#home">Home Utilities</a>
+          <div class="nav-links">
+            <a href="stories.html">Stories</a>
+            <div class="nav-parent">
+              <a href="index.html#kitchen-notes">Kitchen Notes</a>
+              <div class="nav-submenu nav-submenu-kitchen" aria-label="Kitchen Notes submenu">
+                <a href="recipes.html">Recipes</a>
+                <a href="shopping-planner.html">Shopping Planner</a>
+              </div>
+            </div>
+            <a href="kiem-the-system-map.html" class="nav-kiem-the">Kiem The System</a>
+            <div class="nav-parent nav-parent-doomsday">
+              <a href="doomsday-guide.html" class="nav-doomsday">Doomsday: Last Survivors</a>
+              <div class="nav-submenu nav-submenu-doomsday" aria-label="Doomsday submenu">
+                <a href="doomsday-infantry-heroes.html" class="nav-doomsday-infantry">Infantry Heroes & Combos</a>
+                <a href="doomsday-ranged-barracks.html" class="nav-doomsday-ranged">Ranged Barracks</a>
+                <a href="doomsday-riders-barracks.html" class="nav-doomsday-riders">Rider Heroes & Stats</a>
+                <a href="doomsday-biobeast.html" class="nav-doomsday-biobeast">Biobeast</a>
+                <a href="doomsday-2048.html" class="nav-doomsday-2048">2048 Minigame</a>
+              </div>
+            </div>
+            <div class="nav-parent nav-parent-greenies">
+              <a class="nav-link-greenies" href="#">Greenies</a>
+              <div class="nav-submenu nav-submenu-greenies" aria-label="Greenies submenu">
+                <a class="nav-greenies-planting" href="planting-diary.html">Planting diary</a>
+                <a class="nav-greenies-fertilization" href="fertilization-wikipedia.html">Fertilization wikipedia</a>
+              </div>
+            </div>
+            <a href="ptsd.html">PTSD</a>
+          </div>
+          <label class="locale-switcher">
+            <span class="locale-switcher-label">Language</span>
+            <select class="locale-select" id="locale-select" aria-label="Language selector">
+              <option value="en">English</option>
+              <option value="vi">Tiếng Việt</option>
+              <option value="es">Español (PR)</option>
+            </select>
+          </label>
+        </nav>
+
+        <section class="planner-hero-grid" id="doomsday-2048-hero">
+          <div class="subpage-hero-copy">
+            <p class="eyebrow" id="g2048-eyebrow">Doomsday: Last Survivors / Survival Minigame</p>
+            <h1 id="g2048-hero-title">Doomsday 2048 — Weapons & Ammo Fusion Minigame.</h1>
+            <p class="hero-text" id="g2048-hero-text">
+              Slide and merge matching bullets, sidearms, submachine guns, and Gatling cannons to craft ultimate high-tier apocalyptic firepower. Can you forge the Tier 11 Dual Vulcan Minigun and the legendary Tier 12 Triple Gatling Overlord?
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" id="g2048-cta-play" href="#g2048-gameplay-section">Play Now</a>
+              <a class="button button-secondary" id="g2048-cta-armory" href="#g2048-armory-section">Weapon Fusion Lineup</a>
+              <a class="button button-secondary" id="g2048-cta-guide" href="doomsday-guide.html">Back to Main Guide</a>
+            </div>
+          </div>
+          <aside class="month-calendar-card" aria-label="Game HUD card">
+            <p class="card-label" id="g2048-hud-label">Shelter Armory HUD</p>
+            <h2 class="month-calendar-title" id="g2048-hud-title">Target Weapon: Tier 12</h2>
+            <p id="g2048-hud-desc">Merge 9mm bullets into heavy artillery. Play with arrow keys, WASD, on-screen controls, or swipe gestures on touchscreens.</p>
+            <img class="recipe-inline-image" src="assets/doomsday/2048/hud.png" alt="Doomsday 2048 Points HUD" loading="lazy" />
+          </aside>
+        </section>
+      </header>
+
+      <main>
+        <section class="notes-section" id="g2048-gameplay-section">
+          <div class="section-heading">
+            <div>
+              <p class="section-tag" id="g2048-tag">1. Interactive Weapon Fusion Arena</p>
+              <h2 id="g2048-heading">Merge matching weapons together to advance tiers and boost your combat score.</h2>
+            </div>
+          </div>
+
+          <div class="planner-columns g2048-play-layout">
+            <article class="planner-card g2048-card">
+              <div class="g2048-score-header">
+                <div class="g2048-score-box">
+                  <span class="card-label" id="g2048-score-label">Points</span>
+                  <strong class="g2048-score-num" id="g2048-score">0</strong>
+                </div>
+                <div class="g2048-score-box">
+                  <span class="card-label" id="g2048-best-label">Highest Score</span>
+                  <strong class="g2048-score-num" id="g2048-best">0</strong>
+                </div>
+                <button type="button" class="button button-primary g2048-restart-btn" id="g2048-restart">Restart Mission</button>
+              </div>
+
+              <div class="g2048-board-wrapper">
+                <div class="g2048-board" id="g2048-board"></div>
+              </div>
+
+              <p class="g2048-status" id="g2048-status">Swipe or use Arrow Keys to merge weapons and upgrade your arsenal!</p>
+
+              <div class="g2048-dpad">
+                <button type="button" class="quick-btn" data-g2048-dir="up" aria-label="Move Up">▲</button>
+                <div class="g2048-dpad-row">
+                  <button type="button" class="quick-btn" data-g2048-dir="left" aria-label="Move Left">◀</button>
+                  <button type="button" class="quick-btn" data-g2048-dir="down" aria-label="Move Down">▼</button>
+                  <button type="button" class="quick-btn" data-g2048-dir="right" aria-label="Move Right">▶</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="planner-card">
+              <p class="card-label" id="g2048-rules-label">Tactical Fusion Rules</p>
+              <h3 id="g2048-rules-title">How Weapon Upgrades Work</h3>
+              <ul class="planner-list" id="g2048-rules-list">
+                <li><strong>2× 9mm Pistol Ammo (Tier 1)</strong> merge into <strong>7.62mm Rifle Ammo (Tier 2)</strong>.</li>
+                <li><strong>2× Rifle Ammo (Tier 2)</strong> merge into <strong>5.56mm Armor-Piercing (Tier 3)</strong>.</li>
+                <li><strong>2× Stripper Clips (Tier 4)</strong> craft the <strong>Bio-Green Service Pistol (Tier 5)</strong>!</li>
+                <li>Keep forging through <strong>SMGs, Carbines, and PDWs</strong> to unlock <strong>Heavy Gatling Miniguns</strong>.</li>
+                <li><strong>Victory Target:</strong> Combine two Vulcan Miniguns (Tier 10) to forge the <strong>Tier 11 Dual Vulcan Minigun (2048)</strong> and the <strong>Tier 12 Triple Gatling Overlord</strong>!</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="recipes-section" id="g2048-armory-section">
+          <div class="section-heading">
+            <div>
+              <p class="section-tag" id="g2048-armory-tag">2. Shelter Armory Weapon Directory</p>
+              <h2 id="g2048-armory-heading">Complete 12-Tier Weapon Evolution from 9mm round to Triple Gatling Overlord.</h2>
+            </div>
+          </div>
+          <div class="planner-columns" id="g2048-armory-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="doomsday-2048-data.js"></script>
+    <script src="doomsday-2048.js"></script>
+  </body>
+</html>
