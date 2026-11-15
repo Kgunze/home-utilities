@@ -3,6 +3,7 @@
   const presetBar = document.querySelector("#rb-preset-combos"), leaderSel = document.querySelector("#rb-leader-select"), assistSel = document.querySelector("#rb-assist-select"), levelSel = document.querySelector("#rb-skill-level");
   const pairBPreset = document.querySelector("#rb-pair-b-preset"), leaderBSel = document.querySelector("#rb-leader-b-select"), assistBSel = document.querySelector("#rb-assist-b-select");
   const pairThead = document.querySelector("#rb-pair-thead"), pairTbody = document.querySelector("#rb-pair-tbody"), pairPerks = document.querySelector("#rb-pair-perks");
+  const radarSection = document.querySelector("#rb-radar-section");
   const filterBar = document.querySelector("#rb-hero-filters"), heroesGrid = document.querySelector("#rb-ranged-heroes-grid"), unitCards = document.querySelector("#rb-unit-cards");
   const tiersThead = document.querySelector("#rb-tiers-thead"), tiersTbody = document.querySelector("#rb-tiers-tbody");
   const fromSelect = document.querySelector("#rb-tier-from"), toSelect = document.querySelector("#rb-tier-to"), buffSelect = document.querySelector("#rb-buff-profile");
@@ -68,6 +69,14 @@
       const diffTxt = diff === 0 ? c.tie : `${diff > 0 ? "+" : ""}${unit === "%" ? `${diff}%` : diff.toLocaleString()} (${diff > 0 ? `${c.pairACol} ▲` : `${c.pairBCol} ▲`})`;
       return `<tr><td><strong>${label}</strong></td><td>${fmt(vLA)} + ${fmt(vAA)}</td><td><strong>${fmt(sumA)}</strong></td><td>${fmt(vLB)} + ${fmt(vAB)}</td><td><strong>${fmt(sumB)}</strong></td><td><strong>${diffTxt}</strong></td></tr>`;
     }).join("");
+    const totalsA = {}, totalsB = {};
+    keys.forEach(([, k]) => {
+      totalsA[k] = +((hL.stats[k][lv] ?? 0) + (hA.stats[k][lv] ?? 0)).toFixed(1);
+      totalsB[k] = +((hLB.stats[k][lv] ?? 0) + (hAB.stats[k][lv] ?? 0)).toFixed(1);
+    });
+    if (window.DLS_SQUAD_RADAR && radarSection) {
+      window.DLS_SQUAD_RADAR.render(radarSection, { title: c.pairACol, subtitle: `${hL.name} + ${hA.name}`, values: totalsA }, { title: c.pairBCol, subtitle: `${hLB.name} + ${hAB.name}`, values: totalsB });
+    }
     const cbA = rData.combos.find((x) => x.leader === hL.id && x.assistant === hA.id), cbB = rData.combos.find((x) => x.leader === hLB.id && x.assistant === hAB.id);
     if (pairBPreset) pairBPreset.value = cbB ? cbB.id : "custom";
     pairPerks.innerHTML = `<p class="card-label">${c.perksTitle}</p><p><strong>${c.pairACol} (${hL.name} + ${hA.name})${cbA ? ` · ★ ${cbA.tag}` : ""}:</strong> ${cbA ? cbA.note : `${hL.perks[0]} | ${hA.perks[0]}`}</p><p><strong>${c.pairBCol} (${hLB.name} + ${hAB.name})${cbB ? ` · ★ ${cbB.tag}` : ""}:</strong> ${cbB ? cbB.note : `${hLB.perks[0]} | ${hAB.perks[0]}`}</p><ul class="planner-list">${[...hL.perks.map((p) => `<li><strong>[${c.pairACol}] ${hL.name}:</strong> ${p}</li>`), ...hA.perks.map((p) => `<li><strong>[${c.pairACol}] ${hA.name}:</strong> ${p}</li>`), ...hLB.perks.map((p) => `<li><strong>[${c.pairBCol}] ${hLB.name}:</strong> ${p}</li>`), ...hAB.perks.map((p) => `<li><strong>[${c.pairBCol}] ${hAB.name}:</strong> ${p}</li>`)].join("")}</ul>`;

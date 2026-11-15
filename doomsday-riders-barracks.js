@@ -5,6 +5,7 @@
   const presetBar = document.querySelector("#rd-preset-combos"), leaderSel = document.querySelector("#rd-leader-select"), assistSel = document.querySelector("#rd-assist-select"), levelSel = document.querySelector("#rd-skill-level");
   const pairBPreset = document.querySelector("#rd-pair-b-preset"), leaderBSel = document.querySelector("#rd-leader-b-select"), assistBSel = document.querySelector("#rd-assist-b-select");
   const pairThead = document.querySelector("#rd-pair-thead"), pairTbody = document.querySelector("#rd-pair-tbody"), pairPerks = document.querySelector("#rd-pair-perks");
+  const radarSection = document.querySelector("#rd-radar-section");
   const filterBar = document.querySelector("#rd-hero-filters"), heroesGrid = document.querySelector("#rd-riders-heroes-grid");
   const matrixThead = document.querySelector("#rd-matrix-thead"), matrixTbody = document.querySelector("#rd-matrix-tbody"), combosThead = document.querySelector("#rd-combos-thead"), combosTbody = document.querySelector("#rd-combos-tbody");
   const unitCards = document.querySelector("#rd-unit-cards"), tiersThead = document.querySelector("#rd-tiers-thead"), tiersTbody = document.querySelector("#rd-tiers-tbody");
@@ -86,6 +87,14 @@
       const diffTxt = diff === 0 ? c.tie : `${diff > 0 ? "+" : ""}${unit === "%" ? `${diff}%` : diff.toLocaleString()} (${diff > 0 ? `${c.pairACol} ▲` : `${c.pairBCol} ▲`})`;
       return `<tr><td><strong>${label}</strong></td><td>${fmt(vLA)} + ${fmt(vAA)}</td><td><strong>${fmt(sumA)}</strong></td><td>${fmt(vLB)} + ${fmt(vAB)}</td><td><strong>${fmt(sumB)}</strong></td><td><strong>${diffTxt}</strong></td></tr>`;
     }).join("");
+    const totalsA = {}, totalsB = {};
+    keys.forEach(([, k]) => {
+      totalsA[k] = +((hLA.stats[k][lv] ?? 0) + (hAA.stats[k][lv] ?? 0)).toFixed(1);
+      totalsB[k] = +((hLB.stats[k][lv] ?? 0) + (hAB.stats[k][lv] ?? 0)).toFixed(1);
+    });
+    if (window.DLS_SQUAD_RADAR && radarSection) {
+      window.DLS_SQUAD_RADAR.render(radarSection, { title: c.pairACol, subtitle: `${hLA.name} + ${hAA.name}`, values: totalsA }, { title: c.pairBCol, subtitle: `${hLB.name} + ${hAB.name}`, values: totalsB });
+    }
     const cbA = rData.combos.find((x) => x.leader === hLA.id && x.assistant === hAA.id), cbB = rData.combos.find((x) => x.leader === hLB.id && x.assistant === hAB.id);
     if (pairBPreset) pairBPreset.value = cbB ? cbB.id : "custom";
     pairPerks.innerHTML = `<p class="card-label">${c.perksTitle}</p><p><strong>${c.pairACol} (${hLA.name} + ${hAA.name})${cbA ? ` · ★ ${cbA.tag}` : ""}:</strong> ${cbA ? cbA.note : `${hLA.perks[0]} | ${hAA.perks[0]}`}</p><p><strong>${c.pairBCol} (${hLB.name} + ${hAB.name})${cbB ? ` · ★ ${cbB.tag}` : ""}:</strong> ${cbB ? cbB.note : `${hLB.perks[0]} | ${hAB.perks[0]}`}</p><ul class="planner-list">${[...hLA.perks.map((p) => `<li><strong>[${c.pairACol}] ${hLA.name}:</strong> ${p}</li>`), ...hAA.perks.map((p) => `<li><strong>[${c.pairACol}] ${hAA.name}:</strong> ${p}</li>`), ...hLB.perks.map((p) => `<li><strong>[${c.pairBCol}] ${hLB.name}:</strong> ${p}</li>`), ...hAB.perks.map((p) => `<li><strong>[${c.pairBCol}] ${hAB.name}:</strong> ${p}</li>`)].join("")}</ul>`;
