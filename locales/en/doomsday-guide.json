@@ -8,7 +8,7 @@
     { "selector": "#dls-cta-intro", "text": "Hero Roster" },
     { "selector": "#dls-cta-barracks", "text": "Open Ranged Barracks" },
     { "selector": "#dls-roster-tag", "text": "3. Hero Roster Listing" },
-    { "selector": "#dls-roster-heading", "text": "Current 12-Hero Roster by Rarity, Level, Stars, and Tactical Role." },
+    { "selector": "#dls-roster-heading", "text": "Starter & Core Hero Roster by Rarity, Level, Stars, and Tactical Role." },
     { "selector": "#dls-summary-label", "text": "At a Glance" },
     { "selector": "#dls-summary-title", "text": "Core Pillars" },
     { "selector": "#dls-summary-list li", "all": [

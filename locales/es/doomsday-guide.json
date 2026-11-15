@@ -8,7 +8,7 @@
     { "selector": "#dls-cta-intro", "text": "Lista de Héroes" },
     { "selector": "#dls-cta-barracks", "text": "Abrir Cuartel de Tiradores" },
     { "selector": "#dls-roster-tag", "text": "3. Lista de Héroes (Hero Roster)" },
-    { "selector": "#dls-roster-heading", "text": "12 Héroes actuales por Rareza, Nivel, Estrellas y Rol Táctico." },
+    { "selector": "#dls-roster-heading", "text": "Lista de Héroes Iniciales y Principales por Rareza, Nivel, Estrellas y Rol." },
     { "selector": "#dls-summary-label", "text": "De un Vistazo" },
     { "selector": "#dls-summary-title", "text": "Pilares Clave" },
     { "selector": "#dls-summary-list li", "all": [

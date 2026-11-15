@@ -8,7 +8,7 @@
     { "selector": "#dls-cta-intro", "text": "Danh sách Tướng" },
     { "selector": "#dls-cta-barracks", "text": "Mở Trại Cung Thủ (Ranged)" },
     { "selector": "#dls-roster-tag", "text": "3. Danh sách Tướng Hiện có (Hero Roster)" },
-    { "selector": "#dls-roster-heading", "text": "12 Tướng theo Phẩm chất, Cấp độ, Sao và Vai trò Chiến thuật." },
+    { "selector": "#dls-roster-heading", "text": "Danh sách Tướng Khởi đầu & Chủ lực theo Phẩm chất, Cấp độ, Sao và Vai trò." },
     { "selector": "#dls-summary-label", "text": "Tổng quan nhanh" },
     { "selector": "#dls-summary-title", "text": "Trụ cột chính" },
     { "selector": "#dls-summary-list li", "all": [
