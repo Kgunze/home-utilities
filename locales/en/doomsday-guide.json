@@ -2,75 +2,238 @@
   "title": "Doomsday: Last Survivors Guide | Home Utilities",
   "description": "A practical guide to Doomsday: Last Survivors covering game introduction, cross-platform gameplay, basic strategy, and early skirmish setup.",
   "translations": [
-    { "selector": "#dls-eyebrow", "text": "Game Guide / Strategy & Survival" },
-    { "selector": "#dls-hero-title", "text": "Doomsday: Last Survivors — Overview, Platforms & Core Strategy." },
-    { "selector": "#dls-hero-text", "text": "A structured handbook for IGG's hybrid zombie survival strategy game, combining tactical tower-defense combat, cross-platform PC/mobile play, and early skirmish progression." },
-    { "selector": "#dls-cta-intro", "text": "Hero Roster" },
-    { "selector": "#dls-cta-barracks", "text": "Open Ranged Barracks" },
-    { "selector": "#dls-roster-tag", "text": "3. Hero Roster Listing" },
-    { "selector": "#dls-roster-heading", "text": "Starter & Core Hero Roster by Rarity, Level, Stars, and Tactical Role." },
-    { "selector": "#dls-summary-label", "text": "At a Glance" },
-    { "selector": "#dls-summary-title", "text": "Core Pillars" },
-    { "selector": "#dls-summary-list li", "all": [
-      "Hybrid 4X Real-Time Strategy + Tower Defense",
-      "Cross-save on iOS, Android, Windows PC & Steam",
-      "Early Skirmish: Angela, Kris & Michele to Lv 32",
-      "Event-driven resource & hero fragment discipline"
-    ] },
-    { "selector": "#dls-intro-tag", "text": "1. Game Introduction" },
-    { "selector": "#dls-intro-heading", "text": "Where tactical tower defense meets open-field alliance warfare." },
-    { "selector": "#dls-intro-card1-label", "text": "Premise & World" },
-    { "selector": "#dls-intro-card1-title", "text": "Post-Apocalyptic Shelter Command" },
-    { "selector": "#dls-intro-card1-text", "text": "Set in a near-future world overrun by the Infected, you command a survivor Shelter, clear fog-covered zones, rescue survivors, and rebuild civilization alongside an international Alliance." },
-    { "selector": "#dls-intro-card2-label", "text": "Hybrid Genre" },
-    { "selector": "#dls-intro-card2-title", "text": "Dual Combat Architecture" },
-    { "selector": "#dls-intro-card2-text", "text": "Unlike pure spreadsheet war games, Doomsday pairs lane-based Hero Tower Defense (Explore & Z-Virus stages) with real-time free-marching army control on a seamless 3D spherical map." },
-    { "selector": "#dls-intro-card3-label", "text": "Progression Loop" },
-    { "selector": "#dls-intro-card3-title", "text": "Heroes, Troops & Territory" },
-    { "selector": "#dls-intro-card3-text", "text": "Recruit specialized Commanders, research military tech, train T1–T6 troops, and fight for Metro Stations, Checkpoints, and cross-region events like Archipelago Raid and Genesis War." },
-    { "selector": "#dls-platform-tag", "text": "2. Gameplay & Platforms" },
-    { "selector": "#dls-platform-heading", "text": "Seamless cross-platform play across Mobile and PC." },
-    { "selector": "#dls-plat-card1-label", "text": "Supported Platforms" },
-    { "selector": "#dls-plat-card1-title", "text": "Mobile (iOS / Android) & Windows PC / Steam" },
-    { "selector": "#dls-plat-card1-list li", "all": [
-      "Mobile (iOS & Android): Ideal for quick daily tasks, collecting shelter production, radar missions, and joining alliance rallies on the go.",
-      "Windows PC & Steam Client: Native 60–120 FPS widescreen view, mouse drag-selection, and keyboard hotkeys for multi-march micro-control during massive wars.",
-      "Cross-Save Sync: Bind your account via IGG ID, Google, Apple, or Steam to switch between phone and PC instantaneously."
-    ] },
-    { "selector": "#dls-plat-card2-label", "text": "Core Gameplay Modes" },
-    { "selector": "#dls-plat-card2-title", "text": "PvE Exploration & PvP Theater" },
-    { "selector": "#dls-plat-card2-list li", "all": [
-      "Explore & Z-Virus (Tower Defense): Deploy heroes on tactical grids, place chainsaw barriers, turrets, and directional skills to survive zombie waves.",
-      "World Map Open Field (RTS): Command up to 5 troop marches simultaneously—flank enemies, intercept gatherers, and reinforce flags in real time.",
-      "Competitive Modes: Radar Station, Arena of Doom (5v5 hero tactics), Bounty Ground, Pompeii, and Server-vs-Server wars."
-    ] },
-    { "selector": "#dls-skirmish-tag", "text": "3. Early Skirmish (Base Exploration)" },
-    { "selector": "#dls-skirmish-heading", "text": "Step-by-step opening setup to sweep early Shelter plots cleanly." },
-    { "selector": "#dls-skirmish-0-label", "text": "Base Exploration Zone" },
-    { "selector": "#dls-skirmish-0-title", "text": "Clearing Shelter Skirmish Plots" },
-    { "selector": "#dls-skirmish-0-text", "text": "Early progression inside your Shelter revolves around unlocking fog-covered skirmish plots, collecting supply crates, and rescuing key companions in the right sequence." },
-    { "selector": "#dls-skirmish-1-label", "text": "Step 01 · Norah Timing" },
-    { "selector": "#dls-skirmish-1-title", "text": "Never Transform Norah into Legendary Early" },
-    { "selector": "#dls-skirmish-1-text", "text": "Do not click Raise Grade to transform Norah into Legendary right away—only rescue her after you have collected 6 Stim Packs so you do not stall early progression." },
-    { "selector": "#dls-skirmish-2-label", "text": "Step 02 · Core Trio Lineup" },
-    { "selector": "#dls-skirmish-2-title", "text": "Pick Angela, Kris & Michele to Level 32" },
-    { "selector": "#dls-skirmish-2-text", "text": "Run the trio of Angela, Kris, and Michele for your skirmish lineup and level them up to Level 32 to clean the entire early exploration map effortlessly." },
-    { "selector": "#dls-skirmish-3-label", "text": "Step 03 · Adventure Gear" },
-    { "selector": "#dls-skirmish-3-title", "text": "Equip Primary, Secondary Weapons & Boots" },
-    { "selector": "#dls-skirmish-3-text", "text": "Focus your gear setup on Primary Weapon, Secondary Weapon (plus tactical pouch), and Boots to stack Adventure Attack stats and clear every skirmish stage with ease." },
-    { "selector": "#dls-strat-tag", "text": "4. Basic Strategy" },
-    { "selector": "#dls-strat-heading", "text": "Four golden rules for long-term growth and combat readiness." },
-    { "selector": "#dls-strat-1-label", "text": "Rule 01 · Economy & VIP" },
-    { "selector": "#dls-strat-1-title", "text": "Rush Headquarters & VIP Level" },
-    { "selector": "#dls-strat-1-text", "text": "Upgrade Headquarters, Research Lab, and Alliance Center first to unlock T4/T5 troops. Save Gems to reach VIP 6 (permanent 2nd builder queue) and VIP 9+ for daily Legendary Hero Fragments." },
-    { "selector": "#dls-strat-2-label", "text": "Rule 02 · Hero Focus" },
-    { "selector": "#dls-strat-2-title", "text": "One Troop Type, One Pair at a Time" },
-    { "selector": "#dls-strat-2-text", "text": "Choose one main specialization early—Rider, Infantry, or Ranged. Always max a Legendary hero's 1st skill (5-1-1-1) before ascending stars, and never split gold fragments across multiple heroes." },
-    { "selector": "#dls-strat-3-label", "text": "Rule 03 · Resource Discipline" },
-    { "selector": "#dls-strat-3-title", "text": "Hoard for Top Commander & Showdown" },
-    { "selector": "#dls-strat-3-text", "text": "Keep resource packs unopened in your Inventory so raiders cannot plunder them. Save Speedups, Hero Fragments, Carbon Steel, and Stamina to spend during Top Commander or Alliance Showdown." },
-    { "selector": "#dls-strat-4-label", "text": "Rule 04 · Alliance & Defense" },
-    { "selector": "#dls-strat-4-title", "text": "Hive Placement & Shield Discipline" },
-    { "selector": "#dls-strat-4-text", "text": "Join a top-3 active Alliance immediately and teleport to their hive. During Kill Events or war days, always activate a Peace Shield or garrison troops inside Alliance Flags/Forts before logging off." }
+    {
+      "selector": "#dls-eyebrow",
+      "text": "Game Guide / Strategy & Survival"
+    },
+    {
+      "selector": "#dls-hero-title",
+      "text": "Doomsday: Last Survivors — Overview, Platforms & Core Strategy."
+    },
+    {
+      "selector": "#dls-hero-text",
+      "text": "A structured handbook for IGG's hybrid zombie survival strategy game, combining tactical tower-defense combat, cross-platform PC/mobile play, and early skirmish progression."
+    },
+    {
+      "selector": "#dls-cta-intro",
+      "text": "Infantry Barracks"
+    },
+    {
+      "selector": "#dls-cta-barracks",
+      "text": "Open Ranged Barracks"
+    },
+    {
+      "selector": "#dls-summary-label",
+      "text": "At a Glance"
+    },
+    {
+      "selector": "#dls-summary-title",
+      "text": "Core Pillars"
+    },
+    {
+      "selector": "#dls-summary-list li",
+      "all": [
+        "Hybrid 4X Real-Time Strategy + Tower Defense",
+        "Cross-save on iOS, Android, Windows PC & Steam",
+        "Early Skirmish: Angela, Kris & Michele to Lv 32",
+        "Event-driven resource & hero fragment discipline"
+      ]
+    },
+    {
+      "selector": "#dls-intro-tag",
+      "text": "1. Game Introduction"
+    },
+    {
+      "selector": "#dls-intro-heading",
+      "text": "Where tactical tower defense meets open-field alliance warfare."
+    },
+    {
+      "selector": "#dls-intro-card1-label",
+      "text": "Premise & World"
+    },
+    {
+      "selector": "#dls-intro-card1-title",
+      "text": "Post-Apocalyptic Shelter Command"
+    },
+    {
+      "selector": "#dls-intro-card1-text",
+      "text": "Set in a near-future world overrun by the Infected, you command a survivor Shelter, clear fog-covered zones, rescue survivors, and rebuild civilization alongside an international Alliance."
+    },
+    {
+      "selector": "#dls-intro-card2-label",
+      "text": "Hybrid Genre"
+    },
+    {
+      "selector": "#dls-intro-card2-title",
+      "text": "Dual Combat Architecture"
+    },
+    {
+      "selector": "#dls-intro-card2-text",
+      "text": "Unlike pure spreadsheet war games, Doomsday pairs lane-based Hero Tower Defense (Explore & Z-Virus stages) with real-time free-marching army control on a seamless 3D spherical map."
+    },
+    {
+      "selector": "#dls-intro-card3-label",
+      "text": "Progression Loop"
+    },
+    {
+      "selector": "#dls-intro-card3-title",
+      "text": "Heroes, Troops & Territory"
+    },
+    {
+      "selector": "#dls-intro-card3-text",
+      "text": "Recruit specialized Commanders, research military tech, train T1–T6 troops, and fight for Metro Stations, Checkpoints, and cross-region events like Archipelago Raid and Genesis War."
+    },
+    {
+      "selector": "#dls-platform-tag",
+      "text": "2. Gameplay & Platforms"
+    },
+    {
+      "selector": "#dls-platform-heading",
+      "text": "Seamless cross-platform play across Mobile and PC."
+    },
+    {
+      "selector": "#dls-plat-card1-label",
+      "text": "Supported Platforms"
+    },
+    {
+      "selector": "#dls-plat-card1-title",
+      "text": "Mobile (iOS / Android) & Windows PC / Steam"
+    },
+    {
+      "selector": "#dls-plat-card1-list li",
+      "all": [
+        "Mobile (iOS & Android): Ideal for quick daily tasks, collecting shelter production, radar missions, and joining alliance rallies on the go.",
+        "Windows PC & Steam Client: Native 60–120 FPS widescreen view, mouse drag-selection, and keyboard hotkeys for multi-march micro-control during massive wars.",
+        "Cross-Save Sync: Bind your account via IGG ID, Google, Apple, or Steam to switch between phone and PC instantaneously."
+      ]
+    },
+    {
+      "selector": "#dls-plat-card2-label",
+      "text": "Core Gameplay Modes"
+    },
+    {
+      "selector": "#dls-plat-card2-title",
+      "text": "PvE Exploration & PvP Theater"
+    },
+    {
+      "selector": "#dls-plat-card2-list li",
+      "all": [
+        "Explore & Z-Virus (Tower Defense): Deploy heroes on tactical grids, place chainsaw barriers, turrets, and directional skills to survive zombie waves.",
+        "World Map Open Field (RTS): Command up to 5 troop marches simultaneously—flank enemies, intercept gatherers, and reinforce flags in real time.",
+        "Competitive Modes: Radar Station, Arena of Doom (5v5 hero tactics), Bounty Ground, Pompeii, and Server-vs-Server wars."
+      ]
+    },
+    {
+      "selector": "#dls-skirmish-tag",
+      "text": "3. Early Skirmish (Base Exploration)"
+    },
+    {
+      "selector": "#dls-skirmish-heading",
+      "text": "Step-by-step opening setup to sweep early Shelter plots cleanly."
+    },
+    {
+      "selector": "#dls-skirmish-0-label",
+      "text": "Base Exploration Zone"
+    },
+    {
+      "selector": "#dls-skirmish-0-title",
+      "text": "Clearing Shelter Skirmish Plots"
+    },
+    {
+      "selector": "#dls-skirmish-0-text",
+      "text": "Early progression inside your Shelter revolves around unlocking fog-covered skirmish plots, collecting supply crates, and rescuing key companions in the right sequence."
+    },
+    {
+      "selector": "#dls-skirmish-1-label",
+      "text": "Step 01 · Norah Timing"
+    },
+    {
+      "selector": "#dls-skirmish-1-title",
+      "text": "Never Transform Norah into Legendary Early"
+    },
+    {
+      "selector": "#dls-skirmish-1-text",
+      "text": "Do not click Raise Grade to transform Norah into Legendary right away—only rescue her after you have collected 6 Stim Packs so you do not stall early progression."
+    },
+    {
+      "selector": "#dls-skirmish-2-label",
+      "text": "Step 02 · Core Trio Lineup"
+    },
+    {
+      "selector": "#dls-skirmish-2-title",
+      "text": "Pick Angela, Kris & Michele to Level 32"
+    },
+    {
+      "selector": "#dls-skirmish-2-text",
+      "text": "Run the trio of Angela, Kris, and Michele for your skirmish lineup and level them up to Level 32 to clean the entire early exploration map effortlessly."
+    },
+    {
+      "selector": "#dls-skirmish-3-label",
+      "text": "Step 03 · Adventure Gear"
+    },
+    {
+      "selector": "#dls-skirmish-3-title",
+      "text": "Equip Primary, Secondary Weapons & Boots"
+    },
+    {
+      "selector": "#dls-skirmish-3-text",
+      "text": "Focus your gear setup on Primary Weapon, Secondary Weapon (plus tactical pouch), and Boots to stack Adventure Attack stats and clear every skirmish stage with ease."
+    },
+    {
+      "selector": "#dls-strat-tag",
+      "text": "4. Basic Strategy"
+    },
+    {
+      "selector": "#dls-strat-heading",
+      "text": "Four golden rules for long-term growth and combat readiness."
+    },
+    {
+      "selector": "#dls-strat-1-label",
+      "text": "Rule 01 · Economy & VIP"
+    },
+    {
+      "selector": "#dls-strat-1-title",
+      "text": "Rush Headquarters & VIP Level"
+    },
+    {
+      "selector": "#dls-strat-1-text",
+      "text": "Upgrade Headquarters, Research Lab, and Alliance Center first to unlock T4/T5 troops. Save Gems to reach VIP 6 (permanent 2nd builder queue) and VIP 9+ for daily Legendary Hero Fragments."
+    },
+    {
+      "selector": "#dls-strat-2-label",
+      "text": "Rule 02 · Hero Focus"
+    },
+    {
+      "selector": "#dls-strat-2-title",
+      "text": "One Troop Type, One Pair at a Time"
+    },
+    {
+      "selector": "#dls-strat-2-text",
+      "text": "Choose one main specialization early—Rider, Infantry, or Ranged. Always max a Legendary hero's 1st skill (5-1-1-1) before ascending stars, and never split gold fragments across multiple heroes."
+    },
+    {
+      "selector": "#dls-strat-3-label",
+      "text": "Rule 03 · Resource Discipline"
+    },
+    {
+      "selector": "#dls-strat-3-title",
+      "text": "Hoard for Top Commander & Showdown"
+    },
+    {
+      "selector": "#dls-strat-3-text",
+      "text": "Keep resource packs unopened in your Inventory so raiders cannot plunder them. Save Speedups, Hero Fragments, Carbon Steel, and Stamina to spend during Top Commander or Alliance Showdown."
+    },
+    {
+      "selector": "#dls-strat-4-label",
+      "text": "Rule 04 · Alliance & Defense"
+    },
+    {
+      "selector": "#dls-strat-4-title",
+      "text": "Hive Placement & Shield Discipline"
+    },
+    {
+      "selector": "#dls-strat-4-text",
+      "text": "Join a top-3 active Alliance immediately and teleport to their hive. During Kill Events or war days, always activate a Peace Shield or garrison troops inside Alliance Flags/Forts before logging off."
+    }
   ]
 }
