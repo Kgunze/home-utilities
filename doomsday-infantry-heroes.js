@@ -80,6 +80,15 @@
       const diffTxt = diff === 0 ? c.tie : `${diff > 0 ? "+" : ""}${unit === "%" ? `${diff}%` : diff.toLocaleString()} (${diff > 0 ? `${c.pairACol} ▲` : `${c.pairBCol} ▲`})`;
       return `<tr><td><strong>${label}</strong></td><td>${fmt(vLA)} + ${fmt(vAA)}</td><td><strong>${fmt(sumA)}</strong></td><td>${fmt(vLB)} + ${fmt(vAB)}</td><td><strong>${fmt(sumB)}</strong></td><td><strong>${diffTxt}</strong></td></tr>`;
     }).join("");
+    const radarBox = document.querySelector("#ih-radar-section");
+    if (radarBox && window.DLS_INFANTRY_RADAR) {
+      const valsA = {}, valsB = {};
+      ["atk", "def", "hp", "spd", "counter", "dmgRed", "rageFactor", "shieldHeal"].forEach((k) => {
+        valsA[k] = valAt(hLA.stats[k], lvIdx) + valAt(hAA.stats[k], lvIdx);
+        valsB[k] = valAt(hLB.stats[k], lvIdx) + valAt(hAB.stats[k], lvIdx);
+      });
+      window.DLS_INFANTRY_RADAR.render(radarBox, { title: c.pairACol, subtitle: `${hLA.name} + ${hAA.name}`, values: valsA }, { title: c.pairBCol, subtitle: `${hLB.name} + ${hAB.name}`, values: valsB });
+    }
     const trHero = hLA.transcend ? hLA : hAA.transcend ? hAA : null;
     if (transcendWrap) {
       transcendWrap.innerHTML = trHero ? `<p class="card-label" style="margin-top:1.1rem">${c.transTitle}</p><table class="summary-table"><thead><tr><th>${c.skillCol}</th><th>${c.lv5Col}</th><th>${c.trCol}</th><th>${c.gainCol}</th></tr></thead><tbody>${trHero.transcend.map(([sk, n5, tr, d]) => `<tr><td><strong>${sk}</strong></td><td>${n5}</td><td><strong>${tr}</strong></td><td><span class="dls-hero-tags">${d}</span></td></tr>`).join("")}</tbody></table>` : "";
