@@ -1,0 +1,25 @@
+{
+  "title": "Doomsday 2048: Weapon Fusion Minigame | Home Utilities",
+  "description": "Merge ammo, pistols, submachine guns, and rotary Gatling cannons in this Doomsday: Last Survivors themed 2048 mini webgame.",
+  "translations": [
+    { "selector": "#g2048-eyebrow", "text": "Doomsday: Last Survivors / Survival Minigame" },
+    { "selector": "#g2048-hero-title", "text": "Doomsday 2048 — Weapons & Ammo Fusion Minigame." },
+    { "selector": "#g2048-hero-text", "text": "Slide and merge matching bullets, sidearms, submachine guns, and Gatling cannons to craft ultimate high-tier apocalyptic firepower. Can you forge the Tier 11 Dual Vulcan Minigun and the legendary Tier 12 Triple Gatling Overlord?" },
+    { "selector": "#g2048-cta-play", "text": "Play Now" },
+    { "selector": "#g2048-cta-armory", "text": "Weapon Fusion Lineup" },
+    { "selector": "#g2048-cta-guide", "text": "Back to Main Guide" },
+    { "selector": "#g2048-hud-label", "text": "Shelter Armory HUD" },
+    { "selector": "#g2048-hud-title", "text": "Target Weapon: Tier 12" },
+    { "selector": "#g2048-hud-desc", "text": "Merge 9mm bullets into heavy artillery. Play with arrow keys, WASD, on-screen controls, or swipe gestures on touchscreens." },
+    { "selector": "#g2048-tag", "text": "1. Interactive Weapon Fusion Arena" },
+    { "selector": "#g2048-heading", "text": "Merge matching weapons together to advance tiers and boost your combat score." },
+    { "selector": "#g2048-score-label", "text": "Points" },
+    { "selector": "#g2048-best-label", "text": "Highest Score" },
+    { "selector": "#g2048-restart", "text": "Restart Mission" },
+    { "selector": "#g2048-status", "text": "Swipe or use Arrow Keys to merge weapons and upgrade your arsenal!" },
+    { "selector": "#g2048-rules-label", "text": "Tactical Fusion Rules" },
+    { "selector": "#g2048-rules-title", "text": "How Weapon Upgrades Work" },
+    { "selector": "#g2048-armory-tag", "text": "2. Shelter Armory Weapon Directory" },
+    { "selector": "#g2048-armory-heading", "text": "Complete 12-Tier Weapon Evolution from 9mm round to Triple Gatling Overlord." }
+  ]
+}

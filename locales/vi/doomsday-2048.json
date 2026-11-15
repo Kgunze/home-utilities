@@ -1,0 +1,25 @@
+{
+  "title": "Doomsday 2048: Trò chơi Hợp nhất Vũ khí | Home Utilities",
+  "description": "Hợp nhất đạn, súng lục, súng tiểu liên và đại liên Gatling xoay nòng trong trò chơi phong cách 2048 chủ đề Doomsday: Last Survivors.",
+  "translations": [
+    { "selector": "#g2048-eyebrow", "text": "Doomsday: Last Survivors / Trò chơi Sinh tồn" },
+    { "selector": "#g2048-hero-title", "text": "Doomsday 2048 — Trò chơi Hợp nhất Đạn dược & Vũ khí." },
+    { "selector": "#g2048-hero-text", "text": "Vuốt và ghép các viên đạn, súng ngắn, súng tiểu liên và đại liên Gatling cùng cấp để chế tạo hỏa lực hủy diệt tối thượng. Liệu bạn có thể rèn được Đại liên Nòng Đôi Bậc 11 và Siêu Đại Liên 3 Nòng Bậc 12?" },
+    { "selector": "#g2048-cta-play", "text": "Chơi Ngay" },
+    { "selector": "#g2048-cta-armory", "text": "Danh mục Hợp nhất Vũ khí" },
+    { "selector": "#g2048-cta-guide", "text": "Về Cẩm Nang Chính" },
+    { "selector": "#g2048-hud-label", "text": "Bảng Điều khiển Kho Vũ Khí" },
+    { "selector": "#g2048-hud-title", "text": "Mục Tiêu: Bậc 12" },
+    { "selector": "#g2048-hud-desc", "text": "Ghép từng viên đạn 9mm thành hỏa lực hạng nặng. Chơi bằng phím mũi tên, WASD, nút điều khiển ảo hoặc vuốt chạm màn hình." },
+    { "selector": "#g2048-tag", "text": "1. Đấu Trường Hợp Nhất Vũ Khí" },
+    { "selector": "#g2048-heading", "text": "Ghép các vũ khí giống nhau để tăng bậc và tích lũy điểm số kỷ lục." },
+    { "selector": "#g2048-score-label", "text": "Điểm Số" },
+    { "selector": "#g2048-best-label", "text": "Điểm Cao Nhất" },
+    { "selector": "#g2048-restart", "text": "Làm Lại Nhiệm Vụ" },
+    { "selector": "#g2048-status", "text": "Vuốt hoặc dùng Phím Mũi Tên để ghép vũ khí và nâng cấp kho đạn!" },
+    { "selector": "#g2048-rules-label", "text": "Quy Tắc Hợp Nhất Chiến Thuật" },
+    { "selector": "#g2048-rules-title", "text": "Cách Hoạt Động của Việc Nâng Cấp" },
+    { "selector": "#g2048-armory-tag", "text": "2. Danh Mục Kho Vũ Khí Nơi Trú Ẩn" },
+    { "selector": "#g2048-armory-heading", "text": "Tiến trình tiến hóa 12 Bậc vũ khí từ viên đạn 9mm đến Siêu Đại Liên Gatling 3 Nòng." }
+  ]
+}
