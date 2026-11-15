@@ -15,6 +15,8 @@
       { level: 12, name: "Triple Gatling Overlord", sub: "Tri-Cannon Doom Engine (×3)", img: "assets/doomsday/2048/tile-12.png", value: 4096 },
     ],
     STORAGE_KEY: "dls_2048_best_score",
+    SAVE_KEY: "dls_2048_game_save_v1",
+    SAVE_TTL_MS: 24 * 60 * 60 * 1000, // 24 hours
     BOARD_SIZE: 4,
   };
 })();

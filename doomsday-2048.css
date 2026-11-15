@@ -43,7 +43,16 @@
   width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center;
   border-radius: 8px; background: rgba(30, 24, 18, 0.88); border: 1px solid rgba(245, 183, 61, 0.35);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55); animation: g2048Pop 0.18s ease-out; overflow: hidden;
+  transition: transform 0.14s cubic-bezier(0.25, 1, 0.5, 1);
 }
+.g2048-slide-left { animation: g2048SlideLeft 0.14s cubic-bezier(0.25, 1, 0.5, 1); }
+.g2048-slide-right { animation: g2048SlideRight 0.14s cubic-bezier(0.25, 1, 0.5, 1); }
+.g2048-slide-up { animation: g2048SlideUp 0.14s cubic-bezier(0.25, 1, 0.5, 1); }
+.g2048-slide-down { animation: g2048SlideDown 0.14s cubic-bezier(0.25, 1, 0.5, 1); }
+@keyframes g2048SlideLeft { 0% { transform: translateX(28px); } 100% { transform: translateX(0); } }
+@keyframes g2048SlideRight { 0% { transform: translateX(-28px); } 100% { transform: translateX(0); } }
+@keyframes g2048SlideUp { 0% { transform: translateY(28px); } 100% { transform: translateY(0); } }
+@keyframes g2048SlideDown { 0% { transform: translateY(-28px); } 100% { transform: translateY(0); } }
 .g2048-tile img { width: 82%; height: 82%; object-fit: contain; pointer-events: none; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.75)); }
 .g2048-tile-num {
   position: absolute; bottom: 4px; right: 6px; font-size: 0.82rem; font-weight: 700; color: #fff;

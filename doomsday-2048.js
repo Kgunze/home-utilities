@@ -1,13 +1,11 @@
 (() => {
-  const cfg = window.DOOMSDAY_2048_DATA;
+  const cfg = window.DOOMSDAY_2048_DATA, audio = window.DLS_AUDIO;
   if (!cfg) return;
 
   const boardWrapper = document.querySelector(".g2048-board-wrapper") || document.querySelector("#g2048-board");
   const boardEl = document.querySelector("#g2048-board");
-  const scoreEl = document.querySelector("#g2048-score");
-  const bestEl = document.querySelector("#g2048-best");
-  const statusEl = document.querySelector("#g2048-status");
-  const restartBtn = document.querySelector("#g2048-restart");
+  const scoreEl = document.querySelector("#g2048-score"), bestEl = document.querySelector("#g2048-best");
+  const statusEl = document.querySelector("#g2048-status"), restartBtn = document.querySelector("#g2048-restart");
   const armoryList = document.querySelector("#g2048-armory-list");
   if (!boardEl || !scoreEl || !bestEl) return;
 
@@ -15,16 +13,37 @@
   let grid = Array.from({ length: SIZE }, () => Array(SIZE).fill(0));
   let score = 0, bestScore = Number(localStorage.getItem(cfg.STORAGE_KEY) || 0);
   let isGameOver = false, hasWon = false;
-
   const tierMap = new Map(cfg.TIERS.map((t) => [t.level, t]));
   bestEl.textContent = bestScore.toLocaleString();
+
+  const saveGameState = () => {
+    try {
+      localStorage.setItem(cfg.SAVE_KEY, JSON.stringify({ grid, score, isGameOver, hasWon, savedAt: Date.now() }));
+    } catch (_) {}
+  };
+
+  const loadGameState = () => {
+    try {
+      const raw = localStorage.getItem(cfg.SAVE_KEY);
+      if (!raw) return false;
+      const data = JSON.parse(raw);
+      if (!data || !data.savedAt || Date.now() - data.savedAt > cfg.SAVE_TTL_MS) {
+        localStorage.removeItem(cfg.SAVE_KEY);
+        return false;
+      }
+      if (Array.isArray(data.grid) && data.grid.length === SIZE) {
+        grid = data.grid; score = data.score || 0;
+        isGameOver = Boolean(data.isGameOver); hasWon = Boolean(data.hasWon);
+        return true;
+      }
+    } catch (_) {}
+    return false;
+  };
 
   const getEmptyCells = () => {
     const empty = [];
     for (let r = 0; r < SIZE; r++) {
-      for (let c = 0; c < SIZE; c++) {
-        if (grid[r][c] === 0) empty.push({ r, c });
-      }
+      for (let c = 0; c < SIZE; c++) if (grid[r][c] === 0) empty.push({ r, c });
     }
     return empty;
   };
@@ -37,7 +56,7 @@
     return true;
   };
 
-  const renderBoard = () => {
+  const renderBoard = (lastDir = null) => {
     scoreEl.textContent = score.toLocaleString();
     if (score > bestScore) {
       bestScore = score;
@@ -51,44 +70,43 @@
         if (val > 0) {
           const t = tierMap.get(val) || { name: `Tier ${val}`, img: cfg.TIERS[0].img };
           const tile = document.createElement("div");
-          tile.className = `g2048-tile g2048-tier-${val}`;
-          tile.style.gridRowStart = String(r + 1);
-          tile.style.gridColumnStart = String(c + 1);
+          tile.className = `g2048-tile g2048-tier-${val}${lastDir ? ` g2048-slide-${lastDir}` : ""}`;
+          tile.style.gridRowStart = String(r + 1); tile.style.gridColumnStart = String(c + 1);
           tile.innerHTML = `<img src="${t.img}" alt="${t.name}" draggable="false" loading="lazy" /><span class="g2048-tile-num">${val}</span>`;
           boardEl.appendChild(tile);
         }
       }
     }
+    saveGameState();
   };
 
   const slideLine = (line) => {
-    let arr = line.filter((v) => v !== 0), gained = 0;
+    let arr = line.filter((v) => v !== 0), gained = 0, didMerge = false;
     for (let i = 0; i < arr.length - 1; i++) {
       if (arr[i] === arr[i + 1]) {
-        arr[i] += 1;
-        gained += Math.pow(2, arr[i]);
+        arr[i] += 1; gained += Math.pow(2, arr[i]);
         if (arr[i] >= 11) hasWon = true;
-        arr.splice(i + 1, 1);
+        arr.splice(i + 1, 1); didMerge = true;
       }
     }
     while (arr.length < SIZE) arr.push(0);
-    return { line: arr, gained };
+    return { line: arr, gained, didMerge };
   };
 
   const move = (dir) => {
     if (isGameOver) return;
     let nextGrid = Array.from({ length: SIZE }, () => Array(SIZE).fill(0));
-    let moved = false, roundGained = 0;
+    let moved = false, roundGained = 0, hasMerged = false;
 
     for (let i = 0; i < SIZE; i++) {
-      let orig = [];
-      if (dir === "left") orig = [grid[i][0], grid[i][1], grid[i][2], grid[i][3]];
-      else if (dir === "right") orig = [grid[i][3], grid[i][2], grid[i][1], grid[i][0]];
-      else if (dir === "up") orig = [grid[0][i], grid[1][i], grid[2][i], grid[3][i]];
-      else if (dir === "down") orig = [grid[3][i], grid[2][i], grid[1][i], grid[0][i]];
+      let orig = dir === "left" ? [grid[i][0], grid[i][1], grid[i][2], grid[i][3]] :
+                 dir === "right" ? [grid[i][3], grid[i][2], grid[i][1], grid[i][0]] :
+                 dir === "up" ? [grid[0][i], grid[1][i], grid[2][i], grid[3][i]] :
+                 [grid[3][i], grid[2][i], grid[1][i], grid[0][i]];
 
       const res = slideLine(orig);
       roundGained += res.gained;
+      if (res.didMerge) hasMerged = true;
       if (orig.some((v, idx) => v !== res.line[idx])) moved = true;
 
       for (let j = 0; j < SIZE; j++) {
@@ -100,11 +118,9 @@
     }
 
     if (moved) {
-      grid = nextGrid;
-      score += roundGained;
-      spawnTile();
-      checkGameStatus();
-      renderBoard();
+      grid = nextGrid; score += roundGained;
+      spawnTile(); checkGameStatus(); renderBoard(dir);
+      if (hasMerged) audio?.playMerge(); else audio?.playStep();
     }
   };
 
@@ -132,26 +148,16 @@
   };
 
   const initGame = () => {
+    localStorage.removeItem(cfg.SAVE_KEY);
     grid = Array.from({ length: SIZE }, () => Array(SIZE).fill(0));
     score = 0; isGameOver = false; hasWon = false;
     spawnTile(); spawnTile();
-    checkGameStatus();
-    renderBoard();
+    checkGameStatus(); renderBoard();
   };
 
   const renderArmory = () => {
     if (!armoryList) return;
-    armoryList.innerHTML = cfg.TIERS.map(
-      (t) => `
-      <article class="planner-card g2048-armory-card">
-        <div class="g2048-armory-thumb"><img src="${t.img}" alt="${t.name}" loading="lazy" /></div>
-        <div>
-          <p class="card-label">Tier ${t.level} · 2048 Value: ${t.value}</p>
-          <h4>${t.name}</h4>
-          <p class="dls-hero-tags">${t.sub}</p>
-        </div>
-      </article>`
-    ).join("");
+    armoryList.innerHTML = cfg.TIERS.map((t) => `<article class="planner-card g2048-armory-card"><div class="g2048-armory-thumb"><img src="${t.img}" alt="${t.name}" loading="lazy" /></div><div><p class="card-label">Tier ${t.level} · 2048 Value: ${t.value}</p><h4>${t.name}</h4><p class="dls-hero-tags">${t.sub}</p></div></article>`).join("");
   };
 
   window.addEventListener("keydown", (e) => {
@@ -164,8 +170,7 @@
   const handleSwipe = (dx, dy) => {
     const absX = Math.abs(dx), absY = Math.abs(dy);
     if (Math.max(absX, absY) < 24) return;
-    if (absX > absY) move(dx > 0 ? "right" : "left");
-    else move(dy > 0 ? "down" : "up");
+    if (absX > absY) move(dx > 0 ? "right" : "left"); else move(dy > 0 ? "down" : "up");
   };
 
   let tStartX = 0, tStartY = 0;
@@ -179,22 +184,16 @@
   }, { passive: true });
 
   let isMouseDown = false, mStartX = 0, mStartY = 0;
-  boardWrapper.addEventListener("mousedown", (e) => {
-    isMouseDown = true;
-    mStartX = e.clientX; mStartY = e.clientY;
-  });
+  boardWrapper.addEventListener("mousedown", (e) => { isMouseDown = true; mStartX = e.clientX; mStartY = e.clientY; });
   window.addEventListener("mouseup", (e) => {
     if (!isMouseDown) return;
-    isMouseDown = false;
-    handleSwipe(e.clientX - mStartX, e.clientY - mStartY);
+    isMouseDown = false; handleSwipe(e.clientX - mStartX, e.clientY - mStartY);
   });
 
-  document.querySelectorAll("[data-g2048-dir]").forEach((btn) => {
-    btn.addEventListener("click", () => move(btn.dataset.g2048Dir));
-  });
-
+  document.querySelectorAll("[data-g2048-dir]").forEach((btn) => btn.addEventListener("click", () => move(btn.dataset.g2048Dir)));
   restartBtn?.addEventListener("click", initGame);
 
   renderArmory();
-  initGame();
+  if (!loadGameState()) initGame();
+  else { checkGameStatus(); renderBoard(); }
 })();
