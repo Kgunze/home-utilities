@@ -61,8 +61,8 @@
     }
   };
 
-  const slideRow = (row) => {
-    let arr = row.filter((v) => v !== 0), gained = 0;
+  const slideLine = (line) => {
+    let arr = line.filter((v) => v !== 0), gained = 0;
     for (let i = 0; i < arr.length - 1; i++) {
       if (arr[i] === arr[i + 1]) {
         arr[i] += 1;
@@ -72,31 +72,35 @@
       }
     }
     while (arr.length < SIZE) arr.push(0);
-    return { row: arr, gained };
+    return { line: arr, gained };
   };
-
-  const rotate = (m) => m[0].map((_, i) => m.map((r) => r[i]).reverse());
 
   const move = (dir) => {
     if (isGameOver) return;
-    let rotated = grid.map((r) => [...r]);
-    const turns = dir === "left" ? 0 : dir === "down" ? 1 : dir === "right" ? 2 : 3;
-    for (let i = 0; i < turns; i++) rotated = rotate(rotated);
-
+    let nextGrid = Array.from({ length: SIZE }, () => Array(SIZE).fill(0));
     let moved = false, roundGained = 0;
-    for (let r = 0; r < SIZE; r++) {
-      const orig = [...rotated[r]];
-      const res = slideRow(rotated[r]);
-      rotated[r] = res.row;
+
+    for (let i = 0; i < SIZE; i++) {
+      let orig = [];
+      if (dir === "left") orig = [grid[i][0], grid[i][1], grid[i][2], grid[i][3]];
+      else if (dir === "right") orig = [grid[i][3], grid[i][2], grid[i][1], grid[i][0]];
+      else if (dir === "up") orig = [grid[0][i], grid[1][i], grid[2][i], grid[3][i]];
+      else if (dir === "down") orig = [grid[3][i], grid[2][i], grid[1][i], grid[0][i]];
+
+      const res = slideLine(orig);
       roundGained += res.gained;
-      if (orig.some((v, idx) => v !== res.row[idx])) moved = true;
+      if (orig.some((v, idx) => v !== res.line[idx])) moved = true;
+
+      for (let j = 0; j < SIZE; j++) {
+        if (dir === "left") nextGrid[i][j] = res.line[j];
+        else if (dir === "right") nextGrid[i][3 - j] = res.line[j];
+        else if (dir === "up") nextGrid[j][i] = res.line[j];
+        else if (dir === "down") nextGrid[3 - j][i] = res.line[j];
+      }
     }
 
-    const unturns = (4 - turns) % 4;
-    for (let i = 0; i < unturns; i++) rotated = rotate(rotated);
-
     if (moved) {
-      grid = rotated;
+      grid = nextGrid;
       score += roundGained;
       spawnTile();
       checkGameStatus();
