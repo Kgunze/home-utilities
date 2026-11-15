@@ -76,7 +76,6 @@ const ensureNavLink = (className, relativePath, afterSelector = null) => {
   return link;
 };
 
-const ensureKiemTheLink = () => ensureNavLink("nav-kiem-the", "kiem-the-system-map.html");
 const ensureDoomsdayLink = () => {
   const navLinks = document.querySelector(".nav-links");
   if (!navLinks) return null;
@@ -124,10 +123,6 @@ const ensureDoomsdayLink = () => {
     bioLink.textContent = "Biobeast";
     sub.appendChild(bioLink);
   }
-  const kiemThe = navLinks.querySelector(".nav-kiem-the");
-  if (kiemThe && kiemThe.nextElementSibling !== parent) {
-    kiemThe.insertAdjacentElement("afterend", parent);
-  }
   return parent.querySelector(".nav-doomsday");
 };
 const accordionTriggers = document.querySelectorAll(".accordion-trigger");
@@ -156,7 +151,6 @@ const I18N = {
     navRecipes: "Recipes",
     navShoppingPlanner: "Shopping Planner",
     navPtsd: "PTSD",
-    navKiemThe: "Kiem The System",
     navDoomsday: "Doomsday: Last Survivors",
     navDoomsdayRanged: "Ranged Barracks",
     backToTop: "Top",
@@ -193,7 +187,6 @@ const I18N = {
       "recipes.html": "Recipes Catalogue | Home Utilities",
       "shopping-planner.html": "Shopping Planner | Home Utilities",
       "stories.html": "Stories | Home Utilities",
-      "kiem-the-system-map.html": "Kiem The System Map | Home Utilities",
       "ptsd.html": "PTSD | Home Utilities",
       "recipe-pho-ga.html": "Pho Ga for Slow Weekends | Home Utilities",
       "recipe-basa-tomato-soup.html": "Basa Tomato Soup | Home Utilities",
@@ -213,8 +206,6 @@ const I18N = {
         "An English weekly shopping planner translated from the approved 30-day menu document for Home Utilities.",
       "stories.html":
         "A chapter-style story page for Home Utilities, designed like an open book with a personal timeline from 1992 to 2026.",
-      "kiem-the-system-map.html":
-        "An interactive Kiem The system map that visualizes core systems, combat flow, and the evolution from Lv109 to KT69.",
       "ptsd.html":
         "A PTSD page with family scapegoating context, evidence-based terminology, symptom references, and a treatment follow-up timeline template.",
       "recipe-pho-ga.html":
@@ -251,7 +242,6 @@ const I18N = {
     navRecipes: "Công thức",
     navShoppingPlanner: "Kế hoạch đi chợ",
     navPtsd: "PTSD",
-    navKiemThe: "Hệ thống Kiếm Thế",
     navDoomsday: "Doomsday: Last Survivors",
     navDoomsdayRanged: "Trại Cung Thủ (Ranged)",
     backToTop: "Lên đầu trang",
@@ -343,7 +333,6 @@ const I18N = {
     navRecipes: "Recetas",
     navShoppingPlanner: "Planificador de Compras",
     navPtsd: "PTSD",
-    navKiemThe: "Sistema Kiem The",
     navDoomsday: "Doomsday: Last Survivors",
     navDoomsdayRanged: "Cuartel de Tiradores",
     navGreenies: "Greenies",
@@ -900,8 +889,7 @@ const syncCommonLocaleLabels = () => {
   const backToTopButtons = document.querySelectorAll(".back-to-top");
   const primaryNav = document.querySelector(".topbar");
   const storiesLinks = document.querySelectorAll('.nav-links a[href="stories.html"], .nav-links a[href="#stories-book"]');
-  const kiemTheLinks = document.querySelectorAll('.nav-links a[href="kiem-the-system-map.html"], .nav-links a[href="#kt-system-map"]');
-    const kitchenNotesLinks = document.querySelectorAll('.nav-parent > a[href="index.html#kitchen-notes"], .nav-parent > a[href="#kitchen-notes"]');
+      const kitchenNotesLinks = document.querySelectorAll('.nav-parent > a[href="index.html#kitchen-notes"], .nav-parent > a[href="#kitchen-notes"]');
   const recipesLinks = document.querySelectorAll('.nav-submenu a[href="recipes.html"], .nav-submenu a[href="#recipe-catalogue"]');
   const shoppingPlannerLinks = document.querySelectorAll('.nav-submenu a[href="shopping-planner.html"], .nav-submenu a[href="#shopping-planner"]');
   const ptsdLinks = document.querySelectorAll('.nav-links a[href="ptsd.html"], .nav-links a[href="#ptsd-page"]');
@@ -921,13 +909,8 @@ const syncCommonLocaleLabels = () => {
     greeniesSubmenu.setAttribute("aria-label", localeStrings.navGreeniesSubmenu);
   }
 
-  const kiemTheLink = ensureKiemTheLink();
-  const doomsdayLink = ensureDoomsdayLink();
-    if (kiemTheLink && localeStrings.navKiemThe) {
-    kiemTheLink.textContent = localeStrings.navKiemThe;
-    kiemTheLink.setAttribute("aria-label", localeStrings.navKiemThe);
-  }
-  if (doomsdayLink && localeStrings.navDoomsday) {
+    const doomsdayLink = ensureDoomsdayLink();
+      if (doomsdayLink && localeStrings.navDoomsday) {
     doomsdayLink.textContent = localeStrings.navDoomsday;
     doomsdayLink.setAttribute("aria-label", localeStrings.navDoomsday);
   }
@@ -951,10 +934,7 @@ const syncCommonLocaleLabels = () => {
   storiesLinks.forEach((node) => {
     node.textContent = localeStrings.navStories;
   });
-  kiemTheLinks.forEach((node) => {
-    node.textContent = localeStrings.navKiemThe;
-  });
-  kitchenNotesLinks.forEach((node) => {
+    kitchenNotesLinks.forEach((node) => {
     node.textContent = localeStrings.navKitchenNotes;
   });
   recipesLinks.forEach((node) => {
