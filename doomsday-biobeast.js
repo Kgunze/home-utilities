@@ -16,7 +16,8 @@
   const TROOPS = [
     { id: "pluto", baseHp: 90050, beastAtk: 7250, convRate: 850, buff: "+10% Squad Basic Attack DMG · +10% Squad DMG Reduction", proc: "420 Combo (41.2%) + 210 Counter (25.9%)", label: { en: "Pluto Jellyfish Lv.100 Leader (90,050 HP / 5,000 ATK / 420 Combo)", vi: "Pluto Jellyfish Lv.100 Leader (90,050 HP / 5,000 ATK / 420 Combo)", es: "Pluto Jellyfish Nv.100 Líder (90,050 HP / 5,000 ATQ / 420 Combo)" } },
     { id: "fraudrin", baseHp: 89900, beastAtk: 8400, convRate: 980, buff: "+4% Squad Skill DMG Reduction · +10% Squad DMG Reduction", proc: "525 Counter (~51.5%) + +20% Counter DMG + Full Size (+30% ATK)", label: { en: "Fraudrin Lv.100 Leader (89,900 HP / 4,955 ATK / 525 Counter / Full Size)", vi: "Fraudrin Lv.100 Leader (89,900 HP / 4,955 ATK / 525 Counter / Full Size)", es: "Fraudrin Nv.100 Líder (89,900 HP / 4,955 ATQ / 525 Contraataque)" } },
-    { id: "duo", baseHp: 180000, beastAtk: 12800, convRate: 1450, buff: "+4% Skill DMG Red (or +10% Basic ATK) · +33% Corrosion Amp · +50% Counter DMG", proc: "525 Counter + 100% Counter Corrosion + +33% Stinging Echo T12", label: { en: "Fraudrin + Pluto Jellyfish Water Duo + T6 Ace Squad (Max Synergy)", vi: "Bộ đôi Fraudrin + Pluto Jellyfish + Đội T6 Ace (Cộng hưởng Tối đa)", es: "Dúo Fraudrin + Pluto Jellyfish + Escuadrón T6 Ace (Sinergia Máx.)" } },
+    { id: "otachi", baseHp: 90600, beastAtk: 8950, convRate: 1050, buff: "+4% Squad Skill DMG · CRIT +65 · 3-Acid CRIT Corrosion", proc: "Tail Swipe (CRIT +65) + Acid Burst (348% Corrosion) + 3-Acid CRIT Corrosion", label: { en: "Otachi Lv.100 Leader (Pacific Rim Kaiju / CRIT +65 / CRIT Corrosion)", vi: "Otachi Lv.100 Leader (Pacific Rim Kaiju / Bạo Kích +65 / Ăn Mòn Bạo Kích)", es: "Otachi Nv.100 Líder (Pacific Rim Kaiju / CRIT +65 / Corrosión CRIT)" } },
+    { id: "duo", baseHp: 180000, beastAtk: 13800, convRate: 1550, buff: "+4% Squad Skill DMG · +33% Corrosion Amp · +50% Counter DMG · CRIT +65", proc: "Otachi (CRIT +65) + Fraudrin 525 Counter + Pluto Stinging Echo T12", label: { en: "Otachi + Fraudrin / Pluto Water Corrosion Trinity + T6 Squad", vi: "Otachi + Fraudrin / Pluto Bộ ba Ăn Mòn Nước + Đội hình T6", es: "Trinidad Otachi + Fraudrin / Pluto de Corrosión de Agua + T6" } },
   ];
   const TARGETS = [
     { id: "active", enemyHp: 90000, label: { en: "Enemy Biobeast Active (90,000 HP → Beast-vs-Beast Duel)", vi: "Biobeast Địch Còn Máu (90,000 HP → Đấu Thú)", es: "Bestia Enemiga Activa (90,000 HP → Duelo de Bestias)" } },
@@ -28,7 +29,12 @@
   const renderBeasts = () => {
     if (!beastsContainer) return;
     if (beastFilter) {
-      const chips = [["all", "All Biobeasts (2)", "Pluto Jellyfish + Fraudrin"], ["pluto", "Rare · Corrode / Combo / Counter", "Pluto Jellyfish (Lv.100)"], ["fraudrin", "Seven Deadly Sins · Counter DMG / Full Size", "Fraudrin (Lv.100)"]];
+      const chips = [
+        ["all", "All Biobeasts (3)", "Pluto + Fraudrin + Otachi"],
+        ["otachi", "Pacific Rim · CRIT & CRIT Corrosion", "Otachi (Pacific Rim)"],
+        ["fraudrin", "Seven Deadly Sins · Counter DMG / Full Size", "Fraudrin (Lv.100)"],
+        ["pluto", "Rare · Corrode / Combo / Counter", "Pluto Jellyfish (Lv.100)"],
+      ];
       beastFilter.innerHTML = chips.map(([id, tag, title]) => `<button type="button" class="combo-preset-chip${activeBeast === id ? " is-active" : ""}" data-beast="${id}"><span class="combo-preset-tag">★ ${tag}</span><strong class="combo-preset-title">${title}</strong></button>`).join("");
     }
     const list = D.BEASTS.filter((b) => activeBeast === "all" || b.id === activeBeast);
@@ -38,16 +44,16 @@
           <p class="card-label">${b.badge}</p>
           <h3>${b.name} — ${b.tags}</h3>
           <p>${b.summary}</p>
-          <img class="recipe-inline-image" src="${b.img}" alt="${b.name} Lv.100 Biobeast" loading="lazy" />
+          <img class="recipe-inline-image" src="${b.img}" alt="${b.name} Biobeast" loading="lazy" />
         </article>
         <article class="planner-card">
-          <p class="card-label">Lv.100 Basic & Special Attributes</p>
+          <p class="card-label">Basic & Special Attributes</p>
           <h3>${b.name} Stat Breakdown</h3>
-          <div class="table-wrap"><table class="summary-table"><thead><tr><th>Attribute</th><th>Lv.100 Value</th><th>Combat Impact</th></tr></thead><tbody>${b.stats.map(([k, v, n]) => `<tr><td><strong>${k}</strong></td><td><strong>${v}</strong></td><td>${n}</td></tr>`).join("")}</tbody></table></div>
+          <div class="table-wrap"><table class="summary-table"><thead><tr><th>Attribute</th><th>Value</th><th>Combat Impact</th></tr></thead><tbody>${b.stats.map(([k, v, n]) => `<tr><td><strong>${k}</strong></td><td><strong>${v}</strong></td><td>${n}</td></tr>`).join("")}</tbody></table></div>
         </article>
       </div>
       <article class="planner-card" style="margin-top: 1.25rem">
-        <p class="card-label">Leader & Support Skill Tier Progression (Tier 0 → Tier 12 / Tier ★)</p>
+        <p class="card-label">Leader & Support Skill Tier Progression (Tier 0 → Tier 11 / Tier ★)</p>
         <h3>${b.name} — All 4 Skills & Tier Multipliers</h3>
         <div class="table-wrap"><table class="summary-table"><thead><tr><th>Skill Name</th><th>Type & Cooldown</th><th>Leader / Early Tiers</th><th>Awakened (Tier ★) / Support Scaling</th></tr></thead><tbody>${b.skills.map(([n, t, l, s]) => `<tr><td><strong>${n}</strong></td><td>${t}</td><td>${l.replace(/\n/g, "<br>")}</td><td>${s}</td></tr>`).join("")}</tbody></table></div>
       </article>
@@ -57,14 +63,14 @@
 
   const renderSim = () => {
     if (!simTbody) return;
-    const m = MODES.find((x) => x.id === modeSel.value) || MODES[0], tr = TROOPS.find((x) => x.id === troopSel.value) || TROOPS[1], tg = TARGETS.find((x) => x.id === targetSel.value) || TARGETS[0];
+    const m = MODES.find((x) => x.id === modeSel.value) || MODES[0], tr = TROOPS.find((x) => x.id === troopSel.value) || TROOPS[2], tg = TARGETS.find((x) => x.id === targetSel.value) || TARGETS[0];
     const effHp = Math.round(tr.baseHp * m.mult), duelSec = tg.enemyHp > 0 ? +(tg.enemyHp / tr.beastAtk).toFixed(1) : 0;
     const troopKillPer10s = tg.enemyHp === 0 ? tr.convRate * 10 : Math.round(tr.convRate * Math.max(0, 10 - duelSec / 2));
     simThead.innerHTML = `<tr><th>Biobeast Combat Metric</th><th>Calculated Value</th><th>Official Mechanism</th></tr>`;
     simTbody.innerHTML = [
       ["Effective Biobeast HP Pool", `<strong>${effHp.toLocaleString()} HP</strong> (${m.mult}× Scaling)`, m.mult > 1 ? `Boosted by Rally/Garrison troop strength (+${m.heal.toLocaleString()} HP per reinforce wave)` : "Standard Open-Field Biobeast HP"],
-      ["Active Proc Profile", `<strong>${tr.proc}</strong>`, "Auto-casts Active Skill (Invisible Whip / Demonic Claw) ignoring cooldown (max 1/s) to stack Corrosion"],
-      ["Squad Buffs While Deployed", `<strong>${tr.buff}</strong>`, "Pluto buffs Squad Basic Attack DMG (+10%); Fraudrin cuts Squad Skill DMG taken (+4%) + 10% Squad DMG Reduction"],
+      ["Active Proc Profile", `<strong>${tr.proc}</strong>`, "Auto-casts Active Skill ignoring cooldown to stack Acid / Corrosion or trigger Counter/CRIT strikes"],
+      ["Squad Buffs While Deployed", `<strong>${tr.buff}</strong>`, "Amplifies Squad Basic ATK (Pluto), cuts Skill DMG taken (Fraudrin), or boosts Squad Skill DMG by +4% (Otachi)"],
       ["Beast Duel & Excess Troop DMG (10s)", tg.enemyHp > 0 ? `<strong>~${duelSec}s</strong> to Gray Icon → <strong>~${troopKillPer10s.toLocaleString()}</strong> Troop DMG` : `<strong>0s (Already Gray!)</strong> → <strong>~${troopKillPer10s.toLocaleString()}</strong> Troop DMG`, "Excess DMG beyond enemy Biobeast HP converts directly into damage dealt to enemy troops"],
     ].map(([k, v, n]) => `<tr><td><strong>${k}</strong></td><td>${v}</td><td>${n}</td></tr>`).join("");
     simNote.innerHTML = `<p class="card-label">Battlefield Takeaway</p><p>${tg.enemyHp === 0 ? "<strong>Excess Damage Conversion Active:</strong> Because the enemy Biobeast has 0 HP (Gray Icon), 100% of your Biobeast's Direct and Corrosion excess damage converts directly into enemy troop casualties!" : `<strong>Beast Duel in Progress:</strong> Your Biobeast (${effHp.toLocaleString()} HP) duels the enemy Biobeast for ~${duelSec}s before turning the enemy attribute icon gray.`}</p>`;
@@ -81,7 +87,7 @@
     }
     renderBeasts();
     if (modeSel && troopSel && targetSel) {
-      const pm = modeSel.value || "field", pt = troopSel.value || "fraudrin", pg = targetSel.value || "active";
+      const pm = modeSel.value || "field", pt = troopSel.value || "otachi", pg = targetSel.value || "active";
       modeSel.innerHTML = MODES.map((x) => `<option value="${x.id}">${x.label[lang]}</option>`).join("");
       troopSel.innerHTML = TROOPS.map((x) => `<option value="${x.id}">${x.label[lang]}</option>`).join("");
       targetSel.innerHTML = TARGETS.map((x) => `<option value="${x.id}">${x.label[lang]}</option>`).join("");
@@ -96,5 +102,4 @@
   });
   [modeSel, troopSel, targetSel].forEach((el) => el?.addEventListener("change", renderSim));
   renderAll();
-  new MutationObserver(renderAll).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
 })();

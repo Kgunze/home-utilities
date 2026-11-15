@@ -59,11 +59,11 @@
       },
     ],
     ATTR_RULES: [
-      ["Direct vs. Indirect DMG", "Active Skills & Leader Skills vs. Follow-up / Status", "All Active & Leader Skill DMG is Direct DMG unless specified. Indirect DMG includes follow-up DMG, residual DMG, and status DMG (e.g., Corrosion). Excess DMG beyond enemy Beast HP converts to Troop DMG."],
-      ["CRIT (CRIT Rate)", "Dealing damage in battle (0.0% base on Pluto / Fraudrin)", "May trigger a Critical Hit based on CRIT, granting a CRIT DMG bonus. Unless otherwise specified, status DMG (such as Corrosion) cannot trigger critical hits."],
-      ["Combo (Combo Rate)", "Dealing damage in battle (420 Combo = 41.2% Combo Rate)", "Automatically uses the Active Skill 1 additional time (ignores cooldown, max once per second, receives Combo DMG buff). Counter DMG and indirect DMG cannot trigger combos."],
-      ["Counter (Counter Rate)", "Receiving damage in battle (210 = 25.9% · 525 on Fraudrin)", "Automatically uses the Active Skill 1 additional time on the attacker (ignores cooldown, max once per second on same target, receives Counter DMG buff). Counter DMG and indirect DMG cannot trigger counterattacks."],
-      ["Shield Value", "Gained via Biobeast Shield skills during battle", "Absorbs all types of damage dealt by Biochemical Beasts until Shield Value reaches 0 or vanishes. Any unabsorbed remaining damage is taken by the Biochemical Beast's HP."],
+      ["Direct vs. Indirect DMG", "Active & Leader Skills vs. Follow-up / Status", "All Active & Leader Skill DMG is Direct DMG. Indirect DMG includes follow-up DMG, residual DMG, and status DMG (Corrosion). Excess DMG beyond enemy Beast HP converts to Troop DMG."],
+      ["CRIT (CRIT Rate)", "Tail Swipe CRIT +65 · 3 Acid stacks deal CRIT Corrosion!", "May trigger a Critical Hit based on CRIT. Otachi's Awakened Tier ★ Acid Burst breaks the rule that status DMG cannot CRIT when 3 Acid stacks are consumed!"],
+      ["Combo (Combo Rate)", "Dealing damage in battle (420 Combo = 41.2% Rate)", "Auto-casts Active Skill 1 extra time (ignores cooldown, max 1/s, Combo DMG buff). Counter DMG and indirect DMG cannot trigger combos."],
+      ["Counter (Counter Rate)", "Receiving damage in battle (525 on Fraudrin · 210 on Pluto)", "Auto-casts Active Skill 1 extra time on attacker (ignores cooldown, max 1/s, Counter DMG buff). Counter DMG and indirect DMG cannot trigger counterattacks."],
+      ["Shield Value", "Gained via Biobeast Shield skills during battle", "Absorbs all damage dealt by Biochemical Beasts until Shield reaches 0. Any unabsorbed damage is taken by Biobeast HP."],
     ],
     BEASTS: [
       {
@@ -87,7 +87,7 @@
         pairings: [
           ["Rider Basic-Attack Squad (S+ Leader Match)", "Rick Light + Chasey · Rick Light + Felix · Chasey + Felix", "+10% Squad Basic Attack DMG & +10% Squad DMG Reduction supercharge Rick Light's Shark Spin (3,300 Basic Attack bonus DMG + 20% extra basic attack) and Felix's 4-hit proc (5,000 DMG)."],
           ["Infantry Brawl Squad (S Leader Match)", "Miyamoto Doi + Eileen Volt · Adut + Miyamoto Doi · Stella + Charlie", "Prolonged melee combat lets Pluto Jellyfish hit 6 & 12 Active Skill casts rapidly while stacking Stinging Echo T12 (+12% Corrosion DMG / +120 Combo) and buffing Miyamoto Doi's basic attacks by +10%."],
-          ["Support Partner for Fraudrin (S+ Biobeast Pair)", "Leader: Fraudrin + Support: Pluto Jellyfish", "Fraudrin's 525 Counter triggers Pluto Jellyfish's Support Tier 11 Invisible Whip (100% chance for 276% Corrosion on every Counter) while Stinging Echo T12 grants Fraudrin +33% All DMG to corroded targets!"],
+          ["Support Partner for Fraudrin / Otachi (S+ Biobeast Pair)", "Leader: Fraudrin / Otachi + Support: Pluto Jellyfish", "Otachi and Fraudrin supply rapid Acid & Corrosion triggers to activate Pluto Jellyfish's Support Tier 11 Invisible Whip (100% chance for 276% Corrosion on every Counter) and +33% All DMG to corroded targets!"],
         ],
       },
       {
@@ -112,6 +112,31 @@
           ["Garrison & Anti-Skill Tank Squads (S+ Leader Match)", "Nova + Ethan (Ranged) · Stella + Charlie (Infantry) · Daryl + Chasey (Rider)", "Fraudrin grants +4% Squad Skill DMG Reduction + +10% Squad DMG Reduction (-14% total Skill DMG taken), stacking with Nova + Ethan (-25% Skill DMG taken) or Daryl (-30% AoE DMG) while his 525 Counter crushes enemy Rally Biobeasts."],
           ["Siege Rally & Counter-Nuke Squads (S+ Leader Match)", "Sebastian + Cedric · Cedric + Bard · Adut + Miyamoto Doi · Metok Tso + Rubina", "In Rallies with 3.2× boosted HP, Fraudrin's 525 Counter procs 100% Corrosion (Demonic Claw T5+), keeping 'Full Size' (+30% ATK, +8% Beast DMG) active to land 1,050% Demonic Stomp + follow-up nukes every 6s."],
           ["Water Corrosion Biobeast Duo (S+ Leader/Support Pair)", "Leader: Fraudrin + Support: Pluto Jellyfish (or vice versa)", "As Leader with Pluto Jellyfish Support, Fraudrin gets +33% All DMG vs. corroded targets and +150 Counter vs. Fire CRIT teams; as Support for Pluto Jellyfish, Fraudrin adds 360% 6s Corrosion, +50% Counter DMG (5 stacks), and +15% Beast DMG Reduction!"],
+        ],
+      },
+      {
+        id: "otachi", name: "Otachi", badge: "Pacific Rim Collab · Water Attribute · Lv.100 Awakened (Tier ★)",
+        tags: "CRIT · CRIT DMG · Corrode", img: "assets/doomsday/biobeast/otachi.jpg",
+        summary: "The legendary Category IV Kaiju from the <strong>Pacific Rim Collab</strong>! A lethal <strong>CRIT & Acid Corrosion Nuke</strong> that gains <strong>Current Attack CRIT +65</strong>, consumes Acid stacks for <strong>+5% DMG per stack</strong>, unlocks <strong>CRIT Corrosion DMG</strong> at 3 Acid stacks (Tier ★), and boosts <strong>Squad Skill DMG by up to +4%</strong>.",
+        stats: [
+          ["Base Attributes (Lv.1)", "9,060 HP · 1,131 ATK · 622 DEF", "Scales to ~90,000 HP, ~5,000 ATK, and ~4,300 DEF at Lv.100 max awakening"],
+          ["Special Attributes", "CRIT · CRIT DMG · Corrode (Specialized Pacific Rim Kaiju Archetype)", "Specialized in CRIT strikes, Energy Charge Acid stacking, and Beast Suppression execution"],
+          ["Tail Swipe CRIT Scaling", "CRIT +45 (T5) → CRIT +50 (T8) → CRIT +65 (T11)", "Every 3s, Tail Swipe gains massive bonus CRIT rate, turning Active Skill hits into guaranteed Critical strikes"],
+          ["Acid Burst & Stack Synergy", "70% base chance + 10% per Acid held (up to 100%)", "Inflicts 3s Corrosion (up to 348% multiplier). Each stack consumed boosts attack DMG by +5%!"],
+          ["Awakened CRIT Corrosion (Tier ★)", "3 Acid Stacks consumed → Corrosion DMG Deals CRIT DMG!", "Breaks the universal game rule where status/Corrosion DMG cannot CRIT — unleashing monstrous continuous burst!"],
+          ["Leader Deployment Buff", "+2% (T0) → +3% (T7) → +4% (T★) Squad Skill DMG", "Passively amplifies the Hero Active Skill & Rage damage output of your entire squad by up to +4%"],
+        ],
+        skills: [
+          ["1. Acid Burst", "Leader Skill (Every 6s)", "Tier 0: Deals 222% DMG every 6s. 70% chance to inflict Corrosion over 3s (192% multiplier). +10% chance per Acid stack held. Squad Skill DMG +2%.\nTier 7: Deals 356% DMG every 6s. 70% chance for Corrosion (288% over 3s). +10% chance per Acid stack. Each Acid consumed adds +5% attack DMG. Squad Skill DMG +3%.", "Tier ★: Deals 416% DMG every 6s. 70% chance for Corrosion (348% over 3s). +10% chance per Acid stack. Each Acid consumed adds +5% attack DMG. If 3 stacks of Acid are consumed in a go, Corrosion DMG for current attack deals CRIT DMG! Squad Skill DMG +4%."],
+          ["2. Tail Swipe", "Active Skill (Every 3s + Procs)", "[Leader] Tier 0 → 2 → 5 → 8 → 11: Deals 100% → 132% → 172% → 212% → 264% DMG every 3s. Current attack gains CRIT +45 (T5) → CRIT +50 (T8) → CRIT +65 (T11)!", "[Support] Tier 0 → 2 → 5 → 8 → 11: When Active Skill lands a critical hit, inflicts Corrosion over 3s (84% → 114% → 174% → 210% → 258% multiplier) AND grants Leader CRIT DMG +10% (T5) → +12% (T8) → +15% (T11) for 3s!"],
+          ["3. Energy Charge", "Passive Skill (Tier 0 → 3 → 6 → 9 → 12)", "[Leader] For every 1 critical hit or Corrosion stack dealt: 50% (T0) → 60% (T3) → 75% (T6) → 100% (T9/T12) chance to gain 1 stack of Acid (max 3 stacks). Each Acid stack increases next Leader Skill's Corrosion DMG by +34% (T0) → +38% (T3) → +42% (T6) → +46% (T9) → +58% (T12)!", "[Support] For every 1 critical hit dealt: Leader CRIT DMG +4% (T0) → +5% (T3) → +7% (T6) (max 5 stacks = +35%). From T9+: Leader CRIT +10 and CRIT DMG +10% (T9) → +13% (T12) per stack (max 5 stacks = CRIT +50 & +65% CRIT DMG)!"],
+          ["4. Kaiju Technique", "Passive Skill (Tier 1 → 4 → 7 → 10 → ★)", "[Leader] When Leader Skill hits a Fire-type Biobeast, current attack gains DMG +9.5% (T1) → +13% (T4) → +16% (T7) → +22% (T10). At Tier ★: Current attack gains DMG +22% AND CRIT +70!", "[Support] Reduces DMG taken vs Fire-type Biobeast teams by 3.5% (T1) → 5% (T4) → 6% (T7) → 8% (T10). At Tier ★: Reduces DMG taken by 8%, with a 50% chance to further reduce DMG taken by 7%!"],
+          ["5. Beast Suppression", "Talent / Passive Trait (Max Tier)", "[Leader] When dealing direct DMG to a target with Corrosion, Skill DMG for current attack +5.5%. Otherwise, CRIT DMG for current attack +6.5%.", "[Support] When dealing direct DMG to a target with Corrosion, Skill DMG for current attack +5.5%. Otherwise, CRIT DMG for current attack +6.5%."],
+        ],
+        pairings: [
+          ["Ranged Skill & Sniper Squads (S+ Leader Match)", "Charon + Sophie · Nova + Ethan · Sebastian + Cedric", "Otachi's +4% Squad Skill DMG amplifies Charon's 14,500 Rage burst (-40% enemy HP debuff) and Nova's 17,200 AoE, while Tail Swipe CRIT +65 shreds the enemy Biobeast to trigger excess troop DMG conversion."],
+          ["Pacific Rim Water Corrosion Trinity (S+ Biobeast Duo)", "Leader: Otachi + Support: Pluto Jellyfish (or Fraudrin)", "Otachi's Energy Charge (+58% Corrosion DMG / max 3 Acid) guarantees Support Pluto Jellyfish's Stinging Echo (+33% DMG to corroded targets) and Fraudrin's Counter procs, stacking 3 Acid charges to unlock CRIT Corrosion!"],
+          ["Infantry CRIT & Burst Squad (S Leader Match)", "Sakura + Ammara · Julien + Miyamoto Doichi", "Sakura's high-uptime skill cycling benefits directly from Otachi's +4% Squad Skill DMG, while Otachi's Tier ★ Acid Burst melts frontline enemy Biobeasts."],
         ],
       },
     ],
