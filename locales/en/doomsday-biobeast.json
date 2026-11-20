@@ -8,7 +8,7 @@
     },
     {
       "selector": "#bb-hero-title",
-      "text": "Water & Physical Biobeasts (Lv.100) — Skill Tiers, Attributes & Hero Pairings."
+      "text": "Water, Physical & Fire Biobeasts (Lv.100) — Skill Tiers, Attributes & Pairings."
     },
     {
       "selector": "#bb-hero-text",
@@ -20,7 +20,7 @@
     },
     {
       "selector": "#bb-cta-pluto",
-      "text": "Water Biobeasts (4)"
+      "text": "Water (4)"
     },
     {
       "selector": "#bb-cta-sim",
@@ -60,7 +60,7 @@
     },
     {
       "selector": "#bb-sim-tag",
-      "text": "4. Interactive Biobeast Combat, Rally HP & Troop Conversion Simulator"
+      "text": "5. Interactive Biobeast Combat, Rally HP & Troop Conversion Simulator"
     },
     {
       "selector": "#bb-sim-heading",
@@ -80,7 +80,7 @@
     },
     {
       "selector": "#bb-cta-physical",
-      "text": "Physical Biobeasts (4)"
+      "text": "Physical (4)"
     },
     {
       "selector": "#bb-physical-tag",
@@ -89,6 +89,18 @@
     {
       "selector": "#bb-physical-heading",
       "text": "Lv.100 Physical Garrison (Counter/CRIT) & Rally (Combo/CRIT) Attributes and Recommended Pairings."
+    },
+    {
+      "selector": "#bb-cta-fire",
+      "text": "Fire (1)"
+    },
+    {
+      "selector": "#bb-fire-tag",
+      "text": "4. Fire Biobeast Profiles: Kirin (Detonate / CRIT / Combo)"
+    },
+    {
+      "selector": "#bb-fire-heading",
+      "text": "Lv.100 Fire Biobeast Attributes, Max-Tier Detonate & CRIT Skills, and Recommended Pairings."
     }
   ]
 }

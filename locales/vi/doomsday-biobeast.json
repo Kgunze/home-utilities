@@ -8,7 +8,7 @@
     },
     {
       "selector": "#bb-hero-title",
-      "text": "Thú Sinh Hóa Hệ Nước & Vật Lý (Lv.100) — Bậc Kỹ Năng, Chỉ Số & Ghép Tướng."
+      "text": "Thú Sinh Hóa Hệ Nước, Vật Lý & Lửa (Lv.100) — Kỹ Năng, Chỉ Số & Ghép Tướng."
     },
     {
       "selector": "#bb-hero-text",
@@ -20,7 +20,7 @@
     },
     {
       "selector": "#bb-cta-pluto",
-      "text": "Thú Hệ Nước (4)"
+      "text": "Hệ Nước (4)"
     },
     {
       "selector": "#bb-cta-sim",
@@ -60,7 +60,7 @@
     },
     {
       "selector": "#bb-sim-tag",
-      "text": "4. Mô Phỏng Chiến Đấu Biobeast, HP Tập Kết & Chuyển Hóa Sát Thương Lính"
+      "text": "5. Mô Phỏng Chiến Đấu Biobeast, HP Tập Kết & Chuyển Hóa Sát Thương Lính"
     },
     {
       "selector": "#bb-sim-heading",
@@ -80,7 +80,7 @@
     },
     {
       "selector": "#bb-cta-physical",
-      "text": "Thú Hệ Vật Lý (4)"
+      "text": "Hệ Vật Lý (4)"
     },
     {
       "selector": "#bb-physical-tag",
@@ -89,6 +89,18 @@
     {
       "selector": "#bb-physical-heading",
       "text": "Chỉ số Lv.100 Hệ Vật Lý Đồn Trú (Phản Đòn/Bạo Kích) & Tập Kết (Liên Kích/Bạo Kích) và Ghép Đôi."
+    },
+    {
+      "selector": "#bb-cta-fire",
+      "text": "Hệ Lửa (1)"
+    },
+    {
+      "selector": "#bb-fire-tag",
+      "text": "4. Hồ Sơ Thú Hệ Lửa: Kirin (Kích Nổ / Bạo Kích / Liên Kích)"
+    },
+    {
+      "selector": "#bb-fire-heading",
+      "text": "Chỉ số Lv.100 Thú Hệ Lửa, Kỹ Năng Kích Nổ & Bạo Kích Bậc Tối Đa và Ghép Đôi."
     }
   ]
 }

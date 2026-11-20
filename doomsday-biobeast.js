@@ -5,9 +5,10 @@
   const attrThead = document.querySelector("#bb-attr-thead"), attrTbody = document.querySelector("#bb-attr-tbody");
   const beastFilter = document.querySelector("#bb-beast-filter"), beastsContainer = document.querySelector("#bb-beasts-container");
   const physFilter = document.querySelector("#bb-physical-filter"), physContainer = document.querySelector("#bb-physical-container");
+  const fireFilter = document.querySelector("#bb-fire-filter"), fireContainer = document.querySelector("#bb-fire-container");
   const modeSel = document.querySelector("#bb-mode-select"), troopSel = document.querySelector("#bb-troop-select"), targetSel = document.querySelector("#bb-target-select");
   const simThead = document.querySelector("#bb-sim-thead"), simTbody = document.querySelector("#bb-sim-tbody"), simNote = document.querySelector("#bb-sim-note");
-  let activeBeast = "all", activePhys = "all";
+  let activeBeast = "all", activePhys = "all", activeFire = "all";
 
   const MODES = [
     { id: "field", mult: 1.0, heal: 0, label: { en: "Open-Field Squad (1.0× Base Biobeast HP)", vi: "Đánh Đồng Mở (1.0× HP Thú Gốc)", es: "Campo Abierto (1.0× HP Base Biobeast)" } },
@@ -21,6 +22,7 @@
     { id: "general-crab", baseHp: 91700, beastAtk: 7900, convRate: 920, buff: "+8% Squad Basic Attack DMG · +20.0% Combo DMG · 504% Whirlpool Corrosion", proc: "525 Combo (~51.5%) + Deadly Pinch (504% Whirlpool) + Pincer Strike (100% Corrosion)", label: { en: "General Crab Lv.100 Leader (91,700 HP / 4,910 ATK / 525 Combo / Whirlpool)", vi: "General Crab Lv.100 Leader (91,700 HP / 4,910 ATK / 525 Liên Kích / Xoáy Nước)", es: "General Crab Nv.100 Líder (91,700 HP / 4,910 ATQ / 525 Combo / Remolino)" } },
     { id: "dirgewing", baseHp: 88100, beastAtk: 7600, convRate: 900, buff: "10% Element & Squad DMG Reduction · 455 Counter (+18% DMG) · 245 CRIT (+9% DMG)", proc: "Physical Garrison: 455 Counter + 245 CRIT retaliation", label: { en: "Dirgewing Lv.100 Physical Garrison (88,100 HP / 455 Counter / 245 CRIT)", vi: "Dirgewing Lv.100 Vật Lý Đồn Trú (88,100 HP / 455 Phản Đòn / 245 Bạo Kích)", es: "Dirgewing Nv.100 Físico Guarnición (88,100 HP / 455 Contra / 245 CRIT)" } },
     { id: "celestial-eyed-lion", baseHp: 88100, beastAtk: 7850, convRate: 930, buff: "10% Element & Squad DMG Reduction · 455 Combo (+18% DMG) · 245 CRIT (+9% DMG)", proc: "Physical Rally: 455 Combo + 245 CRIT siege burst", label: { en: "Celestial-Eyed Lion Lv.100 Physical Rally (88,100 HP / 455 Combo / 245 CRIT)", vi: "Celestial-Eyed Lion Lv.100 Vật Lý Tập Kết (88,100 HP / 455 Liên Kích / 245 Bạo Kích)", es: "Celestial-Eyed Lion Nv.100 Físico Rally (88,100 HP / 455 Combo / 245 CRIT)" } },
+    { id: "kirin", baseHp: 88100, beastAtk: 9200, convRate: 1080, buff: "+5% Squad Skill DMG · 420 CRIT (+16% DMG) · 172% Detonate", proc: "Fire: 554% Flash Charge + 304% Guaranteed CRIT Follow-Up + 2× Detonate", label: { en: "Kirin Lv.100 Fire Leader (88,100 HP / 4,600 ATK / 420 CRIT / Detonate)", vi: "Kirin Lv.100 Hệ Lửa (88,100 HP / 4,600 ATK / 420 Bạo Kích / Kích Nổ)", es: "Kirin Nv.100 Fuego Líder (88,100 HP / 4,600 ATQ / 420 CRIT / Detonar)" } },
     { id: "duo", baseHp: 180000, beastAtk: 13800, convRate: 1550, buff: "+4% Squad Skill DMG · +33% Corrosion Amp · +50% Counter DMG · CRIT +65", proc: "Otachi (CRIT +65) + Fraudrin 525 Counter + Pluto Stinging Echo T12", label: { en: "Otachi + Fraudrin / Pluto Water Corrosion Trinity + T6 Squad", vi: "Otachi + Fraudrin / Pluto Bộ ba Ăn Mòn Nước + Đội hình T6", es: "Trinidad Otachi + Fraudrin / Pluto de Corrosión de Agua + T6" } },
   ];
   const TARGETS = [
@@ -80,6 +82,16 @@
       physFilter.innerHTML = pChips.map(([id, tag, title]) => `<button type="button" class="combo-preset-chip${activePhys === id ? " is-active" : ""}" data-phys="${id}"><span class="combo-preset-tag">★ ${tag}</span><strong class="combo-preset-title">${title}</strong></button>`).join("");
     }
     renderBeastCards(physContainer, P.filter((b) => activePhys === "all" || b.id === activePhys));
+
+    const F = window.DOOMSDAY_BIOBEAST_FIRE_DATA || [];
+    if (fireFilter && F.length) {
+      const fChips = [
+        ["all", `All Fire Biobeasts (${F.length})`, "Kirin (Detonate / CRIT)"],
+        ["kirin", "Rare · Fire / 420 CRIT / Detonate", "Kirin (Lv.100)"],
+      ];
+      fireFilter.innerHTML = fChips.map(([id, tag, title]) => `<button type="button" class="combo-preset-chip${activeFire === id ? " is-active" : ""}" data-fire="${id}"><span class="combo-preset-tag">★ ${tag}</span><strong class="combo-preset-title">${title}</strong></button>`).join("");
+    }
+    renderBeastCards(fireContainer, F.filter((b) => activeFire === "all" || b.id === activeFire));
   };
 
   const renderSim = () => {
@@ -124,6 +136,10 @@
   physFilter?.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-phys]");
     if (btn) { activePhys = btn.dataset.phys; renderBeasts(); }
+  });
+  fireFilter?.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-fire]");
+    if (btn) { activeFire = btn.dataset.fire; renderBeasts(); }
   });
   [modeSel, troopSel, targetSel].forEach((el) => el?.addEventListener("change", renderSim));
   renderAll();

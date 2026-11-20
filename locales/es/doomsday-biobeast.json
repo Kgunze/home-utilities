@@ -8,7 +8,7 @@
     },
     {
       "selector": "#bb-hero-title",
-      "text": "Biobeasts de Agua y Físicos (Nv.100) — Habilidades, Atributos y Parejas."
+      "text": "Biobeasts de Agua, Físicos y Fuego (Nv.100) — Habilidades, Atributos y Parejas."
     },
     {
       "selector": "#bb-hero-text",
@@ -20,7 +20,7 @@
     },
     {
       "selector": "#bb-cta-pluto",
-      "text": "Biobeasts de Agua (4)"
+      "text": "Agua (4)"
     },
     {
       "selector": "#bb-cta-sim",
@@ -60,7 +60,7 @@
     },
     {
       "selector": "#bb-sim-tag",
-      "text": "4. Simulador Interactivo de Combate Biobeast, HP en Rally y Conversión de Daño"
+      "text": "5. Simulador Interactivo de Combate Biobeast, HP en Rally y Conversión de Daño"
     },
     {
       "selector": "#bb-sim-heading",
@@ -80,7 +80,7 @@
     },
     {
       "selector": "#bb-cta-physical",
-      "text": "Biobeasts Físicos (4)"
+      "text": "Físicos (4)"
     },
     {
       "selector": "#bb-physical-tag",
@@ -89,6 +89,18 @@
     {
       "selector": "#bb-physical-heading",
       "text": "Atributos Nv.100 Físicos de Guarnición (Contra/CRIT) y Rally (Combo/CRIT) y Parejas Recomendadas."
+    },
+    {
+      "selector": "#bb-cta-fire",
+      "text": "Fuego (1)"
+    },
+    {
+      "selector": "#bb-fire-tag",
+      "text": "4. Perfiles Biobeast de Fuego: Kirin (Detonar / CRIT / Combo)"
+    },
+    {
+      "selector": "#bb-fire-heading",
+      "text": "Atributos Nv.100 de Fuego, Habilidades Máximas de Detonar y CRIT, y Parejas Recomendadas."
     }
   ]
 }
