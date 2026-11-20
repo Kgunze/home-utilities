@@ -17,6 +17,7 @@
     { id: "pluto", baseHp: 90050, beastAtk: 7250, convRate: 850, buff: "+10% Squad Basic Attack DMG · +10% Squad DMG Reduction", proc: "420 Combo (41.2%) + 210 Counter (25.9%)", label: { en: "Pluto Jellyfish Lv.100 Leader (90,050 HP / 5,000 ATK / 420 Combo)", vi: "Pluto Jellyfish Lv.100 Leader (90,050 HP / 5,000 ATK / 420 Combo)", es: "Pluto Jellyfish Nv.100 Líder (90,050 HP / 5,000 ATQ / 420 Combo)" } },
     { id: "fraudrin", baseHp: 89900, beastAtk: 8400, convRate: 980, buff: "+4% Squad Skill DMG Reduction · +10% Squad DMG Reduction", proc: "525 Counter (~51.5%) + +20% Counter DMG + Full Size (+30% ATK)", label: { en: "Fraudrin Lv.100 Leader (89,900 HP / 4,955 ATK / 525 Counter / Full Size)", vi: "Fraudrin Lv.100 Leader (89,900 HP / 4,955 ATK / 525 Counter / Full Size)", es: "Fraudrin Nv.100 Líder (89,900 HP / 4,955 ATQ / 525 Contraataque)" } },
     { id: "otachi", baseHp: 90600, beastAtk: 8950, convRate: 1050, buff: "+4% Squad Skill DMG · CRIT +65 · 3-Acid CRIT Corrosion", proc: "Tail Swipe (CRIT +65) + Acid Burst (348% Corrosion) + 3-Acid CRIT Corrosion", label: { en: "Otachi Lv.100 Leader (Pacific Rim Kaiju / CRIT +65 / CRIT Corrosion)", vi: "Otachi Lv.100 Leader (Pacific Rim Kaiju / Bạo Kích +65 / Ăn Mòn Bạo Kích)", es: "Otachi Nv.100 Líder (Pacific Rim Kaiju / CRIT +65 / Corrosión CRIT)" } },
+    { id: "general-crab", baseHp: 91700, beastAtk: 7900, convRate: 920, buff: "+8% Squad Basic Attack DMG · +20.0% Combo DMG · 504% Whirlpool Corrosion", proc: "525 Combo (~51.5%) + Deadly Pinch (504% Whirlpool) + Pincer Strike (100% Corrosion)", label: { en: "General Crab Lv.100 Leader (91,700 HP / 4,910 ATK / 525 Combo / Whirlpool)", vi: "General Crab Lv.100 Leader (91,700 HP / 4,910 ATK / 525 Liên Kích / Xoáy Nước)", es: "General Crab Nv.100 Líder (91,700 HP / 4,910 ATQ / 525 Combo / Remolino)" } },
     { id: "duo", baseHp: 180000, beastAtk: 13800, convRate: 1550, buff: "+4% Squad Skill DMG · +33% Corrosion Amp · +50% Counter DMG · CRIT +65", proc: "Otachi (CRIT +65) + Fraudrin 525 Counter + Pluto Stinging Echo T12", label: { en: "Otachi + Fraudrin / Pluto Water Corrosion Trinity + T6 Squad", vi: "Otachi + Fraudrin / Pluto Bộ ba Ăn Mòn Nước + Đội hình T6", es: "Trinidad Otachi + Fraudrin / Pluto de Corrosión de Agua + T6" } },
   ];
   const TARGETS = [
@@ -30,7 +31,8 @@
     if (!beastsContainer) return;
     if (beastFilter) {
       const chips = [
-        ["all", "All Biobeasts (3)", "Pluto + Fraudrin + Otachi"],
+        ["all", "All Biobeasts (4)", "Pluto + Fraudrin + Otachi + General Crab"],
+        ["general-crab", "Water · 525 Combo / Whirlpool Corrode", "General Crab (Lv.100)"],
         ["otachi", "Pacific Rim · CRIT & CRIT Corrosion", "Otachi (Pacific Rim)"],
         ["fraudrin", "Seven Deadly Sins · Counter DMG / Full Size", "Fraudrin (Lv.100)"],
         ["pluto", "Rare · Corrode / Combo / Counter", "Pluto Jellyfish (Lv.100)"],

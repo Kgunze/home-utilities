@@ -139,6 +139,28 @@
           ["Infantry CRIT & Burst Squad (S Leader Match)", "Sakura + Ammara · Julien + Miyamoto Doichi", "Sakura's high-uptime skill cycling benefits directly from Otachi's +4% Squad Skill DMG, while Otachi's Tier ★ Acid Burst melts frontline enemy Biobeasts."],
         ],
       },
+      {
+        id: "general-crab", name: "General Crab", badge: "Rare Biobeast · Water Attribute · Lv.100 Awakened (Tier ★)",
+        tags: "Combo · Corrode · Whirlpool", img: "assets/doomsday/biobeast/general-crab.jpg",
+        summary: "Relentless <strong>Combo &amp; Whirlpool Corrosion Bruiser (91,700 HP · 525 Combo · +20.0% Combo DMG)</strong> that cycles <strong>Whirlpool</strong> to amplify <em>Deadly Pinch</em> Corrosion up to <strong>504%</strong>, guarantees <strong>100% Pincer Strike Corrosion</strong>, grants <strong>Leader Combo +50</strong> in Support (T11), and boosts <strong>Squad Basic Attack DMG by up to +8%</strong>.",
+        stats: [
+          ["HP / ATK / DEF (Lv.100)", "91,700 HP · 4,910 ATK · 4,300 DEF", "Highest base HP (91,700) among Water Biobeasts for sustained frontline Combo cycling"],
+          ["Combo & Combo DMG", "525 Combo (~51.5% Combo Rate) · +20.0% Combo DMG", "Massive 525 Combo (higher than Pluto's 420) + +20.0% Combo DMG for nonstop Pincer Strike procs"],
+          ["CRIT / Counter", "0 CRIT (0.0%) · 0 Counter (0.0%)", "Pure Combo & Whirlpool Corrosion specialist; relies on rapid Active Skill auto-casts"],
+          ["Whirlpool Synergy (Tier 7 / ★)", "3s Whirlpool → 100% Pincer Corrosion & 504% Leader Corrosion", "Having Whirlpool active before Deadly Pinch (T★) upgrades Corrosion from 420% → 504% and guarantees Pincer Strike Corrosion"],
+          ["Support Combo Engine (T5–T11)", "264% Combo Corrosion + Leader Combo +50 (3s)", "Every Combo proc inflicts 3s Corrosion (84%→264%) and buffs Leader Combo by +30 (T5) → +40 (T8) → +50 (T11)"],
+          ["Leader Deployment Buff", "+4% (T0) → +6% (T7) → +8% (T★) Squad Basic Attack DMG", "Directly amplifies normal attack DPS of your entire Hero & Troop Squad while deployed"],
+        ],
+        skills: [
+          ["1. Deadly Pinch", "Leader Skill (Every 6s)", "Tier 0: Deals 134% DMG every 6s + Corrosion over 3s (204%). Squad Basic Attack DMG +4%.\nTier 7: Deals 294% DMG every 6s + Corrosion over 3s (294%) + gains Whirlpool for 3s. Squad Basic Attack DMG +6%.", "Tier ★: Deals 350% DMG every 6s + Corrosion over 3s (420%) + gains Whirlpool for 3s. If General Crab already had Whirlpool before casting, Corrosion DMG Multiplier jumps to 504%! Squad Basic Attack DMG +8%."],
+          ["2. Pincer Strike", "Active Skill (Every 3s + Combo Procs)", "[Leader] Tier 0 → 2 → 5 → 8 → 11: Deals 70% → 86% → 130% → 152% → 180% DMG every 3s + 40% → 50% → 50% → 60% → 70% chance for 3s Corrosion (48% → 60% → 102% → 120% → 150%). With Whirlpool active: Corrosion chance jumps to 60% (T0) → 70% (T2) → 100% (T5/T8/T11)!", "[Support] Tier 0 → 2 → 5 → 8 → 11: When triggering a Combo, inflicts 3s Corrosion (84% → 108% → 168% → 216% → 264% multiplier). From Tier 5+: Also grants Leader Combo +30 (T5) → +40 (T8) → +50 (T11) for 3s!"],
+        ],
+        pairings: [
+          ["Rider Basic-Attack Squad (S+ Leader Match)", "Rick Light + Chasey · Chasey + Felix · Rick Light + Felix", "+8% Squad Basic Attack DMG & 91,700 HP make General Crab a rock-solid Leader for hyper-basic-attack Rider marches."],
+          ["Water Combo-Corrosion Biobeast Duo (S+ Support Match)", "Leader: Pluto Jellyfish + Support: General Crab (or vice versa)", "General Crab's Support Pincer Strike (T11) adds 264% Corrosion and Leader Combo +50 on every Combo, supercharging Pluto Jellyfish's 420 Combo + Stinging Echo (+120 Combo / +33% Corrosion DMG)!"],
+          ["Infantry Sustained Brawl Squad (S Leader Match)", "Miyamoto Doichi + Eileen Volt · Sakura + Ammara", "Long open-field and garrison brawls maximize General Crab's 525 Combo uptime and 504% Whirlpool-boosted Corrosion cycles."],
+        ],
+      },
     ],
   };
 })();
