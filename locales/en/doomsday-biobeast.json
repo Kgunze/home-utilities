@@ -8,7 +8,7 @@
     },
     {
       "selector": "#bb-hero-title",
-      "text": "Biobeast — Pluto Jellyfish & Fraudrin (Lv.100), Skill Tiers & Hero Pairings."
+      "text": "Water & Physical Biobeasts (Lv.100) — Skill Tiers, Attributes & Hero Pairings."
     },
     {
       "selector": "#bb-hero-text",
@@ -20,7 +20,7 @@
     },
     {
       "selector": "#bb-cta-pluto",
-      "text": "Pluto, Fraudrin & Otachi"
+      "text": "Water Biobeasts (4)"
     },
     {
       "selector": "#bb-cta-sim",
@@ -52,7 +52,7 @@
     },
     {
       "selector": "#bb-pluto-tag",
-      "text": "2. Biobeast Profiles: Pluto Jellyfish, Fraudrin & Otachi (Water / Corrosion)"
+      "text": "2. Water Biobeast Profiles: Pluto Jellyfish, Fraudrin, Otachi & General Crab"
     },
     {
       "selector": "#bb-pluto-heading",
@@ -60,7 +60,7 @@
     },
     {
       "selector": "#bb-sim-tag",
-      "text": "3. Interactive Biobeast Combat, Rally HP & Troop Conversion Simulator"
+      "text": "4. Interactive Biobeast Combat, Rally HP & Troop Conversion Simulator"
     },
     {
       "selector": "#bb-sim-heading",
@@ -77,6 +77,18 @@
     {
       "selector": "#bb-target-label",
       "text": "Enemy Biobeast State"
+    },
+    {
+      "selector": "#bb-cta-physical",
+      "text": "Physical Biobeasts (4)"
+    },
+    {
+      "selector": "#bb-physical-tag",
+      "text": "3. Physical Biobeast Profiles: Dirgewing, Celestial-Eyed Lion, Hammer Pangolin & Undead Bull"
+    },
+    {
+      "selector": "#bb-physical-heading",
+      "text": "Lv.100 Physical Garrison (Counter/CRIT) & Rally (Combo/CRIT) Attributes and Recommended Pairings."
     }
   ]
 }

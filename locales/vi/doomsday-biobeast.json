@@ -8,7 +8,7 @@
     },
     {
       "selector": "#bb-hero-title",
-      "text": "Biobeast — Pluto Jellyfish & Fraudrin (Lv.100), Cấp Kỹ năng & Ghép Tướng."
+      "text": "Thú Sinh Hóa Hệ Nước & Vật Lý (Lv.100) — Bậc Kỹ Năng, Chỉ Số & Ghép Tướng."
     },
     {
       "selector": "#bb-hero-text",
@@ -20,7 +20,7 @@
     },
     {
       "selector": "#bb-cta-pluto",
-      "text": "Pluto, Fraudrin & Otachi"
+      "text": "Thú Hệ Nước (4)"
     },
     {
       "selector": "#bb-cta-sim",
@@ -52,7 +52,7 @@
     },
     {
       "selector": "#bb-pluto-tag",
-      "text": "2. Hồ sơ Thú Sinh Hóa: Pluto Jellyfish, Fraudrin & Otachi (Nước / Ăn mòn)"
+      "text": "2. Hồ Sơ Thú Hệ Nước: Pluto Jellyfish, Fraudrin, Otachi & General Crab"
     },
     {
       "selector": "#bb-pluto-heading",
@@ -60,7 +60,7 @@
     },
     {
       "selector": "#bb-sim-tag",
-      "text": "3. Máy tính Mô phỏng Đấu Thú (Pluto Jellyfish & Fraudrin), Tăng HP Tập kết & Sát thương Lính"
+      "text": "4. Mô Phỏng Chiến Đấu Biobeast, HP Tập Kết & Chuyển Hóa Sát Thương Lính"
     },
     {
       "selector": "#bb-sim-heading",
@@ -77,6 +77,18 @@
     {
       "selector": "#bb-target-label",
       "text": "Trạng thái Biobeast Địch"
+    },
+    {
+      "selector": "#bb-cta-physical",
+      "text": "Thú Hệ Vật Lý (4)"
+    },
+    {
+      "selector": "#bb-physical-tag",
+      "text": "3. Hồ Sơ Thú Hệ Vật Lý: Dirgewing, Celestial-Eyed Lion, Hammer Pangolin & Undead Bull"
+    },
+    {
+      "selector": "#bb-physical-heading",
+      "text": "Chỉ số Lv.100 Hệ Vật Lý Đồn Trú (Phản Đòn/Bạo Kích) & Tập Kết (Liên Kích/Bạo Kích) và Ghép Đôi."
     }
   ]
 }

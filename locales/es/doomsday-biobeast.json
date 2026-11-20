@@ -8,7 +8,7 @@
     },
     {
       "selector": "#bb-hero-title",
-      "text": "Biobeast — Pluto Jellyfish y Fraudrin (Nv.100), Habilidades y Mejores Parejas."
+      "text": "Biobeasts de Agua y Físicos (Nv.100) — Habilidades, Atributos y Parejas."
     },
     {
       "selector": "#bb-hero-text",
@@ -20,7 +20,7 @@
     },
     {
       "selector": "#bb-cta-pluto",
-      "text": "Pluto, Fraudrin y Otachi"
+      "text": "Biobeasts de Agua (4)"
     },
     {
       "selector": "#bb-cta-sim",
@@ -52,7 +52,7 @@
     },
     {
       "selector": "#bb-pluto-tag",
-      "text": "2. Perfiles de Biobeast: Pluto Jellyfish, Fraudrin y Otachi (Agua / Corrosión)"
+      "text": "2. Perfiles Biobeast de Agua: Pluto Jellyfish, Fraudrin, Otachi y General Crab"
     },
     {
       "selector": "#bb-pluto-heading",
@@ -60,7 +60,7 @@
     },
     {
       "selector": "#bb-sim-tag",
-      "text": "3. Simulador Interactivo de Duelo Biobeast, HP en Rally y Conversión a Tropas"
+      "text": "4. Simulador Interactivo de Combate Biobeast, HP en Rally y Conversión de Daño"
     },
     {
       "selector": "#bb-sim-heading",
@@ -77,6 +77,18 @@
     {
       "selector": "#bb-target-label",
       "text": "Estado de la Bestia Enemiga"
+    },
+    {
+      "selector": "#bb-cta-physical",
+      "text": "Biobeasts Físicos (4)"
+    },
+    {
+      "selector": "#bb-physical-tag",
+      "text": "3. Perfiles Biobeast Físicos: Dirgewing, Celestial-Eyed Lion, Hammer Pangolin y Undead Bull"
+    },
+    {
+      "selector": "#bb-physical-heading",
+      "text": "Atributos Nv.100 Físicos de Guarnición (Contra/CRIT) y Rally (Combo/CRIT) y Parejas Recomendadas."
     }
   ]
 }

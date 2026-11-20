@@ -4,9 +4,10 @@
   const stepsGrid = document.querySelector("#bb-battle-steps-grid");
   const attrThead = document.querySelector("#bb-attr-thead"), attrTbody = document.querySelector("#bb-attr-tbody");
   const beastFilter = document.querySelector("#bb-beast-filter"), beastsContainer = document.querySelector("#bb-beasts-container");
+  const physFilter = document.querySelector("#bb-physical-filter"), physContainer = document.querySelector("#bb-physical-container");
   const modeSel = document.querySelector("#bb-mode-select"), troopSel = document.querySelector("#bb-troop-select"), targetSel = document.querySelector("#bb-target-select");
   const simThead = document.querySelector("#bb-sim-thead"), simTbody = document.querySelector("#bb-sim-tbody"), simNote = document.querySelector("#bb-sim-note");
-  let activeBeast = "all";
+  let activeBeast = "all", activePhys = "all";
 
   const MODES = [
     { id: "field", mult: 1.0, heal: 0, label: { en: "Open-Field Squad (1.0× Base Biobeast HP)", vi: "Đánh Đồng Mở (1.0× HP Thú Gốc)", es: "Campo Abierto (1.0× HP Base Biobeast)" } },
@@ -18,6 +19,8 @@
     { id: "fraudrin", baseHp: 89900, beastAtk: 8400, convRate: 980, buff: "+4% Squad Skill DMG Reduction · +10% Squad DMG Reduction", proc: "525 Counter (~51.5%) + +20% Counter DMG + Full Size (+30% ATK)", label: { en: "Fraudrin Lv.100 Leader (89,900 HP / 4,955 ATK / 525 Counter / Full Size)", vi: "Fraudrin Lv.100 Leader (89,900 HP / 4,955 ATK / 525 Counter / Full Size)", es: "Fraudrin Nv.100 Líder (89,900 HP / 4,955 ATQ / 525 Contraataque)" } },
     { id: "otachi", baseHp: 90600, beastAtk: 8950, convRate: 1050, buff: "+4% Squad Skill DMG · CRIT +65 · 3-Acid CRIT Corrosion", proc: "Tail Swipe (CRIT +65) + Acid Burst (348% Corrosion) + 3-Acid CRIT Corrosion", label: { en: "Otachi Lv.100 Leader (Pacific Rim Kaiju / CRIT +65 / CRIT Corrosion)", vi: "Otachi Lv.100 Leader (Pacific Rim Kaiju / Bạo Kích +65 / Ăn Mòn Bạo Kích)", es: "Otachi Nv.100 Líder (Pacific Rim Kaiju / CRIT +65 / Corrosión CRIT)" } },
     { id: "general-crab", baseHp: 91700, beastAtk: 7900, convRate: 920, buff: "+8% Squad Basic Attack DMG · +20.0% Combo DMG · 504% Whirlpool Corrosion", proc: "525 Combo (~51.5%) + Deadly Pinch (504% Whirlpool) + Pincer Strike (100% Corrosion)", label: { en: "General Crab Lv.100 Leader (91,700 HP / 4,910 ATK / 525 Combo / Whirlpool)", vi: "General Crab Lv.100 Leader (91,700 HP / 4,910 ATK / 525 Liên Kích / Xoáy Nước)", es: "General Crab Nv.100 Líder (91,700 HP / 4,910 ATQ / 525 Combo / Remolino)" } },
+    { id: "dirgewing", baseHp: 88100, beastAtk: 7600, convRate: 900, buff: "10% Element & Squad DMG Reduction · 455 Counter (+18% DMG) · 245 CRIT (+9% DMG)", proc: "Physical Garrison: 455 Counter + 245 CRIT retaliation", label: { en: "Dirgewing Lv.100 Physical Garrison (88,100 HP / 455 Counter / 245 CRIT)", vi: "Dirgewing Lv.100 Vật Lý Đồn Trú (88,100 HP / 455 Phản Đòn / 245 Bạo Kích)", es: "Dirgewing Nv.100 Físico Guarnición (88,100 HP / 455 Contra / 245 CRIT)" } },
+    { id: "celestial-eyed-lion", baseHp: 88100, beastAtk: 7850, convRate: 930, buff: "10% Element & Squad DMG Reduction · 455 Combo (+18% DMG) · 245 CRIT (+9% DMG)", proc: "Physical Rally: 455 Combo + 245 CRIT siege burst", label: { en: "Celestial-Eyed Lion Lv.100 Physical Rally (88,100 HP / 455 Combo / 245 CRIT)", vi: "Celestial-Eyed Lion Lv.100 Vật Lý Tập Kết (88,100 HP / 455 Liên Kích / 245 Bạo Kích)", es: "Celestial-Eyed Lion Nv.100 Físico Rally (88,100 HP / 455 Combo / 245 CRIT)" } },
     { id: "duo", baseHp: 180000, beastAtk: 13800, convRate: 1550, buff: "+4% Squad Skill DMG · +33% Corrosion Amp · +50% Counter DMG · CRIT +65", proc: "Otachi (CRIT +65) + Fraudrin 525 Counter + Pluto Stinging Echo T12", label: { en: "Otachi + Fraudrin / Pluto Water Corrosion Trinity + T6 Squad", vi: "Otachi + Fraudrin / Pluto Bộ ba Ăn Mòn Nước + Đội hình T6", es: "Trinidad Otachi + Fraudrin / Pluto de Corrosión de Agua + T6" } },
   ];
   const TARGETS = [
@@ -27,20 +30,9 @@
 
   const getLang = () => (["vi", "es"].includes(document.documentElement.lang) ? document.documentElement.lang : "en");
 
-  const renderBeasts = () => {
-    if (!beastsContainer) return;
-    if (beastFilter) {
-      const chips = [
-        ["all", "All Biobeasts (4)", "Pluto + Fraudrin + Otachi + General Crab"],
-        ["general-crab", "Water · 525 Combo / Whirlpool Corrode", "General Crab (Lv.100)"],
-        ["otachi", "Pacific Rim · CRIT & CRIT Corrosion", "Otachi (Pacific Rim)"],
-        ["fraudrin", "Seven Deadly Sins · Counter DMG / Full Size", "Fraudrin (Lv.100)"],
-        ["pluto", "Rare · Corrode / Combo / Counter", "Pluto Jellyfish (Lv.100)"],
-      ];
-      beastFilter.innerHTML = chips.map(([id, tag, title]) => `<button type="button" class="combo-preset-chip${activeBeast === id ? " is-active" : ""}" data-beast="${id}"><span class="combo-preset-tag">★ ${tag}</span><strong class="combo-preset-title">${title}</strong></button>`).join("");
-    }
-    const list = D.BEASTS.filter((b) => activeBeast === "all" || b.id === activeBeast);
-    beastsContainer.innerHTML = list.map((b) => `
+  const renderBeastCards = (container, list) => {
+    if (!container) return;
+    container.innerHTML = list.map((b) => `
       <div class="planner-columns" style="margin-top: 1.25rem">
         <article class="planner-card">
           <p class="card-label">${b.badge}</p>
@@ -61,6 +53,33 @@
       </article>
       <div class="planner-columns" style="margin-top: 1.25rem">${b.pairings.map(([u, h, w]) => `<article class="planner-card"><p class="card-label">${u}</p><h3>${h}</h3><p>${w}</p></article>`).join("")}</div>
     `).join("");
+  };
+
+  const renderBeasts = () => {
+    if (beastFilter) {
+      const chips = [
+        ["all", "All Water Biobeasts (4)", "Pluto + Fraudrin + Otachi + General Crab"],
+        ["general-crab", "Water · 525 Combo / Whirlpool Corrode", "General Crab (Lv.100)"],
+        ["otachi", "Pacific Rim · CRIT & CRIT Corrosion", "Otachi (Pacific Rim)"],
+        ["fraudrin", "Seven Deadly Sins · Counter DMG / Full Size", "Fraudrin (Lv.100)"],
+        ["pluto", "Rare · Corrode / Combo / Counter", "Pluto Jellyfish (Lv.100)"],
+      ];
+      beastFilter.innerHTML = chips.map(([id, tag, title]) => `<button type="button" class="combo-preset-chip${activeBeast === id ? " is-active" : ""}" data-beast="${id}"><span class="combo-preset-tag">★ ${tag}</span><strong class="combo-preset-title">${title}</strong></button>`).join("");
+    }
+    renderBeastCards(beastsContainer, D.BEASTS.filter((b) => activeBeast === "all" || b.id === activeBeast));
+
+    const P = window.DOOMSDAY_BIOBEAST_PHYSICAL_DATA || [];
+    if (physFilter && P.length) {
+      const pChips = [
+        ["all", "All Physical Biobeasts (4)", "Dirgewing + Lion + Pangolin + Bull"],
+        ["dirgewing", "Rare · Garrison / 455 Counter / 245 CRIT", "Dirgewing (Lv.100)"],
+        ["celestial-eyed-lion", "Rare · Rally / 455 Combo / 245 CRIT", "Celestial-Eyed Lion (Lv.100)"],
+        ["hammer-pangolin", "Physical · Garrison / 420 Counter / 210 CRIT", "Hammer Pangolin (Lv.100)"],
+        ["undead-bull", "Physical · Rally / 420 Combo / 210 CRIT", "Undead Bull (Lv.100)"],
+      ];
+      physFilter.innerHTML = pChips.map(([id, tag, title]) => `<button type="button" class="combo-preset-chip${activePhys === id ? " is-active" : ""}" data-phys="${id}"><span class="combo-preset-tag">★ ${tag}</span><strong class="combo-preset-title">${title}</strong></button>`).join("");
+    }
+    renderBeastCards(physContainer, P.filter((b) => activePhys === "all" || b.id === activePhys));
   };
 
   const renderSim = () => {
@@ -101,6 +120,10 @@
   beastFilter?.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-beast]");
     if (btn) { activeBeast = btn.dataset.beast; renderBeasts(); }
+  });
+  physFilter?.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-phys]");
+    if (btn) { activePhys = btn.dataset.phys; renderBeasts(); }
   });
   [modeSel, troopSel, targetSel].forEach((el) => el?.addEventListener("change", renderSim));
   renderAll();
