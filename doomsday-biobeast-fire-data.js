@@ -23,5 +23,29 @@
         ["CRIT & Anti-Shield Support Partner (S+ Biobeast Pair)", "Leader: Otachi / Celestial-Eyed Lion + Support: Kirin", "Kirin's Support Dust Explosion grants up to +24% Leader ATK & +160 CRIT (4 stacks), while Meteor Power adds Combo +120 & +8.5% DMG against Shielded Biobeasts!"],
       ],
     },
+    {
+      id: "acnologia", name: "Acnologia", badge: "Fairy Tail Collab · Fire Attribute · Lv.100 Awakened (Tier ★)",
+      tags: "Counter DMG · Counter · Detonate", img: "assets/doomsday/biobeast/acnologia.jpg",
+      summary: "The Dragon King from the <strong>Fairy Tail Collab</strong>! A terrifying <strong>Fire Counter &amp; Detonate Juggernaut (88,550 HP · 525 Counter · +20.0% Counter DMG)</strong> that blasts <strong>688% Black Dragon Roar</strong> (+30% with Detonate stacks!), guarantees <strong>100% Counter Detonate</strong>, grants <strong>+200 Counter &amp; +30% Leader Skill DMG</strong> in Support, and adds <strong>+4% Squad Skill DMG Reduction</strong>.",
+      stats: [
+        ["HP / ATK / DEF (Lv.100)", "88,550 HP · 4,525 ATK · 4,200 DEF", "Balanced Fire frontline dragon built to absorb hits and unleash massive Counter nukes"],
+        ["Counter & Counter DMG", "525 Counter (~51.5%) · +20.0% Counter DMG", "Elite 525 Counter (+150 from Roar, +55 from Dominance, +200 in Support!)"],
+        ["Combo / CRIT", "0 Combo (0.0%) · 0 CRIT (0.0%)", "Pure Counter-Attack & Detonate Dragon-Slayer specialist"],
+        ["Magic-Devouring Dragon", "+18% ATK & +10% DEF (reset on Counter/Leader Skill)", "100% chance on Leader Skill or Counter to gain +16% current attack DMG and refresh buff duration!"],
+        ["Exclusive Talent (Dominance)", "+6.5% Counter DMG on Counter · +55 Counter (3s) on Miss", "Guarantees relentless retaliation scaling whether a counterattack triggers or not"],
+        ["Leader Deployment Buff", "+4% Squad Skill DMG Reduction (At Max Tier ★)", "Cuts incoming enemy Hero Rage & Active Skill nukes while deployed"],
+      ],
+      skills: [
+        ["1. Black Dragon Roar", "Leader Skill (Every 6s)", "At Max Tier ★: Deals 688% DMG every 6s (+10% per Detonate stack applied in battle, max +30%) and gains Counter +150 for 3s.", "Fallback Nuke: If no counterattack triggers during those 3s, deals 264% follow-up DMG! When deployed, Squad Skill DMG Reduction +4%."],
+        ["2. Black Dragon Claw Strike", "Active Skill (Every 3s + Procs)", "[Leader · Max Tier] Deals 232% DMG every 3s; 50% chance to apply 1 Detonate stack (explodes after 1s for 124% DMG). If triggered by Counterattack, Detonate chance jumps to 100%!", "[Support · Max Tier] On triggering a Counterattack, increases target DMG taken by +15% for 3s, then applies 1 Detonate stack (explodes after 1s for 248% DMG)!"],
+        ["3. Magic-Devouring Dragon", "Passive Skill (Max Tier)", "[Leader · Max Tier] Gains ATK +18% & DEF +10% for 3s on entering battle. Using Leader Skill or triggering Counterattack has 100% chance to boost current attack DMG by +16% and reset duration!", "[Support · Max Tier] When attacked, grants Leader Counter +40 (stacks up to 5 times = +200 Counter!). On triggering a Counterattack, increases Leader Skill DMG by +30% for 6s!"],
+        ["4. Dragon-Slaying Power", "Passive Skill (Max Tier ★)", "[Leader · Max Tier ★] When Active Skill hits a Grass-type Biobeast, gains DMG +20% for current attack, then gains Counter +70 for 3s!", "[Support · Max Tier ★] When taking Leader Skill DMG vs. a Grass-type Biobeast team, grants Leader ATK +22% and Counter DMG +17.5% for 3s!"],
+        ["5. Black Dragon's Dominance", "Exclusive Talent (Max Tier)", "[Leader] When attacked: if a counterattack triggers, gains Counter DMG +6.5%. Otherwise, gains Counter +55 for 3s.", "[Support] When attacked: if a counterattack triggers, gains Counter DMG +6.5%. Otherwise, gains Counter +55 for 3s."],
+      ],
+      pairings: [
+        ["Garrison & Anti-Skill Tank Squads (S+ Leader Match)", "Nova + Ethan · Stella + Charlie · Daryl + Chasey", "+4% Squad Skill DMG Reduction + 525 Counter (+150 from Roar) melts enemy Rally Biobeasts while protecting your Garrison from Rage nukes."],
+        ["Ultimate Counter Support Partner (S+ Biobeast Pair)", "Leader: Fraudrin / Dirgewing + Support: Acnologia", "Acnologia's Support kit stacks +200 Leader Counter, +30% Leader Skill DMG (6s), +15% enemy DMG taken debuff, and 248% Detonate on every Counter!"],
+      ],
+    },
   ];
 })();

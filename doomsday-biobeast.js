@@ -23,6 +23,7 @@
     { id: "dirgewing", baseHp: 88100, beastAtk: 7600, convRate: 900, buff: "10% Element & Squad DMG Reduction · 455 Counter (+18% DMG) · 245 CRIT (+9% DMG)", proc: "Physical Garrison: 455 Counter + 245 CRIT retaliation", label: { en: "Dirgewing Lv.100 Physical Garrison (88,100 HP / 455 Counter / 245 CRIT)", vi: "Dirgewing Lv.100 Vật Lý Đồn Trú (88,100 HP / 455 Phản Đòn / 245 Bạo Kích)", es: "Dirgewing Nv.100 Físico Guarnición (88,100 HP / 455 Contra / 245 CRIT)" } },
     { id: "celestial-eyed-lion", baseHp: 88100, beastAtk: 7850, convRate: 930, buff: "10% Element & Squad DMG Reduction · 455 Combo (+18% DMG) · 245 CRIT (+9% DMG)", proc: "Physical Rally: 455 Combo + 245 CRIT siege burst", label: { en: "Celestial-Eyed Lion Lv.100 Physical Rally (88,100 HP / 455 Combo / 245 CRIT)", vi: "Celestial-Eyed Lion Lv.100 Vật Lý Tập Kết (88,100 HP / 455 Liên Kích / 245 Bạo Kích)", es: "Celestial-Eyed Lion Nv.100 Físico Rally (88,100 HP / 455 Combo / 245 CRIT)" } },
     { id: "kirin", baseHp: 88100, beastAtk: 9200, convRate: 1080, buff: "+5% Squad Skill DMG · 420 CRIT (+16% DMG) · 172% Detonate", proc: "Fire: 554% Flash Charge + 304% Guaranteed CRIT Follow-Up + 2× Detonate", label: { en: "Kirin Lv.100 Fire Leader (88,100 HP / 4,600 ATK / 420 CRIT / Detonate)", vi: "Kirin Lv.100 Hệ Lửa (88,100 HP / 4,600 ATK / 420 Bạo Kích / Kích Nổ)", es: "Kirin Nv.100 Fuego Líder (88,100 HP / 4,600 ATQ / 420 CRIT / Detonar)" } },
+    { id: "acnologia", baseHp: 88550, beastAtk: 8900, convRate: 1020, buff: "+4% Squad Skill DMG Reduction · 525 Counter (+20% DMG) · +18% ATK / +10% DEF", proc: "Fairy Tail Fire: 688% Roar (+30% Detonate) + 100% Counter Detonate", label: { en: "Acnologia Lv.100 Fire Leader (Fairy Tail / 525 Counter / Detonate)", vi: "Acnologia Lv.100 Hệ Lửa (Fairy Tail / 525 Phản Đòn / Kích Nổ)", es: "Acnologia Nv.100 Fuego Líder (Fairy Tail / 525 Contra / Detonar)" } },
     { id: "duo", baseHp: 180000, beastAtk: 13800, convRate: 1550, buff: "+4% Squad Skill DMG · +33% Corrosion Amp · +50% Counter DMG · CRIT +65", proc: "Otachi (CRIT +65) + Fraudrin 525 Counter + Pluto Stinging Echo T12", label: { en: "Otachi + Fraudrin / Pluto Water Corrosion Trinity + T6 Squad", vi: "Otachi + Fraudrin / Pluto Bộ ba Ăn Mòn Nước + Đội hình T6", es: "Trinidad Otachi + Fraudrin / Pluto de Corrosión de Agua + T6" } },
   ];
   const TARGETS = [
@@ -86,7 +87,8 @@
     const F = window.DOOMSDAY_BIOBEAST_FIRE_DATA || [];
     if (fireFilter && F.length) {
       const fChips = [
-        ["all", `All Fire Biobeasts (${F.length})`, "Kirin (Detonate / CRIT)"],
+        ["all", `All Fire Biobeasts (${F.length})`, "Kirin + Acnologia (Detonate)"],
+        ["acnologia", "Fairy Tail · 525 Counter / Detonate", "Acnologia (Lv.100)"],
         ["kirin", "Rare · Fire / 420 CRIT / Detonate", "Kirin (Lv.100)"],
       ];
       fireFilter.innerHTML = fChips.map(([id, tag, title]) => `<button type="button" class="combo-preset-chip${activeFire === id ? " is-active" : ""}" data-fire="${id}"><span class="combo-preset-tag">★ ${tag}</span><strong class="combo-preset-title">${title}</strong></button>`).join("");
