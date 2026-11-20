@@ -47,5 +47,29 @@
         ["Ultimate Counter Support Partner (S+ Biobeast Pair)", "Leader: Fraudrin / Dirgewing + Support: Acnologia", "Acnologia's Support kit stacks +200 Leader Counter, +30% Leader Skill DMG (6s), +15% enemy DMG taken debuff, and 248% Detonate on every Counter!"],
       ],
     },
+    {
+      id: "kong", name: "Kong", badge: "Godzilla x Kong Collab · Fire Attribute · Lv.100 Awakened (Tier ★)",
+      tags: "Combo DMG · Combo · Detonate", img: "assets/doomsday/biobeast/kong.jpg",
+      summary: "The Titan King from <strong>Godzilla x Kong: The New Empire</strong>! A devastating <strong>Fire Combo &amp; Detonate Bruiser (88,550 HP · 4,600 ATK · 525 Combo · +20.0% Combo DMG)</strong> that unleashes <strong>658% Hollow Strike (Combo +150)</strong>, stacks <strong>[Charge] (+102% Active Skill DMG!)</strong>, grants <strong>+65% Combo DMG &amp; +50 Combo</strong> in Support, and boosts <strong>Squad Skill DMG by +4%</strong>.",
+      stats: [
+        ["HP / ATK / DEF (Lv.100)", "88,550 HP · 4,600 ATK · 4,125 DEF", "High-ATK Fire Titan built for explosive Combo chains and Detonate bursts"],
+        ["Combo & Combo DMG", "525 Combo (~51.5%) · +20.0% Combo DMG", "Massive 525 Combo (+150 on Hollow Strike, +65 on Pounding Strike, +65% Combo DMG in Support!)"],
+        ["CRIT / Counter", "0 CRIT (0.0%) · 0 Counter (0.0%)", "Pure Combo + [Charge] + Detonate offensive powerhouse"],
+        ["Squad & Element Mitigation", "10.0% Element Reduction · 10.0% Squad DMG Reduction", "Standard 10% elemental & squad damage reduction at Lv.100"],
+        ["Exclusive Talent (Colossal Fury)", "+6.5% Combo DMG on Combo · +2.5% Leader Skill DMG otherwise", "Continuously amps either Combo burst or the next 658% Hollow Strike nuke"],
+        ["Leader Deployment Buff", "+4% Squad Skill DMG (At Max Tier ★)", "Amplifies Hero Active & Rage Skill damage across your entire deployed squad"],
+      ],
+      skills: [
+        ["1. Hollow Strike", "Leader Skill (Every 6s)", "At Max Tier ★: Deals 658% DMG every 6s with additional Combo +150 for this attack + 50% chance for 1 Detonate stack (132% DMG after 1s).", "Combo Bonus: If Hollow Strike triggers a Combo, applies 1 additional Detonate stack! When deployed, Squad Skill DMG +4%."],
+        ["2. Pounding Strike", "Active Skill (Every 3s + Procs)", "[Leader · Max Tier] Deals 236% DMG every 3s with additional Combo +65. When triggered through Combos, DMG increases by an additional +20%!", "[Support · Max Tier] When a Combo is triggered, deals 244% follow-up DMG with a 50% chance to apply 1 Detonate stack (86% DMG after 1s)!"],
+        ["3. Energy Diffusion", "Passive Skill (Max Tier)", "[Leader · Max Tier] Gains [Charge] (+34% next Active Skill DMG, stacks up to 3× = +102%!). Using Leader Skill or inflicting Detonate has 100% chance to gain 1 [Charge] stack.", "[Support · Max Tier] For every Combo or Detonate inflicted in battle, grants Combo DMG +13% and Combo +10 (stacks up to 5× = +65% Combo DMG & +50 Combo!)."],
+        ["4. Titan's Power", "Passive Skill (Max Tier ★)", "[Leader · Max Tier ★] When Leader Skill hits a Grass-type Biobeast, gains Leader Skill DMG +22% and Combo +70 for the next attack!", "[Support · Max Tier ★] When taking Counter DMG, reduces current attack DMG taken by -5% and grants Leader ATK +21.5% (3s) vs. Grass-type Biobeast teams!"],
+        ["5. Colossal Fury", "Exclusive Talent (Max Tier)", "[Leader] On direct DMG: if a Combo triggers, Combo DMG +6.5%. Otherwise, next Leader Skill DMG +2.5%.", "[Support] On direct DMG: if a Combo triggers, Combo DMG +6.5%. Otherwise, next Leader Skill DMG +2.5%."],
+      ],
+      pairings: [
+        ["Skill-Burst Rally & Open-Field Squads (S+ Leader Match)", "Metok Tso + Rubina · Charon + Sophie · Sakura + Ammara", "+4% Squad Skill DMG + 525 Combo (+150 Hollow Strike) melts Grass & Water Biobeasts to trigger excess Troop DMG conversion."],
+        ["Hyper-Combo Fire/Physical Duo (S+ Support Partner)", "Leader: Celestial-Eyed Lion / General Crab / Kirin + Support: Kong", "Kong's Support kit adds 244% follow-up DMG + Detonate on every Combo and stacks +65% Combo DMG & +50 Combo!"],
+      ],
+    },
   ];
 })();

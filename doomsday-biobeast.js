@@ -24,6 +24,7 @@
     { id: "celestial-eyed-lion", baseHp: 88100, beastAtk: 7850, convRate: 930, buff: "10% Element & Squad DMG Reduction · 455 Combo (+18% DMG) · 245 CRIT (+9% DMG)", proc: "Physical Rally: 455 Combo + 245 CRIT siege burst", label: { en: "Celestial-Eyed Lion Lv.100 Physical Rally (88,100 HP / 455 Combo / 245 CRIT)", vi: "Celestial-Eyed Lion Lv.100 Vật Lý Tập Kết (88,100 HP / 455 Liên Kích / 245 Bạo Kích)", es: "Celestial-Eyed Lion Nv.100 Físico Rally (88,100 HP / 455 Combo / 245 CRIT)" } },
     { id: "kirin", baseHp: 88100, beastAtk: 9200, convRate: 1080, buff: "+5% Squad Skill DMG · 420 CRIT (+16% DMG) · 172% Detonate", proc: "Fire: 554% Flash Charge + 304% Guaranteed CRIT Follow-Up + 2× Detonate", label: { en: "Kirin Lv.100 Fire Leader (88,100 HP / 4,600 ATK / 420 CRIT / Detonate)", vi: "Kirin Lv.100 Hệ Lửa (88,100 HP / 4,600 ATK / 420 Bạo Kích / Kích Nổ)", es: "Kirin Nv.100 Fuego Líder (88,100 HP / 4,600 ATQ / 420 CRIT / Detonar)" } },
     { id: "acnologia", baseHp: 88550, beastAtk: 8900, convRate: 1020, buff: "+4% Squad Skill DMG Reduction · 525 Counter (+20% DMG) · +18% ATK / +10% DEF", proc: "Fairy Tail Fire: 688% Roar (+30% Detonate) + 100% Counter Detonate", label: { en: "Acnologia Lv.100 Fire Leader (Fairy Tail / 525 Counter / Detonate)", vi: "Acnologia Lv.100 Hệ Lửa (Fairy Tail / 525 Phản Đòn / Kích Nổ)", es: "Acnologia Nv.100 Fuego Líder (Fairy Tail / 525 Contra / Detonar)" } },
+    { id: "kong", baseHp: 88550, beastAtk: 9100, convRate: 1060, buff: "+4% Squad Skill DMG · 525 Combo (+20% DMG) · [Charge] +102% Active DMG", proc: "Godzilla x Kong Fire: 658% Hollow Strike (Combo +150) + [Charge] + Detonate", label: { en: "Kong Lv.100 Fire Leader (Godzilla x Kong / 525 Combo / Detonate)", vi: "Kong Lv.100 Hệ Lửa (Godzilla x Kong / 525 Liên Kích / Kích Nổ)", es: "Kong Nv.100 Fuego Líder (Godzilla x Kong / 525 Combo / Detonar)" } },
     { id: "duo", baseHp: 180000, beastAtk: 13800, convRate: 1550, buff: "+4% Squad Skill DMG · +33% Corrosion Amp · +50% Counter DMG · CRIT +65", proc: "Otachi (CRIT +65) + Fraudrin 525 Counter + Pluto Stinging Echo T12", label: { en: "Otachi + Fraudrin / Pluto Water Corrosion Trinity + T6 Squad", vi: "Otachi + Fraudrin / Pluto Bộ ba Ăn Mòn Nước + Đội hình T6", es: "Trinidad Otachi + Fraudrin / Pluto de Corrosión de Agua + T6" } },
   ];
   const TARGETS = [
@@ -87,7 +88,8 @@
     const F = window.DOOMSDAY_BIOBEAST_FIRE_DATA || [];
     if (fireFilter && F.length) {
       const fChips = [
-        ["all", `All Fire Biobeasts (${F.length})`, "Kirin + Acnologia (Detonate)"],
+        ["all", `All Fire Biobeasts (${F.length})`, "Kirin + Acnologia + Kong"],
+        ["kong", "Godzilla x Kong · 525 Combo / Detonate", "Kong (Lv.100)"],
         ["acnologia", "Fairy Tail · 525 Counter / Detonate", "Acnologia (Lv.100)"],
         ["kirin", "Rare · Fire / 420 CRIT / Detonate", "Kirin (Lv.100)"],
       ];
